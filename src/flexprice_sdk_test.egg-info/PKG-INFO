@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: flexprice-sdk-test
-Version: 2.0.20260104134957
+Version: 2.0.0
 Summary: Python SDK for FlexPrice API
 Home-page: https://github.com/flexprice/python-sdk
 Author: Speakeasy
