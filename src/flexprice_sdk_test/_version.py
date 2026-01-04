@@ -3,11 +3,11 @@
 import importlib.metadata
 
 __title__: str = "flexprice-sdk-test"
-__version__: str = "2.0.20260104132142"
+__version__: str = "2.0.20260104133628"
 __openapi_doc_version__: str = "1.0"
 __gen_version__: str = "2.788.15"
 __user_agent__: str = (
-    "speakeasy-sdk/python 2.0.20260104132142 2.788.15 1.0 flexprice-sdk-test"
+    "speakeasy-sdk/python 2.0.20260104133628 2.788.15 1.0 flexprice-sdk-test"
 )
 
 try:
