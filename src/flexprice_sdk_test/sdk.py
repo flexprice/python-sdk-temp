@@ -23,6 +23,7 @@ if TYPE_CHECKING:
     from flexprice_sdk_test.coupons import Coupons
     from flexprice_sdk_test.credit_notes import CreditNotes
     from flexprice_sdk_test.creditgrants import CreditGrants
+    from flexprice_sdk_test.customerdashboard import CustomerDashboard
     from flexprice_sdk_test.customers import Customers
     from flexprice_sdk_test.entitlements import Entitlements
     from flexprice_sdk_test.entity_integration_mappings import EntityIntegrationMappings
@@ -61,6 +62,7 @@ class FlexPrice(BaseSDK):
     coupons: "Coupons"
     credit_grants: "CreditGrants"
     credit_notes: "CreditNotes"
+    customer_dashboard: "CustomerDashboard"
     customers: "Customers"
     wallets: "Wallets"
     invoices: "Invoices"
@@ -94,6 +96,10 @@ class FlexPrice(BaseSDK):
         "coupons": ("flexprice_sdk_test.coupons", "Coupons"),
         "credit_grants": ("flexprice_sdk_test.creditgrants", "CreditGrants"),
         "credit_notes": ("flexprice_sdk_test.credit_notes", "CreditNotes"),
+        "customer_dashboard": (
+            "flexprice_sdk_test.customerdashboard",
+            "CustomerDashboard",
+        ),
         "customers": ("flexprice_sdk_test.customers", "Customers"),
         "wallets": ("flexprice_sdk_test.wallets", "Wallets"),
         "invoices": ("flexprice_sdk_test.invoices", "Invoices"),
@@ -125,7 +131,9 @@ class FlexPrice(BaseSDK):
     def __init__(
         self,
         server_url: str,
-        api_key_auth: Union[str, Callable[[], str]],
+        api_key_auth: Optional[
+            Union[Optional[str], Callable[[], Optional[str]]]
+        ] = None,
         client: Optional[HttpClient] = None,
         async_client: Optional[AsyncHttpClient] = None,
         retry_config: OptionalNullable[RetryConfig] = UNSET,

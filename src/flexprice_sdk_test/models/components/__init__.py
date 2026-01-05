@@ -262,6 +262,22 @@ if TYPE_CHECKING:
         DtoCustomerUsageSummaryResponse,
         DtoCustomerUsageSummaryResponseTypedDict,
     )
+    from .dto_dashboardanalyticsrequest import (
+        DtoDashboardAnalyticsRequest,
+        DtoDashboardAnalyticsRequestTypedDict,
+    )
+    from .dto_dashboardcostanalyticsrequest import (
+        DtoDashboardCostAnalyticsRequest,
+        DtoDashboardCostAnalyticsRequestTypedDict,
+    )
+    from .dto_dashboardpaginatedrequest import (
+        DtoDashboardPaginatedRequest,
+        DtoDashboardPaginatedRequestTypedDict,
+    )
+    from .dto_dashboardsessionresponse import (
+        DtoDashboardSessionResponse,
+        DtoDashboardSessionResponseTypedDict,
+    )
     from .dto_deletecostsheetresponse import (
         DtoDeleteCostsheetResponse,
         DtoDeleteCostsheetResponseTypedDict,
@@ -1139,6 +1155,14 @@ __all__ = [
     "DtoCustomerResponseTypedDict",
     "DtoCustomerUsageSummaryResponse",
     "DtoCustomerUsageSummaryResponseTypedDict",
+    "DtoDashboardAnalyticsRequest",
+    "DtoDashboardAnalyticsRequestTypedDict",
+    "DtoDashboardCostAnalyticsRequest",
+    "DtoDashboardCostAnalyticsRequestTypedDict",
+    "DtoDashboardPaginatedRequest",
+    "DtoDashboardPaginatedRequestTypedDict",
+    "DtoDashboardSessionResponse",
+    "DtoDashboardSessionResponseTypedDict",
     "DtoDeleteCostsheetResponse",
     "DtoDeleteCostsheetResponseTypedDict",
     "DtoDeletePriceRequest",
@@ -1769,6 +1793,14 @@ _dynamic_imports: dict[str, str] = {
     "DtoCustomerResponseTypedDict": ".dto_customerresponse",
     "DtoCustomerUsageSummaryResponse": ".dto_customerusagesummaryresponse",
     "DtoCustomerUsageSummaryResponseTypedDict": ".dto_customerusagesummaryresponse",
+    "DtoDashboardAnalyticsRequest": ".dto_dashboardanalyticsrequest",
+    "DtoDashboardAnalyticsRequestTypedDict": ".dto_dashboardanalyticsrequest",
+    "DtoDashboardCostAnalyticsRequest": ".dto_dashboardcostanalyticsrequest",
+    "DtoDashboardCostAnalyticsRequestTypedDict": ".dto_dashboardcostanalyticsrequest",
+    "DtoDashboardPaginatedRequest": ".dto_dashboardpaginatedrequest",
+    "DtoDashboardPaginatedRequestTypedDict": ".dto_dashboardpaginatedrequest",
+    "DtoDashboardSessionResponse": ".dto_dashboardsessionresponse",
+    "DtoDashboardSessionResponseTypedDict": ".dto_dashboardsessionresponse",
     "DtoDeleteCostsheetResponse": ".dto_deletecostsheetresponse",
     "DtoDeleteCostsheetResponseTypedDict": ".dto_deletecostsheetresponse",
     "DtoDeletePriceRequest": ".dto_deletepricerequest",

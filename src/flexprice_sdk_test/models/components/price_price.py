@@ -30,7 +30,7 @@ class PricePriceTypedDict(TypedDict):
     billing_period: NotRequired[TypesBillingPeriod]
     billing_period_count: NotRequired[int]
     r"""BillingPeriodCount is the count of the billing period ex 1, 3, 6, 12"""
-    conversion_rate: NotRequired[float]
+    conversion_rate: NotRequired[str]
     r"""ConversionRate is the conversion rate of the price unit to the fiat currency"""
     created_at: NotRequired[str]
     created_by: NotRequired[str]
@@ -69,7 +69,7 @@ class PricePriceTypedDict(TypedDict):
     r"""ParentPriceID references the root price (always set for price lineage tracking)"""
     price_unit: NotRequired[str]
     r"""PriceUnit is the code of the price unit (e.g., 'btc', 'eth')"""
-    price_unit_amount: NotRequired[float]
+    price_unit_amount: NotRequired[str]
     r"""PriceUnitAmount is the amount of the price unit"""
     price_unit_id: NotRequired[str]
     r"""PriceUnitID is the id of the price unit (for CUSTOM type)"""
@@ -107,7 +107,7 @@ class PricePrice(BaseModel):
     billing_period_count: Optional[int] = None
     r"""BillingPeriodCount is the count of the billing period ex 1, 3, 6, 12"""
 
-    conversion_rate: Optional[float] = None
+    conversion_rate: Optional[str] = None
     r"""ConversionRate is the conversion rate of the price unit to the fiat currency"""
 
     created_at: Optional[str] = None
@@ -167,7 +167,7 @@ class PricePrice(BaseModel):
     price_unit: Optional[str] = None
     r"""PriceUnit is the code of the price unit (e.g., 'btc', 'eth')"""
 
-    price_unit_amount: Optional[float] = None
+    price_unit_amount: Optional[str] = None
     r"""PriceUnitAmount is the amount of the price unit"""
 
     price_unit_id: Optional[str] = None

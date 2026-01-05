@@ -1,8 +1,8 @@
-# Security
+# GetCustomerDashboardInvoicesIDRequest
 
 
 ## Fields
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `api_key_auth`     | *Optional[str]*    | :heavy_minus_sign: | N/A                |
+| `id`               | *str*              | :heavy_check_mark: | Invoice ID         |

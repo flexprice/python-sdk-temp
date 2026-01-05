@@ -3,23 +3,22 @@
 from __future__ import annotations
 from flexprice_sdk_test.types import BaseModel
 from flexprice_sdk_test.utils import FieldMetadata, SecurityMetadata
-from typing import Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import Annotated, TypedDict
 
 
-class SecurityTypedDict(TypedDict):
-    api_key_auth: NotRequired[str]
+class GetCustomerDashboardInfoSecurityTypedDict(TypedDict):
+    bearer_auth: str
 
 
-class Security(BaseModel):
-    api_key_auth: Annotated[
-        Optional[str],
+class GetCustomerDashboardInfoSecurity(BaseModel):
+    bearer_auth: Annotated[
+        str,
         FieldMetadata(
             security=SecurityMetadata(
                 scheme=True,
                 scheme_type="apiKey",
                 sub_type="header",
-                field_name="x-api-key",
+                field_name="Authorization",
             )
         ),
-    ] = None
+    ]

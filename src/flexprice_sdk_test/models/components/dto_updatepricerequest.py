@@ -18,6 +18,7 @@ class DtoUpdatePriceRequestTypedDict(TypedDict):
     r"""Amount is the new price amount that overrides the original price (optional)"""
     billing_model: NotRequired[TypesBillingModel]
     description: NotRequired[str]
+    display_name: NotRequired[str]
     effective_from: NotRequired[str]
     group_id: NotRequired[str]
     r"""GroupID is the id of the group to update the price in"""
@@ -39,6 +40,8 @@ class DtoUpdatePriceRequest(BaseModel):
     billing_model: Optional[TypesBillingModel] = None
 
     description: Optional[str] = None
+
+    display_name: Optional[str] = None
 
     effective_from: Optional[str] = None
 
