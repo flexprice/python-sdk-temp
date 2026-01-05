@@ -129,34 +129,6 @@ if TYPE_CHECKING:
         GetCreditnotesIDRequest,
         GetCreditnotesIDRequestTypedDict,
     )
-    from .get_customer_dashboard_info import (
-        GetCustomerDashboardInfoSecurity,
-        GetCustomerDashboardInfoSecurityTypedDict,
-    )
-    from .get_customer_dashboard_invoices_id_ import (
-        GetCustomerDashboardInvoicesIDRequest,
-        GetCustomerDashboardInvoicesIDRequestTypedDict,
-        GetCustomerDashboardInvoicesIDSecurity,
-        GetCustomerDashboardInvoicesIDSecurityTypedDict,
-    )
-    from .get_customer_dashboard_subscriptions_id_ import (
-        GetCustomerDashboardSubscriptionsIDRequest,
-        GetCustomerDashboardSubscriptionsIDRequestTypedDict,
-        GetCustomerDashboardSubscriptionsIDSecurity,
-        GetCustomerDashboardSubscriptionsIDSecurityTypedDict,
-    )
-    from .get_customer_dashboard_usage import (
-        GetCustomerDashboardUsageRequest,
-        GetCustomerDashboardUsageRequestTypedDict,
-        GetCustomerDashboardUsageSecurity,
-        GetCustomerDashboardUsageSecurityTypedDict,
-    )
-    from .get_customer_dashboard_wallets_id_ import (
-        GetCustomerDashboardWalletsIDRequest,
-        GetCustomerDashboardWalletsIDRequestTypedDict,
-        GetCustomerDashboardWalletsIDSecurity,
-        GetCustomerDashboardWalletsIDSecurityTypedDict,
-    )
     from .get_customers import (
         GetCustomersOrder,
         GetCustomersRequest,
@@ -268,6 +240,10 @@ if TYPE_CHECKING:
     from .get_plans_id_entitlements import (
         GetPlansIDEntitlementsRequest,
         GetPlansIDEntitlementsRequestTypedDict,
+    )
+    from .get_portal_external_id_ import (
+        GetPortalExternalIDRequest,
+        GetPortalExternalIDRequestTypedDict,
     )
     from .get_prices import (
         GetPricesEntityType,
@@ -394,26 +370,6 @@ if TYPE_CHECKING:
         PostCreditnotesIDVoidRequest,
         PostCreditnotesIDVoidRequestTypedDict,
     )
-    from .post_customer_dashboard_analytics import (
-        PostCustomerDashboardAnalyticsSecurity,
-        PostCustomerDashboardAnalyticsSecurityTypedDict,
-    )
-    from .post_customer_dashboard_cost_analytics import (
-        PostCustomerDashboardCostAnalyticsSecurity,
-        PostCustomerDashboardCostAnalyticsSecurityTypedDict,
-    )
-    from .post_customer_dashboard_invoices import (
-        PostCustomerDashboardInvoicesSecurity,
-        PostCustomerDashboardInvoicesSecurityTypedDict,
-    )
-    from .post_customer_dashboard_subscriptions import (
-        PostCustomerDashboardSubscriptionsSecurity,
-        PostCustomerDashboardSubscriptionsSecurityTypedDict,
-    )
-    from .post_customer_dashboard_wallets import (
-        PostCustomerDashboardWalletsSecurity,
-        PostCustomerDashboardWalletsSecurityTypedDict,
-    )
     from .post_groups_search import (
         PostGroupsSearchRequest,
         PostGroupsSearchRequestTypedDict,
@@ -530,10 +486,6 @@ if TYPE_CHECKING:
     from .put_creditgrants_id_ import (
         PutCreditgrantsIDRequest,
         PutCreditgrantsIDRequestTypedDict,
-    )
-    from .put_customer_dashboard_info import (
-        PutCustomerDashboardInfoSecurity,
-        PutCustomerDashboardInfoSecurityTypedDict,
     )
     from .put_customers_id_ import PutCustomersIDRequest, PutCustomersIDRequestTypedDict
     from .put_entitlements_id_ import (
@@ -663,24 +615,6 @@ __all__ = [
     "GetCreditnotesRequest",
     "GetCreditnotesRequestTypedDict",
     "GetCreditnotesStatus",
-    "GetCustomerDashboardInfoSecurity",
-    "GetCustomerDashboardInfoSecurityTypedDict",
-    "GetCustomerDashboardInvoicesIDRequest",
-    "GetCustomerDashboardInvoicesIDRequestTypedDict",
-    "GetCustomerDashboardInvoicesIDSecurity",
-    "GetCustomerDashboardInvoicesIDSecurityTypedDict",
-    "GetCustomerDashboardSubscriptionsIDRequest",
-    "GetCustomerDashboardSubscriptionsIDRequestTypedDict",
-    "GetCustomerDashboardSubscriptionsIDSecurity",
-    "GetCustomerDashboardSubscriptionsIDSecurityTypedDict",
-    "GetCustomerDashboardUsageRequest",
-    "GetCustomerDashboardUsageRequestTypedDict",
-    "GetCustomerDashboardUsageSecurity",
-    "GetCustomerDashboardUsageSecurityTypedDict",
-    "GetCustomerDashboardWalletsIDRequest",
-    "GetCustomerDashboardWalletsIDRequestTypedDict",
-    "GetCustomerDashboardWalletsIDSecurity",
-    "GetCustomerDashboardWalletsIDSecurityTypedDict",
     "GetCustomersExternalExternalIDRequest",
     "GetCustomersExternalExternalIDRequestTypedDict",
     "GetCustomersIDEntitlementsRequest",
@@ -751,6 +685,8 @@ __all__ = [
     "GetPlansRequest",
     "GetPlansRequestTypedDict",
     "GetPlansStatus",
+    "GetPortalExternalIDRequest",
+    "GetPortalExternalIDRequestTypedDict",
     "GetPricesEntityType",
     "GetPricesIDRequest",
     "GetPricesIDRequestTypedDict",
@@ -829,16 +765,6 @@ __all__ = [
     "PostCreditnotesIDFinalizeRequestTypedDict",
     "PostCreditnotesIDVoidRequest",
     "PostCreditnotesIDVoidRequestTypedDict",
-    "PostCustomerDashboardAnalyticsSecurity",
-    "PostCustomerDashboardAnalyticsSecurityTypedDict",
-    "PostCustomerDashboardCostAnalyticsSecurity",
-    "PostCustomerDashboardCostAnalyticsSecurityTypedDict",
-    "PostCustomerDashboardInvoicesSecurity",
-    "PostCustomerDashboardInvoicesSecurityTypedDict",
-    "PostCustomerDashboardSubscriptionsSecurity",
-    "PostCustomerDashboardSubscriptionsSecurityTypedDict",
-    "PostCustomerDashboardWalletsSecurity",
-    "PostCustomerDashboardWalletsSecurityTypedDict",
     "PostGroupsSearchRequest",
     "PostGroupsSearchRequestTypedDict",
     "PostInvoicesIDCommsTriggerRequest",
@@ -904,8 +830,6 @@ __all__ = [
     "PutCouponsIDRequestTypedDict",
     "PutCreditgrantsIDRequest",
     "PutCreditgrantsIDRequestTypedDict",
-    "PutCustomerDashboardInfoSecurity",
-    "PutCustomerDashboardInfoSecurityTypedDict",
     "PutCustomersIDRequest",
     "PutCustomersIDRequestTypedDict",
     "PutEntitlementsIDRequest",
@@ -1028,24 +952,6 @@ _dynamic_imports: dict[str, str] = {
     "GetCreditnotesStatus": ".get_creditnotes",
     "GetCreditnotesIDRequest": ".get_creditnotes_id_",
     "GetCreditnotesIDRequestTypedDict": ".get_creditnotes_id_",
-    "GetCustomerDashboardInfoSecurity": ".get_customer_dashboard_info",
-    "GetCustomerDashboardInfoSecurityTypedDict": ".get_customer_dashboard_info",
-    "GetCustomerDashboardInvoicesIDRequest": ".get_customer_dashboard_invoices_id_",
-    "GetCustomerDashboardInvoicesIDRequestTypedDict": ".get_customer_dashboard_invoices_id_",
-    "GetCustomerDashboardInvoicesIDSecurity": ".get_customer_dashboard_invoices_id_",
-    "GetCustomerDashboardInvoicesIDSecurityTypedDict": ".get_customer_dashboard_invoices_id_",
-    "GetCustomerDashboardSubscriptionsIDRequest": ".get_customer_dashboard_subscriptions_id_",
-    "GetCustomerDashboardSubscriptionsIDRequestTypedDict": ".get_customer_dashboard_subscriptions_id_",
-    "GetCustomerDashboardSubscriptionsIDSecurity": ".get_customer_dashboard_subscriptions_id_",
-    "GetCustomerDashboardSubscriptionsIDSecurityTypedDict": ".get_customer_dashboard_subscriptions_id_",
-    "GetCustomerDashboardUsageRequest": ".get_customer_dashboard_usage",
-    "GetCustomerDashboardUsageRequestTypedDict": ".get_customer_dashboard_usage",
-    "GetCustomerDashboardUsageSecurity": ".get_customer_dashboard_usage",
-    "GetCustomerDashboardUsageSecurityTypedDict": ".get_customer_dashboard_usage",
-    "GetCustomerDashboardWalletsIDRequest": ".get_customer_dashboard_wallets_id_",
-    "GetCustomerDashboardWalletsIDRequestTypedDict": ".get_customer_dashboard_wallets_id_",
-    "GetCustomerDashboardWalletsIDSecurity": ".get_customer_dashboard_wallets_id_",
-    "GetCustomerDashboardWalletsIDSecurityTypedDict": ".get_customer_dashboard_wallets_id_",
     "GetCustomersOrder": ".get_customers",
     "GetCustomersRequest": ".get_customers",
     "GetCustomersRequestTypedDict": ".get_customers",
@@ -1120,6 +1026,8 @@ _dynamic_imports: dict[str, str] = {
     "GetPlansIDCreditgrantsRequestTypedDict": ".get_plans_id_creditgrants",
     "GetPlansIDEntitlementsRequest": ".get_plans_id_entitlements",
     "GetPlansIDEntitlementsRequestTypedDict": ".get_plans_id_entitlements",
+    "GetPortalExternalIDRequest": ".get_portal_external_id_",
+    "GetPortalExternalIDRequestTypedDict": ".get_portal_external_id_",
     "GetPricesEntityType": ".get_prices",
     "GetPricesOrder": ".get_prices",
     "GetPricesRequest": ".get_prices",
@@ -1203,16 +1111,6 @@ _dynamic_imports: dict[str, str] = {
     "PostCreditnotesIDFinalizeRequestTypedDict": ".post_creditnotes_id_finalize",
     "PostCreditnotesIDVoidRequest": ".post_creditnotes_id_void",
     "PostCreditnotesIDVoidRequestTypedDict": ".post_creditnotes_id_void",
-    "PostCustomerDashboardAnalyticsSecurity": ".post_customer_dashboard_analytics",
-    "PostCustomerDashboardAnalyticsSecurityTypedDict": ".post_customer_dashboard_analytics",
-    "PostCustomerDashboardCostAnalyticsSecurity": ".post_customer_dashboard_cost_analytics",
-    "PostCustomerDashboardCostAnalyticsSecurityTypedDict": ".post_customer_dashboard_cost_analytics",
-    "PostCustomerDashboardInvoicesSecurity": ".post_customer_dashboard_invoices",
-    "PostCustomerDashboardInvoicesSecurityTypedDict": ".post_customer_dashboard_invoices",
-    "PostCustomerDashboardSubscriptionsSecurity": ".post_customer_dashboard_subscriptions",
-    "PostCustomerDashboardSubscriptionsSecurityTypedDict": ".post_customer_dashboard_subscriptions",
-    "PostCustomerDashboardWalletsSecurity": ".post_customer_dashboard_wallets",
-    "PostCustomerDashboardWalletsSecurityTypedDict": ".post_customer_dashboard_wallets",
     "PostGroupsSearchRequest": ".post_groups_search",
     "PostGroupsSearchRequestTypedDict": ".post_groups_search",
     "PostInvoicesIDCommsTriggerRequest": ".post_invoices_id_comms_trigger",
@@ -1277,8 +1175,6 @@ _dynamic_imports: dict[str, str] = {
     "PutCouponsIDRequestTypedDict": ".put_coupons_id_",
     "PutCreditgrantsIDRequest": ".put_creditgrants_id_",
     "PutCreditgrantsIDRequestTypedDict": ".put_creditgrants_id_",
-    "PutCustomerDashboardInfoSecurity": ".put_customer_dashboard_info",
-    "PutCustomerDashboardInfoSecurityTypedDict": ".put_customer_dashboard_info",
     "PutCustomersIDRequest": ".put_customers_id_",
     "PutCustomersIDRequestTypedDict": ".put_customers_id_",
     "PutEntitlementsIDRequest": ".put_entitlements_id_",

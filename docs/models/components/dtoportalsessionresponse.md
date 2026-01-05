@@ -1,4 +1,4 @@
-# DtoDashboardSessionResponse
+# DtoPortalSessionResponse
 
 
 ## Fields

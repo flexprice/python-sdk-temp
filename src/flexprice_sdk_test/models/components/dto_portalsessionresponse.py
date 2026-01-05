@@ -6,13 +6,13 @@ from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class DtoDashboardSessionResponseTypedDict(TypedDict):
+class DtoPortalSessionResponseTypedDict(TypedDict):
     expires_at: NotRequired[str]
     token: NotRequired[str]
     url: NotRequired[str]
 
 
-class DtoDashboardSessionResponse(BaseModel):
+class DtoPortalSessionResponse(BaseModel):
     expires_at: Optional[str] = None
 
     token: Optional[str] = None

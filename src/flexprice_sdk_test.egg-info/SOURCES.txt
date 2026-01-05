@@ -12,7 +12,7 @@ src/flexprice_sdk_test/costs.py
 src/flexprice_sdk_test/coupons.py
 src/flexprice_sdk_test/credit_notes.py
 src/flexprice_sdk_test/creditgrants.py
-src/flexprice_sdk_test/customerdashboard.py
+src/flexprice_sdk_test/customerportal.py
 src/flexprice_sdk_test/customers.py
 src/flexprice_sdk_test/entitlements.py
 src/flexprice_sdk_test/entity_integration_mappings.py
@@ -123,10 +123,6 @@ src/flexprice_sdk_test/models/components/dto_customerinvoicesummary.py
 src/flexprice_sdk_test/models/components/dto_customermulticurrencyinvoicesummary.py
 src/flexprice_sdk_test/models/components/dto_customerresponse.py
 src/flexprice_sdk_test/models/components/dto_customerusagesummaryresponse.py
-src/flexprice_sdk_test/models/components/dto_dashboardanalyticsrequest.py
-src/flexprice_sdk_test/models/components/dto_dashboardcostanalyticsrequest.py
-src/flexprice_sdk_test/models/components/dto_dashboardpaginatedrequest.py
-src/flexprice_sdk_test/models/components/dto_dashboardsessionresponse.py
 src/flexprice_sdk_test/models/components/dto_deletecostsheetresponse.py
 src/flexprice_sdk_test/models/components/dto_deletepricerequest.py
 src/flexprice_sdk_test/models/components/dto_deletesubscriptionlineitemrequest.py
@@ -198,6 +194,7 @@ src/flexprice_sdk_test/models/components/dto_paymentattemptresponse.py
 src/flexprice_sdk_test/models/components/dto_paymentresponse.py
 src/flexprice_sdk_test/models/components/dto_planresponse.py
 src/flexprice_sdk_test/models/components/dto_plansummary.py
+src/flexprice_sdk_test/models/components/dto_portalsessionresponse.py
 src/flexprice_sdk_test/models/components/dto_priceresponse.py
 src/flexprice_sdk_test/models/components/dto_priceunitconfig.py
 src/flexprice_sdk_test/models/components/dto_priceunitresponse.py
@@ -445,11 +442,6 @@ src/flexprice_sdk_test/models/operations/get_creditgrants.py
 src/flexprice_sdk_test/models/operations/get_creditgrants_id_.py
 src/flexprice_sdk_test/models/operations/get_creditnotes.py
 src/flexprice_sdk_test/models/operations/get_creditnotes_id_.py
-src/flexprice_sdk_test/models/operations/get_customer_dashboard_info.py
-src/flexprice_sdk_test/models/operations/get_customer_dashboard_invoices_id_.py
-src/flexprice_sdk_test/models/operations/get_customer_dashboard_subscriptions_id_.py
-src/flexprice_sdk_test/models/operations/get_customer_dashboard_usage.py
-src/flexprice_sdk_test/models/operations/get_customer_dashboard_wallets_id_.py
 src/flexprice_sdk_test/models/operations/get_customers.py
 src/flexprice_sdk_test/models/operations/get_customers_external_external_id_.py
 src/flexprice_sdk_test/models/operations/get_customers_id_.py
@@ -478,6 +470,7 @@ src/flexprice_sdk_test/models/operations/get_plans.py
 src/flexprice_sdk_test/models/operations/get_plans_id_.py
 src/flexprice_sdk_test/models/operations/get_plans_id_creditgrants.py
 src/flexprice_sdk_test/models/operations/get_plans_id_entitlements.py
+src/flexprice_sdk_test/models/operations/get_portal_external_id_.py
 src/flexprice_sdk_test/models/operations/get_prices.py
 src/flexprice_sdk_test/models/operations/get_prices_id_.py
 src/flexprice_sdk_test/models/operations/get_prices_units.py
@@ -508,11 +501,6 @@ src/flexprice_sdk_test/models/operations/get_wallets_id_balance_real_time.py
 src/flexprice_sdk_test/models/operations/get_wallets_id_transactions.py
 src/flexprice_sdk_test/models/operations/post_creditnotes_id_finalize.py
 src/flexprice_sdk_test/models/operations/post_creditnotes_id_void.py
-src/flexprice_sdk_test/models/operations/post_customer_dashboard_analytics.py
-src/flexprice_sdk_test/models/operations/post_customer_dashboard_cost_analytics.py
-src/flexprice_sdk_test/models/operations/post_customer_dashboard_invoices.py
-src/flexprice_sdk_test/models/operations/post_customer_dashboard_subscriptions.py
-src/flexprice_sdk_test/models/operations/post_customer_dashboard_wallets.py
 src/flexprice_sdk_test/models/operations/post_groups_search.py
 src/flexprice_sdk_test/models/operations/post_invoices_id_comms_trigger.py
 src/flexprice_sdk_test/models/operations/post_invoices_id_finalize.py
@@ -544,7 +532,6 @@ src/flexprice_sdk_test/models/operations/put_connections_id_.py
 src/flexprice_sdk_test/models/operations/put_costs_id_.py
 src/flexprice_sdk_test/models/operations/put_coupons_id_.py
 src/flexprice_sdk_test/models/operations/put_creditgrants_id_.py
-src/flexprice_sdk_test/models/operations/put_customer_dashboard_info.py
 src/flexprice_sdk_test/models/operations/put_customers_id_.py
 src/flexprice_sdk_test/models/operations/put_entitlements_id_.py
 src/flexprice_sdk_test/models/operations/put_environments_id_.py

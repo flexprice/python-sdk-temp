@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: flexprice-sdk-test
-Version: 1.0.49
+Version: 1.0.51
 Summary: Python SDK for FlexPrice API
 Home-page: https://github.com/flexprice/python-sdk
 Author: Speakeasy
@@ -463,47 +463,6 @@ with FlexPrice(
     print(res)
 
 ```
-
-### Per-Operation Security Schemes
-
-Some operations in this SDK require the security scheme to be specified at the request level. For example:
-```python
-from flexprice_sdk_test import FlexPrice
-from flexprice_sdk_test.models import operations
-
-
-with FlexPrice(
-    server_url="https://api.example.com",
-) as flex_price:
-
-    res = flex_price.customer_dashboard.post_customer_dashboard_analytics(security=operations.PostCustomerDashboardAnalyticsSecurity(
-        bearer_auth="<YOUR_API_KEY_HERE>",
-    ), request={
-        "end_time": "2024-01-31T23:59:59Z",
-        "expand": [
-            "price",
-            "meter",
-            "feature",
-        ],
-        "feature_ids": [
-            "feat_123",
-            "feat_456",
-        ],
-        "group_by": [
-            "source",
-            "feature_id",
-        ],
-        "sources": [
-            "api",
-            "web",
-        ],
-        "start_time": "2024-01-01T00:00:00Z",
-    })
-
-    # Handle response
-    print(res)
-
-```
 <!-- End Authentication [security] -->
 
 <!-- Start Available Resources and Operations [operations] -->
@@ -575,20 +534,9 @@ with FlexPrice(
 * [delete_creditgrants_id_](docs/sdks/creditgrants/README.md#delete_creditgrants_id_) - Delete a credit grant
 * [get_plans_id_creditgrants](docs/sdks/creditgrants/README.md#get_plans_id_creditgrants) - Get plan credit grants
 
-### [CustomerDashboard](docs/sdks/customerdashboard/README.md)
+### [CustomerPortal](docs/sdks/customerportal/README.md)
 
-* [get_customer_dashboard_external_id](docs/sdks/customerdashboard/README.md#get_customer_dashboard_external_id) - Create a customer dashboard session
-* [post_customer_dashboard_analytics](docs/sdks/customerdashboard/README.md#post_customer_dashboard_analytics) - Get customer analytics
-* [post_customer_dashboard_cost_analytics](docs/sdks/customerdashboard/README.md#post_customer_dashboard_cost_analytics) - Get customer cost analytics
-* [get_customer_dashboard_info](docs/sdks/customerdashboard/README.md#get_customer_dashboard_info) - Get customer information
-* [put_customer_dashboard_info](docs/sdks/customerdashboard/README.md#put_customer_dashboard_info) - Update customer information
-* [post_customer_dashboard_invoices](docs/sdks/customerdashboard/README.md#post_customer_dashboard_invoices) - Get customer invoices
-* [get_customer_dashboard_invoices_id_](docs/sdks/customerdashboard/README.md#get_customer_dashboard_invoices_id_) - Get invoice by ID
-* [post_customer_dashboard_subscriptions](docs/sdks/customerdashboard/README.md#post_customer_dashboard_subscriptions) - Get customer subscriptions
-* [get_customer_dashboard_subscriptions_id_](docs/sdks/customerdashboard/README.md#get_customer_dashboard_subscriptions_id_) - Get subscription by ID
-* [get_customer_dashboard_usage](docs/sdks/customerdashboard/README.md#get_customer_dashboard_usage) - Get customer usage summary
-* [post_customer_dashboard_wallets](docs/sdks/customerdashboard/README.md#post_customer_dashboard_wallets) - Get customer wallets
-* [get_customer_dashboard_wallets_id_](docs/sdks/customerdashboard/README.md#get_customer_dashboard_wallets_id_) - Get wallet by ID
+* [get_portal_external_id_](docs/sdks/customerportal/README.md#get_portal_external_id_) - Create a customer portal session
 
 ### [Customers](docs/sdks/customers/README.md)
 
