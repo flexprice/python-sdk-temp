@@ -1,29 +1,37 @@
-[build-system]
-requires = ["setuptools>=61.0", "wheel"]
-build-backend = "setuptools.build_meta"
 
 [project]
 name = "flexprice-sdk-test"
-version = "1.0.51"
+version = "1.0.54"
 description = "Python SDK for FlexPrice API"
+authors = [{ name = "Speakeasy" },]
 readme = "README.md"
 requires-python = ">=3.9.2"
-authors = [{ name = "Speakeasy" }]
 dependencies = [
-    "httpcore>=1.0.9",
-    "httpx>=0.28.1",
-    "pydantic>=2.11.2",
+    "httpcore >=1.0.9",
+    "httpx >=0.28.1",
+    "pydantic >=2.11.2",
 ]
 
-[project.urls]
-Repository = "https://github.com/flexprice/flexprice"
-Homepage = "https://github.com/flexprice/flexprice"
-
-[tool.setuptools]
-packages = { find = { where = ["src"] } }
+[tool.poetry]
+packages = [
+    { include = "flexprice_sdk_test", from = "src" }
+]
+include = ["py.typed", "src/flexprice_sdk_test/py.typed"]
 
 [tool.setuptools.package-data]
-"*" = ["py.typed"]
+"*" = ["py.typed", "src/flexprice_sdk_test/py.typed"]
+
+[virtualenvs]
+in-project = true
+
+[tool.poetry.group.dev.dependencies]
+mypy = "==1.15.0"
+pylint = "==3.2.3"
+pyright = "==1.1.398"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
 
 [tool.pytest.ini_options]
 asyncio_default_fixture_loop_scope = "function"
@@ -45,3 +53,5 @@ ignore_missing_imports = true
 [tool.pyright]
 venvPath = "."
 venv = ".venv"
+
+

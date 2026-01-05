@@ -1,6 +1,5 @@
 README.md
 pyproject.toml
-setup.py
 src/flexprice_sdk_test/__init__.py
 src/flexprice_sdk_test/_version.py
 src/flexprice_sdk_test/addons.py
