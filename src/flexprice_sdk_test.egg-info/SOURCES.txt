@@ -1,6 +1,5 @@
 MANIFEST.in
 README.md
-py.typed
 pyproject.toml
 examples/README.md
 examples/async_event_example.py
