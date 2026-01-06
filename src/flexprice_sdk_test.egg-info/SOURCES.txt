@@ -1,5 +1,10 @@
+MANIFEST.in
 README.md
 pyproject.toml
+examples/README.md
+examples/async_event_example.py
+examples/example.py
+examples/requirements.txt
 src/flexprice_sdk_test/__init__.py
 src/flexprice_sdk_test/_version.py
 src/flexprice_sdk_test/addons.py
