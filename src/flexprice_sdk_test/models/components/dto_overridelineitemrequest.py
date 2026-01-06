@@ -19,6 +19,10 @@ class DtoOverrideLineItemRequestTypedDict(TypedDict):
     amount: NotRequired[str]
     r"""Amount is the new price amount that overrides the original price (optional)"""
     billing_model: NotRequired[TypesBillingModel]
+    price_unit_amount: NotRequired[str]
+    r"""PriceUnitAmount is the amount of the price unit (for CUSTOM type, FLAT_FEE/PACKAGE billing models)"""
+    price_unit_tiers: NotRequired[List[DtoCreatePriceTierTypedDict]]
+    r"""PriceUnitTiers are the tiers for the price unit (for CUSTOM type, TIERED billing model)"""
     quantity: NotRequired[str]
     r"""Quantity for this line item (optional)"""
     tier_mode: NotRequired[TypesBillingTier]
@@ -35,6 +39,12 @@ class DtoOverrideLineItemRequest(BaseModel):
     r"""Amount is the new price amount that overrides the original price (optional)"""
 
     billing_model: Optional[TypesBillingModel] = None
+
+    price_unit_amount: Optional[str] = None
+    r"""PriceUnitAmount is the amount of the price unit (for CUSTOM type, FLAT_FEE/PACKAGE billing models)"""
+
+    price_unit_tiers: Optional[List[DtoCreatePriceTier]] = None
+    r"""PriceUnitTiers are the tiers for the price unit (for CUSTOM type, TIERED billing model)"""
 
     quantity: Optional[str] = None
     r"""Quantity for this line item (optional)"""

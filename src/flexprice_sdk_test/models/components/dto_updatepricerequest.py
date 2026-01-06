@@ -27,6 +27,10 @@ class DtoUpdatePriceRequestTypedDict(TypedDict):
     Non-critical fields (can be updated directly)
     """
     metadata: NotRequired[Dict[str, str]]
+    price_unit_amount: NotRequired[str]
+    r"""PriceUnitAmount is the price unit amount (for CUSTOM price unit type, FLAT_FEE/PACKAGE billing models)"""
+    price_unit_tiers: NotRequired[List[DtoCreatePriceTierTypedDict]]
+    r"""PriceUnitTiers are the price unit tiers (for CUSTOM price unit type, TIERED billing model)"""
     tier_mode: NotRequired[TypesBillingTier]
     tiers: NotRequired[List[DtoCreatePriceTierTypedDict]]
     r"""Tiers determines the pricing tiers for this line item"""
@@ -54,6 +58,12 @@ class DtoUpdatePriceRequest(BaseModel):
     """
 
     metadata: Optional[Dict[str, str]] = None
+
+    price_unit_amount: Optional[str] = None
+    r"""PriceUnitAmount is the price unit amount (for CUSTOM price unit type, FLAT_FEE/PACKAGE billing models)"""
+
+    price_unit_tiers: Optional[List[DtoCreatePriceTier]] = None
+    r"""PriceUnitTiers are the price unit tiers (for CUSTOM price unit type, TIERED billing model)"""
 
     tier_mode: Optional[TypesBillingTier] = None
 

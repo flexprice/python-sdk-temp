@@ -16,6 +16,12 @@ class DtoCreateCreditGrantRequestTypedDict(TypedDict):
     credits: str
     name: str
     scope: TypesCreditGrantScope
+    conversion_rate: NotRequired[str]
+    r"""amount in the currency =  number of credits * conversion_rate
+    ex if conversion_rate is 1, then 1 USD = 1 credit
+    ex if conversion_rate is 2, then 1 USD = 0.5 credits
+    ex if conversion_rate is 0.5, then 1 USD = 2 credits
+    """
     expiration_duration: NotRequired[int]
     expiration_duration_unit: NotRequired[TypesCreditGrantExpiryDurationUnit]
     expiration_type: NotRequired[TypesCreditGrantExpiryType]
@@ -25,6 +31,12 @@ class DtoCreateCreditGrantRequestTypedDict(TypedDict):
     plan_id: NotRequired[str]
     priority: NotRequired[int]
     subscription_id: NotRequired[str]
+    topup_conversion_rate: NotRequired[str]
+    r"""topup_conversion_rate is the conversion rate for the topup to the currency
+    ex if topup_conversion_rate is 1, then 1 USD = 1 credit
+    ex if topup_conversion_rate is 2, then 1 USD = 0.5 credits
+    ex if topup_conversion_rate is 0.5, then 1 USD = 2 credits
+    """
 
 
 class DtoCreateCreditGrantRequest(BaseModel):
@@ -35,6 +47,13 @@ class DtoCreateCreditGrantRequest(BaseModel):
     name: str
 
     scope: TypesCreditGrantScope
+
+    conversion_rate: Optional[str] = None
+    r"""amount in the currency =  number of credits * conversion_rate
+    ex if conversion_rate is 1, then 1 USD = 1 credit
+    ex if conversion_rate is 2, then 1 USD = 0.5 credits
+    ex if conversion_rate is 0.5, then 1 USD = 2 credits
+    """
 
     expiration_duration: Optional[int] = None
 
@@ -53,3 +72,10 @@ class DtoCreateCreditGrantRequest(BaseModel):
     priority: Optional[int] = None
 
     subscription_id: Optional[str] = None
+
+    topup_conversion_rate: Optional[str] = None
+    r"""topup_conversion_rate is the conversion rate for the topup to the currency
+    ex if topup_conversion_rate is 1, then 1 USD = 1 credit
+    ex if topup_conversion_rate is 2, then 1 USD = 0.5 credits
+    ex if topup_conversion_rate is 0.5, then 1 USD = 2 credits
+    """

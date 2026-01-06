@@ -51,6 +51,12 @@ class DtoCreateWalletRequestTypedDict(TypedDict):
     - currency: set to price unit's base_currency
     - conversion_rate: set to price unit's conversion_rate
     """
+    topup_conversion_rate: NotRequired[str]
+    r"""topup_conversion_rate is the conversion rate for the topup to the currency
+    ex if topup_conversion_rate is 1, then 1 USD = 1 credit
+    ex if topup_conversion_rate is 2, then 1 USD = 0.5 credits
+    ex if topup_conversion_rate is 0.5, then 1 USD = 2 credits
+    """
     wallet_type: NotRequired[TypesWalletType]
 
 
@@ -108,6 +114,13 @@ class DtoCreateWalletRequest(BaseModel):
     If provided, the price unit will be used to set the currency and conversion rate of the wallet:
     - currency: set to price unit's base_currency
     - conversion_rate: set to price unit's conversion_rate
+    """
+
+    topup_conversion_rate: Optional[str] = None
+    r"""topup_conversion_rate is the conversion rate for the topup to the currency
+    ex if topup_conversion_rate is 1, then 1 USD = 1 credit
+    ex if topup_conversion_rate is 2, then 1 USD = 0.5 credits
+    ex if topup_conversion_rate is 0.5, then 1 USD = 2 credits
     """
 
     wallet_type: Optional[TypesWalletType] = None

@@ -14,6 +14,12 @@ from typing_extensions import NotRequired, TypedDict
 
 class DtoCreditGrantResponseTypedDict(TypedDict):
     cadence: NotRequired[TypesCreditGrantCadence]
+    conversion_rate: NotRequired[str]
+    r"""amount in the currency =  number of credits * conversion_rate
+    ex if conversion_rate is 1, then 1 USD = 1 credit
+    ex if conversion_rate is 2, then 1 USD = 0.5 credits
+    ex if conversion_rate is 0.5, then 1 USD = 2 credits
+    """
     created_at: NotRequired[str]
     created_by: NotRequired[str]
     credit_grant_anchor: NotRequired[str]
@@ -35,12 +41,25 @@ class DtoCreditGrantResponseTypedDict(TypedDict):
     status: NotRequired[TypesStatus]
     subscription_id: NotRequired[str]
     tenant_id: NotRequired[str]
+    topup_conversion_rate: NotRequired[str]
+    r"""topup_conversion_rate is the conversion rate for the topup to the currency
+    ex if topup_conversion_rate is 1, then 1 USD = 1 credit
+    ex if topup_conversion_rate is 2, then 1 USD = 0.5 credits
+    ex if topup_conversion_rate is 0.5, then 1 USD = 2 credits
+    """
     updated_at: NotRequired[str]
     updated_by: NotRequired[str]
 
 
 class DtoCreditGrantResponse(BaseModel):
     cadence: Optional[TypesCreditGrantCadence] = None
+
+    conversion_rate: Optional[str] = None
+    r"""amount in the currency =  number of credits * conversion_rate
+    ex if conversion_rate is 1, then 1 USD = 1 credit
+    ex if conversion_rate is 2, then 1 USD = 0.5 credits
+    ex if conversion_rate is 0.5, then 1 USD = 2 credits
+    """
 
     created_at: Optional[str] = None
 
@@ -83,6 +102,13 @@ class DtoCreditGrantResponse(BaseModel):
     subscription_id: Optional[str] = None
 
     tenant_id: Optional[str] = None
+
+    topup_conversion_rate: Optional[str] = None
+    r"""topup_conversion_rate is the conversion rate for the topup to the currency
+    ex if topup_conversion_rate is 1, then 1 USD = 1 credit
+    ex if topup_conversion_rate is 2, then 1 USD = 0.5 credits
+    ex if topup_conversion_rate is 0.5, then 1 USD = 2 credits
+    """
 
     updated_at: Optional[str] = None
 

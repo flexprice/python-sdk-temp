@@ -41,6 +41,12 @@ class DtoWalletBalanceResponseTypedDict(TypedDict):
     real_time_credit_balance: NotRequired[str]
     status: NotRequired[TypesStatus]
     tenant_id: NotRequired[str]
+    topup_conversion_rate: NotRequired[str]
+    r"""topup_conversion_rate is the conversion rate for the topup to the currency
+    ex if topup_conversion_rate is 1, then 1 USD = 1 credit
+    ex if topup_conversion_rate is 2, then 1 USD = 0.5 credits
+    ex if topup_conversion_rate is 0.5, then 1 USD = 2 credits
+    """
     unpaid_invoices_amount: NotRequired[str]
     updated_at: NotRequired[str]
     updated_by: NotRequired[str]
@@ -99,6 +105,13 @@ class DtoWalletBalanceResponse(BaseModel):
     status: Optional[TypesStatus] = None
 
     tenant_id: Optional[str] = None
+
+    topup_conversion_rate: Optional[str] = None
+    r"""topup_conversion_rate is the conversion rate for the topup to the currency
+    ex if topup_conversion_rate is 1, then 1 USD = 1 credit
+    ex if topup_conversion_rate is 2, then 1 USD = 0.5 credits
+    ex if topup_conversion_rate is 0.5, then 1 USD = 2 credits
+    """
 
     unpaid_invoices_amount: Optional[str] = None
 

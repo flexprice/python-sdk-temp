@@ -16,6 +16,8 @@ from typing_extensions import NotRequired, TypedDict
 
 class DtoWalletTransactionResponseTypedDict(TypedDict):
     amount: NotRequired[str]
+    conversion_rate: NotRequired[str]
+    r"""conversion_rate is the conversion rate for the transaction to the currency"""
     created_at: NotRequired[str]
     created_by: NotRequired[str]
     created_by_user: NotRequired[DtoUserResponseTypedDict]
@@ -38,6 +40,8 @@ class DtoWalletTransactionResponseTypedDict(TypedDict):
     reference_type: NotRequired[TypesWalletTxReferenceType]
     status: NotRequired[TypesStatus]
     tenant_id: NotRequired[str]
+    topup_conversion_rate: NotRequired[str]
+    r"""topup_conversion_rate is the conversion rate for the topup to the currency"""
     transaction_reason: NotRequired[TypesTransactionReason]
     transaction_status: NotRequired[TypesTransactionStatus]
     type: NotRequired[TypesTransactionType]
@@ -49,6 +53,9 @@ class DtoWalletTransactionResponseTypedDict(TypedDict):
 
 class DtoWalletTransactionResponse(BaseModel):
     amount: Optional[str] = None
+
+    conversion_rate: Optional[str] = None
+    r"""conversion_rate is the conversion rate for the transaction to the currency"""
 
     created_at: Optional[str] = None
 
@@ -92,6 +99,9 @@ class DtoWalletTransactionResponse(BaseModel):
     status: Optional[TypesStatus] = None
 
     tenant_id: Optional[str] = None
+
+    topup_conversion_rate: Optional[str] = None
+    r"""topup_conversion_rate is the conversion rate for the topup to the currency"""
 
     transaction_reason: Optional[TypesTransactionReason] = None
 
