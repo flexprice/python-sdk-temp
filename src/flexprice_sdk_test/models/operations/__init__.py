@@ -253,6 +253,10 @@ if TYPE_CHECKING:
         GetPricesStatus,
     )
     from .get_prices_id_ import GetPricesIDRequest, GetPricesIDRequestTypedDict
+    from .get_prices_lookup_lookup_key_ import (
+        GetPricesLookupLookupKeyRequest,
+        GetPricesLookupLookupKeyRequestTypedDict,
+    )
     from .get_prices_units import GetPricesUnitsRequest, GetPricesUnitsRequestTypedDict
     from .get_prices_units_code_code_ import (
         GetPricesUnitsCodeCodeRequest,
@@ -313,6 +317,10 @@ if TYPE_CHECKING:
         TaskType,
     )
     from .get_tasks_id_ import GetTasksIDRequest, GetTasksIDRequestTypedDict
+    from .get_tasks_id_download import (
+        GetTasksIDDownloadRequest,
+        GetTasksIDDownloadRequestTypedDict,
+    )
     from .get_tasks_result import GetTasksResultRequest, GetTasksResultRequestTypedDict
     from .get_tasks_scheduled import (
         GetTasksScheduledRequest,
@@ -690,6 +698,8 @@ __all__ = [
     "GetPricesEntityType",
     "GetPricesIDRequest",
     "GetPricesIDRequestTypedDict",
+    "GetPricesLookupLookupKeyRequest",
+    "GetPricesLookupLookupKeyRequestTypedDict",
     "GetPricesOrder",
     "GetPricesRequest",
     "GetPricesRequestTypedDict",
@@ -721,6 +731,8 @@ __all__ = [
     "GetSubscriptionsRequestTypedDict",
     "GetSubscriptionsStatus",
     "GetTasksEntityType",
+    "GetTasksIDDownloadRequest",
+    "GetTasksIDDownloadRequestTypedDict",
     "GetTasksIDRequest",
     "GetTasksIDRequestTypedDict",
     "GetTasksOrder",
@@ -1035,6 +1047,8 @@ _dynamic_imports: dict[str, str] = {
     "GetPricesStatus": ".get_prices",
     "GetPricesIDRequest": ".get_prices_id_",
     "GetPricesIDRequestTypedDict": ".get_prices_id_",
+    "GetPricesLookupLookupKeyRequest": ".get_prices_lookup_lookup_key_",
+    "GetPricesLookupLookupKeyRequestTypedDict": ".get_prices_lookup_lookup_key_",
     "GetPricesUnitsRequest": ".get_prices_units",
     "GetPricesUnitsRequestTypedDict": ".get_prices_units",
     "GetPricesUnitsCodeCodeRequest": ".get_prices_units_code_code_",
@@ -1073,6 +1087,8 @@ _dynamic_imports: dict[str, str] = {
     "TaskType": ".get_tasks",
     "GetTasksIDRequest": ".get_tasks_id_",
     "GetTasksIDRequestTypedDict": ".get_tasks_id_",
+    "GetTasksIDDownloadRequest": ".get_tasks_id_download",
+    "GetTasksIDDownloadRequestTypedDict": ".get_tasks_id_download",
     "GetTasksResultRequest": ".get_tasks_result",
     "GetTasksResultRequestTypedDict": ".get_tasks_result",
     "GetTasksScheduledRequest": ".get_tasks_scheduled",

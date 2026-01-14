@@ -371,6 +371,7 @@ src/flexprice_sdk_test/models/components/types_roundtype.py
 src/flexprice_sdk_test/models/components/types_s3compressiontype.py
 src/flexprice_sdk_test/models/components/types_s3connectionmetadata.py
 src/flexprice_sdk_test/models/components/types_s3encryptiontype.py
+src/flexprice_sdk_test/models/components/types_s3exportconfig.py
 src/flexprice_sdk_test/models/components/types_s3jobconfig.py
 src/flexprice_sdk_test/models/components/types_scheduledtaskentitytype.py
 src/flexprice_sdk_test/models/components/types_scheduledtaskinterval.py
@@ -477,6 +478,7 @@ src/flexprice_sdk_test/models/operations/get_plans_id_entitlements.py
 src/flexprice_sdk_test/models/operations/get_portal_external_id_.py
 src/flexprice_sdk_test/models/operations/get_prices.py
 src/flexprice_sdk_test/models/operations/get_prices_id_.py
+src/flexprice_sdk_test/models/operations/get_prices_lookup_lookup_key_.py
 src/flexprice_sdk_test/models/operations/get_prices_units.py
 src/flexprice_sdk_test/models/operations/get_prices_units_code_code_.py
 src/flexprice_sdk_test/models/operations/get_prices_units_id_.py
@@ -491,6 +493,7 @@ src/flexprice_sdk_test/models/operations/get_subscriptions_id_grants_upcoming.py
 src/flexprice_sdk_test/models/operations/get_subscriptions_id_pauses.py
 src/flexprice_sdk_test/models/operations/get_tasks.py
 src/flexprice_sdk_test/models/operations/get_tasks_id_.py
+src/flexprice_sdk_test/models/operations/get_tasks_id_download.py
 src/flexprice_sdk_test/models/operations/get_tasks_result.py
 src/flexprice_sdk_test/models/operations/get_tasks_scheduled.py
 src/flexprice_sdk_test/models/operations/get_tasks_scheduled_id_.py

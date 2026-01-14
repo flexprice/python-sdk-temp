@@ -12,6 +12,7 @@ class GetTasksEntityType(str, Enum):
     EVENTS = "EVENTS"
     PRICES = "PRICES"
     CUSTOMERS = "CUSTOMERS"
+    FEATURES = "FEATURES"
 
 
 class GetTasksOrder(str, Enum):

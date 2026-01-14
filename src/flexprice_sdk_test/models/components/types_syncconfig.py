@@ -5,6 +5,7 @@ from .types_entitysyncconfig import (
     TypesEntitySyncConfig,
     TypesEntitySyncConfigTypedDict,
 )
+from .types_s3exportconfig import TypesS3ExportConfig, TypesS3ExportConfigTypedDict
 from flexprice_sdk_test.types import BaseModel
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
@@ -16,6 +17,7 @@ class TypesSyncConfigTypedDict(TypedDict):
     payment: NotRequired[TypesEntitySyncConfigTypedDict]
     plan: NotRequired[TypesEntitySyncConfigTypedDict]
     quote: NotRequired[TypesEntitySyncConfigTypedDict]
+    s3: NotRequired[TypesS3ExportConfigTypedDict]
     subscription: NotRequired[TypesEntitySyncConfigTypedDict]
 
 
@@ -29,5 +31,7 @@ class TypesSyncConfig(BaseModel):
     plan: Optional[TypesEntitySyncConfig] = None
 
     quote: Optional[TypesEntitySyncConfig] = None
+
+    s3: Optional[TypesS3ExportConfig] = None
 
     subscription: Optional[TypesEntitySyncConfig] = None

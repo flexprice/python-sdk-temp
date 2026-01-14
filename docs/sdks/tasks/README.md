@@ -8,6 +8,7 @@
 * [post_tasks](#post_tasks) - Create a new task
 * [get_tasks_result](#get_tasks_result) - Get task processing result
 * [get_tasks_id_](#get_tasks_id_) - Get a task
+* [get_tasks_id_download](#get_tasks_id_download) - Download task export file
 * [put_tasks_id_status](#put_tasks_id_status) - Update task status
 
 ## get_tasks
@@ -70,7 +71,7 @@ with FlexPrice(
 ) as flex_price:
 
     res = flex_price.tasks.post_tasks(request={
-        "entity_type": components.TypesEntityType.CUSTOMERS,
+        "entity_type": components.TypesEntityType.FEATURES,
         "file_type": components.TypesFileType.JSON,
         "file_url": "https://juicy-fundraising.biz/",
         "task_type": components.TypesTaskType.IMPORT,
@@ -175,6 +176,48 @@ with FlexPrice(
 ### Response
 
 **[components.DtoTaskResponse](../../models/components/dtotaskresponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.ErrorsErrorResponse | 400, 404                   | application/json           |
+| errors.ErrorsErrorResponse | 500                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## get_tasks_id_download
+
+Generate a presigned URL for downloading an exported file (supports both Flexprice-managed and customer-owned S3)
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="get_/tasks/{id}/download" method="get" path="/tasks/{id}/download" -->
+```python
+from flexprice_sdk_test import FlexPrice
+
+
+with FlexPrice(
+    server_url="https://api.example.com",
+    api_key_auth="<YOUR_API_KEY_HERE>",
+) as flex_price:
+
+    res = flex_price.tasks.get_tasks_id_download(id="<id>")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `id`                                                                | *str*                                                               | :heavy_check_mark:                                                  | Task ID                                                             |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[Dict[str, str]](../../models/.md)**
 
 ### Errors
 

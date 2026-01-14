@@ -7,6 +7,7 @@
 * [get_prices](#get_prices) - Get prices
 * [post_prices](#post_prices) - Create a new price
 * [post_prices_bulk](#post_prices_bulk) - Create multiple prices in bulk
+* [get_prices_lookup_lookup_key_](#get_prices_lookup_lookup_key_) - Get price by lookup key
 * [get_prices_id_](#get_prices_id_) - Get a price by ID
 * [put_prices_id_](#put_prices_id_) - Update a price
 * [delete_prices_id_](#delete_prices_id_) - Delete a price
@@ -141,6 +142,48 @@ with FlexPrice(
 ### Response
 
 **[components.DtoCreateBulkPriceResponse](../../models/components/dtocreatebulkpriceresponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.ErrorsErrorResponse | 400                        | application/json           |
+| errors.ErrorsErrorResponse | 500                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## get_prices_lookup_lookup_key_
+
+Get price by lookup key
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="get_/prices/lookup/{lookup_key}" method="get" path="/prices/lookup/{lookup_key}" -->
+```python
+from flexprice_sdk_test import FlexPrice
+
+
+with FlexPrice(
+    server_url="https://api.example.com",
+    api_key_auth="<YOUR_API_KEY_HERE>",
+) as flex_price:
+
+    res = flex_price.prices.get_prices_lookup_lookup_key_(lookup_key="<value>")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `lookup_key`                                                        | *str*                                                               | :heavy_check_mark:                                                  | Lookup key                                                          |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[components.DtoPriceResponse](../../models/components/dtopriceresponse.md)**
 
 ### Errors
 

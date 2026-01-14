@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: flexprice-sdk-test
-Version: 1.0.58
+Version: 1.0.59
 Summary: Python SDK for FlexPrice API
 Author: Speakeasy
 Requires-Python: >=3.9.2
@@ -400,6 +400,7 @@ with FlexPrice(
 * [get_prices](docs/sdks/prices/README.md#get_prices) - Get prices
 * [post_prices](docs/sdks/prices/README.md#post_prices) - Create a new price
 * [post_prices_bulk](docs/sdks/prices/README.md#post_prices_bulk) - Create multiple prices in bulk
+* [get_prices_lookup_lookup_key_](docs/sdks/prices/README.md#get_prices_lookup_lookup_key_) - Get price by lookup key
 * [get_prices_id_](docs/sdks/prices/README.md#get_prices_id_) - Get a price by ID
 * [put_prices_id_](docs/sdks/prices/README.md#put_prices_id_) - Update a price
 * [delete_prices_id_](docs/sdks/prices/README.md#delete_prices_id_) - Delete a price
@@ -453,6 +454,7 @@ with FlexPrice(
 * [post_tasks](docs/sdks/tasks/README.md#post_tasks) - Create a new task
 * [get_tasks_result](docs/sdks/tasks/README.md#get_tasks_result) - Get task processing result
 * [get_tasks_id_](docs/sdks/tasks/README.md#get_tasks_id_) - Get a task
+* [get_tasks_id_download](docs/sdks/tasks/README.md#get_tasks_id_download) - Download task export file
 * [put_tasks_id_status](docs/sdks/tasks/README.md#put_tasks_id_status) - Update task status
 
 ### [TaxAssociations](docs/sdks/taxassociations/README.md)

@@ -8,3 +8,4 @@
 | `EVENTS`    | EVENTS      |
 | `PRICES`    | PRICES      |
 | `CUSTOMERS` | CUSTOMERS   |
+| `FEATURES`  | FEATURES    |

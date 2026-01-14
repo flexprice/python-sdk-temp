@@ -928,6 +928,7 @@ if TYPE_CHECKING:
         TypesS3ConnectionMetadataTypedDict,
     )
     from .types_s3encryptiontype import TypesS3EncryptionType
+    from .types_s3exportconfig import TypesS3ExportConfig, TypesS3ExportConfigTypedDict
     from .types_s3jobconfig import TypesS3JobConfig, TypesS3JobConfigTypedDict
     from .types_scheduledtaskentitytype import TypesScheduledTaskEntityType
     from .types_scheduledtaskinterval import TypesScheduledTaskInterval
@@ -1582,6 +1583,8 @@ __all__ = [
     "TypesS3ConnectionMetadata",
     "TypesS3ConnectionMetadataTypedDict",
     "TypesS3EncryptionType",
+    "TypesS3ExportConfig",
+    "TypesS3ExportConfigTypedDict",
     "TypesS3JobConfig",
     "TypesS3JobConfigTypedDict",
     "TypesScheduledTaskEntityType",
@@ -2204,6 +2207,8 @@ _dynamic_imports: dict[str, str] = {
     "TypesS3ConnectionMetadata": ".types_s3connectionmetadata",
     "TypesS3ConnectionMetadataTypedDict": ".types_s3connectionmetadata",
     "TypesS3EncryptionType": ".types_s3encryptiontype",
+    "TypesS3ExportConfig": ".types_s3exportconfig",
+    "TypesS3ExportConfigTypedDict": ".types_s3exportconfig",
     "TypesS3JobConfig": ".types_s3jobconfig",
     "TypesS3JobConfigTypedDict": ".types_s3jobconfig",
     "TypesScheduledTaskEntityType": ".types_scheduledtaskentitytype",

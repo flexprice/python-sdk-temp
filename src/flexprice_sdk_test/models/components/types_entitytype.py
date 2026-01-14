@@ -8,3 +8,4 @@ class TypesEntityType(str, Enum):
     EVENTS = "EVENTS"
     PRICES = "PRICES"
     CUSTOMERS = "CUSTOMERS"
+    FEATURES = "FEATURES"
