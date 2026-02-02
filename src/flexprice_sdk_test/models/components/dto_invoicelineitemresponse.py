@@ -7,7 +7,8 @@ from .dto_usagebreakdownitem import (
     DtoUsageBreakdownItemTypedDict,
 )
 from .types_commitmentinfo import TypesCommitmentInfo, TypesCommitmentInfoTypedDict
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -166,3 +167,53 @@ class DtoInvoiceLineItemResponse(BaseModel):
 
     usage_breakdown: Optional[List[DtoUsageBreakdownItem]] = None
     r"""usage_breakdown contains flexible usage breakdown for this line item (supports any grouping)"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "amount",
+                "commitment_info",
+                "created_at",
+                "created_by",
+                "currency",
+                "customer_id",
+                "display_name",
+                "entity_id",
+                "entity_type",
+                "id",
+                "invoice_id",
+                "metadata",
+                "meter_display_name",
+                "meter_id",
+                "period_end",
+                "period_start",
+                "plan_display_name",
+                "plan_id",
+                "price_id",
+                "price_type",
+                "price_unit",
+                "price_unit_amount",
+                "price_unit_id",
+                "quantity",
+                "status",
+                "subscription_id",
+                "tenant_id",
+                "updated_at",
+                "updated_by",
+                "usage_analytics",
+                "usage_breakdown",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

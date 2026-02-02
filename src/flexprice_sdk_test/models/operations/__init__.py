@@ -193,6 +193,7 @@ if TYPE_CHECKING:
         GetEnvironmentsIDRequest,
         GetEnvironmentsIDRequestTypedDict,
     )
+    from .get_events_id_ import GetEventsIDRequest, GetEventsIDRequestTypedDict
     from .get_events_monitoring import (
         GetEventsMonitoringRequest,
         GetEventsMonitoringRequestTypedDict,
@@ -307,6 +308,10 @@ if TYPE_CHECKING:
         GetSubscriptionsIDPausesRequest,
         GetSubscriptionsIDPausesRequestTypedDict,
     )
+    from .get_subscriptions_id_v2 import (
+        GetSubscriptionsIDV2Request,
+        GetSubscriptionsIDV2RequestTypedDict,
+    )
     from .get_tasks import (
         GetTasksEntityType,
         GetTasksOrder,
@@ -350,6 +355,18 @@ if TYPE_CHECKING:
         GetTaxesRatesIDRequestTypedDict,
     )
     from .get_tenants_id_ import GetTenantsIDRequest, GetTenantsIDRequestTypedDict
+    from .get_v1_subscription_schedules import (
+        GetV1SubscriptionSchedulesRequest,
+        GetV1SubscriptionSchedulesRequestTypedDict,
+    )
+    from .get_v1_subscription_schedules_id_ import (
+        GetV1SubscriptionSchedulesIDRequest,
+        GetV1SubscriptionSchedulesIDRequestTypedDict,
+    )
+    from .get_v1_subscriptions_subscription_id_schedules import (
+        GetV1SubscriptionsSubscriptionIDSchedulesRequest,
+        GetV1SubscriptionsSubscriptionIDSchedulesRequestTypedDict,
+    )
     from .get_wallets import (
         GetWalletsOrder,
         GetWalletsRequest,
@@ -448,6 +465,10 @@ if TYPE_CHECKING:
         PostTasksScheduledScheduleUpdateBillingPeriodResponse,
         PostTasksScheduledScheduleUpdateBillingPeriodResponseTypedDict,
     )
+    from .post_v1_subscriptions_schedules_schedule_id_cancel import (
+        PostV1SubscriptionsSchedulesScheduleIDCancelRequest,
+        PostV1SubscriptionsSchedulesScheduleIDCancelRequestTypedDict,
+    )
     from .post_wallets_id_terminate import (
         PostWalletsIDTerminateRequest,
         PostWalletsIDTerminateRequestTypedDict,
@@ -467,6 +488,10 @@ if TYPE_CHECKING:
     from .post_webhooks_hubspot_tenant_id_environment_id_ import (
         PostWebhooksHubspotTenantIDEnvironmentIDRequest,
         PostWebhooksHubspotTenantIDEnvironmentIDRequestTypedDict,
+    )
+    from .post_webhooks_moyasar_tenant_id_environment_id_ import (
+        PostWebhooksMoyasarTenantIDEnvironmentIDRequest,
+        PostWebhooksMoyasarTenantIDEnvironmentIDRequestTypedDict,
     )
     from .post_webhooks_nomod_tenant_id_environment_id_ import (
         PostWebhooksNomodTenantIDEnvironmentIDRequest,
@@ -495,7 +520,7 @@ if TYPE_CHECKING:
         PutCreditgrantsIDRequest,
         PutCreditgrantsIDRequestTypedDict,
     )
-    from .put_customers_id_ import PutCustomersIDRequest, PutCustomersIDRequestTypedDict
+    from .put_customers import PutCustomersRequest, PutCustomersRequestTypedDict
     from .put_entitlements_id_ import (
         PutEntitlementsIDRequest,
         PutEntitlementsIDRequestTypedDict,
@@ -659,6 +684,8 @@ __all__ = [
     "GetEnvironmentsRequest",
     "GetEnvironmentsRequestTypedDict",
     "GetEnvironmentsStatus",
+    "GetEventsIDRequest",
+    "GetEventsIDRequestTypedDict",
     "GetEventsMonitoringRequest",
     "GetEventsMonitoringRequestTypedDict",
     "GetFeaturesIDRequest",
@@ -726,6 +753,8 @@ __all__ = [
     "GetSubscriptionsIDPausesRequestTypedDict",
     "GetSubscriptionsIDRequest",
     "GetSubscriptionsIDRequestTypedDict",
+    "GetSubscriptionsIDV2Request",
+    "GetSubscriptionsIDV2RequestTypedDict",
     "GetSubscriptionsOrder",
     "GetSubscriptionsRequest",
     "GetSubscriptionsRequestTypedDict",
@@ -758,6 +787,12 @@ __all__ = [
     "GetTaxesRatesStatus",
     "GetTenantsIDRequest",
     "GetTenantsIDRequestTypedDict",
+    "GetV1SubscriptionSchedulesIDRequest",
+    "GetV1SubscriptionSchedulesIDRequestTypedDict",
+    "GetV1SubscriptionSchedulesRequest",
+    "GetV1SubscriptionSchedulesRequestTypedDict",
+    "GetV1SubscriptionsSubscriptionIDSchedulesRequest",
+    "GetV1SubscriptionsSubscriptionIDSchedulesRequestTypedDict",
     "GetWalletsIDBalanceRealTimeRequest",
     "GetWalletsIDBalanceRealTimeRequestTypedDict",
     "GetWalletsIDRequest",
@@ -813,6 +848,8 @@ __all__ = [
     "PostTasksScheduledScheduleUpdateBillingPeriodRequestTypedDict",
     "PostTasksScheduledScheduleUpdateBillingPeriodResponse",
     "PostTasksScheduledScheduleUpdateBillingPeriodResponseTypedDict",
+    "PostV1SubscriptionsSchedulesScheduleIDCancelRequest",
+    "PostV1SubscriptionsSchedulesScheduleIDCancelRequestTypedDict",
     "PostWalletsIDTerminateRequest",
     "PostWalletsIDTerminateRequestTypedDict",
     "PostWalletsIDTopUpRequest",
@@ -823,6 +860,8 @@ __all__ = [
     "PostWebhooksChargebeeTenantIDEnvironmentIDRequestTypedDict",
     "PostWebhooksHubspotTenantIDEnvironmentIDRequest",
     "PostWebhooksHubspotTenantIDEnvironmentIDRequestTypedDict",
+    "PostWebhooksMoyasarTenantIDEnvironmentIDRequest",
+    "PostWebhooksMoyasarTenantIDEnvironmentIDRequestTypedDict",
     "PostWebhooksNomodTenantIDEnvironmentIDRequest",
     "PostWebhooksNomodTenantIDEnvironmentIDRequestTypedDict",
     "PostWebhooksQuickbooksTenantIDEnvironmentIDRequest",
@@ -842,8 +881,8 @@ __all__ = [
     "PutCouponsIDRequestTypedDict",
     "PutCreditgrantsIDRequest",
     "PutCreditgrantsIDRequestTypedDict",
-    "PutCustomersIDRequest",
-    "PutCustomersIDRequestTypedDict",
+    "PutCustomersRequest",
+    "PutCustomersRequestTypedDict",
     "PutEntitlementsIDRequest",
     "PutEntitlementsIDRequestTypedDict",
     "PutEnvironmentsIDRequest",
@@ -1001,6 +1040,8 @@ _dynamic_imports: dict[str, str] = {
     "GetEnvironmentsStatus": ".get_environments",
     "GetEnvironmentsIDRequest": ".get_environments_id_",
     "GetEnvironmentsIDRequestTypedDict": ".get_environments_id_",
+    "GetEventsIDRequest": ".get_events_id_",
+    "GetEventsIDRequestTypedDict": ".get_events_id_",
     "GetEventsMonitoringRequest": ".get_events_monitoring",
     "GetEventsMonitoringRequestTypedDict": ".get_events_monitoring",
     "GetFeaturesOrder": ".get_features",
@@ -1078,6 +1119,8 @@ _dynamic_imports: dict[str, str] = {
     "GetSubscriptionsIDGrantsUpcomingRequestTypedDict": ".get_subscriptions_id_grants_upcoming",
     "GetSubscriptionsIDPausesRequest": ".get_subscriptions_id_pauses",
     "GetSubscriptionsIDPausesRequestTypedDict": ".get_subscriptions_id_pauses",
+    "GetSubscriptionsIDV2Request": ".get_subscriptions_id_v2",
+    "GetSubscriptionsIDV2RequestTypedDict": ".get_subscriptions_id_v2",
     "GetTasksEntityType": ".get_tasks",
     "GetTasksOrder": ".get_tasks",
     "GetTasksRequest": ".get_tasks",
@@ -1108,6 +1151,12 @@ _dynamic_imports: dict[str, str] = {
     "GetTaxesRatesIDRequestTypedDict": ".get_taxes_rates_id_",
     "GetTenantsIDRequest": ".get_tenants_id_",
     "GetTenantsIDRequestTypedDict": ".get_tenants_id_",
+    "GetV1SubscriptionSchedulesRequest": ".get_v1_subscription_schedules",
+    "GetV1SubscriptionSchedulesRequestTypedDict": ".get_v1_subscription_schedules",
+    "GetV1SubscriptionSchedulesIDRequest": ".get_v1_subscription_schedules_id_",
+    "GetV1SubscriptionSchedulesIDRequestTypedDict": ".get_v1_subscription_schedules_id_",
+    "GetV1SubscriptionsSubscriptionIDSchedulesRequest": ".get_v1_subscriptions_subscription_id_schedules",
+    "GetV1SubscriptionsSubscriptionIDSchedulesRequestTypedDict": ".get_v1_subscriptions_subscription_id_schedules",
     "GetWalletsOrder": ".get_wallets",
     "GetWalletsRequest": ".get_wallets",
     "GetWalletsRequestTypedDict": ".get_wallets",
@@ -1163,6 +1212,8 @@ _dynamic_imports: dict[str, str] = {
     "PostTasksScheduledScheduleUpdateBillingPeriodRequestTypedDict": ".post_tasks_scheduled_schedule_update_billing_period",
     "PostTasksScheduledScheduleUpdateBillingPeriodResponse": ".post_tasks_scheduled_schedule_update_billing_period",
     "PostTasksScheduledScheduleUpdateBillingPeriodResponseTypedDict": ".post_tasks_scheduled_schedule_update_billing_period",
+    "PostV1SubscriptionsSchedulesScheduleIDCancelRequest": ".post_v1_subscriptions_schedules_schedule_id_cancel",
+    "PostV1SubscriptionsSchedulesScheduleIDCancelRequestTypedDict": ".post_v1_subscriptions_schedules_schedule_id_cancel",
     "PostWalletsIDTerminateRequest": ".post_wallets_id_terminate",
     "PostWalletsIDTerminateRequestTypedDict": ".post_wallets_id_terminate",
     "PostWalletsIDTopUpRequest": ".post_wallets_id_top_up",
@@ -1173,6 +1224,8 @@ _dynamic_imports: dict[str, str] = {
     "PostWebhooksChargebeeTenantIDEnvironmentIDRequestTypedDict": ".post_webhooks_chargebee_tenant_id_environment_id_",
     "PostWebhooksHubspotTenantIDEnvironmentIDRequest": ".post_webhooks_hubspot_tenant_id_environment_id_",
     "PostWebhooksHubspotTenantIDEnvironmentIDRequestTypedDict": ".post_webhooks_hubspot_tenant_id_environment_id_",
+    "PostWebhooksMoyasarTenantIDEnvironmentIDRequest": ".post_webhooks_moyasar_tenant_id_environment_id_",
+    "PostWebhooksMoyasarTenantIDEnvironmentIDRequestTypedDict": ".post_webhooks_moyasar_tenant_id_environment_id_",
     "PostWebhooksNomodTenantIDEnvironmentIDRequest": ".post_webhooks_nomod_tenant_id_environment_id_",
     "PostWebhooksNomodTenantIDEnvironmentIDRequestTypedDict": ".post_webhooks_nomod_tenant_id_environment_id_",
     "PostWebhooksQuickbooksTenantIDEnvironmentIDRequest": ".post_webhooks_quickbooks_tenant_id_environment_id_",
@@ -1191,8 +1244,8 @@ _dynamic_imports: dict[str, str] = {
     "PutCouponsIDRequestTypedDict": ".put_coupons_id_",
     "PutCreditgrantsIDRequest": ".put_creditgrants_id_",
     "PutCreditgrantsIDRequestTypedDict": ".put_creditgrants_id_",
-    "PutCustomersIDRequest": ".put_customers_id_",
-    "PutCustomersIDRequestTypedDict": ".put_customers_id_",
+    "PutCustomersRequest": ".put_customers",
+    "PutCustomersRequestTypedDict": ".put_customers",
     "PutEntitlementsIDRequest": ".put_entitlements_id_",
     "PutEntitlementsIDRequestTypedDict": ".put_entitlements_id_",
     "PutEnvironmentsIDRequest": ".put_environments_id_",

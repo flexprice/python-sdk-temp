@@ -3,7 +3,8 @@
 from __future__ import annotations
 from .types_taxratescope import TypesTaxRateScope
 from .types_taxratetype import TypesTaxRateType
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -47,3 +48,28 @@ class DtoCreateTaxRateRequest(BaseModel):
     scope: Optional[TypesTaxRateScope] = None
 
     tax_rate_type: Optional[TypesTaxRateType] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "description",
+                "fixed_value",
+                "metadata",
+                "percentage_value",
+                "scope",
+                "tax_rate_type",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

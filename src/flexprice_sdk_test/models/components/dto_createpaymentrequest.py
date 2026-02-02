@@ -4,7 +4,8 @@ from __future__ import annotations
 from .types_paymentdestinationtype import TypesPaymentDestinationType
 from .types_paymentgatewaytype import TypesPaymentGatewayType
 from .types_paymentmethodtype import TypesPaymentMethodType
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -51,3 +52,30 @@ class DtoCreatePaymentRequest(BaseModel):
     save_card_and_make_default: Optional[bool] = False
 
     success_url: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "cancel_url",
+                "idempotency_key",
+                "metadata",
+                "payment_gateway",
+                "payment_method_id",
+                "process_payment",
+                "save_card_and_make_default",
+                "success_url",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

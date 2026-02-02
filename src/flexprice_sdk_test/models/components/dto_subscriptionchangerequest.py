@@ -5,7 +5,9 @@ from .types_billingcadence import TypesBillingCadence
 from .types_billingcycle import TypesBillingCycle
 from .types_billingperiod import TypesBillingPeriod
 from .types_prorationbehavior import TypesProrationBehavior
-from flexprice_sdk_test.types import BaseModel
+from .types_scheduletype import TypesScheduleType
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -21,6 +23,7 @@ class DtoSubscriptionChangeRequestTypedDict(TypedDict):
     r"""target_plan_id is the ID of the new plan to change to (required)"""
     billing_period_count: NotRequired[int]
     r"""billing_period_count is the billing period count for the new subscription"""
+    change_at: NotRequired[TypesScheduleType]
     metadata: NotRequired[Dict[str, str]]
     r"""metadata contains additional key-value pairs for storing extra information"""
 
@@ -42,5 +45,23 @@ class DtoSubscriptionChangeRequest(BaseModel):
     billing_period_count: Optional[int] = None
     r"""billing_period_count is the billing period count for the new subscription"""
 
+    change_at: Optional[TypesScheduleType] = None
+
     metadata: Optional[Dict[str, str]] = None
     r"""metadata contains additional key-value pairs for storing extra information"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["billing_period_count", "change_at", "metadata"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

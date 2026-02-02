@@ -5,7 +5,8 @@ from .dto_integrationentitymapping import (
     DtoIntegrationEntityMapping,
     DtoIntegrationEntityMappingTypedDict,
 )
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -88,3 +89,35 @@ class DtoUpdateCustomerRequest(BaseModel):
 
     parent_customer_id: Optional[str] = None
     r"""parent_customer_id is the internal FlexPrice ID of the parent customer"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "address_city",
+                "address_country",
+                "address_line1",
+                "address_line2",
+                "address_postal_code",
+                "address_state",
+                "email",
+                "external_id",
+                "integration_entity_mapping",
+                "metadata",
+                "name",
+                "parent_customer_external_id",
+                "parent_customer_id",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

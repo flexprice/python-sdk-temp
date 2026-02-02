@@ -8,7 +8,8 @@ from .types_invoicecadence import TypesInvoiceCadence
 from .types_pricetype import TypesPriceType
 from .types_status import TypesStatus
 from .types_subscriptionlineitementitytype import TypesSubscriptionLineItemEntityType
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -126,3 +127,58 @@ class SubscriptionSubscriptionLineItem(BaseModel):
     updated_at: Optional[str] = None
 
     updated_by: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "billing_period",
+                "commitment_amount",
+                "commitment_overage_factor",
+                "commitment_quantity",
+                "commitment_true_up_enabled",
+                "commitment_type",
+                "commitment_windowed",
+                "created_at",
+                "created_by",
+                "currency",
+                "customer_id",
+                "display_name",
+                "end_date",
+                "entity_id",
+                "entity_type",
+                "environment_id",
+                "id",
+                "invoice_cadence",
+                "metadata",
+                "meter_display_name",
+                "meter_id",
+                "plan_display_name",
+                "price",
+                "price_id",
+                "price_type",
+                "price_unit",
+                "price_unit_id",
+                "quantity",
+                "start_date",
+                "status",
+                "subscription_id",
+                "subscription_phase_id",
+                "tenant_id",
+                "trial_period",
+                "updated_at",
+                "updated_by",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

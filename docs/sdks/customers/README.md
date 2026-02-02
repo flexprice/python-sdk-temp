@@ -5,12 +5,12 @@
 ### Available Operations
 
 * [get_customers](#get_customers) - Get customers
+* [put_customers](#put_customers) - Update a customer
 * [post_customers](#post_customers) - Create a customer
 * [get_customers_external_external_id_](#get_customers_external_external_id_) - Get a customer by external id
 * [post_customers_search](#post_customers_search) - List customers by filter
 * [get_customers_usage](#get_customers_usage) - Get customer usage summary
 * [get_customers_id_](#get_customers_id_) - Get a customer
-* [put_customers_id_](#put_customers_id_) - Update a customer
 * [delete_customers_id_](#delete_customers_id_) - Delete a customer
 * [get_customers_id_entitlements](#get_customers_id_entitlements) - Get customer entitlements
 * [get_customers_id_grants_upcoming](#get_customers_id_grants_upcoming) - Get upcoming credit grant applications
@@ -48,6 +48,50 @@ with FlexPrice(
 ### Response
 
 **[components.DtoListCustomersResponse](../../models/components/dtolistcustomersresponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.ErrorsErrorResponse | 400                        | application/json           |
+| errors.ErrorsErrorResponse | 500                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## put_customers
+
+Update a customer by id or external_customer_id
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="put_/customers" method="put" path="/customers" -->
+```python
+from flexprice_sdk_test import FlexPrice
+
+
+with FlexPrice(
+    server_url="https://api.example.com",
+    api_key_auth="<YOUR_API_KEY_HERE>",
+) as flex_price:
+
+    res = flex_price.customers.put_customers(body={})
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `body`                                                                                     | [components.DtoUpdateCustomerRequest](../../models/components/dtoupdatecustomerrequest.md) | :heavy_check_mark:                                                                         | Customer                                                                                   |
+| `id`                                                                                       | *Optional[str]*                                                                            | :heavy_minus_sign:                                                                         | Customer ID                                                                                |
+| `external_customer_id`                                                                     | *Optional[str]*                                                                            | :heavy_minus_sign:                                                                         | Customer External ID                                                                       |
+| `retries`                                                                                  | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                           | :heavy_minus_sign:                                                                         | Configuration to override the default retry behavior of the client.                        |
+
+### Response
+
+**[components.DtoCustomerResponse](../../models/components/dtocustomerresponse.md)**
 
 ### Errors
 
@@ -256,49 +300,6 @@ with FlexPrice(
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | `id`                                                                | *str*                                                               | :heavy_check_mark:                                                  | Customer ID                                                         |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
-
-### Response
-
-**[components.DtoCustomerResponse](../../models/components/dtocustomerresponse.md)**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| errors.ErrorsErrorResponse | 400                        | application/json           |
-| errors.ErrorsErrorResponse | 500                        | application/json           |
-| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
-
-## put_customers_id_
-
-Update a customer
-
-### Example Usage
-
-<!-- UsageSnippet language="python" operationID="put_/customers/{id}" method="put" path="/customers/{id}" -->
-```python
-from flexprice_sdk_test import FlexPrice
-
-
-with FlexPrice(
-    server_url="https://api.example.com",
-    api_key_auth="<YOUR_API_KEY_HERE>",
-) as flex_price:
-
-    res = flex_price.customers.put_customers_id_(id="<id>", body={})
-
-    # Handle response
-    print(res)
-
-```
-
-### Parameters
-
-| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
-| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `id`                                                                                       | *str*                                                                                      | :heavy_check_mark:                                                                         | Customer ID                                                                                |
-| `body`                                                                                     | [components.DtoUpdateCustomerRequest](../../models/components/dtoupdatecustomerrequest.md) | :heavy_check_mark:                                                                         | Customer                                                                                   |
-| `retries`                                                                                  | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                           | :heavy_minus_sign:                                                                         | Configuration to override the default retry behavior of the client.                        |
 
 ### Response
 

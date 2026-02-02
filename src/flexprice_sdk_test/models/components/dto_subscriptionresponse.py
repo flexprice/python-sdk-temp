@@ -30,7 +30,8 @@ from .types_pausestatus import TypesPauseStatus
 from .types_prorationbehavior import TypesProrationBehavior
 from .types_status import TypesStatus
 from .types_subscriptionstatus import TypesSubscriptionStatus
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Dict, List, Optional, TYPE_CHECKING
 from typing_extensions import NotRequired, TypedDict
 
@@ -265,3 +266,70 @@ class DtoSubscriptionResponse(BaseModel):
 
     version: Optional[int] = None
     r"""Version is used for optimistic locking"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "active_pause_id",
+                "billing_anchor",
+                "billing_cadence",
+                "billing_cycle",
+                "billing_period",
+                "billing_period_count",
+                "cancel_at",
+                "cancel_at_period_end",
+                "cancelled_at",
+                "collection_method",
+                "commitment_amount",
+                "coupon_associations",
+                "created_at",
+                "created_by",
+                "credit_grants",
+                "currency",
+                "current_period_end",
+                "current_period_start",
+                "customer",
+                "customer_id",
+                "customer_timezone",
+                "enable_true_up",
+                "end_date",
+                "environment_id",
+                "gateway_payment_method_id",
+                "id",
+                "invoicing_customer_id",
+                "latest_invoice",
+                "line_items",
+                "lookup_key",
+                "metadata",
+                "overage_factor",
+                "pause_status",
+                "pauses",
+                "payment_behavior",
+                "phases",
+                "plan",
+                "plan_id",
+                "proration_behavior",
+                "start_date",
+                "status",
+                "subscription_status",
+                "tenant_id",
+                "trial_end",
+                "trial_start",
+                "updated_at",
+                "updated_by",
+                "version",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

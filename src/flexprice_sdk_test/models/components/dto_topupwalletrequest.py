@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 from .types_transactionreason import TypesTransactionReason
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -68,3 +69,29 @@ class DtoTopUpWalletRequest(BaseModel):
     lower number means higher priority
     default is nil which means no priority at all
     """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "amount",
+                "credits_to_add",
+                "description",
+                "expiry_date_utc",
+                "idempotency_key",
+                "metadata",
+                "priority",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

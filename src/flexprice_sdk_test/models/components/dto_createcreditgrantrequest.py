@@ -6,7 +6,8 @@ from .types_creditgrantexpirydurationunit import TypesCreditGrantExpiryDurationU
 from .types_creditgrantexpirytype import TypesCreditGrantExpiryType
 from .types_creditgrantperiod import TypesCreditGrantPeriod
 from .types_creditgrantscope import TypesCreditGrantScope
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -79,3 +80,33 @@ class DtoCreateCreditGrantRequest(BaseModel):
     ex if topup_conversion_rate is 2, then 1 USD = 0.5 credits
     ex if topup_conversion_rate is 0.5, then 1 USD = 2 credits
     """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "conversion_rate",
+                "expiration_duration",
+                "expiration_duration_unit",
+                "expiration_type",
+                "metadata",
+                "period",
+                "period_count",
+                "plan_id",
+                "priority",
+                "subscription_id",
+                "topup_conversion_rate",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

@@ -17,7 +17,8 @@ from .dto_taxappliedresponse import (
 from .types_invoicestatus import TypesInvoiceStatus
 from .types_invoicetype import TypesInvoiceType
 from .types_paymentstatus import TypesPaymentStatus
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Dict, List, Optional, TYPE_CHECKING
 from typing_extensions import NotRequired, TypedDict
 
@@ -226,3 +227,63 @@ class DtoInvoiceResponse(BaseModel):
 
     voided_at: Optional[str] = None
     r"""voided_at is the timestamp when this invoice was voided"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "amount_due",
+                "amount_paid",
+                "amount_remaining",
+                "billing_period",
+                "billing_reason",
+                "billing_sequence",
+                "coupon_applications",
+                "created_at",
+                "created_by",
+                "currency",
+                "customer",
+                "customer_id",
+                "description",
+                "due_date",
+                "finalized_at",
+                "id",
+                "idempotency_key",
+                "invoice_number",
+                "invoice_pdf_url",
+                "invoice_status",
+                "invoice_type",
+                "line_items",
+                "metadata",
+                "overpaid_amount",
+                "paid_at",
+                "payment_status",
+                "period_end",
+                "period_start",
+                "status",
+                "subscription",
+                "subscription_id",
+                "subtotal",
+                "taxes",
+                "tenant_id",
+                "total",
+                "total_discount",
+                "total_tax",
+                "updated_at",
+                "updated_by",
+                "version",
+                "voided_at",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

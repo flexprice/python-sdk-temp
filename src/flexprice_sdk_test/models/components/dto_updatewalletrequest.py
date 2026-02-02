@@ -4,7 +4,8 @@ from __future__ import annotations
 from .dto_alertconfig import DtoAlertConfig, DtoAlertConfigTypedDict
 from .types_autotopup import TypesAutoTopup, TypesAutoTopupTypedDict
 from .types_walletconfig import TypesWalletConfig, TypesWalletConfigTypedDict
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -33,3 +34,29 @@ class DtoUpdateWalletRequest(BaseModel):
     metadata: Optional[Dict[str, str]] = None
 
     name: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "alert_config",
+                "alert_enabled",
+                "auto_topup",
+                "config",
+                "description",
+                "metadata",
+                "name",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

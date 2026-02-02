@@ -13,9 +13,10 @@ class Wallets(BaseSDK):
     def get_customers_wallets(
         self,
         *,
-        id: Optional[str] = None,
-        include_real_time_balance: Optional[bool] = False,
-        lookup_key: Optional[str] = None,
+        request: Union[
+            operations.GetCustomersWalletsRequest,
+            operations.GetCustomersWalletsRequestTypedDict,
+        ] = operations.GetCustomersWalletsRequest(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -25,9 +26,7 @@ class Wallets(BaseSDK):
 
         Get all wallets for a customer by lookup key or id
 
-        :param id:
-        :param include_real_time_balance:
-        :param lookup_key:
+        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -43,11 +42,9 @@ class Wallets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = operations.GetCustomersWalletsRequest(
-            id=id,
-            include_real_time_balance=include_real_time_balance,
-            lookup_key=lookup_key,
-        )
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(request, operations.GetCustomersWalletsRequest)
+        request = cast(operations.GetCustomersWalletsRequest, request)
 
         req = self._build_request(
             method="GET",
@@ -116,9 +113,10 @@ class Wallets(BaseSDK):
     async def get_customers_wallets_async(
         self,
         *,
-        id: Optional[str] = None,
-        include_real_time_balance: Optional[bool] = False,
-        lookup_key: Optional[str] = None,
+        request: Union[
+            operations.GetCustomersWalletsRequest,
+            operations.GetCustomersWalletsRequestTypedDict,
+        ] = operations.GetCustomersWalletsRequest(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -128,9 +126,7 @@ class Wallets(BaseSDK):
 
         Get all wallets for a customer by lookup key or id
 
-        :param id:
-        :param include_real_time_balance:
-        :param lookup_key:
+        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -146,11 +142,9 @@ class Wallets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = operations.GetCustomersWalletsRequest(
-            id=id,
-            include_real_time_balance=include_real_time_balance,
-            lookup_key=lookup_key,
-        )
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(request, operations.GetCustomersWalletsRequest)
+        request = cast(operations.GetCustomersWalletsRequest, request)
 
         req = self._build_request_async(
             method="GET",
@@ -1668,6 +1662,7 @@ class Wallets(BaseSDK):
         self,
         *,
         id: str,
+        expand: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1678,6 +1673,7 @@ class Wallets(BaseSDK):
         Get real-time balance of a wallet
 
         :param id: Wallet ID
+        :param expand: Expand fields (e.g., credits_available_breakdown)
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1695,6 +1691,7 @@ class Wallets(BaseSDK):
 
         request = operations.GetWalletsIDBalanceRealTimeRequest(
             id=id,
+            expand=expand,
         )
 
         req = self._build_request(
@@ -1767,6 +1764,7 @@ class Wallets(BaseSDK):
         self,
         *,
         id: str,
+        expand: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1777,6 +1775,7 @@ class Wallets(BaseSDK):
         Get real-time balance of a wallet
 
         :param id: Wallet ID
+        :param expand: Expand fields (e.g., credits_available_breakdown)
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1794,6 +1793,7 @@ class Wallets(BaseSDK):
 
         request = operations.GetWalletsIDBalanceRealTimeRequest(
             id=id,
+            expand=expand,
         )
 
         req = self._build_request_async(

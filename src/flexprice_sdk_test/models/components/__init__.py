@@ -57,6 +57,14 @@ if TYPE_CHECKING:
         DtoBulkIngestEventRequest,
         DtoBulkIngestEventRequestTypedDict,
     )
+    from .dto_cancelschedulerequest import (
+        DtoCancelScheduleRequest,
+        DtoCancelScheduleRequestTypedDict,
+    )
+    from .dto_cancelscheduleresponse import (
+        DtoCancelScheduleResponse,
+        DtoCancelScheduleResponseTypedDict,
+    )
     from .dto_cancelsubscriptionrequest import (
         DtoCancelSubscriptionRequest,
         DtoCancelSubscriptionRequestTypedDict,
@@ -253,6 +261,10 @@ if TYPE_CHECKING:
         DtoCustomerInvoiceSummary,
         DtoCustomerInvoiceSummaryTypedDict,
     )
+    from .dto_customerlookupresult import (
+        DtoCustomerLookupResult,
+        DtoCustomerLookupResultTypedDict,
+    )
     from .dto_customermulticurrencyinvoicesummary import (
         DtoCustomerMultiCurrencyInvoiceSummary,
         DtoCustomerMultiCurrencyInvoiceSummaryTypedDict,
@@ -262,6 +274,7 @@ if TYPE_CHECKING:
         DtoCustomerUsageSummaryResponse,
         DtoCustomerUsageSummaryResponseTypedDict,
     )
+    from .dto_debugtracker import DtoDebugTracker, DtoDebugTrackerTypedDict
     from .dto_deletecostsheetresponse import (
         DtoDeleteCostsheetResponse,
         DtoDeleteCostsheetResponseTypedDict,
@@ -291,6 +304,7 @@ if TYPE_CHECKING:
     from .dto_eventcostinfo import DtoEventCostInfo, DtoEventCostInfoTypedDict
     from .dto_eventcountpoint import DtoEventCountPoint, DtoEventCountPointTypedDict
     from .dto_featureresponse import DtoFeatureResponse, DtoFeatureResponseTypedDict
+    from .dto_featureusageinfo import DtoFeatureUsageInfo, DtoFeatureUsageInfoTypedDict
     from .dto_featureusagesummary import (
         DtoFeatureUsageSummary,
         DtoFeatureUsageSummaryTypedDict,
@@ -307,6 +321,10 @@ if TYPE_CHECKING:
         DtoGetDetailedCostAnalyticsResponse,
         DtoGetDetailedCostAnalyticsResponseTypedDict,
     )
+    from .dto_geteventbyidresponse import (
+        DtoGetEventByIDResponse,
+        DtoGetEventByIDResponseTypedDict,
+    )
     from .dto_geteventsresponse import (
         DtoGetEventsResponse,
         DtoGetEventsResponseTypedDict,
@@ -318,6 +336,10 @@ if TYPE_CHECKING:
     from .dto_getmonitoringdataresponse import (
         DtoGetMonitoringDataResponse,
         DtoGetMonitoringDataResponseTypedDict,
+    )
+    from .dto_getpendingschedulesresponse import (
+        DtoGetPendingSchedulesResponse,
+        DtoGetPendingSchedulesResponseTypedDict,
     )
     from .dto_getpreviewinvoicerequest import (
         DtoGetPreviewInvoiceRequest,
@@ -477,6 +499,16 @@ if TYPE_CHECKING:
         DtoListWalletTransactionsResponseTypedDict,
     )
     from .dto_loginrequest import DtoLoginRequest, DtoLoginRequestTypedDict
+    from .dto_matchedmeter import DtoMatchedMeter, DtoMatchedMeterTypedDict
+    from .dto_matchedprice import DtoMatchedPrice, DtoMatchedPriceTypedDict
+    from .dto_matchedsubscriptionlineitem import (
+        DtoMatchedSubscriptionLineItem,
+        DtoMatchedSubscriptionLineItemTypedDict,
+    )
+    from .dto_metermatchingresult import (
+        DtoMeterMatchingResult,
+        DtoMeterMatchingResultTypedDict,
+    )
     from .dto_meterresponse import DtoMeterResponse, DtoMeterResponseTypedDict
     from .dto_overrideentitlementrequest import (
         DtoOverrideEntitlementRequest,
@@ -499,6 +531,10 @@ if TYPE_CHECKING:
     from .dto_portalsessionresponse import (
         DtoPortalSessionResponse,
         DtoPortalSessionResponseTypedDict,
+    )
+    from .dto_pricelookupresult import (
+        DtoPriceLookupResult,
+        DtoPriceLookupResultTypedDict,
     )
     from .dto_priceunitconfig import DtoPriceUnitConfig, DtoPriceUnitConfigTypedDict
     from .dto_priceunitresponse import (
@@ -538,6 +574,10 @@ if TYPE_CHECKING:
         DtoSubscriptionEntitlementsResponse,
         DtoSubscriptionEntitlementsResponseTypedDict,
     )
+    from .dto_subscriptionlineitemlookupresult import (
+        DtoSubscriptionLineItemLookupResult,
+        DtoSubscriptionLineItemLookupResultTypedDict,
+    )
     from .dto_subscriptionlineitemresponse import (
         DtoSubscriptionLineItemResponse,
         DtoSubscriptionLineItemResponseTypedDict,
@@ -553,6 +593,18 @@ if TYPE_CHECKING:
     from .dto_subscriptionphaseresponse import (
         DtoSubscriptionPhaseResponse,
         DtoSubscriptionPhaseResponseTypedDict,
+    )
+    from .dto_subscriptionresponsev2 import (
+        DtoSubscriptionResponseV2,
+        DtoSubscriptionResponseV2TypedDict,
+    )
+    from .dto_subscriptionscheduleresponse import (
+        Configuration,
+        ConfigurationTypedDict,
+        DtoSubscriptionScheduleResponse,
+        DtoSubscriptionScheduleResponseTypedDict,
+        ExecutionResult,
+        ExecutionResultTypedDict,
     )
     from .dto_subscriptionsummary import (
         DtoSubscriptionSummary,
@@ -716,6 +768,7 @@ if TYPE_CHECKING:
         DtoWalletTransactionResponseTypedDict,
     )
     from .errors_errordetail import ErrorsErrorDetail, ErrorsErrorDetailTypedDict
+    from .errors_errorresponse import ErrorsErrorResponse, ErrorsErrorResponseTypedDict
     from .github_com_flexprice_flexprice_internal_domain_addon_addon import (
         GithubComFlexpriceFlexpriceInternalDomainAddonAddon,
         GithubComFlexpriceFlexpriceInternalDomainAddonAddonTypedDict,
@@ -819,6 +872,10 @@ if TYPE_CHECKING:
     )
     from .types_couponcadence import TypesCouponCadence
     from .types_coupontype import TypesCouponType
+    from .types_creditbreakdown import (
+        TypesCreditBreakdown,
+        TypesCreditBreakdownTypedDict,
+    )
     from .types_creditgrantapplicationreason import TypesCreditGrantApplicationReason
     from .types_creditgrantcadence import TypesCreditGrantCadence
     from .types_creditgrantexpirydurationunit import TypesCreditGrantExpiryDurationUnit
@@ -834,6 +891,7 @@ if TYPE_CHECKING:
         TypesCustomerFilterTypedDict,
     )
     from .types_datatype import TypesDataType
+    from .types_debugtrackerstatus import TypesDebugTrackerStatus
     from .types_entitlemententitytype import TypesEntitlementEntityType
     from .types_entitlementfilter import (
         TypesEntitlementFilter,
@@ -846,6 +904,9 @@ if TYPE_CHECKING:
         TypesEntitySyncConfigTypedDict,
     )
     from .types_entitytype import TypesEntityType
+    from .types_eventprocessingstatustype import TypesEventProcessingStatusType
+    from .types_failurepoint import TypesFailurePoint, TypesFailurePointTypedDict
+    from .types_failurepointtype import TypesFailurePointType
     from .types_featurefilter import (
         TypesFeatureFilter,
         TypesFeatureFilterOrder,
@@ -881,6 +942,10 @@ if TYPE_CHECKING:
     from .types_listresponse_dto_walletresponse import (
         TypesListResponseDtoWalletResponse,
         TypesListResponseDtoWalletResponseTypedDict,
+    )
+    from .types_moyasarconnectionmetadata import (
+        TypesMoyasarConnectionMetadata,
+        TypesMoyasarConnectionMetadataTypedDict,
     )
     from .types_nomodconnectionmetadata import (
         TypesNomodConnectionMetadata,
@@ -932,6 +997,8 @@ if TYPE_CHECKING:
     from .types_s3jobconfig import TypesS3JobConfig, TypesS3JobConfigTypedDict
     from .types_scheduledtaskentitytype import TypesScheduledTaskEntityType
     from .types_scheduledtaskinterval import TypesScheduledTaskInterval
+    from .types_schedulestatus import TypesScheduleStatus
+    from .types_scheduletype import TypesScheduleType
     from .types_secretprovider import TypesSecretProvider
     from .types_secrettype import TypesSecretType
     from .types_sortcondition import TypesSortCondition, TypesSortConditionTypedDict
@@ -949,6 +1016,9 @@ if TYPE_CHECKING:
     )
     from .types_subscriptionlineitementitytype import (
         TypesSubscriptionLineItemEntityType,
+    )
+    from .types_subscriptionschedulechangetype import (
+        TypesSubscriptionScheduleChangeType,
     )
     from .types_subscriptionstatus import TypesSubscriptionStatus
     from .types_syncconfig import TypesSyncConfig, TypesSyncConfigTypedDict
@@ -1002,6 +1072,8 @@ DtoInvoiceResponse.model_rebuild()
 
 
 __all__ = [
+    "Configuration",
+    "ConfigurationTypedDict",
     "CostsheetFilter",
     "CostsheetFilterTypedDict",
     "CreditnoteCreditNoteLineItem",
@@ -1034,6 +1106,10 @@ __all__ = [
     "DtoBillingPeriodInfoTypedDict",
     "DtoBulkIngestEventRequest",
     "DtoBulkIngestEventRequestTypedDict",
+    "DtoCancelScheduleRequest",
+    "DtoCancelScheduleRequestTypedDict",
+    "DtoCancelScheduleResponse",
+    "DtoCancelScheduleResponseTypedDict",
     "DtoCancelSubscriptionRequest",
     "DtoCancelSubscriptionRequestTypedDict",
     "DtoCancelSubscriptionResponse",
@@ -1138,12 +1214,16 @@ __all__ = [
     "DtoCustomerEntitlementsResponseTypedDict",
     "DtoCustomerInvoiceSummary",
     "DtoCustomerInvoiceSummaryTypedDict",
+    "DtoCustomerLookupResult",
+    "DtoCustomerLookupResultTypedDict",
     "DtoCustomerMultiCurrencyInvoiceSummary",
     "DtoCustomerMultiCurrencyInvoiceSummaryTypedDict",
     "DtoCustomerResponse",
     "DtoCustomerResponseTypedDict",
     "DtoCustomerUsageSummaryResponse",
     "DtoCustomerUsageSummaryResponseTypedDict",
+    "DtoDebugTracker",
+    "DtoDebugTrackerTypedDict",
     "DtoDeleteCostsheetResponse",
     "DtoDeleteCostsheetResponseTypedDict",
     "DtoDeletePriceRequest",
@@ -1167,6 +1247,8 @@ __all__ = [
     "DtoEventTypedDict",
     "DtoFeatureResponse",
     "DtoFeatureResponseTypedDict",
+    "DtoFeatureUsageInfo",
+    "DtoFeatureUsageInfoTypedDict",
     "DtoFeatureUsageSummary",
     "DtoFeatureUsageSummaryTypedDict",
     "DtoGetCostAnalyticsRequest",
@@ -1175,12 +1257,16 @@ __all__ = [
     "DtoGetCostsheetResponseTypedDict",
     "DtoGetDetailedCostAnalyticsResponse",
     "DtoGetDetailedCostAnalyticsResponseTypedDict",
+    "DtoGetEventByIDResponse",
+    "DtoGetEventByIDResponseTypedDict",
     "DtoGetEventsResponse",
     "DtoGetEventsResponseTypedDict",
     "DtoGetHuggingFaceBillingDataResponse",
     "DtoGetHuggingFaceBillingDataResponseTypedDict",
     "DtoGetMonitoringDataResponse",
     "DtoGetMonitoringDataResponseTypedDict",
+    "DtoGetPendingSchedulesResponse",
+    "DtoGetPendingSchedulesResponseTypedDict",
     "DtoGetPreviewInvoiceRequest",
     "DtoGetPreviewInvoiceRequestTypedDict",
     "DtoGetUsageAnalyticsResponse",
@@ -1269,6 +1355,14 @@ __all__ = [
     "DtoListWalletTransactionsResponseTypedDict",
     "DtoLoginRequest",
     "DtoLoginRequestTypedDict",
+    "DtoMatchedMeter",
+    "DtoMatchedMeterTypedDict",
+    "DtoMatchedPrice",
+    "DtoMatchedPriceTypedDict",
+    "DtoMatchedSubscriptionLineItem",
+    "DtoMatchedSubscriptionLineItemTypedDict",
+    "DtoMeterMatchingResult",
+    "DtoMeterMatchingResultTypedDict",
     "DtoMeterResponse",
     "DtoMeterResponseTypedDict",
     "DtoOverrideEntitlementRequest",
@@ -1287,6 +1381,8 @@ __all__ = [
     "DtoPlanSummaryTypedDict",
     "DtoPortalSessionResponse",
     "DtoPortalSessionResponseTypedDict",
+    "DtoPriceLookupResult",
+    "DtoPriceLookupResultTypedDict",
     "DtoPriceResponse",
     "DtoPriceResponseTypedDict",
     "DtoPriceUnitConfig",
@@ -1317,6 +1413,8 @@ __all__ = [
     "DtoSubscriptionChangeRequestTypedDict",
     "DtoSubscriptionEntitlementsResponse",
     "DtoSubscriptionEntitlementsResponseTypedDict",
+    "DtoSubscriptionLineItemLookupResult",
+    "DtoSubscriptionLineItemLookupResultTypedDict",
     "DtoSubscriptionLineItemResponse",
     "DtoSubscriptionLineItemResponseTypedDict",
     "DtoSubscriptionPauseResponse",
@@ -1327,6 +1425,10 @@ __all__ = [
     "DtoSubscriptionPhaseResponseTypedDict",
     "DtoSubscriptionResponse",
     "DtoSubscriptionResponseTypedDict",
+    "DtoSubscriptionResponseV2",
+    "DtoSubscriptionResponseV2TypedDict",
+    "DtoSubscriptionScheduleResponse",
+    "DtoSubscriptionScheduleResponseTypedDict",
     "DtoSubscriptionSummary",
     "DtoSubscriptionSummaryTypedDict",
     "DtoSubscriptionUsageByMetersResponse",
@@ -1423,6 +1525,10 @@ __all__ = [
     "DtoWalletTransactionResponseTypedDict",
     "ErrorsErrorDetail",
     "ErrorsErrorDetailTypedDict",
+    "ErrorsErrorResponse",
+    "ErrorsErrorResponseTypedDict",
+    "ExecutionResult",
+    "ExecutionResultTypedDict",
     "GithubComFlexpriceFlexpriceInternalDomainAddonAddon",
     "GithubComFlexpriceFlexpriceInternalDomainAddonAddonTypedDict",
     "GithubComFlexpriceFlexpriceInternalDomainCouponCoupon",
@@ -1505,6 +1611,8 @@ __all__ = [
     "TypesConnectionSettingsTypedDict",
     "TypesCouponCadence",
     "TypesCouponType",
+    "TypesCreditBreakdown",
+    "TypesCreditBreakdownTypedDict",
     "TypesCreditGrantApplicationReason",
     "TypesCreditGrantCadence",
     "TypesCreditGrantExpiryDurationUnit",
@@ -1518,6 +1626,7 @@ __all__ = [
     "TypesCustomerFilterOrder",
     "TypesCustomerFilterTypedDict",
     "TypesDataType",
+    "TypesDebugTrackerStatus",
     "TypesEntitlementEntityType",
     "TypesEntitlementFilter",
     "TypesEntitlementFilterOrder",
@@ -1526,6 +1635,10 @@ __all__ = [
     "TypesEntitySyncConfig",
     "TypesEntitySyncConfigTypedDict",
     "TypesEntityType",
+    "TypesEventProcessingStatusType",
+    "TypesFailurePoint",
+    "TypesFailurePointType",
+    "TypesFailurePointTypedDict",
     "TypesFeatureFilter",
     "TypesFeatureFilterOrder",
     "TypesFeatureFilterTypedDict",
@@ -1551,6 +1664,8 @@ __all__ = [
     "TypesInvoiceType",
     "TypesListResponseDtoWalletResponse",
     "TypesListResponseDtoWalletResponseTypedDict",
+    "TypesMoyasarConnectionMetadata",
+    "TypesMoyasarConnectionMetadataTypedDict",
     "TypesNomodConnectionMetadata",
     "TypesNomodConnectionMetadataTypedDict",
     "TypesPaginationResponse",
@@ -1587,6 +1702,8 @@ __all__ = [
     "TypesS3ExportConfigTypedDict",
     "TypesS3JobConfig",
     "TypesS3JobConfigTypedDict",
+    "TypesScheduleStatus",
+    "TypesScheduleType",
     "TypesScheduledTaskEntityType",
     "TypesScheduledTaskInterval",
     "TypesSecretProvider",
@@ -1602,6 +1719,7 @@ __all__ = [
     "TypesSubscriptionFilterOrder",
     "TypesSubscriptionFilterTypedDict",
     "TypesSubscriptionLineItemEntityType",
+    "TypesSubscriptionScheduleChangeType",
     "TypesSubscriptionStatus",
     "TypesSyncConfig",
     "TypesSyncConfigTypedDict",
@@ -1668,6 +1786,10 @@ _dynamic_imports: dict[str, str] = {
     "DtoBillingPeriodInfoTypedDict": ".dto_billingperiodinfo",
     "DtoBulkIngestEventRequest": ".dto_bulkingesteventrequest",
     "DtoBulkIngestEventRequestTypedDict": ".dto_bulkingesteventrequest",
+    "DtoCancelScheduleRequest": ".dto_cancelschedulerequest",
+    "DtoCancelScheduleRequestTypedDict": ".dto_cancelschedulerequest",
+    "DtoCancelScheduleResponse": ".dto_cancelscheduleresponse",
+    "DtoCancelScheduleResponseTypedDict": ".dto_cancelscheduleresponse",
     "DtoCancelSubscriptionRequest": ".dto_cancelsubscriptionrequest",
     "DtoCancelSubscriptionRequestTypedDict": ".dto_cancelsubscriptionrequest",
     "DtoCancelSubscriptionResponse": ".dto_cancelsubscriptionresponse",
@@ -1772,12 +1894,16 @@ _dynamic_imports: dict[str, str] = {
     "DtoCustomerEntitlementsResponseTypedDict": ".dto_customerentitlementsresponse",
     "DtoCustomerInvoiceSummary": ".dto_customerinvoicesummary",
     "DtoCustomerInvoiceSummaryTypedDict": ".dto_customerinvoicesummary",
+    "DtoCustomerLookupResult": ".dto_customerlookupresult",
+    "DtoCustomerLookupResultTypedDict": ".dto_customerlookupresult",
     "DtoCustomerMultiCurrencyInvoiceSummary": ".dto_customermulticurrencyinvoicesummary",
     "DtoCustomerMultiCurrencyInvoiceSummaryTypedDict": ".dto_customermulticurrencyinvoicesummary",
     "DtoCustomerResponse": ".dto_customerresponse",
     "DtoCustomerResponseTypedDict": ".dto_customerresponse",
     "DtoCustomerUsageSummaryResponse": ".dto_customerusagesummaryresponse",
     "DtoCustomerUsageSummaryResponseTypedDict": ".dto_customerusagesummaryresponse",
+    "DtoDebugTracker": ".dto_debugtracker",
+    "DtoDebugTrackerTypedDict": ".dto_debugtracker",
     "DtoDeleteCostsheetResponse": ".dto_deletecostsheetresponse",
     "DtoDeleteCostsheetResponseTypedDict": ".dto_deletecostsheetresponse",
     "DtoDeletePriceRequest": ".dto_deletepricerequest",
@@ -1799,6 +1925,8 @@ _dynamic_imports: dict[str, str] = {
     "DtoEventCountPointTypedDict": ".dto_eventcountpoint",
     "DtoFeatureResponse": ".dto_featureresponse",
     "DtoFeatureResponseTypedDict": ".dto_featureresponse",
+    "DtoFeatureUsageInfo": ".dto_featureusageinfo",
+    "DtoFeatureUsageInfoTypedDict": ".dto_featureusageinfo",
     "DtoFeatureUsageSummary": ".dto_featureusagesummary",
     "DtoFeatureUsageSummaryTypedDict": ".dto_featureusagesummary",
     "DtoGetCostAnalyticsRequest": ".dto_getcostanalyticsrequest",
@@ -1807,12 +1935,16 @@ _dynamic_imports: dict[str, str] = {
     "DtoGetCostsheetResponseTypedDict": ".dto_getcostsheetresponse",
     "DtoGetDetailedCostAnalyticsResponse": ".dto_getdetailedcostanalyticsresponse",
     "DtoGetDetailedCostAnalyticsResponseTypedDict": ".dto_getdetailedcostanalyticsresponse",
+    "DtoGetEventByIDResponse": ".dto_geteventbyidresponse",
+    "DtoGetEventByIDResponseTypedDict": ".dto_geteventbyidresponse",
     "DtoGetEventsResponse": ".dto_geteventsresponse",
     "DtoGetEventsResponseTypedDict": ".dto_geteventsresponse",
     "DtoGetHuggingFaceBillingDataResponse": ".dto_gethuggingfacebillingdataresponse",
     "DtoGetHuggingFaceBillingDataResponseTypedDict": ".dto_gethuggingfacebillingdataresponse",
     "DtoGetMonitoringDataResponse": ".dto_getmonitoringdataresponse",
     "DtoGetMonitoringDataResponseTypedDict": ".dto_getmonitoringdataresponse",
+    "DtoGetPendingSchedulesResponse": ".dto_getpendingschedulesresponse",
+    "DtoGetPendingSchedulesResponseTypedDict": ".dto_getpendingschedulesresponse",
     "DtoGetPreviewInvoiceRequest": ".dto_getpreviewinvoicerequest",
     "DtoGetPreviewInvoiceRequestTypedDict": ".dto_getpreviewinvoicerequest",
     "DtoGetUsageAnalyticsResponse": ".dto_getusageanalyticsresponse",
@@ -1900,6 +2032,14 @@ _dynamic_imports: dict[str, str] = {
     "DtoListWalletTransactionsResponseTypedDict": ".dto_listwallettransactionsresponse",
     "DtoLoginRequest": ".dto_loginrequest",
     "DtoLoginRequestTypedDict": ".dto_loginrequest",
+    "DtoMatchedMeter": ".dto_matchedmeter",
+    "DtoMatchedMeterTypedDict": ".dto_matchedmeter",
+    "DtoMatchedPrice": ".dto_matchedprice",
+    "DtoMatchedPriceTypedDict": ".dto_matchedprice",
+    "DtoMatchedSubscriptionLineItem": ".dto_matchedsubscriptionlineitem",
+    "DtoMatchedSubscriptionLineItemTypedDict": ".dto_matchedsubscriptionlineitem",
+    "DtoMeterMatchingResult": ".dto_metermatchingresult",
+    "DtoMeterMatchingResultTypedDict": ".dto_metermatchingresult",
     "DtoMeterResponse": ".dto_meterresponse",
     "DtoMeterResponseTypedDict": ".dto_meterresponse",
     "DtoOverrideEntitlementRequest": ".dto_overrideentitlementrequest",
@@ -1916,6 +2056,8 @@ _dynamic_imports: dict[str, str] = {
     "DtoPlanSummaryTypedDict": ".dto_plansummary",
     "DtoPortalSessionResponse": ".dto_portalsessionresponse",
     "DtoPortalSessionResponseTypedDict": ".dto_portalsessionresponse",
+    "DtoPriceLookupResult": ".dto_pricelookupresult",
+    "DtoPriceLookupResultTypedDict": ".dto_pricelookupresult",
     "DtoPriceUnitConfig": ".dto_priceunitconfig",
     "DtoPriceUnitConfigTypedDict": ".dto_priceunitconfig",
     "DtoPriceUnitResponse": ".dto_priceunitresponse",
@@ -1944,6 +2086,8 @@ _dynamic_imports: dict[str, str] = {
     "DtoSubscriptionChangeRequestTypedDict": ".dto_subscriptionchangerequest",
     "DtoSubscriptionEntitlementsResponse": ".dto_subscriptionentitlementsresponse",
     "DtoSubscriptionEntitlementsResponseTypedDict": ".dto_subscriptionentitlementsresponse",
+    "DtoSubscriptionLineItemLookupResult": ".dto_subscriptionlineitemlookupresult",
+    "DtoSubscriptionLineItemLookupResultTypedDict": ".dto_subscriptionlineitemlookupresult",
     "DtoSubscriptionLineItemResponse": ".dto_subscriptionlineitemresponse",
     "DtoSubscriptionLineItemResponseTypedDict": ".dto_subscriptionlineitemresponse",
     "DtoSubscriptionPauseResponse": ".dto_subscriptionpauseresponse",
@@ -1952,6 +2096,14 @@ _dynamic_imports: dict[str, str] = {
     "DtoSubscriptionPhaseCreateRequestTypedDict": ".dto_subscriptionphasecreaterequest",
     "DtoSubscriptionPhaseResponse": ".dto_subscriptionphaseresponse",
     "DtoSubscriptionPhaseResponseTypedDict": ".dto_subscriptionphaseresponse",
+    "DtoSubscriptionResponseV2": ".dto_subscriptionresponsev2",
+    "DtoSubscriptionResponseV2TypedDict": ".dto_subscriptionresponsev2",
+    "Configuration": ".dto_subscriptionscheduleresponse",
+    "ConfigurationTypedDict": ".dto_subscriptionscheduleresponse",
+    "DtoSubscriptionScheduleResponse": ".dto_subscriptionscheduleresponse",
+    "DtoSubscriptionScheduleResponseTypedDict": ".dto_subscriptionscheduleresponse",
+    "ExecutionResult": ".dto_subscriptionscheduleresponse",
+    "ExecutionResultTypedDict": ".dto_subscriptionscheduleresponse",
     "DtoSubscriptionSummary": ".dto_subscriptionsummary",
     "DtoSubscriptionSummaryTypedDict": ".dto_subscriptionsummary",
     "DtoSubscriptionUsageByMetersResponse": ".dto_subscriptionusagebymetersresponse",
@@ -2048,6 +2200,8 @@ _dynamic_imports: dict[str, str] = {
     "DtoWalletTransactionResponseTypedDict": ".dto_wallettransactionresponse",
     "ErrorsErrorDetail": ".errors_errordetail",
     "ErrorsErrorDetailTypedDict": ".errors_errordetail",
+    "ErrorsErrorResponse": ".errors_errorresponse",
+    "ErrorsErrorResponseTypedDict": ".errors_errorresponse",
     "GithubComFlexpriceFlexpriceInternalDomainAddonAddon": ".github_com_flexprice_flexprice_internal_domain_addon_addon",
     "GithubComFlexpriceFlexpriceInternalDomainAddonAddonTypedDict": ".github_com_flexprice_flexprice_internal_domain_addon_addon",
     "GithubComFlexpriceFlexpriceInternalDomainCouponCoupon": ".github_com_flexprice_flexprice_internal_domain_coupon_coupon",
@@ -2129,6 +2283,8 @@ _dynamic_imports: dict[str, str] = {
     "TypesConnectionSettingsTypedDict": ".types_connectionsettings",
     "TypesCouponCadence": ".types_couponcadence",
     "TypesCouponType": ".types_coupontype",
+    "TypesCreditBreakdown": ".types_creditbreakdown",
+    "TypesCreditBreakdownTypedDict": ".types_creditbreakdown",
     "TypesCreditGrantApplicationReason": ".types_creditgrantapplicationreason",
     "TypesCreditGrantCadence": ".types_creditgrantcadence",
     "TypesCreditGrantExpiryDurationUnit": ".types_creditgrantexpirydurationunit",
@@ -2142,6 +2298,7 @@ _dynamic_imports: dict[str, str] = {
     "TypesCustomerFilterOrder": ".types_customerfilter",
     "TypesCustomerFilterTypedDict": ".types_customerfilter",
     "TypesDataType": ".types_datatype",
+    "TypesDebugTrackerStatus": ".types_debugtrackerstatus",
     "TypesEntitlementEntityType": ".types_entitlemententitytype",
     "TypesEntitlementFilter": ".types_entitlementfilter",
     "TypesEntitlementFilterOrder": ".types_entitlementfilter",
@@ -2150,6 +2307,10 @@ _dynamic_imports: dict[str, str] = {
     "TypesEntitySyncConfig": ".types_entitysyncconfig",
     "TypesEntitySyncConfigTypedDict": ".types_entitysyncconfig",
     "TypesEntityType": ".types_entitytype",
+    "TypesEventProcessingStatusType": ".types_eventprocessingstatustype",
+    "TypesFailurePoint": ".types_failurepoint",
+    "TypesFailurePointTypedDict": ".types_failurepoint",
+    "TypesFailurePointType": ".types_failurepointtype",
     "TypesFeatureFilter": ".types_featurefilter",
     "TypesFeatureFilterOrder": ".types_featurefilter",
     "TypesFeatureFilterTypedDict": ".types_featurefilter",
@@ -2175,6 +2336,8 @@ _dynamic_imports: dict[str, str] = {
     "TypesInvoiceType": ".types_invoicetype",
     "TypesListResponseDtoWalletResponse": ".types_listresponse_dto_walletresponse",
     "TypesListResponseDtoWalletResponseTypedDict": ".types_listresponse_dto_walletresponse",
+    "TypesMoyasarConnectionMetadata": ".types_moyasarconnectionmetadata",
+    "TypesMoyasarConnectionMetadataTypedDict": ".types_moyasarconnectionmetadata",
     "TypesNomodConnectionMetadata": ".types_nomodconnectionmetadata",
     "TypesNomodConnectionMetadataTypedDict": ".types_nomodconnectionmetadata",
     "TypesPaginationResponse": ".types_paginationresponse",
@@ -2213,6 +2376,8 @@ _dynamic_imports: dict[str, str] = {
     "TypesS3JobConfigTypedDict": ".types_s3jobconfig",
     "TypesScheduledTaskEntityType": ".types_scheduledtaskentitytype",
     "TypesScheduledTaskInterval": ".types_scheduledtaskinterval",
+    "TypesScheduleStatus": ".types_schedulestatus",
+    "TypesScheduleType": ".types_scheduletype",
     "TypesSecretProvider": ".types_secretprovider",
     "TypesSecretType": ".types_secrettype",
     "TypesSortCondition": ".types_sortcondition",
@@ -2226,6 +2391,7 @@ _dynamic_imports: dict[str, str] = {
     "TypesSubscriptionFilterOrder": ".types_subscriptionfilter",
     "TypesSubscriptionFilterTypedDict": ".types_subscriptionfilter",
     "TypesSubscriptionLineItemEntityType": ".types_subscriptionlineitementitytype",
+    "TypesSubscriptionScheduleChangeType": ".types_subscriptionschedulechangetype",
     "TypesSubscriptionStatus": ".types_subscriptionstatus",
     "TypesSyncConfig": ".types_syncconfig",
     "TypesSyncConfigTypedDict": ".types_syncconfig",

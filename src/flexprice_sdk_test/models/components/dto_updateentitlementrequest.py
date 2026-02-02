@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 from .types_entitlementusageresetperiod import TypesEntitlementUsageResetPeriod
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -25,3 +26,27 @@ class DtoUpdateEntitlementRequest(BaseModel):
     usage_limit: Optional[int] = None
 
     usage_reset_period: Optional[TypesEntitlementUsageResetPeriod] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "is_enabled",
+                "is_soft_limit",
+                "static_value",
+                "usage_limit",
+                "usage_reset_period",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

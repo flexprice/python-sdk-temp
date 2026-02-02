@@ -6,7 +6,8 @@ from .types_entitlemententitytype import TypesEntitlementEntityType
 from .types_entitlementusageresetperiod import TypesEntitlementUsageResetPeriod
 from .types_featuretype import TypesFeatureType
 from .types_status import TypesStatus
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Optional, TYPE_CHECKING
 from typing_extensions import NotRequired, TypedDict
 
@@ -95,3 +96,47 @@ class DtoEntitlementResponse(BaseModel):
     usage_limit: Optional[int] = None
 
     usage_reset_period: Optional[TypesEntitlementUsageResetPeriod] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "addon",
+                "created_at",
+                "created_by",
+                "display_order",
+                "end_date",
+                "entity_id",
+                "entity_type",
+                "environment_id",
+                "feature",
+                "feature_id",
+                "feature_type",
+                "id",
+                "is_enabled",
+                "is_soft_limit",
+                "parent_entitlement_id",
+                "plan",
+                "plan_id",
+                "start_date",
+                "static_value",
+                "status",
+                "tenant_id",
+                "updated_at",
+                "updated_by",
+                "usage_limit",
+                "usage_reset_period",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

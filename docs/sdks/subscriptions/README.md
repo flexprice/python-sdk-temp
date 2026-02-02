@@ -23,6 +23,11 @@
 * [post_subscriptions_id_pause](#post_subscriptions_id_pause) - Pause a subscription
 * [get_subscriptions_id_pauses](#get_subscriptions_id_pauses) - List all pauses for a subscription
 * [post_subscriptions_id_resume](#post_subscriptions_id_resume) - Resume a paused subscription
+* [get_subscriptions_id_v2](#get_subscriptions_id_v2) - Get subscription V2
+* [get_v1_subscription_schedules](#get_v1_subscription_schedules) - List all subscription schedules
+* [get_v1_subscription_schedules_id_](#get_v1_subscription_schedules_id_) - Get subscription schedule
+* [post_v1_subscriptions_schedules_schedule_id_cancel](#post_v1_subscriptions_schedules_schedule_id_cancel) - Cancel subscription schedule
+* [get_v1_subscriptions_subscription_id_schedules](#get_v1_subscriptions_subscription_id_schedules) - List subscription schedules
 
 ## get_subscriptions
 
@@ -871,3 +876,210 @@ with FlexPrice(
 | errors.ErrorsErrorResponse | 400, 404                   | application/json           |
 | errors.ErrorsErrorResponse | 500                        | application/json           |
 | errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## get_subscriptions_id_v2
+
+Get a subscription by ID with optional expand parameters
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="get_/subscriptions/{id}/v2" method="get" path="/subscriptions/{id}/v2" -->
+```python
+from flexprice_sdk_test import FlexPrice
+
+
+with FlexPrice(
+    server_url="https://api.example.com",
+    api_key_auth="<YOUR_API_KEY_HERE>",
+) as flex_price:
+
+    res = flex_price.subscriptions.get_subscriptions_id_v2(id="<id>")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `id`                                                                                   | *str*                                                                                  | :heavy_check_mark:                                                                     | Subscription ID                                                                        |
+| `expand`                                                                               | *Optional[str]*                                                                        | :heavy_minus_sign:                                                                     | Comma-separated list of fields to expand (e.g., 'subscription_line_items,prices,plan') |
+| `retries`                                                                              | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                       | :heavy_minus_sign:                                                                     | Configuration to override the default retry behavior of the client.                    |
+
+### Response
+
+**[components.DtoSubscriptionResponseV2](../../models/components/dtosubscriptionresponsev2.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.ErrorsErrorResponse | 400                        | application/json           |
+| errors.ErrorsErrorResponse | 500                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## get_v1_subscription_schedules
+
+Retrieves subscription schedules with optional filtering
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="get_/v1/subscription-schedules" method="get" path="/v1/subscription-schedules" -->
+```python
+from flexprice_sdk_test import FlexPrice
+
+
+with FlexPrice(
+    server_url="https://api.example.com",
+    api_key_auth="<YOUR_API_KEY_HERE>",
+) as flex_price:
+
+    res = flex_price.subscriptions.get_v1_subscription_schedules()
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `pending_only`                                                      | *Optional[bool]*                                                    | :heavy_minus_sign:                                                  | Filter to pending schedules only                                    |
+| `subscription_id`                                                   | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | Filter by subscription ID                                           |
+| `limit`                                                             | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | Limit results                                                       |
+| `offset`                                                            | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | Offset for pagination                                               |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[components.DtoGetPendingSchedulesResponse](../../models/components/dtogetpendingschedulesresponse.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |
+
+## get_v1_subscription_schedules_id_
+
+Retrieves details of a specific subscription schedule
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="get_/v1/subscription-schedules/{id}" method="get" path="/v1/subscription-schedules/{id}" -->
+```python
+from flexprice_sdk_test import FlexPrice
+
+
+with FlexPrice(
+    server_url="https://api.example.com",
+    api_key_auth="<YOUR_API_KEY_HERE>",
+) as flex_price:
+
+    res = flex_price.subscriptions.get_v1_subscription_schedules_id_(id="<id>")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `id`                                                                | *str*                                                               | :heavy_check_mark:                                                  | Schedule ID                                                         |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[components.DtoSubscriptionScheduleResponse](../../models/components/dtosubscriptionscheduleresponse.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |
+
+## post_v1_subscriptions_schedules_schedule_id_cancel
+
+Cancels a pending subscription schedule. Supports two modes: 1) By schedule ID in path, or 2) By subscription ID + schedule type in request body
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="post_/v1/subscriptions/schedules/{schedule_id}/cancel" method="post" path="/v1/subscriptions/schedules/{schedule_id}/cancel" -->
+```python
+from flexprice_sdk_test import FlexPrice
+
+
+with FlexPrice(
+    server_url="https://api.example.com",
+    api_key_auth="<YOUR_API_KEY_HERE>",
+) as flex_price:
+
+    res = flex_price.subscriptions.post_v1_subscriptions_schedules_schedule_id_cancel(schedule_id="<id>")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `schedule_id`                                                                                        | *str*                                                                                                | :heavy_check_mark:                                                                                   | Schedule ID (optional if using request body)                                                         |
+| `body`                                                                                               | [Optional[components.DtoCancelScheduleRequest]](../../models/components/dtocancelschedulerequest.md) | :heavy_minus_sign:                                                                                   | Cancel request (optional if using path parameter)                                                    |
+| `retries`                                                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                     | :heavy_minus_sign:                                                                                   | Configuration to override the default retry behavior of the client.                                  |
+
+### Response
+
+**[components.DtoCancelScheduleResponse](../../models/components/dtocancelscheduleresponse.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |
+
+## get_v1_subscriptions_subscription_id_schedules
+
+Retrieves all schedules for a specific subscription
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="get_/v1/subscriptions/{subscription_id}/schedules" method="get" path="/v1/subscriptions/{subscription_id}/schedules" -->
+```python
+from flexprice_sdk_test import FlexPrice
+
+
+with FlexPrice(
+    server_url="https://api.example.com",
+    api_key_auth="<YOUR_API_KEY_HERE>",
+) as flex_price:
+
+    res = flex_price.subscriptions.get_v1_subscriptions_subscription_id_schedules(subscription_id="<id>")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `subscription_id`                                                   | *str*                                                               | :heavy_check_mark:                                                  | Subscription ID                                                     |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[components.DtoGetPendingSchedulesResponse](../../models/components/dtogetpendingschedulesresponse.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |

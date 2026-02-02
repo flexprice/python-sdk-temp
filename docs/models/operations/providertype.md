@@ -13,3 +13,4 @@
 | `CHARGEBEE`  | chargebee    |
 | `QUICKBOOKS` | quickbooks   |
 | `NOMOD`      | nomod        |
+| `MOYASAR`    | moyasar      |

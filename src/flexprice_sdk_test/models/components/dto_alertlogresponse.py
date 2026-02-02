@@ -8,7 +8,8 @@ from .types_alertentitytype import TypesAlertEntityType
 from .types_alertinfo import TypesAlertInfo, TypesAlertInfoTypedDict
 from .types_alertstate import TypesAlertState
 from .types_alerttype import TypesAlertType
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -75,3 +76,41 @@ class DtoAlertLogResponse(BaseModel):
     updated_by: Optional[str] = None
 
     wallet: Optional[DtoWalletResponse] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "alert_info",
+                "alert_status",
+                "alert_type",
+                "created_at",
+                "created_by",
+                "customer",
+                "customer_id",
+                "entity_id",
+                "entity_type",
+                "environment_id",
+                "feature",
+                "id",
+                "parent_entity_id",
+                "parent_entity_type",
+                "status",
+                "tenant_id",
+                "updated_at",
+                "updated_by",
+                "wallet",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

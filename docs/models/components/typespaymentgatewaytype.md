@@ -8,3 +8,4 @@
 | `STRIPE`   | stripe     |
 | `RAZORPAY` | razorpay   |
 | `NOMOD`    | nomod      |
+| `MOYASAR`  | moyasar    |

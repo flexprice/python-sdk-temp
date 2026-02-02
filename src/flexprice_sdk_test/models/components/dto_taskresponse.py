@@ -6,7 +6,8 @@ from .types_filetype import TypesFileType
 from .types_status import TypesStatus
 from .types_taskstatus import TypesTaskStatus
 from .types_tasktype import TypesTaskType
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Any, Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -89,3 +90,47 @@ class DtoTaskResponse(BaseModel):
     updated_by: Optional[str] = None
 
     workflow_id: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "completed_at",
+                "created_at",
+                "created_by",
+                "entity_type",
+                "environment_id",
+                "error_summary",
+                "failed_at",
+                "failed_records",
+                "file_name",
+                "file_type",
+                "file_url",
+                "id",
+                "metadata",
+                "processed_records",
+                "scheduled_task_id",
+                "started_at",
+                "status",
+                "successful_records",
+                "task_status",
+                "task_type",
+                "tenant_id",
+                "total_records",
+                "updated_at",
+                "updated_by",
+                "workflow_id",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

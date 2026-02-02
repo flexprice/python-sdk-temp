@@ -4,8 +4,9 @@ from __future__ import annotations
 from flexprice_sdk_test.models.components import (
     types_wallettransactionfilter as components_types_wallettransactionfilter,
 )
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
 from flexprice_sdk_test.utils import FieldMetadata, QueryParamMetadata, RequestMetadata
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -31,3 +32,19 @@ class PostWalletsTransactionsSearchRequest(BaseModel):
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ] = None
     r"""Filter"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["expand", "body"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

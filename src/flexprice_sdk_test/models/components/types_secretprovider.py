@@ -13,3 +13,4 @@ class TypesSecretProvider(str, Enum):
     CHARGEBEE = "chargebee"
     QUICKBOOKS = "quickbooks"
     NOMOD = "nomod"
+    MOYASAR = "moyasar"

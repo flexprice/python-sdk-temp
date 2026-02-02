@@ -6,6 +6,7 @@
 
 * [post_webhooks_chargebee_tenant_id_environment_id_](#post_webhooks_chargebee_tenant_id_environment_id_) - Handle Chargebee webhook events
 * [post_webhooks_hubspot_tenant_id_environment_id_](#post_webhooks_hubspot_tenant_id_environment_id_) - Handle HubSpot webhook events
+* [post_webhooks_moyasar_tenant_id_environment_id_](#post_webhooks_moyasar_tenant_id_environment_id_) - Handle Moyasar webhook events
 * [post_webhooks_nomod_tenant_id_environment_id_](#post_webhooks_nomod_tenant_id_environment_id_) - Handle Nomod webhook events
 * [post_webhooks_quickbooks_tenant_id_environment_id_](#post_webhooks_quickbooks_tenant_id_environment_id_) - Handle QuickBooks webhook events
 * [post_webhooks_razorpay_tenant_id_environment_id_](#post_webhooks_razorpay_tenant_id_environment_id_) - Handle Razorpay webhook events
@@ -82,6 +83,48 @@ with FlexPrice(
 | `tenant_id`                                                         | *str*                                                               | :heavy_check_mark:                                                  | Tenant ID                                                           |
 | `environment_id`                                                    | *str*                                                               | :heavy_check_mark:                                                  | Environment ID                                                      |
 | `x_hub_spot_signature_v3`                                           | *str*                                                               | :heavy_check_mark:                                                  | HubSpot webhook signature                                           |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[Dict[str, Any]](../../models/.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |
+
+## post_webhooks_moyasar_tenant_id_environment_id_
+
+Process incoming Moyasar webhook events for payment status updates
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="post_/webhooks/moyasar/{tenant_id}/{environment_id}" method="post" path="/webhooks/moyasar/{tenant_id}/{environment_id}" -->
+```python
+from flexprice_sdk_test import FlexPrice
+
+
+with FlexPrice(
+    server_url="https://api.example.com",
+    api_key_auth="<YOUR_API_KEY_HERE>",
+) as flex_price:
+
+    res = flex_price.webhooks.post_webhooks_moyasar_tenant_id_environment_id_(tenant_id="<id>", environment_id="<id>")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `tenant_id`                                                         | *str*                                                               | :heavy_check_mark:                                                  | Tenant ID                                                           |
+| `environment_id`                                                    | *str*                                                               | :heavy_check_mark:                                                  | Environment ID                                                      |
+| `x_moyasar_signature`                                               | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | Moyasar webhook signature                                           |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response

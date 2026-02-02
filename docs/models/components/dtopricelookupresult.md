@@ -1,0 +1,10 @@
+# DtoPriceLookupResult
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `error`                                                                                            | [Optional[components.ErrorsErrorResponse]](../../models/components/errorserrorresponse.md)         | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `matched_prices`                                                                                   | List[[components.DtoMatchedPrice](../../models/components/dtomatchedprice.md)]                     | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `status`                                                                                           | [Optional[components.TypesDebugTrackerStatus]](../../models/components/typesdebugtrackerstatus.md) | :heavy_minus_sign:                                                                                 | N/A                                                                                                |

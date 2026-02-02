@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
 from flexprice_sdk_test.utils import FieldMetadata, QueryParamMetadata
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -165,3 +166,39 @@ class GetSubscriptionsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""WithLineItems includes line items in the response"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "active_at",
+                "billing_cadence",
+                "billing_period",
+                "customer_id",
+                "end_time",
+                "expand",
+                "external_customer_id",
+                "invoicing_customer_ids",
+                "limit",
+                "offset",
+                "order",
+                "plan_id",
+                "start_time",
+                "status",
+                "subscription_ids",
+                "subscription_status",
+                "with_line_items",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

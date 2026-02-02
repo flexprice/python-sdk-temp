@@ -4,7 +4,8 @@ from __future__ import annotations
 from .types_s3jobconfig import TypesS3JobConfig, TypesS3JobConfigTypedDict
 from .types_scheduledtaskentitytype import TypesScheduledTaskEntityType
 from .types_scheduledtaskinterval import TypesScheduledTaskInterval
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -27,3 +28,19 @@ class DtoCreateScheduledTaskRequest(BaseModel):
     job_config: TypesS3JobConfig
 
     enabled: Optional[bool] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["enabled"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

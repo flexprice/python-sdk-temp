@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 from .dto_costanalyticitem import DtoCostAnalyticItem, DtoCostAnalyticItemTypedDict
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -52,3 +53,32 @@ class DtoGetDetailedCostAnalyticsResponse(BaseModel):
 
     total_revenue: Optional[str] = None
     r"""Derived metrics"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "cost_analytics",
+                "currency",
+                "end_time",
+                "margin",
+                "margin_percent",
+                "roi",
+                "roi_percent",
+                "start_time",
+                "total_cost",
+                "total_revenue",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

@@ -34,7 +34,8 @@ from .types_invoicebilling import TypesInvoiceBilling
 from .types_paymentbehavior import TypesPaymentBehavior
 from .types_prorationbehavior import TypesProrationBehavior
 from .types_subscriptionstatus import TypesSubscriptionStatus
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -179,3 +180,51 @@ class DtoCreateSubscriptionRequest(BaseModel):
     trial_end: Optional[str] = None
 
     trial_start: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "addons",
+                "billing_cycle",
+                "billing_period_count",
+                "collection_method",
+                "commitment_amount",
+                "coupons",
+                "credit_grants",
+                "customer_id",
+                "customer_timezone",
+                "enable_true_up",
+                "end_date",
+                "external_customer_id",
+                "gateway_payment_method_id",
+                "invoice_billing",
+                "line_item_commitments",
+                "line_item_coupons",
+                "lookup_key",
+                "metadata",
+                "overage_factor",
+                "override_entitlements",
+                "override_line_items",
+                "payment_behavior",
+                "phases",
+                "proration_behavior",
+                "start_date",
+                "subscription_status",
+                "tax_rate_overrides",
+                "trial_end",
+                "trial_start",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

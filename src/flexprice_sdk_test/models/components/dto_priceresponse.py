@@ -233,76 +233,73 @@ class DtoPriceResponse(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "addon",
-            "amount",
-            "billing_cadence",
-            "billing_model",
-            "billing_period",
-            "billing_period_count",
-            "conversion_rate",
-            "created_at",
-            "created_by",
-            "currency",
-            "description",
-            "display_amount",
-            "display_name",
-            "display_price_unit_amount",
-            "end_date",
-            "entity_id",
-            "entity_type",
-            "environment_id",
-            "group",
-            "group_id",
-            "id",
-            "invoice_cadence",
-            "lookup_key",
-            "metadata",
-            "meter",
-            "meter_id",
-            "min_quantity",
-            "parent_price_id",
-            "plan",
-            "price_unit",
-            "price_unit_amount",
-            "price_unit_id",
-            "price_unit_tiers",
-            "price_unit_type",
-            "pricing_unit",
-            "start_date",
-            "status",
-            "tenant_id",
-            "tier_mode",
-            "tiers",
-            "transform_quantity",
-            "trial_period",
-            "type",
-            "updated_at",
-            "updated_by",
-        ]
-        nullable_fields = ["min_quantity"]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "addon",
+                "amount",
+                "billing_cadence",
+                "billing_model",
+                "billing_period",
+                "billing_period_count",
+                "conversion_rate",
+                "created_at",
+                "created_by",
+                "currency",
+                "description",
+                "display_amount",
+                "display_name",
+                "display_price_unit_amount",
+                "end_date",
+                "entity_id",
+                "entity_type",
+                "environment_id",
+                "group",
+                "group_id",
+                "id",
+                "invoice_cadence",
+                "lookup_key",
+                "metadata",
+                "meter",
+                "meter_id",
+                "min_quantity",
+                "parent_price_id",
+                "plan",
+                "price_unit",
+                "price_unit_amount",
+                "price_unit_id",
+                "price_unit_tiers",
+                "price_unit_type",
+                "pricing_unit",
+                "start_date",
+                "status",
+                "tenant_id",
+                "tier_mode",
+                "tiers",
+                "transform_quantity",
+                "trial_period",
+                "type",
+                "updated_at",
+                "updated_by",
+            ]
+        )
+        nullable_fields = set(["min_quantity"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m

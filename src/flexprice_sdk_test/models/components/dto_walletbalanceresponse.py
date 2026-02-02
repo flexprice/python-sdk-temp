@@ -3,11 +3,13 @@
 from __future__ import annotations
 from .types_alertconfig import TypesAlertConfig, TypesAlertConfigTypedDict
 from .types_autotopup import TypesAutoTopup, TypesAutoTopupTypedDict
+from .types_creditbreakdown import TypesCreditBreakdown, TypesCreditBreakdownTypedDict
 from .types_status import TypesStatus
 from .types_walletconfig import TypesWalletConfig, TypesWalletConfigTypedDict
 from .types_walletstatus import TypesWalletStatus
 from .types_wallettype import TypesWalletType
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -29,6 +31,7 @@ class DtoWalletBalanceResponseTypedDict(TypedDict):
     created_at: NotRequired[str]
     created_by: NotRequired[str]
     credit_balance: NotRequired[str]
+    credits_available_breakdown: NotRequired[TypesCreditBreakdownTypedDict]
     currency: NotRequired[str]
     current_period_usage: NotRequired[str]
     customer_id: NotRequired[str]
@@ -82,6 +85,8 @@ class DtoWalletBalanceResponse(BaseModel):
 
     credit_balance: Optional[str] = None
 
+    credits_available_breakdown: Optional[TypesCreditBreakdown] = None
+
     currency: Optional[str] = None
 
     current_period_usage: Optional[str] = None
@@ -122,3 +127,52 @@ class DtoWalletBalanceResponse(BaseModel):
     wallet_status: Optional[TypesWalletStatus] = None
 
     wallet_type: Optional[TypesWalletType] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "alert_config",
+                "alert_enabled",
+                "alert_state",
+                "auto_topup",
+                "balance",
+                "balance_updated_at",
+                "config",
+                "conversion_rate",
+                "created_at",
+                "created_by",
+                "credit_balance",
+                "credits_available_breakdown",
+                "currency",
+                "current_period_usage",
+                "customer_id",
+                "description",
+                "environment_id",
+                "id",
+                "metadata",
+                "name",
+                "real_time_balance",
+                "real_time_credit_balance",
+                "status",
+                "tenant_id",
+                "topup_conversion_rate",
+                "unpaid_invoices_amount",
+                "updated_at",
+                "updated_by",
+                "wallet_status",
+                "wallet_type",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

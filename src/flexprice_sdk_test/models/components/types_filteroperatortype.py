@@ -7,6 +7,7 @@ from enum import Enum
 class TypesFilterOperatorType(str, Enum):
     EQ = "eq"
     CONTAINS = "contains"
+    NOT_CONTAINS = "not_contains"
     GT = "gt"
     LT = "lt"
     IN = "in"

@@ -15,7 +15,8 @@ from .types_invoicecadence import TypesInvoiceCadence
 from .types_priceentitytype import TypesPriceEntityType
 from .types_pricetype import TypesPriceType
 from .types_priceunittype import TypesPriceUnitType
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -105,3 +106,39 @@ class DtoCreatePriceRequest(BaseModel):
     transform_quantity: Optional[PriceTransformQuantity] = None
 
     trial_period: Optional[int] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "amount",
+                "billing_period_count",
+                "description",
+                "display_name",
+                "end_date",
+                "filter_values",
+                "group_id",
+                "lookup_key",
+                "metadata",
+                "meter_id",
+                "min_quantity",
+                "price_unit_config",
+                "start_date",
+                "tier_mode",
+                "tiers",
+                "transform_quantity",
+                "trial_period",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

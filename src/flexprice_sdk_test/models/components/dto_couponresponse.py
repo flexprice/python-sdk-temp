@@ -4,7 +4,8 @@ from __future__ import annotations
 from .types_couponcadence import TypesCouponCadence
 from .types_coupontype import TypesCouponType
 from .types_status import TypesStatus
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Any, Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -75,3 +76,43 @@ class DtoCouponResponse(BaseModel):
     updated_at: Optional[str] = None
 
     updated_by: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "amount_off",
+                "cadence",
+                "created_at",
+                "created_by",
+                "currency",
+                "duration_in_periods",
+                "environment_id",
+                "id",
+                "max_redemptions",
+                "metadata",
+                "name",
+                "percentage_off",
+                "redeem_after",
+                "redeem_before",
+                "rules",
+                "status",
+                "tenant_id",
+                "total_redemptions",
+                "type",
+                "updated_at",
+                "updated_by",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

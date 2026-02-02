@@ -6,7 +6,8 @@ from .dto_createcreditnotelineitemrequest import (
     DtoCreateCreditNoteLineItemRequestTypedDict,
 )
 from .types_creditnotereason import TypesCreditNoteReason
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -50,3 +51,28 @@ class DtoCreateCreditNoteRequest(BaseModel):
 
     process_credit_note: Optional[bool] = True
     r"""process_credit_note is a flag to process the credit note after creation"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "credit_note_number",
+                "idempotency_key",
+                "line_items",
+                "memo",
+                "metadata",
+                "process_credit_note",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

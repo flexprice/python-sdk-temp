@@ -5,7 +5,8 @@ from .dto_overridelineitemrequest import (
     DtoOverrideLineItemRequest,
     DtoOverrideLineItemRequestTypedDict,
 )
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -41,3 +42,27 @@ class DtoSubscriptionPhaseCreateRequest(BaseModel):
     r"""OverrideLineItems allows customizing specific prices for this phase
     If not provided, phase will use the same line items as the subscription (plan prices)
     """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "coupons",
+                "end_date",
+                "line_item_coupons",
+                "metadata",
+                "override_line_items",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

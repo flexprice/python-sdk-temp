@@ -6,8 +6,9 @@ from .types_queryfilter import TypesQueryFilter, TypesQueryFilterTypedDict
 from .types_sortcondition import TypesSortCondition, TypesSortConditionTypedDict
 from .types_status import TypesStatus
 from .types_timerangefilter import TypesTimeRangeFilter, TypesTimeRangeFilterTypedDict
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -67,3 +68,32 @@ class CostsheetFilter(BaseModel):
     time_range_filter: Annotated[
         Optional[TypesTimeRangeFilter], pydantic.Field(alias="timeRangeFilter")
     ] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "costsheetIDs",
+                "environmentID",
+                "filters",
+                "lookupKey",
+                "name",
+                "queryFilter",
+                "sort",
+                "status",
+                "tenantID",
+                "timeRangeFilter",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

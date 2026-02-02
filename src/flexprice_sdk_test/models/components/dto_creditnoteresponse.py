@@ -19,7 +19,8 @@ from .types_creditnotestatus import TypesCreditNoteStatus
 from .types_creditnotetype import TypesCreditNoteType
 from .types_paymentstatus import TypesPaymentStatus
 from .types_status import TypesStatus
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -136,3 +137,49 @@ class DtoCreditNoteResponse(BaseModel):
 
     voided_at: Optional[str] = None
     r"""voided_at is the timestamp when the credit note was voided"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "created_at",
+                "created_by",
+                "credit_note_number",
+                "credit_note_status",
+                "credit_note_type",
+                "currency",
+                "customer",
+                "customer_id",
+                "environment_id",
+                "finalized_at",
+                "id",
+                "idempotency_key",
+                "invoice",
+                "invoice_id",
+                "line_items",
+                "memo",
+                "metadata",
+                "reason",
+                "refund_status",
+                "status",
+                "subscription",
+                "subscription_id",
+                "tenant_id",
+                "total_amount",
+                "updated_at",
+                "updated_by",
+                "voided_at",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

@@ -17,6 +17,10 @@ from .types_hubspotconnectionmetadata import (
     TypesHubSpotConnectionMetadata,
     TypesHubSpotConnectionMetadataTypedDict,
 )
+from .types_moyasarconnectionmetadata import (
+    TypesMoyasarConnectionMetadata,
+    TypesMoyasarConnectionMetadataTypedDict,
+)
 from .types_nomodconnectionmetadata import (
     TypesNomodConnectionMetadata,
     TypesNomodConnectionMetadataTypedDict,
@@ -37,7 +41,8 @@ from .types_stripeconnectionmetadata import (
     TypesStripeConnectionMetadata,
     TypesStripeConnectionMetadataTypedDict,
 )
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -46,6 +51,7 @@ class TypesConnectionMetadataTypedDict(TypedDict):
     chargebee: NotRequired[TypesChargebeeConnectionMetadataTypedDict]
     generic: NotRequired[TypesGenericConnectionMetadataTypedDict]
     hubspot: NotRequired[TypesHubSpotConnectionMetadataTypedDict]
+    moyasar: NotRequired[TypesMoyasarConnectionMetadataTypedDict]
     nomod: NotRequired[TypesNomodConnectionMetadataTypedDict]
     quickbooks: NotRequired[TypesQuickBooksConnectionMetadataTypedDict]
     razorpay: NotRequired[TypesRazorpayConnectionMetadataTypedDict]
@@ -61,6 +67,8 @@ class TypesConnectionMetadata(BaseModel):
 
     hubspot: Optional[TypesHubSpotConnectionMetadata] = None
 
+    moyasar: Optional[TypesMoyasarConnectionMetadata] = None
+
     nomod: Optional[TypesNomodConnectionMetadata] = None
 
     quickbooks: Optional[TypesQuickBooksConnectionMetadata] = None
@@ -72,3 +80,32 @@ class TypesConnectionMetadata(BaseModel):
     settings: Optional[TypesConnectionSettings] = None
 
     stripe: Optional[TypesStripeConnectionMetadata] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "chargebee",
+                "generic",
+                "hubspot",
+                "moyasar",
+                "nomod",
+                "quickbooks",
+                "razorpay",
+                "s3",
+                "settings",
+                "stripe",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

@@ -5,7 +5,8 @@ from .types_secretprovider import TypesSecretProvider
 from .types_secrettype import TypesSecretType
 from .types_status import TypesStatus
 from .types_usertype import TypesUserType
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -51,3 +52,34 @@ class DtoSecretResponse(BaseModel):
     updated_at: Optional[str] = None
 
     user_type: Optional[TypesUserType] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "created_at",
+                "display_id",
+                "expires_at",
+                "id",
+                "last_used_at",
+                "name",
+                "provider",
+                "roles",
+                "status",
+                "type",
+                "updated_at",
+                "user_type",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

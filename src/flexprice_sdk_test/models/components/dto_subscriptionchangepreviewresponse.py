@@ -6,7 +6,8 @@ from .dto_invoicepreview import DtoInvoicePreview, DtoInvoicePreviewTypedDict
 from .dto_plansummary import DtoPlanSummary, DtoPlanSummaryTypedDict
 from .dto_prorationdetails import DtoProrationDetails, DtoProrationDetailsTypedDict
 from .types_subscriptionchangetype import TypesSubscriptionChangeType
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -56,3 +57,32 @@ class DtoSubscriptionChangePreviewResponse(BaseModel):
 
     warnings: Optional[List[str]] = None
     r"""warnings contains any warnings about the change"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "change_type",
+                "current_plan",
+                "effective_date",
+                "metadata",
+                "new_billing_cycle",
+                "next_invoice_preview",
+                "proration_details",
+                "subscription_id",
+                "target_plan",
+                "warnings",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

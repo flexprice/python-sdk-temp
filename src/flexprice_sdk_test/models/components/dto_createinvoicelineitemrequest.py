@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 from .types_commitmentinfo import TypesCommitmentInfo, TypesCommitmentInfoTypedDict
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -95,3 +96,37 @@ class DtoCreateInvoiceLineItemRequest(BaseModel):
 
     price_unit_amount: Optional[str] = None
     r"""price_unit_amount is the optional amount converted to the price unit currency"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "commitment_info",
+                "display_name",
+                "entity_id",
+                "entity_type",
+                "metadata",
+                "meter_display_name",
+                "meter_id",
+                "period_end",
+                "period_start",
+                "plan_display_name",
+                "plan_id",
+                "price_id",
+                "price_type",
+                "price_unit",
+                "price_unit_amount",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

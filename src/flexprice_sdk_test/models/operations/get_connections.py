@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
 from flexprice_sdk_test.utils import FieldMetadata, QueryParamMetadata
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -22,6 +23,7 @@ class ProviderType(str, Enum):
     CHARGEBEE = "chargebee"
     QUICKBOOKS = "quickbooks"
     NOMOD = "nomod"
+    MOYASAR = "moyasar"
 
 
 class GetConnectionsStatus(str, Enum):
@@ -87,3 +89,31 @@ class GetConnectionsRequest(BaseModel):
         Optional[GetConnectionsStatus],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "connection_ids",
+                "end_time",
+                "expand",
+                "limit",
+                "offset",
+                "order",
+                "provider_type",
+                "start_time",
+                "status",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

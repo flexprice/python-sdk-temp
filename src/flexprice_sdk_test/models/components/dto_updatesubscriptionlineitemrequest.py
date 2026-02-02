@@ -9,7 +9,8 @@ from .price_transformquantity import (
 from .types_billingmodel import TypesBillingModel
 from .types_billingtier import TypesBillingTier
 from .types_commitmenttype import TypesCommitmentType
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -66,3 +67,35 @@ class DtoUpdateSubscriptionLineItemRequest(BaseModel):
     r"""Tiers determines the pricing tiers for this line item"""
 
     transform_quantity: Optional[PriceTransformQuantity] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "amount",
+                "billing_model",
+                "commitment_amount",
+                "commitment_overage_factor",
+                "commitment_quantity",
+                "commitment_true_up_enabled",
+                "commitment_type",
+                "commitment_windowed",
+                "effective_from",
+                "metadata",
+                "tier_mode",
+                "tiers",
+                "transform_quantity",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

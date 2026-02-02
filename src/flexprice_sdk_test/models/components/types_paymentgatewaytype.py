@@ -8,3 +8,4 @@ class TypesPaymentGatewayType(str, Enum):
     STRIPE = "stripe"
     RAZORPAY = "razorpay"
     NOMOD = "nomod"
+    MOYASAR = "moyasar"

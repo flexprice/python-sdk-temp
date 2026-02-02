@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: flexprice-sdk-test
-Version: 1.0.59
+Version: 1.0.60
 Summary: Python SDK for FlexPrice API
 Author: Speakeasy
 Requires-Python: >=3.9.2
@@ -279,12 +279,12 @@ with FlexPrice(
 ### [Customers](docs/sdks/customers/README.md)
 
 * [get_customers](docs/sdks/customers/README.md#get_customers) - Get customers
+* [put_customers](docs/sdks/customers/README.md#put_customers) - Update a customer
 * [post_customers](docs/sdks/customers/README.md#post_customers) - Create a customer
 * [get_customers_external_external_id_](docs/sdks/customers/README.md#get_customers_external_external_id_) - Get a customer by external id
 * [post_customers_search](docs/sdks/customers/README.md#post_customers_search) - List customers by filter
 * [get_customers_usage](docs/sdks/customers/README.md#get_customers_usage) - Get customer usage summary
 * [get_customers_id_](docs/sdks/customers/README.md#get_customers_id_) - Get a customer
-* [put_customers_id_](docs/sdks/customers/README.md#put_customers_id_) - Update a customer
 * [delete_customers_id_](docs/sdks/customers/README.md#delete_customers_id_) - Delete a customer
 * [get_customers_id_entitlements](docs/sdks/customers/README.md#get_customers_id_entitlements) - Get customer entitlements
 * [get_customers_id_grants_upcoming](docs/sdks/customers/README.md#get_customers_id_grants_upcoming) - Get upcoming credit grant applications
@@ -325,6 +325,7 @@ with FlexPrice(
 * [post_events_query](docs/sdks/events/README.md#post_events_query) - List raw events
 * [post_events_usage](docs/sdks/events/README.md#post_events_usage) - Get usage statistics
 * [post_events_usage_meter](docs/sdks/events/README.md#post_events_usage_meter) - Get usage by meter
+* [get_events_id_](docs/sdks/events/README.md#get_events_id_) - Get event by ID
 
 ### [Features](docs/sdks/features/README.md)
 
@@ -447,6 +448,11 @@ with FlexPrice(
 * [post_subscriptions_id_pause](docs/sdks/subscriptions/README.md#post_subscriptions_id_pause) - Pause a subscription
 * [get_subscriptions_id_pauses](docs/sdks/subscriptions/README.md#get_subscriptions_id_pauses) - List all pauses for a subscription
 * [post_subscriptions_id_resume](docs/sdks/subscriptions/README.md#post_subscriptions_id_resume) - Resume a paused subscription
+* [get_subscriptions_id_v2](docs/sdks/subscriptions/README.md#get_subscriptions_id_v2) - Get subscription V2
+* [get_v1_subscription_schedules](docs/sdks/subscriptions/README.md#get_v1_subscription_schedules) - List all subscription schedules
+* [get_v1_subscription_schedules_id_](docs/sdks/subscriptions/README.md#get_v1_subscription_schedules_id_) - Get subscription schedule
+* [post_v1_subscriptions_schedules_schedule_id_cancel](docs/sdks/subscriptions/README.md#post_v1_subscriptions_schedules_schedule_id_cancel) - Cancel subscription schedule
+* [get_v1_subscriptions_subscription_id_schedules](docs/sdks/subscriptions/README.md#get_v1_subscriptions_subscription_id_schedules) - List subscription schedules
 
 ### [Tasks](docs/sdks/tasks/README.md)
 
@@ -505,6 +511,7 @@ with FlexPrice(
 
 * [post_webhooks_chargebee_tenant_id_environment_id_](docs/sdks/webhooks/README.md#post_webhooks_chargebee_tenant_id_environment_id_) - Handle Chargebee webhook events
 * [post_webhooks_hubspot_tenant_id_environment_id_](docs/sdks/webhooks/README.md#post_webhooks_hubspot_tenant_id_environment_id_) - Handle HubSpot webhook events
+* [post_webhooks_moyasar_tenant_id_environment_id_](docs/sdks/webhooks/README.md#post_webhooks_moyasar_tenant_id_environment_id_) - Handle Moyasar webhook events
 * [post_webhooks_nomod_tenant_id_environment_id_](docs/sdks/webhooks/README.md#post_webhooks_nomod_tenant_id_environment_id_) - Handle Nomod webhook events
 * [post_webhooks_quickbooks_tenant_id_environment_id_](docs/sdks/webhooks/README.md#post_webhooks_quickbooks_tenant_id_environment_id_) - Handle QuickBooks webhook events
 * [post_webhooks_razorpay_tenant_id_environment_id_](docs/sdks/webhooks/README.md#post_webhooks_razorpay_tenant_id_environment_id_) - Handle Razorpay webhook events

@@ -8,7 +8,8 @@ from .dto_paymentattemptresponse import (
 from .types_paymentdestinationtype import TypesPaymentDestinationType
 from .types_paymentmethodtype import TypesPaymentMethodType
 from .types_paymentstatus import TypesPaymentStatus
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -100,3 +101,50 @@ class DtoPaymentResponse(BaseModel):
     updated_at: Optional[str] = None
 
     updated_by: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "amount",
+                "attempts",
+                "created_at",
+                "created_by",
+                "currency",
+                "destination_id",
+                "destination_type",
+                "error_message",
+                "failed_at",
+                "gateway_metadata",
+                "gateway_payment_id",
+                "gateway_tracking_id",
+                "id",
+                "idempotency_key",
+                "invoice_number",
+                "metadata",
+                "payment_gateway",
+                "payment_method_id",
+                "payment_method_type",
+                "payment_status",
+                "payment_url",
+                "refunded_at",
+                "save_card_and_make_default",
+                "succeeded_at",
+                "tenant_id",
+                "track_attempts",
+                "updated_at",
+                "updated_by",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

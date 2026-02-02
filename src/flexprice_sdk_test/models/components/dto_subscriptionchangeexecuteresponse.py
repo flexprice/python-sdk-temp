@@ -12,7 +12,8 @@ from .dto_subscriptionsummary import (
     DtoSubscriptionSummaryTypedDict,
 )
 from .types_subscriptionchangetype import TypesSubscriptionChangeType
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -26,11 +27,17 @@ class DtoSubscriptionChangeExecuteResponseTypedDict(TypedDict):
     effective_date: NotRequired[str]
     r"""effective_date is when the change took effect"""
     invoice: NotRequired[DtoInvoiceResponseTypedDict]
+    is_scheduled: NotRequired[bool]
+    r"""is_scheduled indicates if the change was scheduled or executed immediately"""
     metadata: NotRequired[Dict[str, str]]
     r"""metadata from the request"""
     new_subscription: NotRequired[DtoSubscriptionSummaryTypedDict]
     old_subscription: NotRequired[DtoSubscriptionSummaryTypedDict]
     proration_applied: NotRequired[DtoProrationDetailsTypedDict]
+    schedule_id: NotRequired[str]
+    r"""schedule_id is the ID of the created schedule (only if is_scheduled=true)"""
+    scheduled_at: NotRequired[str]
+    r"""scheduled_at is when the change will execute (only if is_scheduled=true)"""
 
 
 class DtoSubscriptionChangeExecuteResponse(BaseModel):
@@ -46,6 +53,9 @@ class DtoSubscriptionChangeExecuteResponse(BaseModel):
 
     invoice: Optional[DtoInvoiceResponse] = None
 
+    is_scheduled: Optional[bool] = None
+    r"""is_scheduled indicates if the change was scheduled or executed immediately"""
+
     metadata: Optional[Dict[str, str]] = None
     r"""metadata from the request"""
 
@@ -54,3 +64,39 @@ class DtoSubscriptionChangeExecuteResponse(BaseModel):
     old_subscription: Optional[DtoSubscriptionSummary] = None
 
     proration_applied: Optional[DtoProrationDetails] = None
+
+    schedule_id: Optional[str] = None
+    r"""schedule_id is the ID of the created schedule (only if is_scheduled=true)"""
+
+    scheduled_at: Optional[str] = None
+    r"""scheduled_at is when the change will execute (only if is_scheduled=true)"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "change_type",
+                "credit_grants",
+                "effective_date",
+                "invoice",
+                "is_scheduled",
+                "metadata",
+                "new_subscription",
+                "old_subscription",
+                "proration_applied",
+                "schedule_id",
+                "scheduled_at",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
 from flexprice_sdk_test.utils import FieldMetadata, QueryParamMetadata
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -207,3 +208,39 @@ class GetInvoicesRequest(BaseModel):
     r"""subscription_id filters invoices generated for a specific subscription
     Only returns invoices that were created as part of the specified subscription's billing
     """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "amount_due_gt",
+                "amount_remaining_gt",
+                "customer_id",
+                "end_time",
+                "expand",
+                "external_customer_id",
+                "invoice_ids",
+                "invoice_status",
+                "invoice_type",
+                "limit",
+                "offset",
+                "order",
+                "payment_status",
+                "skip_line_items",
+                "start_time",
+                "status",
+                "subscription_id",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

@@ -5,6 +5,7 @@ from enum import Enum
 
 
 class TypesWindowSize(str, Enum):
+    MONTH = "MONTH"
     MINUTE = "MINUTE"
     FIFTEEN_MIN = "15MIN"
     THIRTY_MIN = "30MIN"
@@ -14,4 +15,3 @@ class TypesWindowSize(str, Enum):
     TWELVE_HOUR = "12HOUR"
     DAY = "DAY"
     WEEK = "WEEK"
-    MONTH = "MONTH"

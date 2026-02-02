@@ -4,7 +4,8 @@ from __future__ import annotations
 from .dto_costpoint import DtoCostPoint, DtoCostPointTypedDict
 from .meter_meter import MeterMeter, MeterMeterTypedDict
 from .price_price import PricePrice, PricePriceTypedDict
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -63,3 +64,37 @@ class DtoCostAnalyticItem(BaseModel):
     total_events: Optional[int] = None
 
     total_quantity: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "cost_by_period",
+                "costsheet_id",
+                "currency",
+                "customer_id",
+                "external_customer_id",
+                "meter",
+                "meter_id",
+                "meter_name",
+                "price",
+                "price_id",
+                "properties",
+                "source",
+                "total_cost",
+                "total_events",
+                "total_quantity",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

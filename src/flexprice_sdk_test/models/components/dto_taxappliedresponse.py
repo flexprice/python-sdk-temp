@@ -4,7 +4,8 @@ from __future__ import annotations
 from .dto_taxrateresponse import DtoTaxRateResponse, DtoTaxRateResponseTypedDict
 from .types_status import TypesStatus
 from .types_taxrateentitytype import TypesTaxRateEntityType
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -69,3 +70,41 @@ class DtoTaxAppliedResponse(BaseModel):
     updated_at: Optional[str] = None
 
     updated_by: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "applied_at",
+                "created_at",
+                "created_by",
+                "currency",
+                "entity_id",
+                "entity_type",
+                "environment_id",
+                "id",
+                "idempotency_key",
+                "metadata",
+                "status",
+                "tax_amount",
+                "tax_association_id",
+                "tax_rate",
+                "tax_rate_id",
+                "taxable_amount",
+                "tenant_id",
+                "updated_at",
+                "updated_by",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

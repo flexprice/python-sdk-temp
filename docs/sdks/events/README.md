@@ -12,6 +12,7 @@
 * [post_events_query](#post_events_query) - List raw events
 * [post_events_usage](#post_events_usage) - Get usage statistics
 * [post_events_usage_meter](#post_events_usage_meter) - Get usage by meter
+* [get_events_id_](#get_events_id_) - Get event by ID
 
 ## post_events
 
@@ -357,5 +358,47 @@ with FlexPrice(
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | errors.ErrorsErrorResponse | 400, 404                   | application/json           |
+| errors.ErrorsErrorResponse | 500                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## get_events_id_
+
+Retrieve event details and processing status with debug information
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="get_/events/{id}" method="get" path="/events/{id}" -->
+```python
+from flexprice_sdk_test import FlexPrice
+
+
+with FlexPrice(
+    server_url="https://api.example.com",
+    api_key_auth="<YOUR_API_KEY_HERE>",
+) as flex_price:
+
+    res = flex_price.events.get_events_id_(id="<id>")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `id`                                                                | *str*                                                               | :heavy_check_mark:                                                  | Event ID                                                            |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[components.DtoGetEventByIDResponse](../../models/components/dtogeteventbyidresponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.ErrorsErrorResponse | 404                        | application/json           |
 | errors.ErrorsErrorResponse | 500                        | application/json           |
 | errors.SDKError            | 4XX, 5XX                   | \*/\*                      |

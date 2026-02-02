@@ -5,7 +5,8 @@ from .types_pausemode import TypesPauseMode
 from .types_pausestatus import TypesPauseStatus
 from .types_resumemode import TypesResumeMode
 from .types_status import TypesStatus
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -88,3 +89,41 @@ class SubscriptionSubscriptionPause(BaseModel):
     updated_at: Optional[str] = None
 
     updated_by: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "created_at",
+                "created_by",
+                "environment_id",
+                "id",
+                "metadata",
+                "original_period_end",
+                "original_period_start",
+                "pause_end",
+                "pause_mode",
+                "pause_start",
+                "pause_status",
+                "reason",
+                "resume_mode",
+                "resumed_at",
+                "status",
+                "subscription_id",
+                "tenant_id",
+                "updated_at",
+                "updated_by",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

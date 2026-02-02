@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 from .types_commitmenttype import TypesCommitmentType
-from flexprice_sdk_test.types import BaseModel
+from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -38,3 +39,28 @@ class DtoLineItemCommitmentConfig(BaseModel):
 
     overage_factor: Optional[float] = None
     r"""OverageFactor is a multiplier applied to usage beyond the commitment"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "commitment_amount",
+                "commitment_quantity",
+                "commitment_type",
+                "enable_true_up",
+                "is_window_commitment",
+                "overage_factor",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
