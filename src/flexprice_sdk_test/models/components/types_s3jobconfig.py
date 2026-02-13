@@ -3,8 +3,9 @@
 from __future__ import annotations
 from .types_s3compressiontype import TypesS3CompressionType
 from .types_s3encryptiontype import TypesS3EncryptionType
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -43,6 +44,24 @@ class TypesS3JobConfig(BaseModel):
 
     use_path_style: Optional[bool] = None
     r"""Use path-style addressing instead of virtual-hosted-style (required for MinIO)"""
+
+    @field_serializer("compression")
+    def serialize_compression(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesS3CompressionType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("encryption")
+    def serialize_encryption(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesS3EncryptionType(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesTaxRateType(str, Enum):
+class TypesTaxRateType(str, Enum, metaclass=utils.OpenEnumMeta):
     PERCENTAGE = "percentage"
     FIXED = "fixed"

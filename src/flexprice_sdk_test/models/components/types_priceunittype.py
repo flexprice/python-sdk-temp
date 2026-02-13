@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesPriceUnitType(str, Enum):
+class TypesPriceUnitType(str, Enum, metaclass=utils.OpenEnumMeta):
     FIAT = "FIAT"
     CUSTOM = "CUSTOM"

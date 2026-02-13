@@ -3,7 +3,7 @@
 
 ## Values
 
-| Name          | Value         |
-| ------------- | ------------- |
-| `PROMOTIONAL` | PROMOTIONAL   |
-| `PRE_PAID`    | PRE_PAID      |
+| Name        | Value       |
+| ----------- | ----------- |
+| `PRE_PAID`  | PRE_PAID    |
+| `POST_PAID` | POST_PAID   |

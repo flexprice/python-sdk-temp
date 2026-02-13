@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesCreditGrantCadence(str, Enum):
+class TypesCreditGrantCadence(str, Enum, metaclass=utils.OpenEnumMeta):
     ONETIME = "ONETIME"
     RECURRING = "RECURRING"

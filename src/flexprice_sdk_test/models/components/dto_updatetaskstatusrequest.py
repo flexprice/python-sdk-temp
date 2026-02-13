@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 from .types_taskstatus import TypesTaskStatus
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel
+from pydantic import field_serializer
 from typing_extensions import TypedDict
 
 
@@ -12,3 +14,12 @@ class DtoUpdateTaskStatusRequestTypedDict(TypedDict):
 
 class DtoUpdateTaskStatusRequest(BaseModel):
     task_status: TypesTaskStatus
+
+    @field_serializer("task_status")
+    def serialize_task_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesTaskStatus(value)
+            except ValueError:
+                return value
+        return value

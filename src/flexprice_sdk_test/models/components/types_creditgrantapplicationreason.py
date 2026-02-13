@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesCreditGrantApplicationReason(str, Enum):
+class TypesCreditGrantApplicationReason(str, Enum, metaclass=utils.OpenEnumMeta):
     FIRST_TIME_RECURRING_CREDIT_GRANT = "first_time_recurring_credit_grant"
     RECURRING_CREDIT_GRANT = "recurring_credit_grant"
     ONETIME_CREDIT_GRANT = "onetime_credit_grant"

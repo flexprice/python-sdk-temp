@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesBillingPeriod(str, Enum):
+class TypesBillingPeriod(str, Enum, metaclass=utils.OpenEnumMeta):
     MONTHLY = "MONTHLY"
     ANNUAL = "ANNUAL"
     WEEKLY = "WEEKLY"

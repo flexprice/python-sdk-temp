@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesAlertType(str, Enum):
+class TypesAlertType(str, Enum, metaclass=utils.OpenEnumMeta):
     LOW_ONGOING_BALANCE = "low_ongoing_balance"
     LOW_CREDIT_BALANCE = "low_credit_balance"
     FEATURE_WALLET_BALANCE = "feature_wallet_balance"

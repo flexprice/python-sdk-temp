@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesCreditGrantExpiryType(str, Enum):
+class TypesCreditGrantExpiryType(str, Enum, metaclass=utils.OpenEnumMeta):
     NEVER = "NEVER"
     DURATION = "DURATION"
     BILLING_CYCLE = "BILLING_CYCLE"

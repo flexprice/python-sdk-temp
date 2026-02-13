@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesSubscriptionScheduleChangeType(str, Enum):
+class TypesSubscriptionScheduleChangeType(str, Enum, metaclass=utils.OpenEnumMeta):
     PLAN_CHANGE = "plan_change"
     CANCELLATION = "cancellation"

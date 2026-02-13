@@ -188,7 +188,7 @@ with FlexPrice(
 
 ## delete_creditgrants_id_
 
-Delete a credit grant
+Delete a credit grant. Plan-scoped grants are archived; subscription-scoped grants have their end date set (optional body with effective_date). Request body is optional.
 
 ### Example Usage
 
@@ -211,10 +211,11 @@ with FlexPrice(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `id`                                                                | *str*                                                               | :heavy_check_mark:                                                  | Credit Grant ID                                                     |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                       | *str*                                                                                                      | :heavy_check_mark:                                                                                         | Credit Grant ID                                                                                            |
+| `body`                                                                                                     | [Optional[components.DtoDeleteCreditGrantRequest]](../../models/components/dtodeletecreditgrantrequest.md) | :heavy_minus_sign:                                                                                         | Optional: effective_date for subscription-scoped grants                                                    |
+| `retries`                                                                                                  | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                           | :heavy_minus_sign:                                                                                         | Configuration to override the default retry behavior of the client.                                        |
 
 ### Response
 

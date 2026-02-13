@@ -8,8 +8,9 @@ from .types_transactionreason import TypesTransactionReason
 from .types_transactionstatus import TypesTransactionStatus
 from .types_transactiontype import TypesTransactionType
 from enum import Enum
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -84,6 +85,42 @@ class TypesWalletTransactionFilter(BaseModel):
     transaction_status: Optional[TypesTransactionStatus] = None
 
     type: Optional[TypesTransactionType] = None
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesStatus(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("transaction_reason")
+    def serialize_transaction_reason(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesTransactionReason(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("transaction_status")
+    def serialize_transaction_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesTransactionStatus(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("type")
+    def serialize_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesTransactionType(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

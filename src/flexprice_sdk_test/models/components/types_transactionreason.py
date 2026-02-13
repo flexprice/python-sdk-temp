@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesTransactionReason(str, Enum):
+class TypesTransactionReason(str, Enum, metaclass=utils.OpenEnumMeta):
     INVOICE_PAYMENT = "INVOICE_PAYMENT"
     FREE_CREDIT_GRANT = "FREE_CREDIT_GRANT"
     SUBSCRIPTION_CREDIT_GRANT = "SUBSCRIPTION_CREDIT_GRANT"
@@ -14,3 +15,4 @@ class TypesTransactionReason(str, Enum):
     CREDIT_EXPIRED = "CREDIT_EXPIRED"
     WALLET_TERMINATION = "WALLET_TERMINATION"
     MANUAL_BALANCE_DEBIT = "MANUAL_BALANCE_DEBIT"
+    CREDIT_ADJUSTMENT = "CREDIT_ADJUSTMENT"

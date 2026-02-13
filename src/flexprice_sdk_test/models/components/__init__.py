@@ -279,6 +279,10 @@ if TYPE_CHECKING:
         DtoDeleteCostsheetResponse,
         DtoDeleteCostsheetResponseTypedDict,
     )
+    from .dto_deletecreditgrantrequest import (
+        DtoDeleteCreditGrantRequest,
+        DtoDeleteCreditGrantRequestTypedDict,
+    )
     from .dto_deletepricerequest import (
         DtoDeletePriceRequest,
         DtoDeletePriceRequestTypedDict,
@@ -849,6 +853,9 @@ if TYPE_CHECKING:
     from .types_billingmodel import TypesBillingModel
     from .types_billingperiod import TypesBillingPeriod
     from .types_billingtier import TypesBillingTier
+    from .types_cancelimmediatelyinvoicepolicy import (
+        TypesCancelImmediatelyInvoicePolicy,
+    )
     from .types_cancellationtype import TypesCancellationType
     from .types_chargebeeconnectionmetadata import (
         TypesChargebeeConnectionMetadata,
@@ -968,6 +975,11 @@ if TYPE_CHECKING:
         TypesPlanFilterTypedDict,
     )
     from .types_priceentitytype import TypesPriceEntityType
+    from .types_pricefilter import (
+        TypesPriceFilter,
+        TypesPriceFilterOrder,
+        TypesPriceFilterTypedDict,
+    )
     from .types_pricetype import TypesPriceType
     from .types_priceunittype import TypesPriceUnitType
     from .types_prorationbehavior import TypesProrationBehavior
@@ -1226,6 +1238,8 @@ __all__ = [
     "DtoDebugTrackerTypedDict",
     "DtoDeleteCostsheetResponse",
     "DtoDeleteCostsheetResponseTypedDict",
+    "DtoDeleteCreditGrantRequest",
+    "DtoDeleteCreditGrantRequestTypedDict",
     "DtoDeletePriceRequest",
     "DtoDeletePriceRequestTypedDict",
     "DtoDeleteSubscriptionLineItemRequest",
@@ -1595,6 +1609,7 @@ __all__ = [
     "TypesBillingModel",
     "TypesBillingPeriod",
     "TypesBillingTier",
+    "TypesCancelImmediatelyInvoicePolicy",
     "TypesCancellationType",
     "TypesChargebeeConnectionMetadata",
     "TypesChargebeeConnectionMetadataTypedDict",
@@ -1681,6 +1696,9 @@ __all__ = [
     "TypesPlanFilterOrder",
     "TypesPlanFilterTypedDict",
     "TypesPriceEntityType",
+    "TypesPriceFilter",
+    "TypesPriceFilterOrder",
+    "TypesPriceFilterTypedDict",
     "TypesPriceType",
     "TypesPriceUnitType",
     "TypesProrationBehavior",
@@ -1906,6 +1924,8 @@ _dynamic_imports: dict[str, str] = {
     "DtoDebugTrackerTypedDict": ".dto_debugtracker",
     "DtoDeleteCostsheetResponse": ".dto_deletecostsheetresponse",
     "DtoDeleteCostsheetResponseTypedDict": ".dto_deletecostsheetresponse",
+    "DtoDeleteCreditGrantRequest": ".dto_deletecreditgrantrequest",
+    "DtoDeleteCreditGrantRequestTypedDict": ".dto_deletecreditgrantrequest",
     "DtoDeletePriceRequest": ".dto_deletepricerequest",
     "DtoDeletePriceRequestTypedDict": ".dto_deletepricerequest",
     "DtoDeleteSubscriptionLineItemRequest": ".dto_deletesubscriptionlineitemrequest",
@@ -2267,6 +2287,7 @@ _dynamic_imports: dict[str, str] = {
     "TypesBillingModel": ".types_billingmodel",
     "TypesBillingPeriod": ".types_billingperiod",
     "TypesBillingTier": ".types_billingtier",
+    "TypesCancelImmediatelyInvoicePolicy": ".types_cancelimmediatelyinvoicepolicy",
     "TypesCancellationType": ".types_cancellationtype",
     "TypesChargebeeConnectionMetadata": ".types_chargebeeconnectionmetadata",
     "TypesChargebeeConnectionMetadataTypedDict": ".types_chargebeeconnectionmetadata",
@@ -2353,6 +2374,9 @@ _dynamic_imports: dict[str, str] = {
     "TypesPlanFilterOrder": ".types_planfilter",
     "TypesPlanFilterTypedDict": ".types_planfilter",
     "TypesPriceEntityType": ".types_priceentitytype",
+    "TypesPriceFilter": ".types_pricefilter",
+    "TypesPriceFilterOrder": ".types_pricefilter",
+    "TypesPriceFilterTypedDict": ".types_pricefilter",
     "TypesPriceType": ".types_pricetype",
     "TypesPriceUnitType": ".types_priceunittype",
     "TypesProrationBehavior": ".types_prorationbehavior",

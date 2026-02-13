@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesBillingModel(str, Enum):
+class TypesBillingModel(str, Enum, metaclass=utils.OpenEnumMeta):
     FLAT_FEE = "FLAT_FEE"
     PACKAGE = "PACKAGE"
     TIERED = "TIERED"

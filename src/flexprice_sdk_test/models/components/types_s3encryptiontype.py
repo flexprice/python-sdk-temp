@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesS3EncryptionType(str, Enum):
+class TypesS3EncryptionType(str, Enum, metaclass=utils.OpenEnumMeta):
     AES256 = "AES256"
     AWS_KMS = "aws:kms"
     AWS_KMS_DSSE = "aws:kms:dsse"

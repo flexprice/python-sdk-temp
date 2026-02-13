@@ -8,8 +8,9 @@ from .dto_paymentattemptresponse import (
 from .types_paymentdestinationtype import TypesPaymentDestinationType
 from .types_paymentmethodtype import TypesPaymentMethodType
 from .types_paymentstatus import TypesPaymentStatus
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -101,6 +102,24 @@ class DtoPaymentResponse(BaseModel):
     updated_at: Optional[str] = None
 
     updated_by: Optional[str] = None
+
+    @field_serializer("payment_method_type")
+    def serialize_payment_method_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesPaymentMethodType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("payment_status")
+    def serialize_payment_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesPaymentStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

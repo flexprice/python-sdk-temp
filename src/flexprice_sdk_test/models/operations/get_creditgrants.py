@@ -26,6 +26,7 @@ class GetCreditgrantsStatus(str, Enum):
 
 
 class GetCreditgrantsRequestTypedDict(TypedDict):
+    credit_grant_ids: NotRequired[List[str]]
     end_time: NotRequired[str]
     expand: NotRequired[str]
     limit: NotRequired[int]
@@ -41,6 +42,11 @@ class GetCreditgrantsRequestTypedDict(TypedDict):
 
 
 class GetCreditgrantsRequest(BaseModel):
+    credit_grant_ids: Annotated[
+        Optional[List[str]],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
+    ] = None
+
     end_time: Annotated[
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -101,6 +107,7 @@ class GetCreditgrantsRequest(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "credit_grant_ids",
                 "end_time",
                 "expand",
                 "limit",

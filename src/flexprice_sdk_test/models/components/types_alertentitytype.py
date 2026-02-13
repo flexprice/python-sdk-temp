@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesAlertEntityType(str, Enum):
+class TypesAlertEntityType(str, Enum, metaclass=utils.OpenEnumMeta):
     WALLET = "wallet"
     FEATURE = "feature"

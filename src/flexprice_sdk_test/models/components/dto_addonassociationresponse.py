@@ -9,8 +9,9 @@ from .dto_subscriptionresponse import (
 from .types_addonassociationentitytype import TypesAddonAssociationEntityType
 from .types_addonstatus import TypesAddonStatus
 from .types_status import TypesStatus
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Any, Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -75,6 +76,33 @@ class DtoAddonAssociationResponse(BaseModel):
     updated_at: Optional[str] = None
 
     updated_by: Optional[str] = None
+
+    @field_serializer("addon_status")
+    def serialize_addon_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesAddonStatus(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("entity_type")
+    def serialize_entity_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesAddonAssociationEntityType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

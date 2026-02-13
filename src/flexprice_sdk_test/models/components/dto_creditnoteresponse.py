@@ -19,8 +19,9 @@ from .types_creditnotestatus import TypesCreditNoteStatus
 from .types_creditnotetype import TypesCreditNoteType
 from .types_paymentstatus import TypesPaymentStatus
 from .types_status import TypesStatus
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -137,6 +138,51 @@ class DtoCreditNoteResponse(BaseModel):
 
     voided_at: Optional[str] = None
     r"""voided_at is the timestamp when the credit note was voided"""
+
+    @field_serializer("credit_note_status")
+    def serialize_credit_note_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesCreditNoteStatus(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("credit_note_type")
+    def serialize_credit_note_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesCreditNoteType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("reason")
+    def serialize_reason(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesCreditNoteReason(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("refund_status")
+    def serialize_refund_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesPaymentStatus(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

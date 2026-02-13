@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesWalletConfigPriceType(str, Enum):
+class TypesWalletConfigPriceType(str, Enum, metaclass=utils.OpenEnumMeta):
     ALL = "ALL"
     USAGE = "USAGE"
     FIXED = "FIXED"

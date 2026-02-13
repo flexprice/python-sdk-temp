@@ -132,6 +132,7 @@ src/flexprice_sdk_test/models/components/dto_customerresponse.py
 src/flexprice_sdk_test/models/components/dto_customerusagesummaryresponse.py
 src/flexprice_sdk_test/models/components/dto_debugtracker.py
 src/flexprice_sdk_test/models/components/dto_deletecostsheetresponse.py
+src/flexprice_sdk_test/models/components/dto_deletecreditgrantrequest.py
 src/flexprice_sdk_test/models/components/dto_deletepricerequest.py
 src/flexprice_sdk_test/models/components/dto_deletesubscriptionlineitemrequest.py
 src/flexprice_sdk_test/models/components/dto_entitlementresponse.py
@@ -322,6 +323,7 @@ src/flexprice_sdk_test/models/components/types_billingcycle.py
 src/flexprice_sdk_test/models/components/types_billingmodel.py
 src/flexprice_sdk_test/models/components/types_billingperiod.py
 src/flexprice_sdk_test/models/components/types_billingtier.py
+src/flexprice_sdk_test/models/components/types_cancelimmediatelyinvoicepolicy.py
 src/flexprice_sdk_test/models/components/types_cancellationtype.py
 src/flexprice_sdk_test/models/components/types_chargebeeconnectionmetadata.py
 src/flexprice_sdk_test/models/components/types_collectionmethod.py
@@ -381,6 +383,7 @@ src/flexprice_sdk_test/models/components/types_paymentmethodtype.py
 src/flexprice_sdk_test/models/components/types_paymentstatus.py
 src/flexprice_sdk_test/models/components/types_planfilter.py
 src/flexprice_sdk_test/models/components/types_priceentitytype.py
+src/flexprice_sdk_test/models/components/types_pricefilter.py
 src/flexprice_sdk_test/models/components/types_pricetype.py
 src/flexprice_sdk_test/models/components/types_priceunittype.py
 src/flexprice_sdk_test/models/components/types_prorationbehavior.py

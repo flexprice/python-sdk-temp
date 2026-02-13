@@ -7,8 +7,9 @@ from .github_com_flexprice_flexprice_internal_domain_customer_customer import (
     GithubComFlexpriceFlexpriceInternalDomainCustomerCustomerTypedDict,
 )
 from .types_debugtrackerstatus import TypesDebugTrackerStatus
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -27,6 +28,15 @@ class DtoCustomerLookupResult(BaseModel):
     error: Optional[ErrorsErrorResponse] = None
 
     status: Optional[TypesDebugTrackerStatus] = None
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesDebugTrackerStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesCancellationType(str, Enum):
+class TypesCancellationType(str, Enum, metaclass=utils.OpenEnumMeta):
     IMMEDIATE = "immediate"
     END_OF_PERIOD = "end_of_period"

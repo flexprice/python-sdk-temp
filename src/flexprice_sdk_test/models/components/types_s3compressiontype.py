@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesS3CompressionType(str, Enum):
+class TypesS3CompressionType(str, Enum, metaclass=utils.OpenEnumMeta):
     NONE = "none"
     GZIP = "gzip"

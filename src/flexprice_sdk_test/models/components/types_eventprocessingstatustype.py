@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesEventProcessingStatusType(str, Enum):
+class TypesEventProcessingStatusType(str, Enum, metaclass=utils.OpenEnumMeta):
     PROCESSED = "processed"
     PROCESSING = "processing"
     FAILED = "failed"

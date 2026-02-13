@@ -1,9 +1,9 @@
 Metadata-Version: 2.4
 Name: flexprice-sdk-test
-Version: 1.0.60
+Version: 1.0.61
 Summary: Python SDK for FlexPrice API
 Author: Speakeasy
-Requires-Python: >=3.9.2
+Requires-Python: >=3.10
 Description-Content-Type: text/markdown
 Requires-Dist: httpcore>=1.0.9
 Requires-Dist: httpx>=0.28.1
@@ -99,7 +99,7 @@ It's also possible to write a standalone Python script without needing to set up
 ```python
 #!/usr/bin/env -S uv run --script
 # /// script
-# requires-python = ">=3.9"
+# requires-python = ">=3.10"
 # dependencies = [
 #     "flexprice-sdk-test",
 # ]
@@ -402,6 +402,7 @@ with FlexPrice(
 * [post_prices](docs/sdks/prices/README.md#post_prices) - Create a new price
 * [post_prices_bulk](docs/sdks/prices/README.md#post_prices_bulk) - Create multiple prices in bulk
 * [get_prices_lookup_lookup_key_](docs/sdks/prices/README.md#get_prices_lookup_lookup_key_) - Get price by lookup key
+* [post_prices_search](docs/sdks/prices/README.md#post_prices_search) - List prices by filter
 * [get_prices_id_](docs/sdks/prices/README.md#get_prices_id_) - Get a price by ID
 * [put_prices_id_](docs/sdks/prices/README.md#put_prices_id_) - Update a price
 * [delete_prices_id_](docs/sdks/prices/README.md#delete_prices_id_) - Delete a price

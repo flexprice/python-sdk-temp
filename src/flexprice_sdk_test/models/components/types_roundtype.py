@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesRoundType(str, Enum):
+class TypesRoundType(str, Enum, metaclass=utils.OpenEnumMeta):
     UP = "up"
     DOWN = "down"

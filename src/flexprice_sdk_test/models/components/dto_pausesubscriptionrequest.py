@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from .types_pausemode import TypesPauseMode
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -84,6 +85,15 @@ class DtoPauseSubscriptionRequest(BaseModel):
     @Description Optional reason for the pause. Maximum 255 characters
     @Example \"Customer requested temporary suspension\" 
     """
+
+    @field_serializer("pause_mode")
+    def serialize_pause_mode(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesPauseMode(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

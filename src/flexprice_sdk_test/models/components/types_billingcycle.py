@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesBillingCycle(str, Enum):
+class TypesBillingCycle(str, Enum, metaclass=utils.OpenEnumMeta):
     ANNIVERSARY = "anniversary"
     CALENDAR = "calendar"

@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesCouponCadence(str, Enum):
+class TypesCouponCadence(str, Enum, metaclass=utils.OpenEnumMeta):
     ONCE = "once"
     REPEATED = "repeated"
     FOREVER = "forever"

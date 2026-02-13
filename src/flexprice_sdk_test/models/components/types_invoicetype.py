@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesInvoiceType(str, Enum):
+class TypesInvoiceType(str, Enum, metaclass=utils.OpenEnumMeta):
     SUBSCRIPTION = "SUBSCRIPTION"
     ONE_OFF = "ONE_OFF"
     CREDIT = "CREDIT"

@@ -7,8 +7,9 @@ from .types_creditgrantexpirytype import TypesCreditGrantExpiryType
 from .types_creditgrantperiod import TypesCreditGrantPeriod
 from .types_creditgrantscope import TypesCreditGrantScope
 from .types_status import TypesStatus
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -114,6 +115,60 @@ class DtoCreditGrantResponse(BaseModel):
     updated_at: Optional[str] = None
 
     updated_by: Optional[str] = None
+
+    @field_serializer("cadence")
+    def serialize_cadence(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesCreditGrantCadence(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("expiration_duration_unit")
+    def serialize_expiration_duration_unit(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesCreditGrantExpiryDurationUnit(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("expiration_type")
+    def serialize_expiration_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesCreditGrantExpiryType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("period")
+    def serialize_period(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesCreditGrantPeriod(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("scope")
+    def serialize_scope(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesCreditGrantScope(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

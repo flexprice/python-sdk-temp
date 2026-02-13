@@ -6,8 +6,9 @@ from .types_billingcycle import TypesBillingCycle
 from .types_billingperiod import TypesBillingPeriod
 from .types_prorationbehavior import TypesProrationBehavior
 from .types_scheduletype import TypesScheduleType
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -49,6 +50,42 @@ class DtoSubscriptionChangeRequest(BaseModel):
 
     metadata: Optional[Dict[str, str]] = None
     r"""metadata contains additional key-value pairs for storing extra information"""
+
+    @field_serializer("billing_cadence")
+    def serialize_billing_cadence(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesBillingCadence(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("billing_cycle")
+    def serialize_billing_cycle(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesBillingCycle(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("billing_period")
+    def serialize_billing_period(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesBillingPeriod(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("proration_behavior")
+    def serialize_proration_behavior(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesProrationBehavior(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

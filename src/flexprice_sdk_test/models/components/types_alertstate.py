@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesAlertState(str, Enum):
+class TypesAlertState(str, Enum, metaclass=utils.OpenEnumMeta):
     OK = "ok"
     INFO = "info"
     WARNING = "warning"

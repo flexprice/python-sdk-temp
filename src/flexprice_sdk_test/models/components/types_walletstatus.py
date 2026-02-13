@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesWalletStatus(str, Enum):
+class TypesWalletStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     ACTIVE = "active"
     FROZEN = "frozen"
     CLOSED = "closed"

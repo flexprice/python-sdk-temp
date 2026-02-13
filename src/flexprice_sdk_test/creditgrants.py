@@ -838,6 +838,12 @@ class CreditGrants(BaseSDK):
         self,
         *,
         id: str,
+        body: Optional[
+            Union[
+                components.DtoDeleteCreditGrantRequest,
+                components.DtoDeleteCreditGrantRequestTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -845,9 +851,10 @@ class CreditGrants(BaseSDK):
     ) -> components.DtoSuccessResponse:
         r"""Delete a credit grant
 
-        Delete a credit grant
+        Delete a credit grant. Plan-scoped grants are archived; subscription-scoped grants have their end date set (optional body with effective_date). Request body is optional.
 
         :param id: Credit Grant ID
+        :param body: Optional: effective_date for subscription-scoped grants
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -865,6 +872,9 @@ class CreditGrants(BaseSDK):
 
         request = operations.DeleteCreditgrantsIDRequest(
             id=id,
+            body=utils.get_pydantic_model(
+                body, Optional[components.DtoDeleteCreditGrantRequest]
+            ),
         )
 
         req = self._build_request(
@@ -880,6 +890,13 @@ class CreditGrants(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body,
+                False,
+                True,
+                "json",
+                Optional[components.DtoDeleteCreditGrantRequest],
+            ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -935,6 +952,12 @@ class CreditGrants(BaseSDK):
         self,
         *,
         id: str,
+        body: Optional[
+            Union[
+                components.DtoDeleteCreditGrantRequest,
+                components.DtoDeleteCreditGrantRequestTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -942,9 +965,10 @@ class CreditGrants(BaseSDK):
     ) -> components.DtoSuccessResponse:
         r"""Delete a credit grant
 
-        Delete a credit grant
+        Delete a credit grant. Plan-scoped grants are archived; subscription-scoped grants have their end date set (optional body with effective_date). Request body is optional.
 
         :param id: Credit Grant ID
+        :param body: Optional: effective_date for subscription-scoped grants
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -962,6 +986,9 @@ class CreditGrants(BaseSDK):
 
         request = operations.DeleteCreditgrantsIDRequest(
             id=id,
+            body=utils.get_pydantic_model(
+                body, Optional[components.DtoDeleteCreditGrantRequest]
+            ),
         )
 
         req = self._build_request_async(
@@ -977,6 +1004,13 @@ class CreditGrants(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body,
+                False,
+                True,
+                "json",
+                Optional[components.DtoDeleteCreditGrantRequest],
+            ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )

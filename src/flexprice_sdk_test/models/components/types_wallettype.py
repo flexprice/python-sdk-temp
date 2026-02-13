@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesWalletType(str, Enum):
-    PROMOTIONAL = "PROMOTIONAL"
+class TypesWalletType(str, Enum, metaclass=utils.OpenEnumMeta):
     PRE_PAID = "PRE_PAID"
+    POST_PAID = "POST_PAID"

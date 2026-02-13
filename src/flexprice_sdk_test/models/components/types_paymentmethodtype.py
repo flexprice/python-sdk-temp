@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesPaymentMethodType(str, Enum):
+class TypesPaymentMethodType(str, Enum, metaclass=utils.OpenEnumMeta):
     CARD = "CARD"
     ACH = "ACH"
     OFFLINE = "OFFLINE"

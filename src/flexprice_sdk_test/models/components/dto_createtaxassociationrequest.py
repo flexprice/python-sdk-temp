@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from .types_taxrateentitytype import TypesTaxRateEntityType
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -32,6 +33,15 @@ class DtoCreateTaxAssociationRequest(BaseModel):
     metadata: Optional[Dict[str, str]] = None
 
     priority: Optional[int] = None
+
+    @field_serializer("entity_type")
+    def serialize_entity_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesTaxRateEntityType(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

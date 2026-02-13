@@ -2,60 +2,76 @@
 
 from __future__ import annotations
 from .dto_taxrateresponse import DtoTaxRateResponse, DtoTaxRateResponseTypedDict
+from .types_status import TypesStatus
 from .types_taxrateentitytype import TypesTaxRateEntityType
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
 class DtoTaxAssociationResponseTypedDict(TypedDict):
     auto_apply: NotRequired[bool]
+    r"""Whether this tax should be automatically applied"""
     created_at: NotRequired[str]
     created_by: NotRequired[str]
     currency: NotRequired[str]
+    r"""Currency"""
     entity_id: NotRequired[str]
+    r"""ID of the entity this tax rate applies to"""
     entity_type: NotRequired[TypesTaxRateEntityType]
     environment_id: NotRequired[str]
+    r"""EnvironmentID is the ID of the environment this tax rate config belongs to"""
     id: NotRequired[str]
+    r"""ID of the ent."""
     metadata: NotRequired[Dict[str, str]]
+    r"""Metadata holds the value of the \"metadata\" field."""
     priority: NotRequired[int]
-    status: NotRequired[str]
+    r"""Priority for tax resolution (lower number = higher priority)"""
+    status: NotRequired[TypesStatus]
     tax_rate: NotRequired[DtoTaxRateResponseTypedDict]
     tax_rate_id: NotRequired[str]
+    r"""Reference to the TaxRate entity"""
     tenant_id: NotRequired[str]
     updated_at: NotRequired[str]
     updated_by: NotRequired[str]
-    valid_from: NotRequired[str]
-    valid_to: NotRequired[str]
 
 
 class DtoTaxAssociationResponse(BaseModel):
     auto_apply: Optional[bool] = None
+    r"""Whether this tax should be automatically applied"""
 
     created_at: Optional[str] = None
 
     created_by: Optional[str] = None
 
     currency: Optional[str] = None
+    r"""Currency"""
 
     entity_id: Optional[str] = None
+    r"""ID of the entity this tax rate applies to"""
 
     entity_type: Optional[TypesTaxRateEntityType] = None
 
     environment_id: Optional[str] = None
+    r"""EnvironmentID is the ID of the environment this tax rate config belongs to"""
 
     id: Optional[str] = None
+    r"""ID of the ent."""
 
     metadata: Optional[Dict[str, str]] = None
+    r"""Metadata holds the value of the \"metadata\" field."""
 
     priority: Optional[int] = None
+    r"""Priority for tax resolution (lower number = higher priority)"""
 
-    status: Optional[str] = None
+    status: Optional[TypesStatus] = None
 
     tax_rate: Optional[DtoTaxRateResponse] = None
 
     tax_rate_id: Optional[str] = None
+    r"""Reference to the TaxRate entity"""
 
     tenant_id: Optional[str] = None
 
@@ -63,9 +79,23 @@ class DtoTaxAssociationResponse(BaseModel):
 
     updated_by: Optional[str] = None
 
-    valid_from: Optional[str] = None
+    @field_serializer("entity_type")
+    def serialize_entity_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesTaxRateEntityType(value)
+            except ValueError:
+                return value
+        return value
 
-    valid_to: Optional[str] = None
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -87,8 +117,6 @@ class DtoTaxAssociationResponse(BaseModel):
                 "tenant_id",
                 "updated_at",
                 "updated_by",
-                "valid_from",
-                "valid_to",
             ]
         )
         serialized = handler(self)

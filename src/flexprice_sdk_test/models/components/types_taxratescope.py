@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesTaxRateScope(str, Enum):
+class TypesTaxRateScope(str, Enum, metaclass=utils.OpenEnumMeta):
     INTERNAL = "INTERNAL"
     EXTERNAL = "EXTERNAL"
     ONETIME = "ONETIME"

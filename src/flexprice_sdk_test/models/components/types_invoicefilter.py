@@ -8,8 +8,9 @@ from .types_paymentstatus import TypesPaymentStatus
 from .types_sortcondition import TypesSortCondition, TypesSortConditionTypedDict
 from .types_status import TypesStatus
 from enum import Enum
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -55,6 +56,14 @@ class TypesInvoiceFilterTypedDict(TypedDict):
     r"""payment_status filters by the payment state of invoices
     Multiple statuses can be specified to include invoices with any of the listed payment states
     """
+    period_end_gte: NotRequired[str]
+    r"""period_end_gte filters invoices with period_end >= value"""
+    period_end_lte: NotRequired[str]
+    r"""period_end_lte filters invoices with period_end <= value"""
+    period_start_gte: NotRequired[str]
+    r"""period_start_gte filters invoices with period_start >= value"""
+    period_start_lte: NotRequired[str]
+    r"""period_start_lte filters invoices with period_start <= value"""
     skip_line_items: NotRequired[bool]
     r"""SkipLineItems if true, will not include line items in the response"""
     sort: NotRequired[List[TypesSortConditionTypedDict]]
@@ -116,6 +125,18 @@ class TypesInvoiceFilter(BaseModel):
     Multiple statuses can be specified to include invoices with any of the listed payment states
     """
 
+    period_end_gte: Optional[str] = None
+    r"""period_end_gte filters invoices with period_end >= value"""
+
+    period_end_lte: Optional[str] = None
+    r"""period_end_lte filters invoices with period_end <= value"""
+
+    period_start_gte: Optional[str] = None
+    r"""period_start_gte filters invoices with period_start >= value"""
+
+    period_start_lte: Optional[str] = None
+    r"""period_start_lte filters invoices with period_start <= value"""
+
     skip_line_items: Optional[bool] = None
     r"""SkipLineItems if true, will not include line items in the response"""
 
@@ -129,6 +150,24 @@ class TypesInvoiceFilter(BaseModel):
     r"""subscription_id filters invoices generated for a specific subscription
     Only returns invoices that were created as part of the specified subscription's billing
     """
+
+    @field_serializer("invoice_type")
+    def serialize_invoice_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesInvoiceType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -148,6 +187,10 @@ class TypesInvoiceFilter(BaseModel):
                 "offset",
                 "order",
                 "payment_status",
+                "period_end_gte",
+                "period_end_lte",
+                "period_start_gte",
+                "period_start_lte",
                 "skip_line_items",
                 "sort",
                 "start_time",

@@ -8,8 +8,9 @@ from .price_transformquantity import (
 )
 from .types_billingmodel import TypesBillingModel
 from .types_billingtier import TypesBillingTier
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -56,6 +57,24 @@ class DtoOverrideLineItemRequest(BaseModel):
     r"""Tiers determines the pricing tiers for this line item"""
 
     transform_quantity: Optional[PriceTransformQuantity] = None
+
+    @field_serializer("billing_model")
+    def serialize_billing_model(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesBillingModel(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("tier_mode")
+    def serialize_tier_mode(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesBillingTier(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

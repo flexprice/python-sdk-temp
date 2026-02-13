@@ -5,8 +5,9 @@ from .types_pausemode import TypesPauseMode
 from .types_pausestatus import TypesPauseStatus
 from .types_resumemode import TypesResumeMode
 from .types_status import TypesStatus
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -93,6 +94,42 @@ class DtoSubscriptionPauseResponse(BaseModel):
     updated_at: Optional[str] = None
 
     updated_by: Optional[str] = None
+
+    @field_serializer("pause_mode")
+    def serialize_pause_mode(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesPauseMode(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("pause_status")
+    def serialize_pause_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesPauseStatus(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("resume_mode")
+    def serialize_resume_mode(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesResumeMode(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

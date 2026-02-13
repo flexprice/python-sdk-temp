@@ -88,7 +88,7 @@ It's also possible to write a standalone Python script without needing to set up
 ```python
 #!/usr/bin/env -S uv run --script
 # /// script
-# requires-python = ">=3.9"
+# requires-python = ">=3.10"
 # dependencies = [
 #     "flexprice-sdk-test",
 # ]
@@ -391,6 +391,7 @@ with FlexPrice(
 * [post_prices](docs/sdks/prices/README.md#post_prices) - Create a new price
 * [post_prices_bulk](docs/sdks/prices/README.md#post_prices_bulk) - Create multiple prices in bulk
 * [get_prices_lookup_lookup_key_](docs/sdks/prices/README.md#get_prices_lookup_lookup_key_) - Get price by lookup key
+* [post_prices_search](docs/sdks/prices/README.md#post_prices_search) - List prices by filter
 * [get_prices_id_](docs/sdks/prices/README.md#get_prices_id_) - Get a price by ID
 * [put_prices_id_](docs/sdks/prices/README.md#put_prices_id_) - Update a price
 * [delete_prices_id_](docs/sdks/prices/README.md#delete_prices_id_) - Delete a price

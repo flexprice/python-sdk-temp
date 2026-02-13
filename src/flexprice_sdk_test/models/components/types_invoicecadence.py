@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesInvoiceCadence(str, Enum):
+class TypesInvoiceCadence(str, Enum, metaclass=utils.OpenEnumMeta):
     ARREAR = "ARREAR"
     ADVANCE = "ADVANCE"

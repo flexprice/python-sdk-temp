@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesSubscriptionChangeType(str, Enum):
+class TypesSubscriptionChangeType(str, Enum, metaclass=utils.OpenEnumMeta):
     UPGRADE = "upgrade"
     DOWNGRADE = "downgrade"
     LATERAL = "lateral"

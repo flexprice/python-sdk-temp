@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesAddonAssociationEntityType(str, Enum):
+class TypesAddonAssociationEntityType(str, Enum, metaclass=utils.OpenEnumMeta):
     SUBSCRIPTION = "subscription"
     PLAN = "plan"
     ADDON = "addon"

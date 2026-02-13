@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesPauseStatus(str, Enum):
+class TypesPauseStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     NONE = "none"
     ACTIVE = "active"
     SCHEDULED = "scheduled"

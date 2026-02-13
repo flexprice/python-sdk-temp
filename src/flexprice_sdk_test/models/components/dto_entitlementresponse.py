@@ -6,8 +6,9 @@ from .types_entitlemententitytype import TypesEntitlementEntityType
 from .types_entitlementusageresetperiod import TypesEntitlementUsageResetPeriod
 from .types_featuretype import TypesFeatureType
 from .types_status import TypesStatus
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional, TYPE_CHECKING
 from typing_extensions import NotRequired, TypedDict
 
@@ -96,6 +97,42 @@ class DtoEntitlementResponse(BaseModel):
     usage_limit: Optional[int] = None
 
     usage_reset_period: Optional[TypesEntitlementUsageResetPeriod] = None
+
+    @field_serializer("entity_type")
+    def serialize_entity_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesEntitlementEntityType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("feature_type")
+    def serialize_feature_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesFeatureType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesStatus(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("usage_reset_period")
+    def serialize_usage_reset_period(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesEntitlementUsageResetPeriod(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

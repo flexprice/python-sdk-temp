@@ -7,8 +7,9 @@ from .dto_createmeterrequest import (
 )
 from .types_alertsettings import TypesAlertSettings, TypesAlertSettingsTypedDict
 from .types_featuretype import TypesFeatureType
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -46,6 +47,15 @@ class DtoCreateFeatureRequest(BaseModel):
     unit_plural: Optional[str] = None
 
     unit_singular: Optional[str] = None
+
+    @field_serializer("type")
+    def serialize_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesFeatureType(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

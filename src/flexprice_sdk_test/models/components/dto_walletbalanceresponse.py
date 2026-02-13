@@ -8,8 +8,9 @@ from .types_status import TypesStatus
 from .types_walletconfig import TypesWalletConfig, TypesWalletConfigTypedDict
 from .types_walletstatus import TypesWalletStatus
 from .types_wallettype import TypesWalletType
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -127,6 +128,33 @@ class DtoWalletBalanceResponse(BaseModel):
     wallet_status: Optional[TypesWalletStatus] = None
 
     wallet_type: Optional[TypesWalletType] = None
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesStatus(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("wallet_status")
+    def serialize_wallet_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesWalletStatus(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("wallet_type")
+    def serialize_wallet_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesWalletType(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesTransactionType(str, Enum):
+class TypesTransactionType(str, Enum, metaclass=utils.OpenEnumMeta):
     CREDIT = "credit"
     DEBIT = "debit"

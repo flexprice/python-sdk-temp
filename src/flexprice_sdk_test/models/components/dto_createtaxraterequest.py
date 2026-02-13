@@ -3,8 +3,9 @@
 from __future__ import annotations
 from .types_taxratescope import TypesTaxRateScope
 from .types_taxratetype import TypesTaxRateType
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -48,6 +49,24 @@ class DtoCreateTaxRateRequest(BaseModel):
     scope: Optional[TypesTaxRateScope] = None
 
     tax_rate_type: Optional[TypesTaxRateType] = None
+
+    @field_serializer("scope")
+    def serialize_scope(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesTaxRateScope(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("tax_rate_type")
+    def serialize_tax_rate_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesTaxRateType(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

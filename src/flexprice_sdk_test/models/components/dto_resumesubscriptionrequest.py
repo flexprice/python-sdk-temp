@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from .types_resumemode import TypesResumeMode
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -40,6 +41,15 @@ class DtoResumeSubscriptionRequest(BaseModel):
     @Description Optional metadata for storing additional information about the resume operation
     @Example {\"resumed_by\": \"admin\", \"reason\": \"issue_resolved\"}
     """
+
+    @field_serializer("resume_mode")
+    def serialize_resume_mode(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesResumeMode(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

@@ -3,10 +3,10 @@
 from __future__ import annotations
 from .dto_alertconfig import DtoAlertConfig, DtoAlertConfigTypedDict
 from .types_autotopup import TypesAutoTopup, TypesAutoTopupTypedDict
-from .types_walletconfig import TypesWalletConfig, TypesWalletConfigTypedDict
 from .types_wallettype import TypesWalletType
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -19,7 +19,6 @@ class DtoCreateWalletRequestTypedDict(TypedDict):
     defaults to true, can be explicitly set to false to disable alerts
     """
     auto_topup: NotRequired[TypesAutoTopupTypedDict]
-    config: NotRequired[TypesWalletConfigTypedDict]
     conversion_rate: NotRequired[str]
     r"""amount in the currency =  number of credits * conversion_rate
     ex if conversion_rate is 1, then 1 USD = 1 credit
@@ -45,7 +44,6 @@ class DtoCreateWalletRequestTypedDict(TypedDict):
     hence they will be available for use until 2024-12-31 23:59:59 UTC
     """
     metadata: NotRequired[Dict[str, str]]
-    name: NotRequired[str]
     price_unit: NotRequired[str]
     r"""price_unit is the code of the price unit to use for wallet creation
     If provided, the price unit will be used to set the currency and conversion rate of the wallet:
@@ -72,8 +70,6 @@ class DtoCreateWalletRequest(BaseModel):
     """
 
     auto_topup: Optional[TypesAutoTopup] = None
-
-    config: Optional[TypesWalletConfig] = None
 
     conversion_rate: Optional[str] = "1"
     r"""amount in the currency =  number of credits * conversion_rate
@@ -108,8 +104,6 @@ class DtoCreateWalletRequest(BaseModel):
 
     metadata: Optional[Dict[str, str]] = None
 
-    name: Optional[str] = None
-
     price_unit: Optional[str] = None
     r"""price_unit is the code of the price unit to use for wallet creation
     If provided, the price unit will be used to set the currency and conversion rate of the wallet:
@@ -126,6 +120,15 @@ class DtoCreateWalletRequest(BaseModel):
 
     wallet_type: Optional[TypesWalletType] = None
 
+    @field_serializer("wallet_type")
+    def serialize_wallet_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesWalletType(value)
+            except ValueError:
+                return value
+        return value
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -133,7 +136,6 @@ class DtoCreateWalletRequest(BaseModel):
                 "alert_config",
                 "alert_enabled",
                 "auto_topup",
-                "config",
                 "conversion_rate",
                 "customer_id",
                 "description",
@@ -142,7 +144,6 @@ class DtoCreateWalletRequest(BaseModel):
                 "initial_credits_to_load",
                 "initial_credits_to_load_expiry_date",
                 "metadata",
-                "name",
                 "price_unit",
                 "topup_conversion_rate",
                 "wallet_type",

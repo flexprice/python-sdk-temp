@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesResumeMode(str, Enum):
+class TypesResumeMode(str, Enum, metaclass=utils.OpenEnumMeta):
     IMMEDIATE = "immediate"
     SCHEDULED = "scheduled"
     AUTO = "auto"

@@ -14,3 +14,4 @@
 | `CREDIT_EXPIRED`            | CREDIT_EXPIRED              |
 | `WALLET_TERMINATION`        | WALLET_TERMINATION          |
 | `MANUAL_BALANCE_DEBIT`      | MANUAL_BALANCE_DEBIT        |
+| `CREDIT_ADJUSTMENT`         | CREDIT_ADJUSTMENT           |

@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from .types_taxratestatus import TypesTaxRateStatus
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -34,6 +35,15 @@ class DtoUpdateTaxRateRequest(BaseModel):
     r"""name is the updated human-readable name for the tax rate"""
 
     tax_rate_status: Optional[TypesTaxRateStatus] = None
+
+    @field_serializer("tax_rate_status")
+    def serialize_tax_rate_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesTaxRateStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

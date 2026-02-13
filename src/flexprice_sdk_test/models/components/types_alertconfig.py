@@ -12,15 +12,18 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class TypesAlertConfigTypedDict(TypedDict):
+    enabled: NotRequired[bool]
     threshold: NotRequired[TypesWalletAlertThresholdTypedDict]
 
 
 class TypesAlertConfig(BaseModel):
+    enabled: Optional[bool] = None
+
     threshold: Optional[TypesWalletAlertThreshold] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["threshold"])
+        optional_fields = set(["enabled", "threshold"])
         serialized = handler(self)
         m = {}
 

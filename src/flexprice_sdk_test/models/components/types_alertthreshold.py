@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from .types_alertcondition import TypesAlertCondition
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -17,6 +18,15 @@ class TypesAlertThreshold(BaseModel):
     condition: Optional[TypesAlertCondition] = None
 
     threshold: Optional[float] = None
+
+    @field_serializer("condition")
+    def serialize_condition(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesAlertCondition(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

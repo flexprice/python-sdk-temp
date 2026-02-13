@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesFailurePointType(str, Enum):
+class TypesFailurePointType(str, Enum, metaclass=utils.OpenEnumMeta):
     CUSTOMER_LOOKUP = "customer_lookup"
     METER_LOOKUP = "meter_lookup"
     PRICE_LOOKUP = "price_lookup"

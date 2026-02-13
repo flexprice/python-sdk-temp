@@ -6,9 +6,10 @@ from .types_queryfilter import TypesQueryFilter, TypesQueryFilterTypedDict
 from .types_sortcondition import TypesSortCondition, TypesSortConditionTypedDict
 from .types_status import TypesStatus
 from .types_timerangefilter import TypesTimeRangeFilter, TypesTimeRangeFilterTypedDict
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -68,6 +69,15 @@ class CostsheetFilter(BaseModel):
     time_range_filter: Annotated[
         Optional[TypesTimeRangeFilter], pydantic.Field(alias="timeRangeFilter")
     ] = None
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

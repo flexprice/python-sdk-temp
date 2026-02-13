@@ -5,8 +5,9 @@ from .dto_debugtracker import DtoDebugTracker, DtoDebugTrackerTypedDict
 from .dto_event import DtoEvent, DtoEventTypedDict
 from .dto_featureusageinfo import DtoFeatureUsageInfo, DtoFeatureUsageInfoTypedDict
 from .types_eventprocessingstatustype import TypesEventProcessingStatusType
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -26,6 +27,15 @@ class DtoGetEventByIDResponse(BaseModel):
     processed_events: Optional[List[DtoFeatureUsageInfo]] = None
 
     status: Optional[TypesEventProcessingStatusType] = None
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesEventProcessingStatusType(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

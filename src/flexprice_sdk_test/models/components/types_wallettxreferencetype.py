@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesWalletTxReferenceType(str, Enum):
+class TypesWalletTxReferenceType(str, Enum, metaclass=utils.OpenEnumMeta):
     PAYMENT = "PAYMENT"
     EXTERNAL = "EXTERNAL"
     REQUEST = "REQUEST"
+    INVOICE = "INVOICE"

@@ -4,8 +4,9 @@ from __future__ import annotations
 from .types_alertsettings import TypesAlertSettings, TypesAlertSettingsTypedDict
 from .types_featuretype import TypesFeatureType
 from .types_status import TypesStatus
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -64,6 +65,24 @@ class GithubComFlexpriceFlexpriceInternalDomainFeatureFeature(BaseModel):
     updated_at: Optional[str] = None
 
     updated_by: Optional[str] = None
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesStatus(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("type")
+    def serialize_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesFeatureType(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

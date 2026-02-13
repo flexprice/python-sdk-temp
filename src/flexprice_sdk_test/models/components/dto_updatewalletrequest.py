@@ -17,7 +17,6 @@ class DtoUpdateWalletRequestTypedDict(TypedDict):
     config: NotRequired[TypesWalletConfigTypedDict]
     description: NotRequired[str]
     metadata: NotRequired[Dict[str, str]]
-    name: NotRequired[str]
 
 
 class DtoUpdateWalletRequest(BaseModel):
@@ -33,8 +32,6 @@ class DtoUpdateWalletRequest(BaseModel):
 
     metadata: Optional[Dict[str, str]] = None
 
-    name: Optional[str] = None
-
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -45,7 +42,6 @@ class DtoUpdateWalletRequest(BaseModel):
                 "config",
                 "description",
                 "metadata",
-                "name",
             ]
         )
         serialized = handler(self)

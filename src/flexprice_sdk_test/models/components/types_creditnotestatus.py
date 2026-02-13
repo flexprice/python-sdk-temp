@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesCreditNoteStatus(str, Enum):
+class TypesCreditNoteStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     DRAFT = "DRAFT"
     FINALIZED = "FINALIZED"
     VOIDED = "VOIDED"

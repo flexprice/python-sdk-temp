@@ -17,8 +17,10 @@ from .dto_taxappliedresponse import (
 from .types_invoicestatus import TypesInvoiceStatus
 from .types_invoicetype import TypesInvoiceType
 from .types_paymentstatus import TypesPaymentStatus
+from .types_status import TypesStatus
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, List, Optional, TYPE_CHECKING
 from typing_extensions import NotRequired, TypedDict
 
@@ -30,149 +32,161 @@ if TYPE_CHECKING:
 
 
 class DtoInvoiceResponseTypedDict(TypedDict):
-    amount_due: NotRequired[str]
+    adjustment_amount: NotRequired[float]
+    r"""adjustment_amount is the total sum of credit notes of type \"adjustment\".
+    These are non-cash reductions applied to the invoice (e.g. goodwill credit, billing correction).
+    """
+    amount_due: NotRequired[float]
     r"""amount_due is the total amount that needs to be paid for this invoice"""
-    amount_paid: NotRequired[str]
-    r"""amount_paid is the amount that has been paid towards this invoice"""
-    amount_remaining: NotRequired[str]
-    r"""amount_remaining is the amount still outstanding on this invoice"""
+    amount_paid: NotRequired[float]
+    r"""amount_paid is the amount that has already been paid towards this invoice"""
+    amount_remaining: NotRequired[float]
+    r"""amount_remaining is the outstanding amount still owed on this invoice (calculated as amount_due minus amount_paid)"""
     billing_period: NotRequired[str]
-    r"""billing_period is the period this invoice covers (e.g., \"monthly\", \"yearly\")"""
+    r"""billing_period describes the billing period this invoice covers (e.g., \"January 2024\", \"Q1 2024\")"""
     billing_reason: NotRequired[str]
-    r"""billing_reason indicates why this invoice was created (subscription_cycle, manual, etc.)"""
+    r"""billing_reason indicates why this invoice was generated (e.g., \"subscription_billing\", \"manual_charge\")"""
     billing_sequence: NotRequired[int]
-    r"""billing_sequence is the optional sequence number for billing cycles"""
+    r"""billing_sequence is the sequential number indicating the billing cycle for subscription invoices"""
     coupon_applications: NotRequired[List[DtoCouponApplicationResponseTypedDict]]
-    r"""coupon_applications contains the coupon applications associated with this invoice"""
+    r"""coupon_applications contains the coupon applications associated with this invoice (overrides embedded field)"""
     created_at: NotRequired[str]
-    r"""created_at is the timestamp when this invoice was created"""
     created_by: NotRequired[str]
-    r"""created_by is the identifier of the user who created this invoice"""
     currency: NotRequired[str]
-    r"""currency is the three-letter ISO currency code (e.g., USD, EUR) for the invoice"""
+    r"""currency is the three-letter ISO currency code (e.g., USD, EUR, GBP) that applies to all monetary amounts on this invoice"""
     customer: NotRequired[DtoCustomerResponseTypedDict]
     r"""Customer response object containing all customer information"""
     customer_id: NotRequired[str]
-    r"""customer_id is the unique identifier of the customer this invoice belongs to"""
+    r"""customer_id is the ID of the customer who will receive this invoice"""
     description: NotRequired[str]
-    r"""description is the optional text description of the invoice"""
+    r"""description is an optional description or notes about this invoice"""
     due_date: NotRequired[str]
-    r"""due_date is the date by which payment is expected"""
+    r"""due_date is the date when payment for this invoice is due"""
+    environment_id: NotRequired[str]
+    r"""environment_id is the ID of the environment this invoice belongs to (for multi-environment setups)"""
     finalized_at: NotRequired[str]
-    r"""finalized_at is the timestamp when this invoice was finalized"""
+    r"""finalized_at is the timestamp when this invoice was finalized and made ready for payment"""
     id: NotRequired[str]
     r"""id is the unique identifier for this invoice"""
     idempotency_key: NotRequired[str]
-    r"""idempotency_key is the optional key used to prevent duplicate invoice creation"""
+    r"""idempotency_key is a unique key used to prevent duplicate invoice creation when retrying API calls"""
     invoice_number: NotRequired[str]
-    r"""invoice_number is the optional human-readable identifier for the invoice"""
+    r"""invoice_number is the human-readable invoice number displayed to customers (e.g., INV-2024-001)"""
     invoice_pdf_url: NotRequired[str]
-    r"""invoice_pdf_url is the optional URL to the PDF version of this invoice"""
+    r"""invoice_pdf_url is the URL where customers can download the PDF version of this invoice"""
     invoice_status: NotRequired[TypesInvoiceStatus]
     invoice_type: NotRequired[TypesInvoiceType]
     line_items: NotRequired[List[DtoInvoiceLineItemResponseTypedDict]]
-    r"""line_items contains the individual items that make up this invoice"""
+    r"""line_items contains the individual items that make up this invoice (overrides embedded field)"""
     metadata: NotRequired[Dict[str, str]]
     overpaid_amount: NotRequired[str]
     r"""overpaid_amount is the amount overpaid if payment_status is OVERPAID (amount_paid - total)"""
     paid_at: NotRequired[str]
-    r"""paid_at is the timestamp when this invoice was paid"""
+    r"""paid_at is the timestamp when this invoice was fully paid"""
     payment_status: NotRequired[TypesPaymentStatus]
     period_end: NotRequired[str]
-    r"""period_end is the end date of the billing period"""
+    r"""period_end is the end date of the billing period covered by this invoice"""
     period_start: NotRequired[str]
-    r"""period_start is the start date of the billing period"""
-    status: NotRequired[str]
-    r"""status represents the current status of this invoice"""
+    r"""period_start is the start date of the billing period covered by this invoice"""
+    refunded_amount: NotRequired[float]
+    r"""refunded_amount is the total sum of credit notes of type \"refund\".
+    These are actual refunds issued to the customer.
+    """
+    status: NotRequired[TypesStatus]
     subscription: NotRequired["DtoSubscriptionResponseTypedDict"]
     subscription_id: NotRequired[str]
-    r"""subscription_id is the optional unique identifier of the subscription associated with this invoice"""
-    subtotal: NotRequired[str]
-    r"""subtotal is the amount before taxes and discounts are applied"""
+    r"""subscription_id is the ID of the subscription this invoice is associated with (only present for subscription-based invoices)"""
+    subtotal: NotRequired[float]
+    r"""subtotal is the sum of all line items before any taxes, discounts, or additional fees"""
     taxes: NotRequired[List[DtoTaxAppliedResponseTypedDict]]
     r"""tax_applied_records contains the tax applied records associated with this invoice"""
     tenant_id: NotRequired[str]
-    r"""tenant_id is the unique identifier of the tenant this invoice belongs to"""
-    total: NotRequired[str]
-    r"""total is the total amount of the invoice including taxes and discounts"""
-    total_discount: NotRequired[str]
-    r"""total_discount is the total discount amount from coupon applications"""
-    total_tax: NotRequired[str]
-    r"""total_tax is the total tax amount for this invoice"""
+    total: NotRequired[float]
+    r"""total is the final amount including taxes, fees, and discounts"""
+    total_discount: NotRequired[float]
+    r"""total_discount is the sum of all coupon discounts applied to the invoice"""
+    total_prepaid_credits_applied: NotRequired[float]
+    r"""total_prepaid_credits_applied is the total amount of prepaid credits applied to this invoice."""
+    total_tax: NotRequired[float]
+    r"""total_tax is the sum of all taxes combined at the invoice level."""
     updated_at: NotRequired[str]
-    r"""updated_at is the timestamp when this invoice was last updated"""
     updated_by: NotRequired[str]
-    r"""updated_by is the identifier of the user who last updated this invoice"""
     version: NotRequired[int]
-    r"""version is the version number of this invoice"""
+    r"""version is the version number for tracking changes to this invoice"""
     voided_at: NotRequired[str]
-    r"""voided_at is the timestamp when this invoice was voided"""
+    r"""voided_at is the timestamp when this invoice was voided or cancelled"""
 
 
 class DtoInvoiceResponse(BaseModel):
-    amount_due: Optional[str] = None
+    adjustment_amount: Optional[float] = None
+    r"""adjustment_amount is the total sum of credit notes of type \"adjustment\".
+    These are non-cash reductions applied to the invoice (e.g. goodwill credit, billing correction).
+    """
+
+    amount_due: Optional[float] = None
     r"""amount_due is the total amount that needs to be paid for this invoice"""
 
-    amount_paid: Optional[str] = None
-    r"""amount_paid is the amount that has been paid towards this invoice"""
+    amount_paid: Optional[float] = None
+    r"""amount_paid is the amount that has already been paid towards this invoice"""
 
-    amount_remaining: Optional[str] = None
-    r"""amount_remaining is the amount still outstanding on this invoice"""
+    amount_remaining: Optional[float] = None
+    r"""amount_remaining is the outstanding amount still owed on this invoice (calculated as amount_due minus amount_paid)"""
 
     billing_period: Optional[str] = None
-    r"""billing_period is the period this invoice covers (e.g., \"monthly\", \"yearly\")"""
+    r"""billing_period describes the billing period this invoice covers (e.g., \"January 2024\", \"Q1 2024\")"""
 
     billing_reason: Optional[str] = None
-    r"""billing_reason indicates why this invoice was created (subscription_cycle, manual, etc.)"""
+    r"""billing_reason indicates why this invoice was generated (e.g., \"subscription_billing\", \"manual_charge\")"""
 
     billing_sequence: Optional[int] = None
-    r"""billing_sequence is the optional sequence number for billing cycles"""
+    r"""billing_sequence is the sequential number indicating the billing cycle for subscription invoices"""
 
     coupon_applications: Optional[List[DtoCouponApplicationResponse]] = None
-    r"""coupon_applications contains the coupon applications associated with this invoice"""
+    r"""coupon_applications contains the coupon applications associated with this invoice (overrides embedded field)"""
 
     created_at: Optional[str] = None
-    r"""created_at is the timestamp when this invoice was created"""
 
     created_by: Optional[str] = None
-    r"""created_by is the identifier of the user who created this invoice"""
 
     currency: Optional[str] = None
-    r"""currency is the three-letter ISO currency code (e.g., USD, EUR) for the invoice"""
+    r"""currency is the three-letter ISO currency code (e.g., USD, EUR, GBP) that applies to all monetary amounts on this invoice"""
 
     customer: Optional[DtoCustomerResponse] = None
     r"""Customer response object containing all customer information"""
 
     customer_id: Optional[str] = None
-    r"""customer_id is the unique identifier of the customer this invoice belongs to"""
+    r"""customer_id is the ID of the customer who will receive this invoice"""
 
     description: Optional[str] = None
-    r"""description is the optional text description of the invoice"""
+    r"""description is an optional description or notes about this invoice"""
 
     due_date: Optional[str] = None
-    r"""due_date is the date by which payment is expected"""
+    r"""due_date is the date when payment for this invoice is due"""
+
+    environment_id: Optional[str] = None
+    r"""environment_id is the ID of the environment this invoice belongs to (for multi-environment setups)"""
 
     finalized_at: Optional[str] = None
-    r"""finalized_at is the timestamp when this invoice was finalized"""
+    r"""finalized_at is the timestamp when this invoice was finalized and made ready for payment"""
 
     id: Optional[str] = None
     r"""id is the unique identifier for this invoice"""
 
     idempotency_key: Optional[str] = None
-    r"""idempotency_key is the optional key used to prevent duplicate invoice creation"""
+    r"""idempotency_key is a unique key used to prevent duplicate invoice creation when retrying API calls"""
 
     invoice_number: Optional[str] = None
-    r"""invoice_number is the optional human-readable identifier for the invoice"""
+    r"""invoice_number is the human-readable invoice number displayed to customers (e.g., INV-2024-001)"""
 
     invoice_pdf_url: Optional[str] = None
-    r"""invoice_pdf_url is the optional URL to the PDF version of this invoice"""
+    r"""invoice_pdf_url is the URL where customers can download the PDF version of this invoice"""
 
     invoice_status: Optional[TypesInvoiceStatus] = None
 
     invoice_type: Optional[TypesInvoiceType] = None
 
     line_items: Optional[List[DtoInvoiceLineItemResponse]] = None
-    r"""line_items contains the individual items that make up this invoice"""
+    r"""line_items contains the individual items that make up this invoice (overrides embedded field)"""
 
     metadata: Optional[Dict[str, str]] = None
 
@@ -180,58 +194,99 @@ class DtoInvoiceResponse(BaseModel):
     r"""overpaid_amount is the amount overpaid if payment_status is OVERPAID (amount_paid - total)"""
 
     paid_at: Optional[str] = None
-    r"""paid_at is the timestamp when this invoice was paid"""
+    r"""paid_at is the timestamp when this invoice was fully paid"""
 
     payment_status: Optional[TypesPaymentStatus] = None
 
     period_end: Optional[str] = None
-    r"""period_end is the end date of the billing period"""
+    r"""period_end is the end date of the billing period covered by this invoice"""
 
     period_start: Optional[str] = None
-    r"""period_start is the start date of the billing period"""
+    r"""period_start is the start date of the billing period covered by this invoice"""
 
-    status: Optional[str] = None
-    r"""status represents the current status of this invoice"""
+    refunded_amount: Optional[float] = None
+    r"""refunded_amount is the total sum of credit notes of type \"refund\".
+    These are actual refunds issued to the customer.
+    """
+
+    status: Optional[TypesStatus] = None
 
     subscription: Optional["DtoSubscriptionResponse"] = None
 
     subscription_id: Optional[str] = None
-    r"""subscription_id is the optional unique identifier of the subscription associated with this invoice"""
+    r"""subscription_id is the ID of the subscription this invoice is associated with (only present for subscription-based invoices)"""
 
-    subtotal: Optional[str] = None
-    r"""subtotal is the amount before taxes and discounts are applied"""
+    subtotal: Optional[float] = None
+    r"""subtotal is the sum of all line items before any taxes, discounts, or additional fees"""
 
     taxes: Optional[List[DtoTaxAppliedResponse]] = None
     r"""tax_applied_records contains the tax applied records associated with this invoice"""
 
     tenant_id: Optional[str] = None
-    r"""tenant_id is the unique identifier of the tenant this invoice belongs to"""
 
-    total: Optional[str] = None
-    r"""total is the total amount of the invoice including taxes and discounts"""
+    total: Optional[float] = None
+    r"""total is the final amount including taxes, fees, and discounts"""
 
-    total_discount: Optional[str] = None
-    r"""total_discount is the total discount amount from coupon applications"""
+    total_discount: Optional[float] = None
+    r"""total_discount is the sum of all coupon discounts applied to the invoice"""
 
-    total_tax: Optional[str] = None
-    r"""total_tax is the total tax amount for this invoice"""
+    total_prepaid_credits_applied: Optional[float] = None
+    r"""total_prepaid_credits_applied is the total amount of prepaid credits applied to this invoice."""
+
+    total_tax: Optional[float] = None
+    r"""total_tax is the sum of all taxes combined at the invoice level."""
 
     updated_at: Optional[str] = None
-    r"""updated_at is the timestamp when this invoice was last updated"""
 
     updated_by: Optional[str] = None
-    r"""updated_by is the identifier of the user who last updated this invoice"""
 
     version: Optional[int] = None
-    r"""version is the version number of this invoice"""
+    r"""version is the version number for tracking changes to this invoice"""
 
     voided_at: Optional[str] = None
-    r"""voided_at is the timestamp when this invoice was voided"""
+    r"""voided_at is the timestamp when this invoice was voided or cancelled"""
+
+    @field_serializer("invoice_status")
+    def serialize_invoice_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesInvoiceStatus(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("invoice_type")
+    def serialize_invoice_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesInvoiceType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("payment_status")
+    def serialize_payment_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesPaymentStatus(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "adjustment_amount",
                 "amount_due",
                 "amount_paid",
                 "amount_remaining",
@@ -246,6 +301,7 @@ class DtoInvoiceResponse(BaseModel):
                 "customer_id",
                 "description",
                 "due_date",
+                "environment_id",
                 "finalized_at",
                 "id",
                 "idempotency_key",
@@ -260,6 +316,7 @@ class DtoInvoiceResponse(BaseModel):
                 "payment_status",
                 "period_end",
                 "period_start",
+                "refunded_amount",
                 "status",
                 "subscription",
                 "subscription_id",
@@ -268,6 +325,7 @@ class DtoInvoiceResponse(BaseModel):
                 "tenant_id",
                 "total",
                 "total_discount",
+                "total_prepaid_credits_applied",
                 "total_tax",
                 "updated_at",
                 "updated_by",

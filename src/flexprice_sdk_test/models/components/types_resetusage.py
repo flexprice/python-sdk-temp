@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesResetUsage(str, Enum):
+class TypesResetUsage(str, Enum, metaclass=utils.OpenEnumMeta):
     BILLING_PERIOD = "BILLING_PERIOD"
     NEVER = "NEVER"

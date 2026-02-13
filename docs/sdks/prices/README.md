@@ -8,6 +8,7 @@
 * [post_prices](#post_prices) - Create a new price
 * [post_prices_bulk](#post_prices_bulk) - Create multiple prices in bulk
 * [get_prices_lookup_lookup_key_](#get_prices_lookup_lookup_key_) - Get price by lookup key
+* [post_prices_search](#post_prices_search) - List prices by filter
 * [get_prices_id_](#get_prices_id_) - Get a price by ID
 * [put_prices_id_](#put_prices_id_) - Update a price
 * [delete_prices_id_](#delete_prices_id_) - Delete a price
@@ -184,6 +185,48 @@ with FlexPrice(
 ### Response
 
 **[components.DtoPriceResponse](../../models/components/dtopriceresponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.ErrorsErrorResponse | 400                        | application/json           |
+| errors.ErrorsErrorResponse | 500                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## post_prices_search
+
+List prices with filter
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="post_/prices/search" method="post" path="/prices/search" -->
+```python
+from flexprice_sdk_test import FlexPrice
+
+
+with FlexPrice(
+    server_url="https://api.example.com",
+    api_key_auth="<YOUR_API_KEY_HERE>",
+) as flex_price:
+
+    res = flex_price.prices.post_prices_search(request={})
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `request`                                                                  | [components.TypesPriceFilter](../../models/components/typespricefilter.md) | :heavy_check_mark:                                                         | The request object to use for the request.                                 |
+| `retries`                                                                  | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)           | :heavy_minus_sign:                                                         | Configuration to override the default retry behavior of the client.        |
+
+### Response
+
+**[components.DtoListPricesResponse](../../models/components/dtolistpricesresponse.md)**
 
 ### Errors
 

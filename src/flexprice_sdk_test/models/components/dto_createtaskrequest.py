@@ -4,8 +4,9 @@ from __future__ import annotations
 from .types_entitytype import TypesEntityType
 from .types_filetype import TypesFileType
 from .types_tasktype import TypesTaskType
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Any, Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -31,6 +32,33 @@ class DtoCreateTaskRequest(BaseModel):
     file_name: Optional[str] = None
 
     metadata: Optional[Dict[str, Any]] = None
+
+    @field_serializer("entity_type")
+    def serialize_entity_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesEntityType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("file_type")
+    def serialize_file_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesFileType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("task_type")
+    def serialize_task_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesTaskType(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

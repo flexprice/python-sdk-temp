@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesWindowSize(str, Enum):
+class TypesWindowSize(str, Enum, metaclass=utils.OpenEnumMeta):
     MONTH = "MONTH"
     MINUTE = "MINUTE"
     FIFTEEN_MIN = "15MIN"

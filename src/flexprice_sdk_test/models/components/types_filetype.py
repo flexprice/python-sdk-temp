@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesFileType(str, Enum):
+class TypesFileType(str, Enum, metaclass=utils.OpenEnumMeta):
     CSV = "CSV"
     JSON = "JSON"

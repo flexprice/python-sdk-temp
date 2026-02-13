@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class DtoEntitlementSourceEntityType(str, Enum):
+class DtoEntitlementSourceEntityType(str, Enum, metaclass=utils.OpenEnumMeta):
     PLAN = "plan"
     ADDON = "addon"
     SUBSCRIPTION = "subscription"

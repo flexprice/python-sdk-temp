@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesCreditNoteType(str, Enum):
+class TypesCreditNoteType(str, Enum, metaclass=utils.OpenEnumMeta):
     ADJUSTMENT = "ADJUSTMENT"
     REFUND = "REFUND"

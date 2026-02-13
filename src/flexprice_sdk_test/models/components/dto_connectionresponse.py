@@ -4,8 +4,9 @@ from __future__ import annotations
 from .types_secretprovider import TypesSecretProvider
 from .types_status import TypesStatus
 from .types_syncconfig import TypesSyncConfig, TypesSyncConfigTypedDict
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Any, Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -49,6 +50,24 @@ class DtoConnectionResponse(BaseModel):
     updated_at: Optional[str] = None
 
     updated_by: Optional[str] = None
+
+    @field_serializer("provider_type")
+    def serialize_provider_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesSecretProvider(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

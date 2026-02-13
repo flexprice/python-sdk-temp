@@ -5,8 +5,9 @@ from .dto_invoiceresponse import DtoInvoiceResponse, DtoInvoiceResponseTypedDict
 from .dto_prorationdetail import DtoProrationDetail, DtoProrationDetailTypedDict
 from .types_cancellationtype import TypesCancellationType
 from .types_subscriptionstatus import TypesSubscriptionStatus
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -48,6 +49,24 @@ class DtoCancelSubscriptionResponse(BaseModel):
     r"""Basic cancellation info"""
 
     total_credit_amount: Optional[str] = None
+
+    @field_serializer("cancellation_type")
+    def serialize_cancellation_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesCancellationType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesSubscriptionStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

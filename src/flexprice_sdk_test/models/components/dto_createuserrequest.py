@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 from .types_usertype import TypesUserType
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel
+from pydantic import field_serializer
 from typing import List
 from typing_extensions import TypedDict
 
@@ -18,3 +20,12 @@ class DtoCreateUserRequest(BaseModel):
     r"""Roles are required"""
 
     type: TypesUserType
+
+    @field_serializer("type")
+    def serialize_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesUserType(value)
+            except ValueError:
+                return value
+        return value

@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 from .types_secretprovider import TypesSecretProvider
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel
+from pydantic import field_serializer
 from typing import Dict
 from typing_extensions import TypedDict
 
@@ -19,3 +21,12 @@ class DtoCreateIntegrationRequest(BaseModel):
     name: str
 
     provider: TypesSecretProvider
+
+    @field_serializer("provider")
+    def serialize_provider(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesSecretProvider(value)
+            except ValueError:
+                return value
+        return value

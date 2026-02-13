@@ -6,8 +6,9 @@ from .types_creditgrantexpirydurationunit import TypesCreditGrantExpiryDurationU
 from .types_creditgrantexpirytype import TypesCreditGrantExpiryType
 from .types_creditgrantperiod import TypesCreditGrantPeriod
 from .types_creditgrantscope import TypesCreditGrantScope
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -23,6 +24,7 @@ class DtoCreateCreditGrantRequestTypedDict(TypedDict):
     ex if conversion_rate is 2, then 1 USD = 0.5 credits
     ex if conversion_rate is 0.5, then 1 USD = 2 credits
     """
+    end_date: NotRequired[str]
     expiration_duration: NotRequired[int]
     expiration_duration_unit: NotRequired[TypesCreditGrantExpiryDurationUnit]
     expiration_type: NotRequired[TypesCreditGrantExpiryType]
@@ -31,6 +33,7 @@ class DtoCreateCreditGrantRequestTypedDict(TypedDict):
     period_count: NotRequired[int]
     plan_id: NotRequired[str]
     priority: NotRequired[int]
+    start_date: NotRequired[str]
     subscription_id: NotRequired[str]
     topup_conversion_rate: NotRequired[str]
     r"""topup_conversion_rate is the conversion rate for the topup to the currency
@@ -56,6 +59,8 @@ class DtoCreateCreditGrantRequest(BaseModel):
     ex if conversion_rate is 0.5, then 1 USD = 2 credits
     """
 
+    end_date: Optional[str] = None
+
     expiration_duration: Optional[int] = None
 
     expiration_duration_unit: Optional[TypesCreditGrantExpiryDurationUnit] = None
@@ -72,6 +77,8 @@ class DtoCreateCreditGrantRequest(BaseModel):
 
     priority: Optional[int] = None
 
+    start_date: Optional[str] = None
+
     subscription_id: Optional[str] = None
 
     topup_conversion_rate: Optional[str] = None
@@ -81,11 +88,57 @@ class DtoCreateCreditGrantRequest(BaseModel):
     ex if topup_conversion_rate is 0.5, then 1 USD = 2 credits
     """
 
+    @field_serializer("cadence")
+    def serialize_cadence(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesCreditGrantCadence(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("expiration_duration_unit")
+    def serialize_expiration_duration_unit(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesCreditGrantExpiryDurationUnit(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("expiration_type")
+    def serialize_expiration_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesCreditGrantExpiryType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("period")
+    def serialize_period(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesCreditGrantPeriod(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("scope")
+    def serialize_scope(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesCreditGrantScope(value)
+            except ValueError:
+                return value
+        return value
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
             [
                 "conversion_rate",
+                "end_date",
                 "expiration_duration",
                 "expiration_duration_unit",
                 "expiration_type",
@@ -94,6 +147,7 @@ class DtoCreateCreditGrantRequest(BaseModel):
                 "period_count",
                 "plan_id",
                 "priority",
+                "start_date",
                 "subscription_id",
                 "topup_conversion_rate",
             ]

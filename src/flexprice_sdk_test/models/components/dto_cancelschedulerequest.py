@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from .types_subscriptionschedulechangetype import TypesSubscriptionScheduleChangeType
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -28,6 +29,15 @@ class DtoCancelScheduleRequest(BaseModel):
 
     subscription_id: Optional[str] = None
     r"""subscription_id is the ID of the subscription (required if schedule_id is not provided)"""
+
+    @field_serializer("schedule_type")
+    def serialize_schedule_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesSubscriptionScheduleChangeType(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

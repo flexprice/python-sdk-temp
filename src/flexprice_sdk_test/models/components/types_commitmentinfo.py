@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from .types_commitmenttype import TypesCommitmentType
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -42,6 +43,15 @@ class TypesCommitmentInfo(BaseModel):
     true_up_enabled: Optional[bool] = None
 
     type: Optional[TypesCommitmentType] = None
+
+    @field_serializer("type")
+    def serialize_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesCommitmentType(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

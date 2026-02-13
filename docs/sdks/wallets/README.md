@@ -460,7 +460,7 @@ with FlexPrice(
 ) as flex_price:
 
     res = flex_price.wallets.post_wallets_id_top_up(id="<id>", body={
-        "transaction_reason": components.TypesTransactionReason.FREE_CREDIT_GRANT,
+        "transaction_reason": components.TypesTransactionReason.SUBSCRIPTION_CREDIT_GRANT,
     })
 
     # Handle response

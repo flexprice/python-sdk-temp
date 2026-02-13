@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesApplicationStatus(str, Enum):
+class TypesApplicationStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     APPLIED = "applied"
     FAILED = "failed"
     PENDING = "pending"

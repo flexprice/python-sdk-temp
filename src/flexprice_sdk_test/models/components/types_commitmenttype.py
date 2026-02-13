@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesCommitmentType(str, Enum):
+class TypesCommitmentType(str, Enum, metaclass=utils.OpenEnumMeta):
     AMOUNT = "amount"
     QUANTITY = "quantity"

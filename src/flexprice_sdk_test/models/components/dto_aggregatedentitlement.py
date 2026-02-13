@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from .types_entitlementusageresetperiod import TypesEntitlementUsageResetPeriod
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -28,6 +29,15 @@ class DtoAggregatedEntitlement(BaseModel):
     usage_limit: Optional[int] = None
 
     usage_reset_period: Optional[TypesEntitlementUsageResetPeriod] = None
+
+    @field_serializer("usage_reset_period")
+    def serialize_usage_reset_period(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesEntitlementUsageResetPeriod(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

@@ -6,8 +6,9 @@ from .dto_invoicepreview import DtoInvoicePreview, DtoInvoicePreviewTypedDict
 from .dto_plansummary import DtoPlanSummary, DtoPlanSummaryTypedDict
 from .dto_prorationdetails import DtoProrationDetails, DtoProrationDetailsTypedDict
 from .types_subscriptionchangetype import TypesSubscriptionChangeType
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -57,6 +58,15 @@ class DtoSubscriptionChangePreviewResponse(BaseModel):
 
     warnings: Optional[List[str]] = None
     r"""warnings contains any warnings about the change"""
+
+    @field_serializer("change_type")
+    def serialize_change_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesSubscriptionChangeType(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

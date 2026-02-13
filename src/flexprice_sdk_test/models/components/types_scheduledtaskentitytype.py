@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesScheduledTaskEntityType(str, Enum):
+class TypesScheduledTaskEntityType(str, Enum, metaclass=utils.OpenEnumMeta):
     EVENTS = "events"
     INVOICE = "invoice"
     CREDIT_TOPUPS = "credit_topups"

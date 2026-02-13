@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesTaxRateStatus(str, Enum):
+class TypesTaxRateStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     ACTIVE = "ACTIVE"
     INACTIVE = "INACTIVE"

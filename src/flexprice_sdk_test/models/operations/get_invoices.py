@@ -85,6 +85,14 @@ class GetInvoicesRequestTypedDict(TypedDict):
     r"""payment_status filters by the payment state of invoices
     Multiple statuses can be specified to include invoices with any of the listed payment states
     """
+    period_end_gte: NotRequired[str]
+    r"""period_end_gte filters invoices with period_end >= value"""
+    period_end_lte: NotRequired[str]
+    r"""period_end_lte filters invoices with period_end <= value"""
+    period_start_gte: NotRequired[str]
+    r"""period_start_gte filters invoices with period_start >= value"""
+    period_start_lte: NotRequired[str]
+    r"""period_start_lte filters invoices with period_start <= value"""
     skip_line_items: NotRequired[bool]
     r"""SkipLineItems if true, will not include line items in the response"""
     start_time: NotRequired[str]
@@ -185,6 +193,30 @@ class GetInvoicesRequest(BaseModel):
     Multiple statuses can be specified to include invoices with any of the listed payment states
     """
 
+    period_end_gte: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""period_end_gte filters invoices with period_end >= value"""
+
+    period_end_lte: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""period_end_lte filters invoices with period_end <= value"""
+
+    period_start_gte: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""period_start_gte filters invoices with period_start >= value"""
+
+    period_start_lte: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""period_start_lte filters invoices with period_start <= value"""
+
     skip_line_items: Annotated[
         Optional[bool],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -226,6 +258,10 @@ class GetInvoicesRequest(BaseModel):
                 "offset",
                 "order",
                 "payment_status",
+                "period_end_gte",
+                "period_end_lte",
+                "period_start_gte",
+                "period_start_lte",
                 "skip_line_items",
                 "start_time",
                 "status",

@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesCreditGrantScope(str, Enum):
+class TypesCreditGrantScope(str, Enum, metaclass=utils.OpenEnumMeta):
     PLAN = "PLAN"
     SUBSCRIPTION = "SUBSCRIPTION"

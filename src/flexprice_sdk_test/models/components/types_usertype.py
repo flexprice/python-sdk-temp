@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesUserType(str, Enum):
+class TypesUserType(str, Enum, metaclass=utils.OpenEnumMeta):
     USER = "user"
     SERVICE_ACCOUNT = "service_account"

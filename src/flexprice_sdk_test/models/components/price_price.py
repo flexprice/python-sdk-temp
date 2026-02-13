@@ -15,6 +15,7 @@ from .types_priceentitytype import TypesPriceEntityType
 from .types_pricetype import TypesPriceType
 from .types_priceunittype import TypesPriceUnitType
 from .types_status import TypesStatus
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import (
     BaseModel,
     Nullable,
@@ -22,7 +23,7 @@ from flexprice_sdk_test.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -208,6 +209,87 @@ class PricePrice(BaseModel):
     updated_at: Optional[str] = None
 
     updated_by: Optional[str] = None
+
+    @field_serializer("billing_cadence")
+    def serialize_billing_cadence(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesBillingCadence(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("billing_model")
+    def serialize_billing_model(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesBillingModel(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("billing_period")
+    def serialize_billing_period(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesBillingPeriod(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("entity_type")
+    def serialize_entity_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesPriceEntityType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("invoice_cadence")
+    def serialize_invoice_cadence(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesInvoiceCadence(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("price_unit_type")
+    def serialize_price_unit_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesPriceUnitType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesStatus(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("tier_mode")
+    def serialize_tier_mode(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesBillingTier(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("type")
+    def serialize_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesPriceType(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

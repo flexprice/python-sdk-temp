@@ -16,8 +16,9 @@ from .types_invoicebillingreason import TypesInvoiceBillingReason
 from .types_invoicestatus import TypesInvoiceStatus
 from .types_invoicetype import TypesInvoiceType
 from .types_paymentstatus import TypesPaymentStatus
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -44,12 +45,10 @@ class DtoCreateInvoiceRequestTypedDict(TypedDict):
     r"""description is an optional text description of the invoice"""
     due_date: NotRequired[str]
     r"""due_date is the date by which payment is expected"""
-    environment_id: NotRequired[str]
-    r"""environment_id is the unique identifier of the environment this invoice belongs to"""
     idempotency_key: NotRequired[str]
     r"""idempotency_key is an optional key used to prevent duplicate invoice creation"""
     invoice_coupons: NotRequired[List[DtoInvoiceCouponTypedDict]]
-    r"""Invoice Coupns"""
+    r"""Invoice Coupons"""
     invoice_number: NotRequired[str]
     r"""invoice_number is an optional human-readable identifier for the invoice"""
     invoice_pdf_url: NotRequired[str]
@@ -67,15 +66,15 @@ class DtoCreateInvoiceRequestTypedDict(TypedDict):
     period_start: NotRequired[str]
     r"""period_start is the start date of the billing period"""
     prepared_tax_rates: NotRequired[List[DtoTaxRateResponseTypedDict]]
-    r"""prepared_tax_rates contains the tax rates pre-resolved by the caller (e.g., billing service)
-    These are applied at invoice level by the invoice service without further resolution
-    """
+    r"""prepared_tax_rates contains the tax rates pre-resolved by the caller (e.g., billing service)"""
     subscription_id: NotRequired[str]
     r"""subscription_id is the optional unique identifier of the subscription associated with this invoice"""
     tax_rate_overrides: NotRequired[List[DtoTaxRateOverrideTypedDict]]
     r"""tax_rate_overrides is the tax rate overrides to be applied to the invoice"""
     tax_rates: NotRequired[List[str]]
     r"""tax_rates"""
+    total_prepaid_applied: NotRequired[str]
+    r"""total_prepaid_applied is the total amount of prepaid applied to this invoice."""
 
 
 class DtoCreateInvoiceRequest(BaseModel):
@@ -111,14 +110,11 @@ class DtoCreateInvoiceRequest(BaseModel):
     due_date: Optional[str] = None
     r"""due_date is the date by which payment is expected"""
 
-    environment_id: Optional[str] = None
-    r"""environment_id is the unique identifier of the environment this invoice belongs to"""
-
     idempotency_key: Optional[str] = None
     r"""idempotency_key is an optional key used to prevent duplicate invoice creation"""
 
     invoice_coupons: Optional[List[DtoInvoiceCoupon]] = None
-    r"""Invoice Coupns"""
+    r"""Invoice Coupons"""
 
     invoice_number: Optional[str] = None
     r"""invoice_number is an optional human-readable identifier for the invoice"""
@@ -147,9 +143,7 @@ class DtoCreateInvoiceRequest(BaseModel):
     r"""period_start is the start date of the billing period"""
 
     prepared_tax_rates: Optional[List[DtoTaxRateResponse]] = None
-    r"""prepared_tax_rates contains the tax rates pre-resolved by the caller (e.g., billing service)
-    These are applied at invoice level by the invoice service without further resolution
-    """
+    r"""prepared_tax_rates contains the tax rates pre-resolved by the caller (e.g., billing service)"""
 
     subscription_id: Optional[str] = None
     r"""subscription_id is the optional unique identifier of the subscription associated with this invoice"""
@@ -159,6 +153,36 @@ class DtoCreateInvoiceRequest(BaseModel):
 
     tax_rates: Optional[List[str]] = None
     r"""tax_rates"""
+
+    total_prepaid_applied: Optional[str] = None
+    r"""total_prepaid_applied is the total amount of prepaid applied to this invoice."""
+
+    @field_serializer("invoice_status")
+    def serialize_invoice_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesInvoiceStatus(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("invoice_type")
+    def serialize_invoice_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesInvoiceType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("payment_status")
+    def serialize_payment_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesPaymentStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -170,7 +194,6 @@ class DtoCreateInvoiceRequest(BaseModel):
                 "coupons",
                 "description",
                 "due_date",
-                "environment_id",
                 "idempotency_key",
                 "invoice_coupons",
                 "invoice_number",
@@ -187,6 +210,7 @@ class DtoCreateInvoiceRequest(BaseModel):
                 "subscription_id",
                 "tax_rate_overrides",
                 "tax_rates",
+                "total_prepaid_applied",
             ]
         )
         serialized = handler(self)

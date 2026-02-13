@@ -3,8 +3,9 @@
 from __future__ import annotations
 from .types_billingcadence import TypesBillingCadence
 from .types_billingperiod import TypesBillingPeriod
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -38,6 +39,24 @@ class DtoBillingCycleInfo(BaseModel):
 
     period_start: Optional[str] = None
     r"""period_start is the start of the new billing period"""
+
+    @field_serializer("billing_cadence")
+    def serialize_billing_cadence(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesBillingCadence(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("billing_period")
+    def serialize_billing_period(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesBillingPeriod(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

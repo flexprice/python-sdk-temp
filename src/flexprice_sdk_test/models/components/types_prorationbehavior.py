@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesProrationBehavior(str, Enum):
+class TypesProrationBehavior(str, Enum, metaclass=utils.OpenEnumMeta):
     CREATE_PRORATIONS = "create_prorations"
     NONE = "none"

@@ -5,8 +5,9 @@ from .types_applicationstatus import TypesApplicationStatus
 from .types_creditgrantapplicationreason import TypesCreditGrantApplicationReason
 from .types_status import TypesStatus
 from .types_subscriptionstatus import TypesSubscriptionStatus
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -80,6 +81,42 @@ class DtoCreditGrantApplicationResponse(BaseModel):
     updated_at: Optional[str] = None
 
     updated_by: Optional[str] = None
+
+    @field_serializer("application_reason")
+    def serialize_application_reason(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesCreditGrantApplicationReason(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("application_status")
+    def serialize_application_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesApplicationStatus(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesStatus(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("subscription_status_at_application")
+    def serialize_subscription_status_at_application(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesSubscriptionStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

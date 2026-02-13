@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesDebugTrackerStatus(str, Enum):
+class TypesDebugTrackerStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     UNPROCESSED = "unprocessed"
     NOT_FOUND = "not_found"
     FOUND = "found"

@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesSubscriptionStatus(str, Enum):
+class TypesSubscriptionStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     ACTIVE = "active"
     PAUSED = "paused"
     CANCELLED = "cancelled"

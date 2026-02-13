@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesCreditGrantExpiryDurationUnit(str, Enum):
+class TypesCreditGrantExpiryDurationUnit(str, Enum, metaclass=utils.OpenEnumMeta):
     DAY = "DAY"
     WEEK = "WEEK"
     MONTH = "MONTH"

@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesFeatureType(str, Enum):
+class TypesFeatureType(str, Enum, metaclass=utils.OpenEnumMeta):
     METERED = "metered"
     BOOLEAN = "boolean"
     STATIC = "static"

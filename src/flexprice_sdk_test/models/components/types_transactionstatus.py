@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesTransactionStatus(str, Enum):
+class TypesTransactionStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     PENDING = "pending"
     COMPLETED = "completed"
     FAILED = "failed"

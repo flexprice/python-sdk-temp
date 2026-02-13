@@ -8,8 +8,9 @@ from .types_filtercondition import TypesFilterCondition, TypesFilterConditionTyp
 from .types_sortcondition import TypesSortCondition, TypesSortConditionTypedDict
 from .types_status import TypesStatus
 from enum import Enum
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -66,6 +67,42 @@ class TypesAlertLogFilter(BaseModel):
     start_time: Optional[str] = None
 
     status: Optional[TypesStatus] = None
+
+    @field_serializer("alert_status")
+    def serialize_alert_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesAlertState(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("alert_type")
+    def serialize_alert_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesAlertType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("entity_type")
+    def serialize_entity_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesAlertEntityType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

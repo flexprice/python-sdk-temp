@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesTaxRateEntityType(str, Enum):
+class TypesTaxRateEntityType(str, Enum, metaclass=utils.OpenEnumMeta):
     CUSTOMER = "customer"
     SUBSCRIPTION = "subscription"
     INVOICE = "invoice"

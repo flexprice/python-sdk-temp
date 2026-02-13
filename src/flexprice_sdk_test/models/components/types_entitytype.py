@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesEntityType(str, Enum):
+class TypesEntityType(str, Enum, metaclass=utils.OpenEnumMeta):
     EVENTS = "EVENTS"
     PRICES = "PRICES"
     CUSTOMERS = "CUSTOMERS"

@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesStatus(str, Enum):
+class TypesStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     PUBLISHED = "published"
     DELETED = "deleted"
     ARCHIVED = "archived"

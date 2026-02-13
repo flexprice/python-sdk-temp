@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesScheduledTaskInterval(str, Enum):
+class TypesScheduledTaskInterval(str, Enum, metaclass=utils.OpenEnumMeta):
     FIFTEEN_MIN = "15MIN"
     CUSTOM = "custom"
     HOURLY = "hourly"

@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from .types_subscriptionstatus import TypesSubscriptionStatus
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -49,6 +50,15 @@ class DtoSubscriptionSummary(BaseModel):
     r"""plan_id of the subscription"""
 
     status: Optional[TypesSubscriptionStatus] = None
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesSubscriptionStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from .types_roundtype import TypesRoundType
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -19,6 +20,15 @@ class PriceTransformQuantity(BaseModel):
     r"""Divide quantity by this number"""
 
     round: Optional[TypesRoundType] = None
+
+    @field_serializer("round")
+    def serialize_round(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesRoundType(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

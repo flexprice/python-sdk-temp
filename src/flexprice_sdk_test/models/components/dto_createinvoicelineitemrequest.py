@@ -20,6 +20,10 @@ class DtoCreateInvoiceLineItemRequestTypedDict(TypedDict):
     r"""entity_id is the optional unique identifier of the entity associated with this line item"""
     entity_type: NotRequired[str]
     r"""entity_type is the optional type of the entity associated with this line item"""
+    invoice_level_discount: NotRequired[str]
+    r"""invoice_level_discount is the discount amount in invoice currency applied to all line items on the invoice."""
+    line_item_discount: NotRequired[str]
+    r"""line_item_discount is the discount amount in invoice currency applied directly to this line item."""
     metadata: NotRequired[Dict[str, str]]
     meter_display_name: NotRequired[str]
     r"""meter_display_name is the optional human-readable name of the meter"""
@@ -35,6 +39,8 @@ class DtoCreateInvoiceLineItemRequestTypedDict(TypedDict):
     r"""TODO: !REMOVE after migration
     plan_id is the optional unique identifier of the plan associated with this line item
     """
+    prepaid_credits_applied: NotRequired[str]
+    r"""prepaid_credits_applied is the amount in invoice currency reduced from this line item due to prepaid credits application."""
     price_id: NotRequired[str]
     r"""price_id is the optional unique identifier of the price associated with this line item"""
     price_type: NotRequired[str]
@@ -63,6 +69,12 @@ class DtoCreateInvoiceLineItemRequest(BaseModel):
     entity_type: Optional[str] = None
     r"""entity_type is the optional type of the entity associated with this line item"""
 
+    invoice_level_discount: Optional[str] = None
+    r"""invoice_level_discount is the discount amount in invoice currency applied to all line items on the invoice."""
+
+    line_item_discount: Optional[str] = None
+    r"""line_item_discount is the discount amount in invoice currency applied directly to this line item."""
+
     metadata: Optional[Dict[str, str]] = None
 
     meter_display_name: Optional[str] = None
@@ -85,6 +97,9 @@ class DtoCreateInvoiceLineItemRequest(BaseModel):
     plan_id is the optional unique identifier of the plan associated with this line item
     """
 
+    prepaid_credits_applied: Optional[str] = None
+    r"""prepaid_credits_applied is the amount in invoice currency reduced from this line item due to prepaid credits application."""
+
     price_id: Optional[str] = None
     r"""price_id is the optional unique identifier of the price associated with this line item"""
 
@@ -105,6 +120,8 @@ class DtoCreateInvoiceLineItemRequest(BaseModel):
                 "display_name",
                 "entity_id",
                 "entity_type",
+                "invoice_level_discount",
+                "line_item_discount",
                 "metadata",
                 "meter_display_name",
                 "meter_id",
@@ -112,6 +129,7 @@ class DtoCreateInvoiceLineItemRequest(BaseModel):
                 "period_start",
                 "plan_display_name",
                 "plan_id",
+                "prepaid_credits_applied",
                 "price_id",
                 "price_type",
                 "price_unit",

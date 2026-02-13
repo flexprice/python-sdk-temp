@@ -8,8 +8,9 @@ from .types_invoicecadence import TypesInvoiceCadence
 from .types_pricetype import TypesPriceType
 from .types_status import TypesStatus
 from .types_subscriptionlineitementitytype import TypesSubscriptionLineItemEntityType
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -127,6 +128,60 @@ class SubscriptionSubscriptionLineItem(BaseModel):
     updated_at: Optional[str] = None
 
     updated_by: Optional[str] = None
+
+    @field_serializer("billing_period")
+    def serialize_billing_period(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesBillingPeriod(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("commitment_type")
+    def serialize_commitment_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesCommitmentType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("entity_type")
+    def serialize_entity_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesSubscriptionLineItemEntityType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("invoice_cadence")
+    def serialize_invoice_cadence(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesInvoiceCadence(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("price_type")
+    def serialize_price_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesPriceType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

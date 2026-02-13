@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesBillingTier(str, Enum):
+class TypesBillingTier(str, Enum, metaclass=utils.OpenEnumMeta):
     VOLUME = "VOLUME"
     SLAB = "SLAB"

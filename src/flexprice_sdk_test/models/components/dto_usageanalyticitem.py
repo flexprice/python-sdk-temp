@@ -26,8 +26,9 @@ from .subscription_subscriptionlineitem import (
 from .types_aggregationtype import TypesAggregationType
 from .types_commitmentinfo import TypesCommitmentInfo, TypesCommitmentInfoTypedDict
 from .types_windowsize import TypesWindowSize
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -135,6 +136,24 @@ class DtoUsageAnalyticItem(BaseModel):
     unit_plural: Optional[str] = None
 
     window_size: Optional[TypesWindowSize] = None
+
+    @field_serializer("aggregation_type")
+    def serialize_aggregation_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesAggregationType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("window_size")
+    def serialize_window_size(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesWindowSize(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

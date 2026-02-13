@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesSecretType(str, Enum):
+class TypesSecretType(str, Enum, metaclass=utils.OpenEnumMeta):
     PRIVATE_KEY = "private_key"
     PUBLISHABLE_KEY = "publishable_key"
     INTEGRATION = "integration"

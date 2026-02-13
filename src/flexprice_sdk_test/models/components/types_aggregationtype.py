@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesAggregationType(str, Enum):
+class TypesAggregationType(str, Enum, metaclass=utils.OpenEnumMeta):
     COUNT = "COUNT"
     SUM = "SUM"
     AVG = "AVG"

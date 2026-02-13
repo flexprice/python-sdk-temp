@@ -4,8 +4,9 @@ from __future__ import annotations
 from .dto_matchedmeter import DtoMatchedMeter, DtoMatchedMeterTypedDict
 from .errors_errorresponse import ErrorsErrorResponse, ErrorsErrorResponseTypedDict
 from .types_debugtrackerstatus import TypesDebugTrackerStatus
+from flexprice_sdk_test.models import components
 from flexprice_sdk_test.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -22,6 +23,15 @@ class DtoMeterMatchingResult(BaseModel):
     matched_meters: Optional[List[DtoMatchedMeter]] = None
 
     status: Optional[TypesDebugTrackerStatus] = None
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TypesDebugTrackerStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

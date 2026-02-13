@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from flexprice_sdk_test import utils
 
 
-class TypesTaskType(str, Enum):
+class TypesTaskType(str, Enum, metaclass=utils.OpenEnumMeta):
     IMPORT = "IMPORT"
     EXPORT = "EXPORT"
