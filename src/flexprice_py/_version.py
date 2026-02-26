@@ -3,10 +3,10 @@
 import importlib.metadata
 
 __title__: str = "flexprice-py"
-__version__: str = "0.0.42"
+__version__: str = "0.0.44"
 __openapi_doc_version__: str = "1.0"
 __gen_version__: str = "2.845.1"
-__user_agent__: str = "speakeasy-sdk/python 0.0.42 2.845.1 1.0 flexprice-py"
+__user_agent__: str = "speakeasy-sdk/python 0.0.44 2.845.1 1.0 flexprice-py"
 
 try:
     if __package__ is not None:
