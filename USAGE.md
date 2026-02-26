@@ -1,7 +1,7 @@
 <!-- Start SDK Example Usage [usage] -->
 ```python
 # Synchronous Example
-from flexprice_py import Flexprice
+from flexprice_temp import Flexprice
 
 
 with Flexprice(
@@ -22,7 +22,7 @@ The same SDK client can also be used to make asynchronous requests by importing 
 ```python
 # Asynchronous Example
 import asyncio
-from flexprice_py import Flexprice
+from flexprice_temp import Flexprice
 
 async def main():
 
