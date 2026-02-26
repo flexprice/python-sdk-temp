@@ -9,15 +9,15 @@ Type-safe Python client for the FlexPrice API: billing, metering, and subscripti
 ## Installation
 
 ```bash
-pip install flexprice-temp
+pip install flexprice-py
 ```
 
 With uv or poetry:
 
 ```bash
-uv add flexprice-temp
+uv add flexprice-py
 # or
-poetry add flexprice-temp
+poetry add flexprice-py
 ```
 
 ## Quick start
@@ -25,7 +25,7 @@ poetry add flexprice-temp
 Initialize the client with your server URL and API key, then ingest an event:
 
 ```python
-from flexprice_temp import Flexprice
+from flexprice_py import Flexprice
 
 with Flexprice(
     server_url="https://api.cloud.flexprice.io",
@@ -49,7 +49,7 @@ The same client supports async when used as an async context manager:
 
 ```python
 import asyncio
-from flexprice_temp import Flexprice
+from flexprice_py import Flexprice
 
 async def main():
     async with Flexprice(
