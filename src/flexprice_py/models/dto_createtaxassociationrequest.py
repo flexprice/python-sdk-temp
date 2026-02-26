@@ -9,25 +9,28 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class DtoCreateTaxAssociationRequestTypedDict(TypedDict):
-    entity_id: str
-    entity_type: TypesTaxRateEntityType
     tax_rate_code: str
     auto_apply: NotRequired[bool]
     currency: NotRequired[str]
+    entity_id: NotRequired[str]
+    entity_type: NotRequired[TypesTaxRateEntityType]
+    external_customer_id: NotRequired[str]
     metadata: NotRequired[Dict[str, str]]
     priority: NotRequired[int]
 
 
 class DtoCreateTaxAssociationRequest(BaseModel):
-    entity_id: str
-
-    entity_type: TypesTaxRateEntityType
-
     tax_rate_code: str
 
     auto_apply: Optional[bool] = None
 
     currency: Optional[str] = None
+
+    entity_id: Optional[str] = None
+
+    entity_type: Optional[TypesTaxRateEntityType] = None
+
+    external_customer_id: Optional[str] = None
 
     metadata: Optional[Dict[str, str]] = None
 
@@ -35,7 +38,17 @@ class DtoCreateTaxAssociationRequest(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["auto_apply", "currency", "metadata", "priority"])
+        optional_fields = set(
+            [
+                "auto_apply",
+                "currency",
+                "entity_id",
+                "entity_type",
+                "external_customer_id",
+                "metadata",
+                "priority",
+            ]
+        )
         serialized = handler(self)
         m = {}
 

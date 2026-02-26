@@ -14,6 +14,7 @@ class TaxAssociations(BaseSDK):
         *,
         entity_type: Optional[str] = None,
         entity_id: Optional[str] = None,
+        external_customer_id: Optional[str] = None,
         tax_rate_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -26,6 +27,7 @@ class TaxAssociations(BaseSDK):
 
         :param entity_type: Entity Type
         :param entity_id: Entity ID
+        :param external_customer_id: External Customer ID
         :param tax_rate_id: Tax Rate ID
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -45,6 +47,7 @@ class TaxAssociations(BaseSDK):
         request = models.ListTaxAssociationsRequest(
             entity_type=entity_type,
             entity_id=entity_id,
+            external_customer_id=external_customer_id,
             tax_rate_id=tax_rate_id,
         )
 
@@ -119,6 +122,7 @@ class TaxAssociations(BaseSDK):
         *,
         entity_type: Optional[str] = None,
         entity_id: Optional[str] = None,
+        external_customer_id: Optional[str] = None,
         tax_rate_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -131,6 +135,7 @@ class TaxAssociations(BaseSDK):
 
         :param entity_type: Entity Type
         :param entity_id: Entity ID
+        :param external_customer_id: External Customer ID
         :param tax_rate_id: Tax Rate ID
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -150,6 +155,7 @@ class TaxAssociations(BaseSDK):
         request = models.ListTaxAssociationsRequest(
             entity_type=entity_type,
             entity_id=entity_id,
+            external_customer_id=external_customer_id,
             tax_rate_id=tax_rate_id,
         )
 
@@ -222,11 +228,12 @@ class TaxAssociations(BaseSDK):
     def create_tax_association(
         self,
         *,
-        entity_id: str,
-        entity_type: models.TypesTaxRateEntityType,
         tax_rate_code: str,
         auto_apply: Optional[bool] = None,
         currency: Optional[str] = None,
+        entity_id: Optional[str] = None,
+        entity_type: Optional[models.TypesTaxRateEntityType] = None,
+        external_customer_id: Optional[str] = None,
         metadata: Optional[Dict[str, str]] = None,
         priority: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -238,11 +245,12 @@ class TaxAssociations(BaseSDK):
 
         Use when linking a tax rate to an entity (e.g. customer, product, or region) so that rate applies on invoices.
 
-        :param entity_id:
-        :param entity_type:
         :param tax_rate_code:
         :param auto_apply:
         :param currency:
+        :param entity_id:
+        :param entity_type:
+        :param external_customer_id:
         :param metadata:
         :param priority:
         :param retries: Override the default retry configuration for this method
@@ -265,6 +273,7 @@ class TaxAssociations(BaseSDK):
             currency=currency,
             entity_id=entity_id,
             entity_type=entity_type,
+            external_customer_id=external_customer_id,
             metadata=metadata,
             priority=priority,
             tax_rate_code=tax_rate_code,
@@ -340,11 +349,12 @@ class TaxAssociations(BaseSDK):
     async def create_tax_association_async(
         self,
         *,
-        entity_id: str,
-        entity_type: models.TypesTaxRateEntityType,
         tax_rate_code: str,
         auto_apply: Optional[bool] = None,
         currency: Optional[str] = None,
+        entity_id: Optional[str] = None,
+        entity_type: Optional[models.TypesTaxRateEntityType] = None,
+        external_customer_id: Optional[str] = None,
         metadata: Optional[Dict[str, str]] = None,
         priority: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -356,11 +366,12 @@ class TaxAssociations(BaseSDK):
 
         Use when linking a tax rate to an entity (e.g. customer, product, or region) so that rate applies on invoices.
 
-        :param entity_id:
-        :param entity_type:
         :param tax_rate_code:
         :param auto_apply:
         :param currency:
+        :param entity_id:
+        :param entity_type:
+        :param external_customer_id:
         :param metadata:
         :param priority:
         :param retries: Override the default retry configuration for this method
@@ -383,6 +394,7 @@ class TaxAssociations(BaseSDK):
             currency=currency,
             entity_id=entity_id,
             entity_type=entity_type,
+            external_customer_id=external_customer_id,
             metadata=metadata,
             priority=priority,
             tax_rate_code=tax_rate_code,

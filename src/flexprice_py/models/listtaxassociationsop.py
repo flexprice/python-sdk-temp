@@ -13,6 +13,8 @@ class ListTaxAssociationsRequestTypedDict(TypedDict):
     r"""Entity Type"""
     entity_id: NotRequired[str]
     r"""Entity ID"""
+    external_customer_id: NotRequired[str]
+    r"""External Customer ID"""
     tax_rate_id: NotRequired[str]
     r"""Tax Rate ID"""
 
@@ -30,6 +32,12 @@ class ListTaxAssociationsRequest(BaseModel):
     ] = None
     r"""Entity ID"""
 
+    external_customer_id: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""External Customer ID"""
+
     tax_rate_id: Annotated[
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -38,7 +46,9 @@ class ListTaxAssociationsRequest(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["entity_type", "entity_id", "tax_rate_id"])
+        optional_fields = set(
+            ["entity_type", "entity_id", "external_customer_id", "tax_rate_id"]
+        )
         serialized = handler(self)
         m = {}
 
