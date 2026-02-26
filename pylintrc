@@ -188,8 +188,7 @@ good-names=i,
            Run,
            _,
            e,
-           id,
-           s3
+           id
 
 # Good variable names regexes, separated by a comma. If names match any regex,
 # they will always be accepted
@@ -459,7 +458,8 @@ disable=raw-checker-failed,
         consider-using-with,
         wildcard-import,
         unused-wildcard-import,
-        too-many-return-statements
+        too-many-return-statements,
+        redefined-builtin
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
@@ -641,7 +641,7 @@ additional-builtins=
 allow-global-unused-variables=yes
 
 # List of names allowed to shadow builtins
-allowed-redefined-builtins=id,object
+allowed-redefined-builtins=id,object,input,dir
 
 # List of strings which can identify a callback function by name. A callback
 # name must start or end with one of those strings.
