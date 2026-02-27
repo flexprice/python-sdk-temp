@@ -18,7 +18,7 @@ class Environments(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoEnvironmentResponse:
+    ) -> models.components.DtoEnvironmentResponse:
         r"""Create environment
 
         Use when setting up a new environment (e.g. production, staging) for the tenant. Ideal for separating billing or config per environment.
@@ -40,7 +40,7 @@ class Environments(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateEnvironmentRequest(
+        request = models.components.DtoCreateEnvironmentRequest(
             name=name,
             type=type_,
         )
@@ -59,7 +59,11 @@ class Environments(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateEnvironmentRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoCreateEnvironmentRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -88,7 +92,9 @@ class Environments(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoEnvironmentResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoEnvironmentResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -121,7 +127,7 @@ class Environments(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoEnvironmentResponse:
+    ) -> models.components.DtoEnvironmentResponse:
         r"""Create environment
 
         Use when setting up a new environment (e.g. production, staging) for the tenant. Ideal for separating billing or config per environment.
@@ -143,7 +149,7 @@ class Environments(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateEnvironmentRequest(
+        request = models.components.DtoCreateEnvironmentRequest(
             name=name,
             type=type_,
         )
@@ -162,7 +168,11 @@ class Environments(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateEnvironmentRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoCreateEnvironmentRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -191,7 +201,9 @@ class Environments(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoEnvironmentResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoEnvironmentResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -225,7 +237,7 @@ class Environments(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoEnvironmentResponse:
+    ) -> models.components.DtoEnvironmentResponse:
         r"""Update environment
 
         Use when changing environment name or settings (e.g. renaming or updating metadata).
@@ -248,9 +260,9 @@ class Environments(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateEnvironmentRequest(
+        request = models.operations.UpdateEnvironmentRequest(
             id=id,
-            body=models.DtoUpdateEnvironmentRequest(
+            body=models.components.DtoUpdateEnvironmentRequest(
                 name=name,
                 type=type_,
             ),
@@ -270,7 +282,11 @@ class Environments(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdateEnvironmentRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdateEnvironmentRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -299,7 +315,9 @@ class Environments(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoEnvironmentResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoEnvironmentResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -333,7 +351,7 @@ class Environments(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoEnvironmentResponse:
+    ) -> models.components.DtoEnvironmentResponse:
         r"""Update environment
 
         Use when changing environment name or settings (e.g. renaming or updating metadata).
@@ -356,9 +374,9 @@ class Environments(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateEnvironmentRequest(
+        request = models.operations.UpdateEnvironmentRequest(
             id=id,
-            body=models.DtoUpdateEnvironmentRequest(
+            body=models.components.DtoUpdateEnvironmentRequest(
                 name=name,
                 type=type_,
             ),
@@ -378,7 +396,11 @@ class Environments(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdateEnvironmentRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdateEnvironmentRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -407,7 +429,9 @@ class Environments(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoEnvironmentResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoEnvironmentResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res

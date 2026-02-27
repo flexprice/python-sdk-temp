@@ -40,7 +40,7 @@ class Webhooks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.HandleChargebeeWebhookRequest(
+        request = models.operations.HandleChargebeeWebhookRequest(
             tenant_id=tenant_id,
             environment_id=environment_id,
         )
@@ -129,7 +129,7 @@ class Webhooks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.HandleChargebeeWebhookRequest(
+        request = models.operations.HandleChargebeeWebhookRequest(
             tenant_id=tenant_id,
             environment_id=environment_id,
         )
@@ -220,7 +220,7 @@ class Webhooks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.HandleHubspotWebhookRequest(
+        request = models.operations.HandleHubspotWebhookRequest(
             tenant_id=tenant_id,
             environment_id=environment_id,
             x_hub_spot_signature_v3=x_hub_spot_signature_v3,
@@ -312,7 +312,7 @@ class Webhooks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.HandleHubspotWebhookRequest(
+        request = models.operations.HandleHubspotWebhookRequest(
             tenant_id=tenant_id,
             environment_id=environment_id,
             x_hub_spot_signature_v3=x_hub_spot_signature_v3,
@@ -404,7 +404,7 @@ class Webhooks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.HandleMoyasarWebhookRequest(
+        request = models.operations.HandleMoyasarWebhookRequest(
             tenant_id=tenant_id,
             environment_id=environment_id,
             x_moyasar_signature=x_moyasar_signature,
@@ -496,7 +496,7 @@ class Webhooks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.HandleMoyasarWebhookRequest(
+        request = models.operations.HandleMoyasarWebhookRequest(
             tenant_id=tenant_id,
             environment_id=environment_id,
             x_moyasar_signature=x_moyasar_signature,
@@ -588,7 +588,7 @@ class Webhooks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.HandleNomodWebhookRequest(
+        request = models.operations.HandleNomodWebhookRequest(
             tenant_id=tenant_id,
             environment_id=environment_id,
             x_api_key=x_api_key,
@@ -680,7 +680,7 @@ class Webhooks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.HandleNomodWebhookRequest(
+        request = models.operations.HandleNomodWebhookRequest(
             tenant_id=tenant_id,
             environment_id=environment_id,
             x_api_key=x_api_key,
@@ -772,7 +772,7 @@ class Webhooks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.HandleQuickbooksWebhookRequest(
+        request = models.operations.HandleQuickbooksWebhookRequest(
             tenant_id=tenant_id,
             environment_id=environment_id,
             intuit_signature=intuit_signature,
@@ -864,7 +864,7 @@ class Webhooks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.HandleQuickbooksWebhookRequest(
+        request = models.operations.HandleQuickbooksWebhookRequest(
             tenant_id=tenant_id,
             environment_id=environment_id,
             intuit_signature=intuit_signature,
@@ -956,7 +956,7 @@ class Webhooks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.HandleRazorpayWebhookRequest(
+        request = models.operations.HandleRazorpayWebhookRequest(
             tenant_id=tenant_id,
             environment_id=environment_id,
             x_razorpay_signature=x_razorpay_signature,
@@ -1048,7 +1048,7 @@ class Webhooks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.HandleRazorpayWebhookRequest(
+        request = models.operations.HandleRazorpayWebhookRequest(
             tenant_id=tenant_id,
             environment_id=environment_id,
             x_razorpay_signature=x_razorpay_signature,
@@ -1140,7 +1140,7 @@ class Webhooks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.HandleStripeWebhookRequest(
+        request = models.operations.HandleStripeWebhookRequest(
             tenant_id=tenant_id,
             environment_id=environment_id,
             stripe_signature=stripe_signature,
@@ -1232,7 +1232,7 @@ class Webhooks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.HandleStripeWebhookRequest(
+        request = models.operations.HandleStripeWebhookRequest(
             tenant_id=tenant_id,
             environment_id=environment_id,
             stripe_signature=stripe_signature,

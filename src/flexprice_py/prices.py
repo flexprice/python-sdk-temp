@@ -12,15 +12,15 @@ class Prices(BaseSDK):
     def create_price(
         self,
         *,
-        billing_cadence: models.TypesBillingCadence,
-        billing_model: models.TypesBillingModel,
-        billing_period: models.TypesBillingPeriod,
+        billing_cadence: models.components.BillingCadence,
+        billing_model: models.components.BillingModel,
+        billing_period: models.components.BillingPeriod,
         currency: str,
         entity_id: str,
-        entity_type: models.TypesPriceEntityType,
-        invoice_cadence: models.TypesInvoiceCadence,
-        price_unit_type: models.TypesPriceUnitType,
-        type_: models.TypesPriceType,
+        entity_type: models.components.PriceEntityType,
+        invoice_cadence: models.components.InvoiceCadence,
+        price_unit_type: models.components.PriceUnitType,
+        type_: models.components.PriceType,
         amount: Optional[str] = None,
         billing_period_count: Optional[int] = None,
         description: Optional[str] = None,
@@ -33,25 +33,31 @@ class Prices(BaseSDK):
         meter_id: Optional[str] = None,
         min_quantity: Optional[int] = None,
         price_unit_config: Optional[
-            Union[models.DtoPriceUnitConfig, models.DtoPriceUnitConfigTypedDict]
+            Union[
+                models.components.DtoPriceUnitConfig,
+                models.components.DtoPriceUnitConfigTypedDict,
+            ]
         ] = None,
         start_date: Optional[str] = None,
-        tier_mode: Optional[models.TypesBillingTier] = None,
+        tier_mode: Optional[models.components.BillingTier] = None,
         tiers: Optional[
             Union[
-                List[models.DtoCreatePriceTier],
-                List[models.DtoCreatePriceTierTypedDict],
+                List[models.components.DtoCreatePriceTier],
+                List[models.components.DtoCreatePriceTierTypedDict],
             ]
         ] = None,
         transform_quantity: Optional[
-            Union[models.PriceTransformQuantity, models.PriceTransformQuantityTypedDict]
+            Union[
+                models.components.PriceTransformQuantity,
+                models.components.PriceTransformQuantityTypedDict,
+            ]
         ] = None,
         trial_period: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPriceResponse:
+    ) -> models.components.DtoPriceResponse:
         r"""Create price
 
         Use when adding a new price to a plan or catalog (e.g. per-seat, flat, or metered). Ideal for both simple and usage-based pricing.
@@ -97,7 +103,7 @@ class Prices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreatePriceRequest(
+        request = models.components.DtoCreatePriceRequest(
             amount=amount,
             billing_cadence=billing_cadence,
             billing_model=billing_model,
@@ -117,16 +123,16 @@ class Prices(BaseSDK):
             meter_id=meter_id,
             min_quantity=min_quantity,
             price_unit_config=utils.get_pydantic_model(
-                price_unit_config, Optional[models.DtoPriceUnitConfig]
+                price_unit_config, Optional[models.components.DtoPriceUnitConfig]
             ),
             price_unit_type=price_unit_type,
             start_date=start_date,
             tier_mode=tier_mode,
             tiers=utils.get_pydantic_model(
-                tiers, Optional[List[models.DtoCreatePriceTier]]
+                tiers, Optional[List[models.components.DtoCreatePriceTier]]
             ),
             transform_quantity=utils.get_pydantic_model(
-                transform_quantity, Optional[models.PriceTransformQuantity]
+                transform_quantity, Optional[models.components.PriceTransformQuantity]
             ),
             trial_period=trial_period,
             type=type_,
@@ -146,7 +152,7 @@ class Prices(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreatePriceRequest
+                request, False, False, "json", models.components.DtoCreatePriceRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -175,7 +181,7 @@ class Prices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoPriceResponse, http_res)
+            return unmarshal_json_response(models.components.DtoPriceResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -202,15 +208,15 @@ class Prices(BaseSDK):
     async def create_price_async(
         self,
         *,
-        billing_cadence: models.TypesBillingCadence,
-        billing_model: models.TypesBillingModel,
-        billing_period: models.TypesBillingPeriod,
+        billing_cadence: models.components.BillingCadence,
+        billing_model: models.components.BillingModel,
+        billing_period: models.components.BillingPeriod,
         currency: str,
         entity_id: str,
-        entity_type: models.TypesPriceEntityType,
-        invoice_cadence: models.TypesInvoiceCadence,
-        price_unit_type: models.TypesPriceUnitType,
-        type_: models.TypesPriceType,
+        entity_type: models.components.PriceEntityType,
+        invoice_cadence: models.components.InvoiceCadence,
+        price_unit_type: models.components.PriceUnitType,
+        type_: models.components.PriceType,
         amount: Optional[str] = None,
         billing_period_count: Optional[int] = None,
         description: Optional[str] = None,
@@ -223,25 +229,31 @@ class Prices(BaseSDK):
         meter_id: Optional[str] = None,
         min_quantity: Optional[int] = None,
         price_unit_config: Optional[
-            Union[models.DtoPriceUnitConfig, models.DtoPriceUnitConfigTypedDict]
+            Union[
+                models.components.DtoPriceUnitConfig,
+                models.components.DtoPriceUnitConfigTypedDict,
+            ]
         ] = None,
         start_date: Optional[str] = None,
-        tier_mode: Optional[models.TypesBillingTier] = None,
+        tier_mode: Optional[models.components.BillingTier] = None,
         tiers: Optional[
             Union[
-                List[models.DtoCreatePriceTier],
-                List[models.DtoCreatePriceTierTypedDict],
+                List[models.components.DtoCreatePriceTier],
+                List[models.components.DtoCreatePriceTierTypedDict],
             ]
         ] = None,
         transform_quantity: Optional[
-            Union[models.PriceTransformQuantity, models.PriceTransformQuantityTypedDict]
+            Union[
+                models.components.PriceTransformQuantity,
+                models.components.PriceTransformQuantityTypedDict,
+            ]
         ] = None,
         trial_period: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPriceResponse:
+    ) -> models.components.DtoPriceResponse:
         r"""Create price
 
         Use when adding a new price to a plan or catalog (e.g. per-seat, flat, or metered). Ideal for both simple and usage-based pricing.
@@ -287,7 +299,7 @@ class Prices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreatePriceRequest(
+        request = models.components.DtoCreatePriceRequest(
             amount=amount,
             billing_cadence=billing_cadence,
             billing_model=billing_model,
@@ -307,16 +319,16 @@ class Prices(BaseSDK):
             meter_id=meter_id,
             min_quantity=min_quantity,
             price_unit_config=utils.get_pydantic_model(
-                price_unit_config, Optional[models.DtoPriceUnitConfig]
+                price_unit_config, Optional[models.components.DtoPriceUnitConfig]
             ),
             price_unit_type=price_unit_type,
             start_date=start_date,
             tier_mode=tier_mode,
             tiers=utils.get_pydantic_model(
-                tiers, Optional[List[models.DtoCreatePriceTier]]
+                tiers, Optional[List[models.components.DtoCreatePriceTier]]
             ),
             transform_quantity=utils.get_pydantic_model(
-                transform_quantity, Optional[models.PriceTransformQuantity]
+                transform_quantity, Optional[models.components.PriceTransformQuantity]
             ),
             trial_period=trial_period,
             type=type_,
@@ -336,7 +348,7 @@ class Prices(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreatePriceRequest
+                request, False, False, "json", models.components.DtoCreatePriceRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -365,7 +377,7 @@ class Prices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoPriceResponse, http_res)
+            return unmarshal_json_response(models.components.DtoPriceResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -393,14 +405,14 @@ class Prices(BaseSDK):
         self,
         *,
         items: Union[
-            List[models.DtoCreatePriceRequest],
-            List[models.DtoCreatePriceRequestTypedDict],
+            List[models.components.DtoCreatePriceRequest],
+            List[models.components.DtoCreatePriceRequestTypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCreateBulkPriceResponse:
+    ) -> models.components.DtoCreateBulkPriceResponse:
         r"""Create prices in bulk
 
         Use when creating many prices at once (e.g. importing a catalog or setting up a plan with multiple tiers).
@@ -421,8 +433,10 @@ class Prices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateBulkPriceRequest(
-            items=utils.get_pydantic_model(items, List[models.DtoCreatePriceRequest]),
+        request = models.components.DtoCreateBulkPriceRequest(
+            items=utils.get_pydantic_model(
+                items, List[models.components.DtoCreatePriceRequest]
+            ),
         )
 
         req = self._build_request(
@@ -439,7 +453,11 @@ class Prices(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateBulkPriceRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoCreateBulkPriceRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -468,7 +486,9 @@ class Prices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoCreateBulkPriceResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCreateBulkPriceResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -496,14 +516,14 @@ class Prices(BaseSDK):
         self,
         *,
         items: Union[
-            List[models.DtoCreatePriceRequest],
-            List[models.DtoCreatePriceRequestTypedDict],
+            List[models.components.DtoCreatePriceRequest],
+            List[models.components.DtoCreatePriceRequestTypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCreateBulkPriceResponse:
+    ) -> models.components.DtoCreateBulkPriceResponse:
         r"""Create prices in bulk
 
         Use when creating many prices at once (e.g. importing a catalog or setting up a plan with multiple tiers).
@@ -524,8 +544,10 @@ class Prices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateBulkPriceRequest(
-            items=utils.get_pydantic_model(items, List[models.DtoCreatePriceRequest]),
+        request = models.components.DtoCreateBulkPriceRequest(
+            items=utils.get_pydantic_model(
+                items, List[models.components.DtoCreatePriceRequest]
+            ),
         )
 
         req = self._build_request_async(
@@ -542,7 +564,11 @@ class Prices(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateBulkPriceRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoCreateBulkPriceRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -571,7 +597,9 @@ class Prices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoCreateBulkPriceResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCreateBulkPriceResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -603,7 +631,7 @@ class Prices(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPriceResponse:
+    ) -> models.components.DtoPriceResponse:
         r"""Get price by lookup key
 
         Use when resolving a price by external id (e.g. from your catalog or CMS). Ideal for integrations.
@@ -624,7 +652,7 @@ class Prices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetPriceByLookupKeyRequest(
+        request = models.operations.GetPriceByLookupKeyRequest(
             lookup_key=lookup_key,
         )
 
@@ -668,7 +696,7 @@ class Prices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoPriceResponse, http_res)
+            return unmarshal_json_response(models.components.DtoPriceResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -700,7 +728,7 @@ class Prices(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPriceResponse:
+    ) -> models.components.DtoPriceResponse:
         r"""Get price by lookup key
 
         Use when resolving a price by external id (e.g. from your catalog or CMS). Ideal for integrations.
@@ -721,7 +749,7 @@ class Prices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetPriceByLookupKeyRequest(
+        request = models.operations.GetPriceByLookupKeyRequest(
             lookup_key=lookup_key,
         )
 
@@ -765,7 +793,7 @@ class Prices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoPriceResponse, http_res)
+            return unmarshal_json_response(models.components.DtoPriceResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -795,31 +823,31 @@ class Prices(BaseSDK):
         allow_expired_prices: Optional[bool] = False,
         end_time: Optional[str] = None,
         entity_ids: Optional[List[str]] = None,
-        entity_type: Optional[models.TypesPriceEntityType] = None,
+        entity_type: Optional[models.components.PriceEntityType] = None,
         expand: Optional[str] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         limit: Optional[int] = None,
         meter_ids: Optional[List[str]] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesPriceFilterOrder] = None,
+        order: Optional[models.components.PriceFilterOrder] = None,
         parent_price_id: Optional[str] = None,
         plan_ids: Optional[List[str]] = None,
         price_ids: Optional[List[str]] = None,
         sort: Optional[str] = None,
         start_date_lt: Optional[str] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.TypesStatus] = None,
+        status: Optional[models.components.Status] = None,
         subscription_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListPricesResponse:
+    ) -> models.components.DtoListPricesResponse:
         r"""Query prices
 
         Use when listing or searching prices (e.g. plan builder or catalog). Returns a paginated list; supports filtering and sorting.
@@ -857,14 +885,14 @@ class Prices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesPriceFilter(
+        request = models.components.PriceFilter(
             allow_expired_prices=allow_expired_prices,
             end_time=end_time,
             entity_ids=entity_ids,
             entity_type=entity_type,
             expand=expand,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             limit=limit,
             meter_ids=meter_ids,
@@ -894,7 +922,7 @@ class Prices(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesPriceFilter
+                request, False, False, "json", models.components.PriceFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -923,7 +951,9 @@ class Prices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListPricesResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListPricesResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -953,31 +983,31 @@ class Prices(BaseSDK):
         allow_expired_prices: Optional[bool] = False,
         end_time: Optional[str] = None,
         entity_ids: Optional[List[str]] = None,
-        entity_type: Optional[models.TypesPriceEntityType] = None,
+        entity_type: Optional[models.components.PriceEntityType] = None,
         expand: Optional[str] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         limit: Optional[int] = None,
         meter_ids: Optional[List[str]] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesPriceFilterOrder] = None,
+        order: Optional[models.components.PriceFilterOrder] = None,
         parent_price_id: Optional[str] = None,
         plan_ids: Optional[List[str]] = None,
         price_ids: Optional[List[str]] = None,
         sort: Optional[str] = None,
         start_date_lt: Optional[str] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.TypesStatus] = None,
+        status: Optional[models.components.Status] = None,
         subscription_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListPricesResponse:
+    ) -> models.components.DtoListPricesResponse:
         r"""Query prices
 
         Use when listing or searching prices (e.g. plan builder or catalog). Returns a paginated list; supports filtering and sorting.
@@ -1015,14 +1045,14 @@ class Prices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesPriceFilter(
+        request = models.components.PriceFilter(
             allow_expired_prices=allow_expired_prices,
             end_time=end_time,
             entity_ids=entity_ids,
             entity_type=entity_type,
             expand=expand,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             limit=limit,
             meter_ids=meter_ids,
@@ -1052,7 +1082,7 @@ class Prices(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesPriceFilter
+                request, False, False, "json", models.components.PriceFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1081,7 +1111,9 @@ class Prices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListPricesResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListPricesResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1113,7 +1145,7 @@ class Prices(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPriceResponse:
+    ) -> models.components.DtoPriceResponse:
         r"""Get price
 
         Use when you need to load a single price (e.g. for display or editing). Response includes expanded meter and price unit when applicable.
@@ -1134,7 +1166,7 @@ class Prices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetPriceRequest(
+        request = models.operations.GetPriceRequest(
             id=id,
         )
 
@@ -1178,7 +1210,7 @@ class Prices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoPriceResponse, http_res)
+            return unmarshal_json_response(models.components.DtoPriceResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1210,7 +1242,7 @@ class Prices(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPriceResponse:
+    ) -> models.components.DtoPriceResponse:
         r"""Get price
 
         Use when you need to load a single price (e.g. for display or editing). Response includes expanded meter and price unit when applicable.
@@ -1231,7 +1263,7 @@ class Prices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetPriceRequest(
+        request = models.operations.GetPriceRequest(
             id=id,
         )
 
@@ -1275,7 +1307,7 @@ class Prices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoPriceResponse, http_res)
+            return unmarshal_json_response(models.components.DtoPriceResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1304,7 +1336,7 @@ class Prices(BaseSDK):
         *,
         id: str,
         amount: Optional[str] = None,
-        billing_model: Optional[models.TypesBillingModel] = None,
+        billing_model: Optional[models.components.BillingModel] = None,
         description: Optional[str] = None,
         display_name: Optional[str] = None,
         effective_from: Optional[str] = None,
@@ -1314,25 +1346,28 @@ class Prices(BaseSDK):
         price_unit_amount: Optional[str] = None,
         price_unit_tiers: Optional[
             Union[
-                List[models.DtoCreatePriceTier],
-                List[models.DtoCreatePriceTierTypedDict],
+                List[models.components.DtoCreatePriceTier],
+                List[models.components.DtoCreatePriceTierTypedDict],
             ]
         ] = None,
-        tier_mode: Optional[models.TypesBillingTier] = None,
+        tier_mode: Optional[models.components.BillingTier] = None,
         tiers: Optional[
             Union[
-                List[models.DtoCreatePriceTier],
-                List[models.DtoCreatePriceTierTypedDict],
+                List[models.components.DtoCreatePriceTier],
+                List[models.components.DtoCreatePriceTierTypedDict],
             ]
         ] = None,
         transform_quantity: Optional[
-            Union[models.PriceTransformQuantity, models.PriceTransformQuantityTypedDict]
+            Union[
+                models.components.PriceTransformQuantity,
+                models.components.PriceTransformQuantityTypedDict,
+            ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPriceResponse:
+    ) -> models.components.DtoPriceResponse:
         r"""Update price
 
         Use when changing price configuration (e.g. amount, billing scheme, or metadata).
@@ -1367,9 +1402,9 @@ class Prices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdatePriceRequest(
+        request = models.operations.UpdatePriceRequest(
             id=id,
-            body=models.DtoUpdatePriceRequest(
+            body=models.components.DtoUpdatePriceRequest(
                 amount=amount,
                 billing_model=billing_model,
                 description=description,
@@ -1380,14 +1415,16 @@ class Prices(BaseSDK):
                 metadata=metadata,
                 price_unit_amount=price_unit_amount,
                 price_unit_tiers=utils.get_pydantic_model(
-                    price_unit_tiers, Optional[List[models.DtoCreatePriceTier]]
+                    price_unit_tiers,
+                    Optional[List[models.components.DtoCreatePriceTier]],
                 ),
                 tier_mode=tier_mode,
                 tiers=utils.get_pydantic_model(
-                    tiers, Optional[List[models.DtoCreatePriceTier]]
+                    tiers, Optional[List[models.components.DtoCreatePriceTier]]
                 ),
                 transform_quantity=utils.get_pydantic_model(
-                    transform_quantity, Optional[models.PriceTransformQuantity]
+                    transform_quantity,
+                    Optional[models.components.PriceTransformQuantity],
                 ),
             ),
         )
@@ -1406,7 +1443,11 @@ class Prices(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdatePriceRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdatePriceRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1435,7 +1476,7 @@ class Prices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoPriceResponse, http_res)
+            return unmarshal_json_response(models.components.DtoPriceResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1464,7 +1505,7 @@ class Prices(BaseSDK):
         *,
         id: str,
         amount: Optional[str] = None,
-        billing_model: Optional[models.TypesBillingModel] = None,
+        billing_model: Optional[models.components.BillingModel] = None,
         description: Optional[str] = None,
         display_name: Optional[str] = None,
         effective_from: Optional[str] = None,
@@ -1474,25 +1515,28 @@ class Prices(BaseSDK):
         price_unit_amount: Optional[str] = None,
         price_unit_tiers: Optional[
             Union[
-                List[models.DtoCreatePriceTier],
-                List[models.DtoCreatePriceTierTypedDict],
+                List[models.components.DtoCreatePriceTier],
+                List[models.components.DtoCreatePriceTierTypedDict],
             ]
         ] = None,
-        tier_mode: Optional[models.TypesBillingTier] = None,
+        tier_mode: Optional[models.components.BillingTier] = None,
         tiers: Optional[
             Union[
-                List[models.DtoCreatePriceTier],
-                List[models.DtoCreatePriceTierTypedDict],
+                List[models.components.DtoCreatePriceTier],
+                List[models.components.DtoCreatePriceTierTypedDict],
             ]
         ] = None,
         transform_quantity: Optional[
-            Union[models.PriceTransformQuantity, models.PriceTransformQuantityTypedDict]
+            Union[
+                models.components.PriceTransformQuantity,
+                models.components.PriceTransformQuantityTypedDict,
+            ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPriceResponse:
+    ) -> models.components.DtoPriceResponse:
         r"""Update price
 
         Use when changing price configuration (e.g. amount, billing scheme, or metadata).
@@ -1527,9 +1571,9 @@ class Prices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdatePriceRequest(
+        request = models.operations.UpdatePriceRequest(
             id=id,
-            body=models.DtoUpdatePriceRequest(
+            body=models.components.DtoUpdatePriceRequest(
                 amount=amount,
                 billing_model=billing_model,
                 description=description,
@@ -1540,14 +1584,16 @@ class Prices(BaseSDK):
                 metadata=metadata,
                 price_unit_amount=price_unit_amount,
                 price_unit_tiers=utils.get_pydantic_model(
-                    price_unit_tiers, Optional[List[models.DtoCreatePriceTier]]
+                    price_unit_tiers,
+                    Optional[List[models.components.DtoCreatePriceTier]],
                 ),
                 tier_mode=tier_mode,
                 tiers=utils.get_pydantic_model(
-                    tiers, Optional[List[models.DtoCreatePriceTier]]
+                    tiers, Optional[List[models.components.DtoCreatePriceTier]]
                 ),
                 transform_quantity=utils.get_pydantic_model(
-                    transform_quantity, Optional[models.PriceTransformQuantity]
+                    transform_quantity,
+                    Optional[models.components.PriceTransformQuantity],
                 ),
             ),
         )
@@ -1566,7 +1612,11 @@ class Prices(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdatePriceRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdatePriceRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1595,7 +1645,7 @@ class Prices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoPriceResponse, http_res)
+            return unmarshal_json_response(models.components.DtoPriceResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1628,7 +1678,7 @@ class Prices(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSuccessResponse:
+    ) -> models.components.DtoSuccessResponse:
         r"""Delete price
 
         Use when retiring a price (e.g. end-of-life or replacement). Optional effective date or cascade for subscriptions.
@@ -1650,9 +1700,9 @@ class Prices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeletePriceRequest(
+        request = models.operations.DeletePriceRequest(
             id=id,
-            body=models.DtoDeletePriceRequest(
+            body=models.components.DtoDeletePriceRequest(
                 end_date=end_date,
             ),
         )
@@ -1671,7 +1721,11 @@ class Prices(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoDeletePriceRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoDeletePriceRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1700,7 +1754,9 @@ class Prices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSuccessResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSuccessResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1733,7 +1789,7 @@ class Prices(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSuccessResponse:
+    ) -> models.components.DtoSuccessResponse:
         r"""Delete price
 
         Use when retiring a price (e.g. end-of-life or replacement). Optional effective date or cascade for subscriptions.
@@ -1755,9 +1811,9 @@ class Prices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeletePriceRequest(
+        request = models.operations.DeletePriceRequest(
             id=id,
-            body=models.DtoDeletePriceRequest(
+            body=models.components.DtoDeletePriceRequest(
                 end_date=end_date,
             ),
         )
@@ -1776,7 +1832,11 @@ class Prices(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoDeletePriceRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoDeletePriceRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1805,7 +1865,9 @@ class Prices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSuccessResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSuccessResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res

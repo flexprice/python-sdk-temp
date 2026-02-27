@@ -14,22 +14,22 @@ class Tasks(BaseSDK):
         *,
         created_by: Optional[str] = None,
         end_time: Optional[str] = None,
-        entity_type: Optional[models.EntityType] = None,
+        entity_type: Optional[models.operations.EntityType] = None,
         expand: Optional[str] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.ListTasksOrder] = None,
+        order: Optional[models.operations.ListTasksOrder] = None,
         scheduled_task_id: Optional[str] = None,
         sort: Optional[str] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.ListTasksStatus] = None,
-        task_status: Optional[models.TaskStatus] = None,
-        task_type: Optional[models.TaskType] = None,
+        status: Optional[models.operations.ListTasksStatus] = None,
+        task_status: Optional[models.operations.TaskStatus] = None,
+        task_type: Optional[models.operations.TaskType] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListTasksResponse:
+    ) -> models.components.DtoListTasksResponse:
         r"""List tasks
 
         Use when listing or searching async tasks (e.g. admin queue view). Returns list with optional filtering.
@@ -62,7 +62,7 @@ class Tasks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListTasksRequest(
+        request = models.operations.ListTasksRequest(
             created_by=created_by,
             end_time=end_time,
             entity_type=entity_type,
@@ -118,7 +118,9 @@ class Tasks(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListTasksResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListTasksResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -147,22 +149,22 @@ class Tasks(BaseSDK):
         *,
         created_by: Optional[str] = None,
         end_time: Optional[str] = None,
-        entity_type: Optional[models.EntityType] = None,
+        entity_type: Optional[models.operations.EntityType] = None,
         expand: Optional[str] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.ListTasksOrder] = None,
+        order: Optional[models.operations.ListTasksOrder] = None,
         scheduled_task_id: Optional[str] = None,
         sort: Optional[str] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.ListTasksStatus] = None,
-        task_status: Optional[models.TaskStatus] = None,
-        task_type: Optional[models.TaskType] = None,
+        status: Optional[models.operations.ListTasksStatus] = None,
+        task_status: Optional[models.operations.TaskStatus] = None,
+        task_type: Optional[models.operations.TaskType] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListTasksResponse:
+    ) -> models.components.DtoListTasksResponse:
         r"""List tasks
 
         Use when listing or searching async tasks (e.g. admin queue view). Returns list with optional filtering.
@@ -195,7 +197,7 @@ class Tasks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListTasksRequest(
+        request = models.operations.ListTasksRequest(
             created_by=created_by,
             end_time=end_time,
             entity_type=entity_type,
@@ -251,7 +253,9 @@ class Tasks(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListTasksResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListTasksResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -278,17 +282,17 @@ class Tasks(BaseSDK):
     def create_task(
         self,
         *,
-        entity_type: models.TypesEntityType,
-        file_type: models.TypesFileType,
+        entity_type: models.components.EntityType,
+        file_type: models.components.FileType,
         file_url: str,
-        task_type: models.TypesTaskType,
+        task_type: models.components.TaskType,
         file_name: Optional[str] = None,
         metadata: Optional[Dict[str, Any]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoTaskResponse:
+    ) -> models.components.DtoTaskResponse:
         r"""Create a new task
 
         Use when submitting a file or job for async processing (e.g. export or import). Returns task ID to poll for status and result.
@@ -314,7 +318,7 @@ class Tasks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateTaskRequest(
+        request = models.components.DtoCreateTaskRequest(
             entity_type=entity_type,
             file_name=file_name,
             file_type=file_type,
@@ -337,7 +341,7 @@ class Tasks(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateTaskRequest
+                request, False, False, "json", models.components.DtoCreateTaskRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -366,7 +370,7 @@ class Tasks(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "202", "application/json"):
-            return unmarshal_json_response(models.DtoTaskResponse, http_res)
+            return unmarshal_json_response(models.components.DtoTaskResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -393,17 +397,17 @@ class Tasks(BaseSDK):
     async def create_task_async(
         self,
         *,
-        entity_type: models.TypesEntityType,
-        file_type: models.TypesFileType,
+        entity_type: models.components.EntityType,
+        file_type: models.components.FileType,
         file_url: str,
-        task_type: models.TypesTaskType,
+        task_type: models.components.TaskType,
         file_name: Optional[str] = None,
         metadata: Optional[Dict[str, Any]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoTaskResponse:
+    ) -> models.components.DtoTaskResponse:
         r"""Create a new task
 
         Use when submitting a file or job for async processing (e.g. export or import). Returns task ID to poll for status and result.
@@ -429,7 +433,7 @@ class Tasks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateTaskRequest(
+        request = models.components.DtoCreateTaskRequest(
             entity_type=entity_type,
             file_name=file_name,
             file_type=file_type,
@@ -452,7 +456,7 @@ class Tasks(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateTaskRequest
+                request, False, False, "json", models.components.DtoCreateTaskRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -481,7 +485,7 @@ class Tasks(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "202", "application/json"):
-            return unmarshal_json_response(models.DtoTaskResponse, http_res)
+            return unmarshal_json_response(models.components.DtoTaskResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -513,7 +517,7 @@ class Tasks(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ModelsTemporalWorkflowResult:
+    ) -> models.components.ModelsTemporalWorkflowResult:
         r"""Get task processing result
 
         Use when fetching the outcome of a completed task (e.g. export URL or error message). Call after task status is complete.
@@ -534,7 +538,7 @@ class Tasks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetTaskResultRequest(
+        request = models.operations.GetTaskResultRequest(
             workflow_id=workflow_id,
         )
 
@@ -579,7 +583,7 @@ class Tasks(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ModelsTemporalWorkflowResult, http_res
+                models.components.ModelsTemporalWorkflowResult, http_res
             )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
@@ -612,7 +616,7 @@ class Tasks(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ModelsTemporalWorkflowResult:
+    ) -> models.components.ModelsTemporalWorkflowResult:
         r"""Get task processing result
 
         Use when fetching the outcome of a completed task (e.g. export URL or error message). Call after task status is complete.
@@ -633,7 +637,7 @@ class Tasks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetTaskResultRequest(
+        request = models.operations.GetTaskResultRequest(
             workflow_id=workflow_id,
         )
 
@@ -678,7 +682,7 @@ class Tasks(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ModelsTemporalWorkflowResult, http_res
+                models.components.ModelsTemporalWorkflowResult, http_res
             )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
@@ -711,7 +715,7 @@ class Tasks(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoTaskResponse:
+    ) -> models.components.DtoTaskResponse:
         r"""Get a task
 
         Use when checking task status or progress (e.g. polling after create). Returns task by ID.
@@ -732,7 +736,7 @@ class Tasks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetTaskRequest(
+        request = models.operations.GetTaskRequest(
             id=id,
         )
 
@@ -776,7 +780,7 @@ class Tasks(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoTaskResponse, http_res)
+            return unmarshal_json_response(models.components.DtoTaskResponse, http_res)
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -808,7 +812,7 @@ class Tasks(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoTaskResponse:
+    ) -> models.components.DtoTaskResponse:
         r"""Get a task
 
         Use when checking task status or progress (e.g. polling after create). Returns task by ID.
@@ -829,7 +833,7 @@ class Tasks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetTaskRequest(
+        request = models.operations.GetTaskRequest(
             id=id,
         )
 
@@ -873,7 +877,7 @@ class Tasks(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoTaskResponse, http_res)
+            return unmarshal_json_response(models.components.DtoTaskResponse, http_res)
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -926,7 +930,7 @@ class Tasks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DownloadTaskExportRequest(
+        request = models.operations.DownloadTaskExportRequest(
             id=id,
         )
 
@@ -1023,7 +1027,7 @@ class Tasks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DownloadTaskExportRequest(
+        request = models.operations.DownloadTaskExportRequest(
             id=id,
         )
 
@@ -1095,12 +1099,12 @@ class Tasks(BaseSDK):
         self,
         *,
         id: str,
-        task_status: models.TypesTaskStatus,
+        task_status: models.components.TaskStatus,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSuccessResponse:
+    ) -> models.components.DtoSuccessResponse:
         r"""Update task status
 
         Use when updating task status (e.g. marking complete or failed from a worker). Typically called by backend processors.
@@ -1122,9 +1126,9 @@ class Tasks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateTaskStatusRequest(
+        request = models.operations.UpdateTaskStatusRequest(
             id=id,
-            body=models.DtoUpdateTaskStatusRequest(
+            body=models.components.DtoUpdateTaskStatusRequest(
                 task_status=task_status,
             ),
         )
@@ -1143,7 +1147,11 @@ class Tasks(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdateTaskStatusRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdateTaskStatusRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1172,7 +1180,9 @@ class Tasks(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSuccessResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSuccessResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1200,12 +1210,12 @@ class Tasks(BaseSDK):
         self,
         *,
         id: str,
-        task_status: models.TypesTaskStatus,
+        task_status: models.components.TaskStatus,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSuccessResponse:
+    ) -> models.components.DtoSuccessResponse:
         r"""Update task status
 
         Use when updating task status (e.g. marking complete or failed from a worker). Typically called by backend processors.
@@ -1227,9 +1237,9 @@ class Tasks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateTaskStatusRequest(
+        request = models.operations.UpdateTaskStatusRequest(
             id=id,
-            body=models.DtoUpdateTaskStatusRequest(
+            body=models.components.DtoUpdateTaskStatusRequest(
                 task_status=task_status,
             ),
         )
@@ -1248,7 +1258,11 @@ class Tasks(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdateTaskStatusRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdateTaskStatusRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1277,7 +1291,9 @@ class Tasks(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSuccessResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSuccessResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res

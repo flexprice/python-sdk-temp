@@ -50,7 +50,7 @@ class Events(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoIngestEventRequest(
+        request = models.components.DtoIngestEventRequest(
             customer_id=customer_id,
             event_id=event_id,
             event_name=event_name,
@@ -74,7 +74,7 @@ class Events(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoIngestEventRequest
+                request, False, False, "json", models.components.DtoIngestEventRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -168,7 +168,7 @@ class Events(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoIngestEventRequest(
+        request = models.components.DtoIngestEventRequest(
             customer_id=customer_id,
             event_id=event_id,
             event_name=event_name,
@@ -192,7 +192,7 @@ class Events(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoIngestEventRequest
+                request, False, False, "json", models.components.DtoIngestEventRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -256,12 +256,12 @@ class Events(BaseSDK):
         property_filters: Optional[Dict[str, List[str]]] = None,
         sources: Optional[List[str]] = None,
         start_time: Optional[str] = None,
-        window_size: Optional[models.TypesWindowSize] = None,
+        window_size: Optional[models.components.WindowSize] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoGetUsageAnalyticsResponse:
+    ) -> models.components.DtoGetUsageAnalyticsResponse:
         r"""Get usage analytics
 
         Use when building analytics views (e.g. usage by feature or customer over time). Supports filtering, grouping, and time-series breakdown.
@@ -290,7 +290,7 @@ class Events(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoGetUsageAnalyticsRequest(
+        request = models.components.DtoGetUsageAnalyticsRequest(
             end_time=end_time,
             expand=expand,
             external_customer_id=external_customer_id,
@@ -316,7 +316,11 @@ class Events(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoGetUsageAnalyticsRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoGetUsageAnalyticsRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -346,7 +350,7 @@ class Events(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoGetUsageAnalyticsResponse, http_res
+                models.components.DtoGetUsageAnalyticsResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -382,12 +386,12 @@ class Events(BaseSDK):
         property_filters: Optional[Dict[str, List[str]]] = None,
         sources: Optional[List[str]] = None,
         start_time: Optional[str] = None,
-        window_size: Optional[models.TypesWindowSize] = None,
+        window_size: Optional[models.components.WindowSize] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoGetUsageAnalyticsResponse:
+    ) -> models.components.DtoGetUsageAnalyticsResponse:
         r"""Get usage analytics
 
         Use when building analytics views (e.g. usage by feature or customer over time). Supports filtering, grouping, and time-series breakdown.
@@ -416,7 +420,7 @@ class Events(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoGetUsageAnalyticsRequest(
+        request = models.components.DtoGetUsageAnalyticsRequest(
             end_time=end_time,
             expand=expand,
             external_customer_id=external_customer_id,
@@ -442,7 +446,11 @@ class Events(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoGetUsageAnalyticsRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoGetUsageAnalyticsRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -472,7 +480,7 @@ class Events(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoGetUsageAnalyticsResponse, http_res
+                models.components.DtoGetUsageAnalyticsResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -501,8 +509,8 @@ class Events(BaseSDK):
         self,
         *,
         events: Union[
-            List[models.DtoIngestEventRequest],
-            List[models.DtoIngestEventRequestTypedDict],
+            List[models.components.DtoIngestEventRequest],
+            List[models.components.DtoIngestEventRequestTypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -529,8 +537,10 @@ class Events(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoBulkIngestEventRequest(
-            events=utils.get_pydantic_model(events, List[models.DtoIngestEventRequest]),
+        request = models.components.DtoBulkIngestEventRequest(
+            events=utils.get_pydantic_model(
+                events, List[models.components.DtoIngestEventRequest]
+            ),
         )
 
         req = self._build_request(
@@ -547,7 +557,11 @@ class Events(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoBulkIngestEventRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoBulkIngestEventRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -604,8 +618,8 @@ class Events(BaseSDK):
         self,
         *,
         events: Union[
-            List[models.DtoIngestEventRequest],
-            List[models.DtoIngestEventRequestTypedDict],
+            List[models.components.DtoIngestEventRequest],
+            List[models.components.DtoIngestEventRequestTypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -632,8 +646,10 @@ class Events(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoBulkIngestEventRequest(
-            events=utils.get_pydantic_model(events, List[models.DtoIngestEventRequest]),
+        request = models.components.DtoBulkIngestEventRequest(
+            events=utils.get_pydantic_model(
+                events, List[models.components.DtoIngestEventRequest]
+            ),
         )
 
         req = self._build_request_async(
@@ -650,7 +666,11 @@ class Events(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoBulkIngestEventRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoBulkIngestEventRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -710,7 +730,7 @@ class Events(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoGetHuggingFaceBillingDataResponse:
+    ) -> models.components.DtoGetHuggingFaceBillingDataResponse:
         r"""Get Hugging Face inference data
 
         Use when fetching Hugging Face inference usage or billing data (e.g. for HF-specific reporting or reconciliation).
@@ -770,7 +790,7 @@ class Events(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoGetHuggingFaceBillingDataResponse, http_res
+                models.components.DtoGetHuggingFaceBillingDataResponse, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
@@ -797,7 +817,7 @@ class Events(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoGetHuggingFaceBillingDataResponse:
+    ) -> models.components.DtoGetHuggingFaceBillingDataResponse:
         r"""Get Hugging Face inference data
 
         Use when fetching Hugging Face inference usage or billing data (e.g. for HF-specific reporting or reconciliation).
@@ -857,7 +877,7 @@ class Events(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoGetHuggingFaceBillingDataResponse, http_res
+                models.components.DtoGetHuggingFaceBillingDataResponse, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
@@ -897,7 +917,7 @@ class Events(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoGetEventsResponse:
+    ) -> models.components.DtoGetEventsResponse:
         r"""List raw events
 
         Use when debugging ingestion or exporting raw event data (e.g. support or audit). Returns a paginated list; supports time range and sorting.
@@ -932,7 +952,7 @@ class Events(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoGetEventsRequest(
+        request = models.components.DtoGetEventsRequest(
             end_time=end_time,
             event_id=event_id,
             event_name=event_name,
@@ -962,7 +982,7 @@ class Events(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoGetEventsRequest
+                request, False, False, "json", models.components.DtoGetEventsRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -991,7 +1011,9 @@ class Events(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoGetEventsResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoGetEventsResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1035,7 +1057,7 @@ class Events(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoGetEventsResponse:
+    ) -> models.components.DtoGetEventsResponse:
         r"""List raw events
 
         Use when debugging ingestion or exporting raw event data (e.g. support or audit). Returns a paginated list; supports time range and sorting.
@@ -1070,7 +1092,7 @@ class Events(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoGetEventsRequest(
+        request = models.components.DtoGetEventsRequest(
             end_time=end_time,
             event_id=event_id,
             event_name=event_name,
@@ -1100,7 +1122,7 @@ class Events(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoGetEventsRequest
+                request, False, False, "json", models.components.DtoGetEventsRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1129,7 +1151,9 @@ class Events(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoGetEventsResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoGetEventsResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1156,10 +1180,10 @@ class Events(BaseSDK):
     def get_usage_statistics(
         self,
         *,
-        aggregation_type: models.TypesAggregationType,
+        aggregation_type: models.components.AggregationType,
         event_name: str,
         billing_anchor: Optional[str] = None,
-        bucket_size: Optional[models.TypesWindowSize] = None,
+        bucket_size: Optional[models.components.WindowSize] = None,
         customer_id: Optional[str] = None,
         end_time: Optional[str] = None,
         external_customer_id: Optional[str] = None,
@@ -1168,12 +1192,12 @@ class Events(BaseSDK):
         multiplier: Optional[str] = None,
         property_name: Optional[str] = None,
         start_time: Optional[str] = None,
-        window_size: Optional[models.TypesWindowSize] = None,
+        window_size: Optional[models.components.WindowSize] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoGetUsageResponse:
+    ) -> models.components.DtoGetUsageResponse:
         r"""Get usage statistics
 
         Use when building usage reports or dashboards across events. Supports filters and grouping; defaults to last 7 days if no range provided.
@@ -1222,7 +1246,7 @@ class Events(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoGetUsageRequest(
+        request = models.components.DtoGetUsageRequest(
             aggregation_type=aggregation_type,
             billing_anchor=billing_anchor,
             bucket_size=bucket_size,
@@ -1252,7 +1276,7 @@ class Events(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoGetUsageRequest
+                request, False, False, "json", models.components.DtoGetUsageRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1281,7 +1305,9 @@ class Events(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoGetUsageResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoGetUsageResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1308,10 +1334,10 @@ class Events(BaseSDK):
     async def get_usage_statistics_async(
         self,
         *,
-        aggregation_type: models.TypesAggregationType,
+        aggregation_type: models.components.AggregationType,
         event_name: str,
         billing_anchor: Optional[str] = None,
-        bucket_size: Optional[models.TypesWindowSize] = None,
+        bucket_size: Optional[models.components.WindowSize] = None,
         customer_id: Optional[str] = None,
         end_time: Optional[str] = None,
         external_customer_id: Optional[str] = None,
@@ -1320,12 +1346,12 @@ class Events(BaseSDK):
         multiplier: Optional[str] = None,
         property_name: Optional[str] = None,
         start_time: Optional[str] = None,
-        window_size: Optional[models.TypesWindowSize] = None,
+        window_size: Optional[models.components.WindowSize] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoGetUsageResponse:
+    ) -> models.components.DtoGetUsageResponse:
         r"""Get usage statistics
 
         Use when building usage reports or dashboards across events. Supports filters and grouping; defaults to last 7 days if no range provided.
@@ -1374,7 +1400,7 @@ class Events(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoGetUsageRequest(
+        request = models.components.DtoGetUsageRequest(
             aggregation_type=aggregation_type,
             billing_anchor=billing_anchor,
             bucket_size=bucket_size,
@@ -1404,7 +1430,7 @@ class Events(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoGetUsageRequest
+                request, False, False, "json", models.components.DtoGetUsageRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1433,7 +1459,9 @@ class Events(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoGetUsageResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoGetUsageResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1462,18 +1490,18 @@ class Events(BaseSDK):
         *,
         meter_id: str,
         billing_anchor: Optional[str] = None,
-        bucket_size: Optional[models.TypesWindowSize] = None,
+        bucket_size: Optional[models.components.WindowSize] = None,
         customer_id: Optional[str] = None,
         end_time: Optional[str] = None,
         external_customer_id: Optional[str] = None,
         filters: Optional[Dict[str, List[str]]] = None,
         start_time: Optional[str] = None,
-        window_size: Optional[models.TypesWindowSize] = None,
+        window_size: Optional[models.components.WindowSize] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoGetUsageResponse:
+    ) -> models.components.DtoGetUsageResponse:
         r"""Get usage by meter
 
         Use when showing usage for a specific meter (e.g. dashboard or overage check). Supports time range, filters, and grouping by customer or subscription.
@@ -1517,7 +1545,7 @@ class Events(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoGetUsageByMeterRequest(
+        request = models.components.DtoGetUsageByMeterRequest(
             billing_anchor=billing_anchor,
             bucket_size=bucket_size,
             customer_id=customer_id,
@@ -1543,7 +1571,11 @@ class Events(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoGetUsageByMeterRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoGetUsageByMeterRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1572,7 +1604,9 @@ class Events(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoGetUsageResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoGetUsageResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1601,18 +1635,18 @@ class Events(BaseSDK):
         *,
         meter_id: str,
         billing_anchor: Optional[str] = None,
-        bucket_size: Optional[models.TypesWindowSize] = None,
+        bucket_size: Optional[models.components.WindowSize] = None,
         customer_id: Optional[str] = None,
         end_time: Optional[str] = None,
         external_customer_id: Optional[str] = None,
         filters: Optional[Dict[str, List[str]]] = None,
         start_time: Optional[str] = None,
-        window_size: Optional[models.TypesWindowSize] = None,
+        window_size: Optional[models.components.WindowSize] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoGetUsageResponse:
+    ) -> models.components.DtoGetUsageResponse:
         r"""Get usage by meter
 
         Use when showing usage for a specific meter (e.g. dashboard or overage check). Supports time range, filters, and grouping by customer or subscription.
@@ -1656,7 +1690,7 @@ class Events(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoGetUsageByMeterRequest(
+        request = models.components.DtoGetUsageByMeterRequest(
             billing_anchor=billing_anchor,
             bucket_size=bucket_size,
             customer_id=customer_id,
@@ -1682,7 +1716,11 @@ class Events(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoGetUsageByMeterRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoGetUsageByMeterRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1711,7 +1749,9 @@ class Events(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoGetUsageResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoGetUsageResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1743,7 +1783,7 @@ class Events(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoGetEventByIDResponse:
+    ) -> models.components.DtoGetEventByIDResponse:
         r"""Get event
 
         Use when debugging a specific event (e.g. why it failed or how it was aggregated). Includes processing status and debug info.
@@ -1764,7 +1804,7 @@ class Events(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetEventRequest(
+        request = models.operations.GetEventRequest(
             id=id,
         )
 
@@ -1808,7 +1848,9 @@ class Events(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoGetEventByIDResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoGetEventByIDResponse, http_res
+            )
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1840,7 +1882,7 @@ class Events(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoGetEventByIDResponse:
+    ) -> models.components.DtoGetEventByIDResponse:
         r"""Get event
 
         Use when debugging a specific event (e.g. why it failed or how it was aggregated). Includes processing status and debug info.
@@ -1861,7 +1903,7 @@ class Events(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetEventRequest(
+        request = models.operations.GetEventRequest(
             id=id,
         )
 
@@ -1905,7 +1947,9 @@ class Events(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoGetEventByIDResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoGetEventByIDResponse, http_res
+            )
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res

@@ -1,0 +1,9 @@
+# UpdateEntitlementRequest
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `id`                                                                                             | *str*                                                                                            | :heavy_check_mark:                                                                               | Entitlement ID                                                                                   |
+| `body`                                                                                           | [components.DtoUpdateEntitlementRequest](../../models/components/dtoupdateentitlementrequest.md) | :heavy_check_mark:                                                                               | Entitlement configuration                                                                        |

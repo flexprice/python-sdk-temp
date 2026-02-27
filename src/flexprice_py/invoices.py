@@ -18,7 +18,7 @@ class Invoices(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCustomerMultiCurrencyInvoiceSummary:
+    ) -> models.components.DtoCustomerMultiCurrencyInvoiceSummary:
         r"""Get customer invoice summary
 
         Use when showing a customer's invoice overview (e.g. billing portal or balance summary). Includes totals and multi-currency breakdown.
@@ -39,7 +39,7 @@ class Invoices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetCustomerInvoiceSummaryRequest(
+        request = models.operations.GetCustomerInvoiceSummaryRequest(
             id=id,
         )
 
@@ -84,7 +84,7 @@ class Invoices(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoCustomerMultiCurrencyInvoiceSummary, http_res
+                models.components.DtoCustomerMultiCurrencyInvoiceSummary, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -117,7 +117,7 @@ class Invoices(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCustomerMultiCurrencyInvoiceSummary:
+    ) -> models.components.DtoCustomerMultiCurrencyInvoiceSummary:
         r"""Get customer invoice summary
 
         Use when showing a customer's invoice overview (e.g. billing portal or balance summary). Includes totals and multi-currency breakdown.
@@ -138,7 +138,7 @@ class Invoices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetCustomerInvoiceSummaryRequest(
+        request = models.operations.GetCustomerInvoiceSummaryRequest(
             id=id,
         )
 
@@ -183,7 +183,7 @@ class Invoices(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoCustomerMultiCurrencyInvoiceSummary, http_res
+                models.components.DtoCustomerMultiCurrencyInvoiceSummary, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -218,45 +218,48 @@ class Invoices(BaseSDK):
         total: str,
         amount_paid: Optional[str] = None,
         billing_period: Optional[str] = None,
-        billing_reason: Optional[models.TypesInvoiceBillingReason] = None,
+        billing_reason: Optional[models.components.InvoiceBillingReason] = None,
         coupons: Optional[List[str]] = None,
         description: Optional[str] = None,
         due_date: Optional[str] = None,
         idempotency_key: Optional[str] = None,
         invoice_coupons: Optional[
-            Union[List[models.DtoInvoiceCoupon], List[models.DtoInvoiceCouponTypedDict]]
+            Union[
+                List[models.components.DtoInvoiceCoupon],
+                List[models.components.DtoInvoiceCouponTypedDict],
+            ]
         ] = None,
         invoice_number: Optional[str] = None,
         invoice_pdf_url: Optional[str] = None,
-        invoice_status: Optional[models.TypesInvoiceStatus] = None,
-        invoice_type: Optional[models.TypesInvoiceType] = None,
+        invoice_status: Optional[models.components.InvoiceStatus] = None,
+        invoice_type: Optional[models.components.InvoiceType] = None,
         line_item_coupons: Optional[
             Union[
-                List[models.DtoInvoiceLineItemCoupon],
-                List[models.DtoInvoiceLineItemCouponTypedDict],
+                List[models.components.DtoInvoiceLineItemCoupon],
+                List[models.components.DtoInvoiceLineItemCouponTypedDict],
             ]
         ] = None,
         line_items: Optional[
             Union[
-                List[models.DtoCreateInvoiceLineItemRequest],
-                List[models.DtoCreateInvoiceLineItemRequestTypedDict],
+                List[models.components.DtoCreateInvoiceLineItemRequest],
+                List[models.components.DtoCreateInvoiceLineItemRequestTypedDict],
             ]
         ] = None,
         metadata: Optional[Dict[str, str]] = None,
-        payment_status: Optional[models.TypesPaymentStatus] = None,
+        payment_status: Optional[models.components.PaymentStatus] = None,
         period_end: Optional[str] = None,
         period_start: Optional[str] = None,
         prepared_tax_rates: Optional[
             Union[
-                List[models.DtoTaxRateResponse],
-                List[models.DtoTaxRateResponseTypedDict],
+                List[models.components.DtoTaxRateResponse],
+                List[models.components.DtoTaxRateResponseTypedDict],
             ]
         ] = None,
         subscription_id: Optional[str] = None,
         tax_rate_overrides: Optional[
             Union[
-                List[models.DtoTaxRateOverride],
-                List[models.DtoTaxRateOverrideTypedDict],
+                List[models.components.DtoTaxRateOverride],
+                List[models.components.DtoTaxRateOverrideTypedDict],
             ]
         ] = None,
         tax_rates: Optional[List[str]] = None,
@@ -265,7 +268,7 @@ class Invoices(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoInvoiceResponse:
+    ) -> models.components.DtoInvoiceResponse:
         r"""Create one-off invoice
 
         Use when creating a manual or one-off invoice (e.g. custom charge or non-recurring billing). Invoice is created in draft; finalize when ready.
@@ -313,7 +316,7 @@ class Invoices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateInvoiceRequest(
+        request = models.components.DtoCreateInvoiceRequest(
             amount_due=amount_due,
             amount_paid=amount_paid,
             billing_period=billing_period,
@@ -325,29 +328,31 @@ class Invoices(BaseSDK):
             due_date=due_date,
             idempotency_key=idempotency_key,
             invoice_coupons=utils.get_pydantic_model(
-                invoice_coupons, Optional[List[models.DtoInvoiceCoupon]]
+                invoice_coupons, Optional[List[models.components.DtoInvoiceCoupon]]
             ),
             invoice_number=invoice_number,
             invoice_pdf_url=invoice_pdf_url,
             invoice_status=invoice_status,
             invoice_type=invoice_type,
             line_item_coupons=utils.get_pydantic_model(
-                line_item_coupons, Optional[List[models.DtoInvoiceLineItemCoupon]]
+                line_item_coupons,
+                Optional[List[models.components.DtoInvoiceLineItemCoupon]],
             ),
             line_items=utils.get_pydantic_model(
-                line_items, Optional[List[models.DtoCreateInvoiceLineItemRequest]]
+                line_items,
+                Optional[List[models.components.DtoCreateInvoiceLineItemRequest]],
             ),
             metadata=metadata,
             payment_status=payment_status,
             period_end=period_end,
             period_start=period_start,
             prepared_tax_rates=utils.get_pydantic_model(
-                prepared_tax_rates, Optional[List[models.DtoTaxRateResponse]]
+                prepared_tax_rates, Optional[List[models.components.DtoTaxRateResponse]]
             ),
             subscription_id=subscription_id,
             subtotal=subtotal,
             tax_rate_overrides=utils.get_pydantic_model(
-                tax_rate_overrides, Optional[List[models.DtoTaxRateOverride]]
+                tax_rate_overrides, Optional[List[models.components.DtoTaxRateOverride]]
             ),
             tax_rates=tax_rates,
             total=total,
@@ -368,7 +373,7 @@ class Invoices(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateInvoiceRequest
+                request, False, False, "json", models.components.DtoCreateInvoiceRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -397,7 +402,9 @@ class Invoices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoInvoiceResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoInvoiceResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -431,45 +438,48 @@ class Invoices(BaseSDK):
         total: str,
         amount_paid: Optional[str] = None,
         billing_period: Optional[str] = None,
-        billing_reason: Optional[models.TypesInvoiceBillingReason] = None,
+        billing_reason: Optional[models.components.InvoiceBillingReason] = None,
         coupons: Optional[List[str]] = None,
         description: Optional[str] = None,
         due_date: Optional[str] = None,
         idempotency_key: Optional[str] = None,
         invoice_coupons: Optional[
-            Union[List[models.DtoInvoiceCoupon], List[models.DtoInvoiceCouponTypedDict]]
+            Union[
+                List[models.components.DtoInvoiceCoupon],
+                List[models.components.DtoInvoiceCouponTypedDict],
+            ]
         ] = None,
         invoice_number: Optional[str] = None,
         invoice_pdf_url: Optional[str] = None,
-        invoice_status: Optional[models.TypesInvoiceStatus] = None,
-        invoice_type: Optional[models.TypesInvoiceType] = None,
+        invoice_status: Optional[models.components.InvoiceStatus] = None,
+        invoice_type: Optional[models.components.InvoiceType] = None,
         line_item_coupons: Optional[
             Union[
-                List[models.DtoInvoiceLineItemCoupon],
-                List[models.DtoInvoiceLineItemCouponTypedDict],
+                List[models.components.DtoInvoiceLineItemCoupon],
+                List[models.components.DtoInvoiceLineItemCouponTypedDict],
             ]
         ] = None,
         line_items: Optional[
             Union[
-                List[models.DtoCreateInvoiceLineItemRequest],
-                List[models.DtoCreateInvoiceLineItemRequestTypedDict],
+                List[models.components.DtoCreateInvoiceLineItemRequest],
+                List[models.components.DtoCreateInvoiceLineItemRequestTypedDict],
             ]
         ] = None,
         metadata: Optional[Dict[str, str]] = None,
-        payment_status: Optional[models.TypesPaymentStatus] = None,
+        payment_status: Optional[models.components.PaymentStatus] = None,
         period_end: Optional[str] = None,
         period_start: Optional[str] = None,
         prepared_tax_rates: Optional[
             Union[
-                List[models.DtoTaxRateResponse],
-                List[models.DtoTaxRateResponseTypedDict],
+                List[models.components.DtoTaxRateResponse],
+                List[models.components.DtoTaxRateResponseTypedDict],
             ]
         ] = None,
         subscription_id: Optional[str] = None,
         tax_rate_overrides: Optional[
             Union[
-                List[models.DtoTaxRateOverride],
-                List[models.DtoTaxRateOverrideTypedDict],
+                List[models.components.DtoTaxRateOverride],
+                List[models.components.DtoTaxRateOverrideTypedDict],
             ]
         ] = None,
         tax_rates: Optional[List[str]] = None,
@@ -478,7 +488,7 @@ class Invoices(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoInvoiceResponse:
+    ) -> models.components.DtoInvoiceResponse:
         r"""Create one-off invoice
 
         Use when creating a manual or one-off invoice (e.g. custom charge or non-recurring billing). Invoice is created in draft; finalize when ready.
@@ -526,7 +536,7 @@ class Invoices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateInvoiceRequest(
+        request = models.components.DtoCreateInvoiceRequest(
             amount_due=amount_due,
             amount_paid=amount_paid,
             billing_period=billing_period,
@@ -538,29 +548,31 @@ class Invoices(BaseSDK):
             due_date=due_date,
             idempotency_key=idempotency_key,
             invoice_coupons=utils.get_pydantic_model(
-                invoice_coupons, Optional[List[models.DtoInvoiceCoupon]]
+                invoice_coupons, Optional[List[models.components.DtoInvoiceCoupon]]
             ),
             invoice_number=invoice_number,
             invoice_pdf_url=invoice_pdf_url,
             invoice_status=invoice_status,
             invoice_type=invoice_type,
             line_item_coupons=utils.get_pydantic_model(
-                line_item_coupons, Optional[List[models.DtoInvoiceLineItemCoupon]]
+                line_item_coupons,
+                Optional[List[models.components.DtoInvoiceLineItemCoupon]],
             ),
             line_items=utils.get_pydantic_model(
-                line_items, Optional[List[models.DtoCreateInvoiceLineItemRequest]]
+                line_items,
+                Optional[List[models.components.DtoCreateInvoiceLineItemRequest]],
             ),
             metadata=metadata,
             payment_status=payment_status,
             period_end=period_end,
             period_start=period_start,
             prepared_tax_rates=utils.get_pydantic_model(
-                prepared_tax_rates, Optional[List[models.DtoTaxRateResponse]]
+                prepared_tax_rates, Optional[List[models.components.DtoTaxRateResponse]]
             ),
             subscription_id=subscription_id,
             subtotal=subtotal,
             tax_rate_overrides=utils.get_pydantic_model(
-                tax_rate_overrides, Optional[List[models.DtoTaxRateOverride]]
+                tax_rate_overrides, Optional[List[models.components.DtoTaxRateOverride]]
             ),
             tax_rates=tax_rates,
             total=total,
@@ -581,7 +593,7 @@ class Invoices(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateInvoiceRequest
+                request, False, False, "json", models.components.DtoCreateInvoiceRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -610,7 +622,9 @@ class Invoices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoInvoiceResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoInvoiceResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -644,7 +658,7 @@ class Invoices(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoInvoiceResponse:
+    ) -> models.components.DtoInvoiceResponse:
         r"""Get invoice preview
 
         Use when showing a customer what they will be charged (e.g. preview before checkout or plan change). No invoice is created.
@@ -667,7 +681,7 @@ class Invoices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoGetPreviewInvoiceRequest(
+        request = models.components.DtoGetPreviewInvoiceRequest(
             period_end=period_end,
             period_start=period_start,
             subscription_id=subscription_id,
@@ -687,7 +701,11 @@ class Invoices(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoGetPreviewInvoiceRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoGetPreviewInvoiceRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -716,7 +734,9 @@ class Invoices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoInvoiceResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoInvoiceResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -750,7 +770,7 @@ class Invoices(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoInvoiceResponse:
+    ) -> models.components.DtoInvoiceResponse:
         r"""Get invoice preview
 
         Use when showing a customer what they will be charged (e.g. preview before checkout or plan change). No invoice is created.
@@ -773,7 +793,7 @@ class Invoices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoGetPreviewInvoiceRequest(
+        request = models.components.DtoGetPreviewInvoiceRequest(
             period_end=period_end,
             period_start=period_start,
             subscription_id=subscription_id,
@@ -793,7 +813,11 @@ class Invoices(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoGetPreviewInvoiceRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoGetPreviewInvoiceRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -822,7 +846,9 @@ class Invoices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoInvoiceResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoInvoiceResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -857,17 +883,17 @@ class Invoices(BaseSDK):
         external_customer_id: Optional[str] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         invoice_ids: Optional[List[str]] = None,
-        invoice_status: Optional[List[models.TypesInvoiceStatus]] = None,
-        invoice_type: Optional[models.TypesInvoiceType] = None,
+        invoice_status: Optional[List[models.components.InvoiceStatus]] = None,
+        invoice_type: Optional[models.components.InvoiceType] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesInvoiceFilterOrder] = None,
-        payment_status: Optional[List[models.TypesPaymentStatus]] = None,
+        order: Optional[models.components.InvoiceFilterOrder] = None,
+        payment_status: Optional[List[models.components.PaymentStatus]] = None,
         period_end_gte: Optional[str] = None,
         period_end_lte: Optional[str] = None,
         period_start_gte: Optional[str] = None,
@@ -875,18 +901,18 @@ class Invoices(BaseSDK):
         skip_line_items: Optional[bool] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.TypesStatus] = None,
+        status: Optional[models.components.Status] = None,
         subscription_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListInvoicesResponse:
+    ) -> models.components.DtoListInvoicesResponse:
         r"""Query invoices
 
         Use when listing or searching invoices (e.g. admin view or customer history). Returns a paginated list; supports filtering by customer, status, date range.
@@ -937,7 +963,7 @@ class Invoices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesInvoiceFilter(
+        request = models.components.InvoiceFilter(
             amount_due_gt=amount_due_gt,
             amount_remaining_gt=amount_remaining_gt,
             customer_id=customer_id,
@@ -945,7 +971,7 @@ class Invoices(BaseSDK):
             expand=expand,
             external_customer_id=external_customer_id,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             invoice_ids=invoice_ids,
             invoice_status=invoice_status,
@@ -960,7 +986,7 @@ class Invoices(BaseSDK):
             period_start_lte=period_start_lte,
             skip_line_items=skip_line_items,
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             start_time=start_time,
             status=status,
@@ -981,7 +1007,7 @@ class Invoices(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesInvoiceFilter
+                request, False, False, "json", models.components.InvoiceFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1010,7 +1036,9 @@ class Invoices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListInvoicesResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListInvoicesResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1045,17 +1073,17 @@ class Invoices(BaseSDK):
         external_customer_id: Optional[str] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         invoice_ids: Optional[List[str]] = None,
-        invoice_status: Optional[List[models.TypesInvoiceStatus]] = None,
-        invoice_type: Optional[models.TypesInvoiceType] = None,
+        invoice_status: Optional[List[models.components.InvoiceStatus]] = None,
+        invoice_type: Optional[models.components.InvoiceType] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesInvoiceFilterOrder] = None,
-        payment_status: Optional[List[models.TypesPaymentStatus]] = None,
+        order: Optional[models.components.InvoiceFilterOrder] = None,
+        payment_status: Optional[List[models.components.PaymentStatus]] = None,
         period_end_gte: Optional[str] = None,
         period_end_lte: Optional[str] = None,
         period_start_gte: Optional[str] = None,
@@ -1063,18 +1091,18 @@ class Invoices(BaseSDK):
         skip_line_items: Optional[bool] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.TypesStatus] = None,
+        status: Optional[models.components.Status] = None,
         subscription_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListInvoicesResponse:
+    ) -> models.components.DtoListInvoicesResponse:
         r"""Query invoices
 
         Use when listing or searching invoices (e.g. admin view or customer history). Returns a paginated list; supports filtering by customer, status, date range.
@@ -1125,7 +1153,7 @@ class Invoices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesInvoiceFilter(
+        request = models.components.InvoiceFilter(
             amount_due_gt=amount_due_gt,
             amount_remaining_gt=amount_remaining_gt,
             customer_id=customer_id,
@@ -1133,7 +1161,7 @@ class Invoices(BaseSDK):
             expand=expand,
             external_customer_id=external_customer_id,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             invoice_ids=invoice_ids,
             invoice_status=invoice_status,
@@ -1148,7 +1176,7 @@ class Invoices(BaseSDK):
             period_start_lte=period_start_lte,
             skip_line_items=skip_line_items,
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             start_time=start_time,
             status=status,
@@ -1169,7 +1197,7 @@ class Invoices(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesInvoiceFilter
+                request, False, False, "json", models.components.InvoiceFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1198,7 +1226,9 @@ class Invoices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListInvoicesResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListInvoicesResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1232,7 +1262,7 @@ class Invoices(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoInvoiceResponse:
+    ) -> models.components.DtoInvoiceResponse:
         r"""Get invoice
 
         Use when loading an invoice for display or editing (e.g. portal or reconciliation). Supports group_by for usage breakdown and force_runtime_recalculation.
@@ -1255,7 +1285,7 @@ class Invoices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetInvoiceRequest(
+        request = models.operations.GetInvoiceRequest(
             id=id,
             expand_by_source=expand_by_source,
             group_by=group_by,
@@ -1301,7 +1331,9 @@ class Invoices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoInvoiceResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoInvoiceResponse, http_res
+            )
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1335,7 +1367,7 @@ class Invoices(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoInvoiceResponse:
+    ) -> models.components.DtoInvoiceResponse:
         r"""Get invoice
 
         Use when loading an invoice for display or editing (e.g. portal or reconciliation). Supports group_by for usage breakdown and force_runtime_recalculation.
@@ -1358,7 +1390,7 @@ class Invoices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetInvoiceRequest(
+        request = models.operations.GetInvoiceRequest(
             id=id,
             expand_by_source=expand_by_source,
             group_by=group_by,
@@ -1404,7 +1436,9 @@ class Invoices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoInvoiceResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoInvoiceResponse, http_res
+            )
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1439,7 +1473,7 @@ class Invoices(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoInvoiceResponse:
+    ) -> models.components.DtoInvoiceResponse:
         r"""Update invoice
 
         Use when updating invoice metadata or due date (e.g. PDF URL, net terms). For paid invoices only safe fields can be updated.
@@ -1463,9 +1497,9 @@ class Invoices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateInvoiceRequest(
+        request = models.operations.UpdateInvoiceRequest(
             id=id,
-            body=models.DtoUpdateInvoiceRequest(
+            body=models.components.DtoUpdateInvoiceRequest(
                 due_date=due_date,
                 invoice_pdf_url=invoice_pdf_url,
                 metadata=metadata,
@@ -1486,7 +1520,11 @@ class Invoices(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdateInvoiceRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdateInvoiceRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1515,7 +1553,9 @@ class Invoices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoInvoiceResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoInvoiceResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1550,7 +1590,7 @@ class Invoices(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoInvoiceResponse:
+    ) -> models.components.DtoInvoiceResponse:
         r"""Update invoice
 
         Use when updating invoice metadata or due date (e.g. PDF URL, net terms). For paid invoices only safe fields can be updated.
@@ -1574,9 +1614,9 @@ class Invoices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateInvoiceRequest(
+        request = models.operations.UpdateInvoiceRequest(
             id=id,
-            body=models.DtoUpdateInvoiceRequest(
+            body=models.components.DtoUpdateInvoiceRequest(
                 due_date=due_date,
                 invoice_pdf_url=invoice_pdf_url,
                 metadata=metadata,
@@ -1597,7 +1637,11 @@ class Invoices(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdateInvoiceRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdateInvoiceRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1626,7 +1670,9 @@ class Invoices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoInvoiceResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoInvoiceResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1658,7 +1704,7 @@ class Invoices(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSuccessResponse:
+    ) -> models.components.DtoSuccessResponse:
         r"""Trigger invoice communication webhook
 
         Use when sending an invoice to the customer (e.g. trigger email or Slack). Payload includes full invoice details for your integration.
@@ -1679,7 +1725,7 @@ class Invoices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TriggerInvoiceCommsWebhookRequest(
+        request = models.operations.TriggerInvoiceCommsWebhookRequest(
             id=id,
         )
 
@@ -1723,7 +1769,9 @@ class Invoices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSuccessResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSuccessResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1755,7 +1803,7 @@ class Invoices(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSuccessResponse:
+    ) -> models.components.DtoSuccessResponse:
         r"""Trigger invoice communication webhook
 
         Use when sending an invoice to the customer (e.g. trigger email or Slack). Payload includes full invoice details for your integration.
@@ -1776,7 +1824,7 @@ class Invoices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TriggerInvoiceCommsWebhookRequest(
+        request = models.operations.TriggerInvoiceCommsWebhookRequest(
             id=id,
         )
 
@@ -1820,7 +1868,9 @@ class Invoices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSuccessResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSuccessResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1852,7 +1902,7 @@ class Invoices(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSuccessResponse:
+    ) -> models.components.DtoSuccessResponse:
         r"""Finalize invoice
 
         Use when locking an invoice for payment (e.g. after review). Once finalized, line items are locked; invoice can be paid or voided.
@@ -1873,7 +1923,7 @@ class Invoices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.FinalizeInvoiceRequest(
+        request = models.operations.FinalizeInvoiceRequest(
             id=id,
         )
 
@@ -1917,7 +1967,9 @@ class Invoices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSuccessResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSuccessResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1949,7 +2001,7 @@ class Invoices(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSuccessResponse:
+    ) -> models.components.DtoSuccessResponse:
         r"""Finalize invoice
 
         Use when locking an invoice for payment (e.g. after review). Once finalized, line items are locked; invoice can be paid or voided.
@@ -1970,7 +2022,7 @@ class Invoices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.FinalizeInvoiceRequest(
+        request = models.operations.FinalizeInvoiceRequest(
             id=id,
         )
 
@@ -2014,7 +2066,9 @@ class Invoices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSuccessResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSuccessResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -2042,13 +2096,13 @@ class Invoices(BaseSDK):
         self,
         *,
         id: str,
-        payment_status: models.TypesPaymentStatus,
+        payment_status: models.components.PaymentStatus,
         amount: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoInvoiceResponse:
+    ) -> models.components.DtoInvoiceResponse:
         r"""Update invoice payment status
 
         Use when reconciling payment status from an external gateway or manual entry (e.g. mark paid after bank confirmation).
@@ -2071,9 +2125,9 @@ class Invoices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateInvoicePaymentStatusRequest(
+        request = models.operations.UpdateInvoicePaymentStatusRequest(
             id=id,
-            body=models.DtoUpdatePaymentStatusRequest(
+            body=models.components.DtoUpdatePaymentStatusRequest(
                 amount=amount,
                 payment_status=payment_status,
             ),
@@ -2093,7 +2147,11 @@ class Invoices(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdatePaymentStatusRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdatePaymentStatusRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -2122,7 +2180,9 @@ class Invoices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoInvoiceResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoInvoiceResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -2150,13 +2210,13 @@ class Invoices(BaseSDK):
         self,
         *,
         id: str,
-        payment_status: models.TypesPaymentStatus,
+        payment_status: models.components.PaymentStatus,
         amount: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoInvoiceResponse:
+    ) -> models.components.DtoInvoiceResponse:
         r"""Update invoice payment status
 
         Use when reconciling payment status from an external gateway or manual entry (e.g. mark paid after bank confirmation).
@@ -2179,9 +2239,9 @@ class Invoices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateInvoicePaymentStatusRequest(
+        request = models.operations.UpdateInvoicePaymentStatusRequest(
             id=id,
-            body=models.DtoUpdatePaymentStatusRequest(
+            body=models.components.DtoUpdatePaymentStatusRequest(
                 amount=amount,
                 payment_status=payment_status,
             ),
@@ -2201,7 +2261,11 @@ class Invoices(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdatePaymentStatusRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdatePaymentStatusRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -2230,7 +2294,9 @@ class Invoices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoInvoiceResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoInvoiceResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -2262,7 +2328,7 @@ class Invoices(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSuccessResponse:
+    ) -> models.components.DtoSuccessResponse:
         r"""Attempt invoice payment
 
         Use when paying an invoice with the customer's wallet balance (e.g. prepaid credits or balance applied at checkout).
@@ -2283,7 +2349,7 @@ class Invoices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.AttemptInvoicePaymentRequest(
+        request = models.operations.AttemptInvoicePaymentRequest(
             id=id,
         )
 
@@ -2327,7 +2393,9 @@ class Invoices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSuccessResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSuccessResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -2359,7 +2427,7 @@ class Invoices(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSuccessResponse:
+    ) -> models.components.DtoSuccessResponse:
         r"""Attempt invoice payment
 
         Use when paying an invoice with the customer's wallet balance (e.g. prepaid credits or balance applied at checkout).
@@ -2380,7 +2448,7 @@ class Invoices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.AttemptInvoicePaymentRequest(
+        request = models.operations.AttemptInvoicePaymentRequest(
             id=id,
         )
 
@@ -2424,7 +2492,9 @@ class Invoices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSuccessResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSuccessResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -2479,7 +2549,7 @@ class Invoices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetInvoicePdfRequest(
+        request = models.operations.GetInvoicePdfRequest(
             id=id,
             url=url,
         )
@@ -2572,7 +2642,7 @@ class Invoices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetInvoicePdfRequest(
+        request = models.operations.GetInvoicePdfRequest(
             id=id,
             url=url,
         )
@@ -2643,7 +2713,7 @@ class Invoices(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoInvoiceResponse:
+    ) -> models.components.DtoInvoiceResponse:
         r"""Recalculate invoice
 
         Use when subscription or usage data changed and you need to refresh a draft invoice before finalizing. Optional finalize=true to lock after recalc.
@@ -2665,7 +2735,7 @@ class Invoices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.RecalculateInvoiceRequest(
+        request = models.operations.RecalculateInvoiceRequest(
             id=id,
             finalize=finalize,
         )
@@ -2710,7 +2780,9 @@ class Invoices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoInvoiceResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoInvoiceResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -2743,7 +2815,7 @@ class Invoices(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoInvoiceResponse:
+    ) -> models.components.DtoInvoiceResponse:
         r"""Recalculate invoice
 
         Use when subscription or usage data changed and you need to refresh a draft invoice before finalizing. Optional finalize=true to lock after recalc.
@@ -2765,7 +2837,7 @@ class Invoices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.RecalculateInvoiceRequest(
+        request = models.operations.RecalculateInvoiceRequest(
             id=id,
             finalize=finalize,
         )
@@ -2810,7 +2882,9 @@ class Invoices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoInvoiceResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoInvoiceResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -2842,7 +2916,7 @@ class Invoices(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSuccessResponse:
+    ) -> models.components.DtoSuccessResponse:
         r"""Void invoice
 
         Use when cancelling an invoice (e.g. order cancelled or duplicate). Only unpaid invoices can be voided.
@@ -2863,7 +2937,7 @@ class Invoices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.VoidInvoiceRequest(
+        request = models.operations.VoidInvoiceRequest(
             id=id,
         )
 
@@ -2907,7 +2981,9 @@ class Invoices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSuccessResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSuccessResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -2939,7 +3015,7 @@ class Invoices(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSuccessResponse:
+    ) -> models.components.DtoSuccessResponse:
         r"""Void invoice
 
         Use when cancelling an invoice (e.g. order cancelled or duplicate). Only unpaid invoices can be voided.
@@ -2960,7 +3036,7 @@ class Invoices(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.VoidInvoiceRequest(
+        request = models.operations.VoidInvoiceRequest(
             id=id,
         )
 
@@ -3004,7 +3080,9 @@ class Invoices(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSuccessResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSuccessResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res

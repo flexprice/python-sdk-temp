@@ -12,26 +12,26 @@ class Subscriptions(BaseSDK):
     def create_subscription(
         self,
         *,
-        billing_cadence: models.TypesBillingCadence,
-        billing_period: models.TypesBillingPeriod,
+        billing_cadence: models.components.BillingCadence,
+        billing_period: models.components.BillingPeriod,
         currency: str,
         plan_id: str,
         addons: Optional[
             Union[
-                List[models.DtoAddAddonToSubscriptionRequest],
-                List[models.DtoAddAddonToSubscriptionRequestTypedDict],
+                List[models.components.DtoAddAddonToSubscriptionRequest],
+                List[models.components.DtoAddAddonToSubscriptionRequestTypedDict],
             ]
         ] = None,
-        billing_cycle: Optional[models.TypesBillingCycle] = None,
+        billing_cycle: Optional[models.components.BillingCycle] = None,
         billing_period_count: Optional[int] = None,
-        collection_method: Optional[models.TypesCollectionMethod] = None,
+        collection_method: Optional[models.components.CollectionMethod] = None,
         commitment_amount: Optional[str] = None,
-        commitment_duration: Optional[models.TypesBillingPeriod] = None,
+        commitment_duration: Optional[models.components.BillingPeriod] = None,
         coupons: Optional[List[str]] = None,
         credit_grants: Optional[
             Union[
-                List[models.DtoCreateCreditGrantRequest],
-                List[models.DtoCreateCreditGrantRequestTypedDict],
+                List[models.components.DtoCreateCreditGrantRequest],
+                List[models.components.DtoCreateCreditGrantRequestTypedDict],
             ]
         ] = None,
         customer_id: Optional[str] = None,
@@ -40,18 +40,18 @@ class Subscriptions(BaseSDK):
         end_date: Optional[str] = None,
         external_customer_id: Optional[str] = None,
         gateway_payment_method_id: Optional[str] = None,
-        invoice_billing: Optional[models.TypesInvoiceBilling] = None,
+        invoice_billing: Optional[models.components.InvoiceBilling] = None,
         line_item_commitments: Optional[
             Union[
-                Dict[str, models.DtoLineItemCommitmentConfig],
-                Dict[str, models.DtoLineItemCommitmentConfigTypedDict],
+                Dict[str, models.components.DtoLineItemCommitmentConfig],
+                Dict[str, models.components.DtoLineItemCommitmentConfigTypedDict],
             ]
         ] = None,
         line_item_coupons: Optional[Dict[str, List[str]]] = None,
         line_items: Optional[
             Union[
-                List[models.DtoCreateSubscriptionLineItemRequest],
-                List[models.DtoCreateSubscriptionLineItemRequestTypedDict],
+                List[models.components.DtoCreateSubscriptionLineItemRequest],
+                List[models.components.DtoCreateSubscriptionLineItemRequestTypedDict],
             ]
         ] = None,
         lookup_key: Optional[str] = None,
@@ -59,32 +59,32 @@ class Subscriptions(BaseSDK):
         overage_factor: Optional[str] = None,
         override_entitlements: Optional[
             Union[
-                List[models.DtoOverrideEntitlementRequest],
-                List[models.DtoOverrideEntitlementRequestTypedDict],
+                List[models.components.DtoOverrideEntitlementRequest],
+                List[models.components.DtoOverrideEntitlementRequestTypedDict],
             ]
         ] = None,
         override_line_items: Optional[
             Union[
-                List[models.DtoOverrideLineItemRequest],
-                List[models.DtoOverrideLineItemRequestTypedDict],
+                List[models.components.DtoOverrideLineItemRequest],
+                List[models.components.DtoOverrideLineItemRequestTypedDict],
             ]
         ] = None,
         parent_subscription_id: Optional[str] = None,
-        payment_behavior: Optional[models.TypesPaymentBehavior] = None,
-        payment_terms: Optional[models.TypesPaymentTerms] = None,
+        payment_behavior: Optional[models.components.PaymentBehavior] = None,
+        payment_terms: Optional[models.components.PaymentTerms] = None,
         phases: Optional[
             Union[
-                List[models.DtoSubscriptionPhaseCreateRequest],
-                List[models.DtoSubscriptionPhaseCreateRequestTypedDict],
+                List[models.components.DtoSubscriptionPhaseCreateRequest],
+                List[models.components.DtoSubscriptionPhaseCreateRequestTypedDict],
             ]
         ] = None,
-        proration_behavior: Optional[models.TypesProrationBehavior] = None,
+        proration_behavior: Optional[models.components.ProrationBehavior] = None,
         start_date: Optional[str] = None,
-        subscription_status: Optional[models.TypesSubscriptionStatus] = None,
+        subscription_status: Optional[models.components.SubscriptionStatus] = None,
         tax_rate_overrides: Optional[
             Union[
-                List[models.DtoTaxRateOverride],
-                List[models.DtoTaxRateOverrideTypedDict],
+                List[models.components.DtoTaxRateOverride],
+                List[models.components.DtoTaxRateOverrideTypedDict],
             ]
         ] = None,
         trial_end: Optional[str] = None,
@@ -93,7 +93,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSubscriptionResponse:
+    ) -> models.components.DtoSubscriptionResponse:
         r"""Create subscription
 
         Use when onboarding a customer to a plan or starting a new subscription. Ideal for draft subscriptions (activate later) or active from start.
@@ -153,9 +153,10 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateSubscriptionRequest(
+        request = models.components.DtoCreateSubscriptionRequest(
             addons=utils.get_pydantic_model(
-                addons, Optional[List[models.DtoAddAddonToSubscriptionRequest]]
+                addons,
+                Optional[List[models.components.DtoAddAddonToSubscriptionRequest]],
             ),
             billing_cadence=billing_cadence,
             billing_cycle=billing_cycle,
@@ -166,7 +167,8 @@ class Subscriptions(BaseSDK):
             commitment_duration=commitment_duration,
             coupons=coupons,
             credit_grants=utils.get_pydantic_model(
-                credit_grants, Optional[List[models.DtoCreateCreditGrantRequest]]
+                credit_grants,
+                Optional[List[models.components.DtoCreateCreditGrantRequest]],
             ),
             currency=currency,
             customer_id=customer_id,
@@ -178,34 +180,37 @@ class Subscriptions(BaseSDK):
             invoice_billing=invoice_billing,
             line_item_commitments=utils.get_pydantic_model(
                 line_item_commitments,
-                Optional[Dict[str, models.DtoLineItemCommitmentConfig]],
+                Optional[Dict[str, models.components.DtoLineItemCommitmentConfig]],
             ),
             line_item_coupons=line_item_coupons,
             line_items=utils.get_pydantic_model(
-                line_items, Optional[List[models.DtoCreateSubscriptionLineItemRequest]]
+                line_items,
+                Optional[List[models.components.DtoCreateSubscriptionLineItemRequest]],
             ),
             lookup_key=lookup_key,
             metadata=metadata,
             overage_factor=overage_factor,
             override_entitlements=utils.get_pydantic_model(
                 override_entitlements,
-                Optional[List[models.DtoOverrideEntitlementRequest]],
+                Optional[List[models.components.DtoOverrideEntitlementRequest]],
             ),
             override_line_items=utils.get_pydantic_model(
-                override_line_items, Optional[List[models.DtoOverrideLineItemRequest]]
+                override_line_items,
+                Optional[List[models.components.DtoOverrideLineItemRequest]],
             ),
             parent_subscription_id=parent_subscription_id,
             payment_behavior=payment_behavior,
             payment_terms=payment_terms,
             phases=utils.get_pydantic_model(
-                phases, Optional[List[models.DtoSubscriptionPhaseCreateRequest]]
+                phases,
+                Optional[List[models.components.DtoSubscriptionPhaseCreateRequest]],
             ),
             plan_id=plan_id,
             proration_behavior=proration_behavior,
             start_date=start_date,
             subscription_status=subscription_status,
             tax_rate_overrides=utils.get_pydantic_model(
-                tax_rate_overrides, Optional[List[models.DtoTaxRateOverride]]
+                tax_rate_overrides, Optional[List[models.components.DtoTaxRateOverride]]
             ),
             trial_end=trial_end,
             trial_start=trial_start,
@@ -225,7 +230,11 @@ class Subscriptions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateSubscriptionRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoCreateSubscriptionRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -254,7 +263,9 @@ class Subscriptions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoSubscriptionResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSubscriptionResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -281,26 +292,26 @@ class Subscriptions(BaseSDK):
     async def create_subscription_async(
         self,
         *,
-        billing_cadence: models.TypesBillingCadence,
-        billing_period: models.TypesBillingPeriod,
+        billing_cadence: models.components.BillingCadence,
+        billing_period: models.components.BillingPeriod,
         currency: str,
         plan_id: str,
         addons: Optional[
             Union[
-                List[models.DtoAddAddonToSubscriptionRequest],
-                List[models.DtoAddAddonToSubscriptionRequestTypedDict],
+                List[models.components.DtoAddAddonToSubscriptionRequest],
+                List[models.components.DtoAddAddonToSubscriptionRequestTypedDict],
             ]
         ] = None,
-        billing_cycle: Optional[models.TypesBillingCycle] = None,
+        billing_cycle: Optional[models.components.BillingCycle] = None,
         billing_period_count: Optional[int] = None,
-        collection_method: Optional[models.TypesCollectionMethod] = None,
+        collection_method: Optional[models.components.CollectionMethod] = None,
         commitment_amount: Optional[str] = None,
-        commitment_duration: Optional[models.TypesBillingPeriod] = None,
+        commitment_duration: Optional[models.components.BillingPeriod] = None,
         coupons: Optional[List[str]] = None,
         credit_grants: Optional[
             Union[
-                List[models.DtoCreateCreditGrantRequest],
-                List[models.DtoCreateCreditGrantRequestTypedDict],
+                List[models.components.DtoCreateCreditGrantRequest],
+                List[models.components.DtoCreateCreditGrantRequestTypedDict],
             ]
         ] = None,
         customer_id: Optional[str] = None,
@@ -309,18 +320,18 @@ class Subscriptions(BaseSDK):
         end_date: Optional[str] = None,
         external_customer_id: Optional[str] = None,
         gateway_payment_method_id: Optional[str] = None,
-        invoice_billing: Optional[models.TypesInvoiceBilling] = None,
+        invoice_billing: Optional[models.components.InvoiceBilling] = None,
         line_item_commitments: Optional[
             Union[
-                Dict[str, models.DtoLineItemCommitmentConfig],
-                Dict[str, models.DtoLineItemCommitmentConfigTypedDict],
+                Dict[str, models.components.DtoLineItemCommitmentConfig],
+                Dict[str, models.components.DtoLineItemCommitmentConfigTypedDict],
             ]
         ] = None,
         line_item_coupons: Optional[Dict[str, List[str]]] = None,
         line_items: Optional[
             Union[
-                List[models.DtoCreateSubscriptionLineItemRequest],
-                List[models.DtoCreateSubscriptionLineItemRequestTypedDict],
+                List[models.components.DtoCreateSubscriptionLineItemRequest],
+                List[models.components.DtoCreateSubscriptionLineItemRequestTypedDict],
             ]
         ] = None,
         lookup_key: Optional[str] = None,
@@ -328,32 +339,32 @@ class Subscriptions(BaseSDK):
         overage_factor: Optional[str] = None,
         override_entitlements: Optional[
             Union[
-                List[models.DtoOverrideEntitlementRequest],
-                List[models.DtoOverrideEntitlementRequestTypedDict],
+                List[models.components.DtoOverrideEntitlementRequest],
+                List[models.components.DtoOverrideEntitlementRequestTypedDict],
             ]
         ] = None,
         override_line_items: Optional[
             Union[
-                List[models.DtoOverrideLineItemRequest],
-                List[models.DtoOverrideLineItemRequestTypedDict],
+                List[models.components.DtoOverrideLineItemRequest],
+                List[models.components.DtoOverrideLineItemRequestTypedDict],
             ]
         ] = None,
         parent_subscription_id: Optional[str] = None,
-        payment_behavior: Optional[models.TypesPaymentBehavior] = None,
-        payment_terms: Optional[models.TypesPaymentTerms] = None,
+        payment_behavior: Optional[models.components.PaymentBehavior] = None,
+        payment_terms: Optional[models.components.PaymentTerms] = None,
         phases: Optional[
             Union[
-                List[models.DtoSubscriptionPhaseCreateRequest],
-                List[models.DtoSubscriptionPhaseCreateRequestTypedDict],
+                List[models.components.DtoSubscriptionPhaseCreateRequest],
+                List[models.components.DtoSubscriptionPhaseCreateRequestTypedDict],
             ]
         ] = None,
-        proration_behavior: Optional[models.TypesProrationBehavior] = None,
+        proration_behavior: Optional[models.components.ProrationBehavior] = None,
         start_date: Optional[str] = None,
-        subscription_status: Optional[models.TypesSubscriptionStatus] = None,
+        subscription_status: Optional[models.components.SubscriptionStatus] = None,
         tax_rate_overrides: Optional[
             Union[
-                List[models.DtoTaxRateOverride],
-                List[models.DtoTaxRateOverrideTypedDict],
+                List[models.components.DtoTaxRateOverride],
+                List[models.components.DtoTaxRateOverrideTypedDict],
             ]
         ] = None,
         trial_end: Optional[str] = None,
@@ -362,7 +373,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSubscriptionResponse:
+    ) -> models.components.DtoSubscriptionResponse:
         r"""Create subscription
 
         Use when onboarding a customer to a plan or starting a new subscription. Ideal for draft subscriptions (activate later) or active from start.
@@ -422,9 +433,10 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateSubscriptionRequest(
+        request = models.components.DtoCreateSubscriptionRequest(
             addons=utils.get_pydantic_model(
-                addons, Optional[List[models.DtoAddAddonToSubscriptionRequest]]
+                addons,
+                Optional[List[models.components.DtoAddAddonToSubscriptionRequest]],
             ),
             billing_cadence=billing_cadence,
             billing_cycle=billing_cycle,
@@ -435,7 +447,8 @@ class Subscriptions(BaseSDK):
             commitment_duration=commitment_duration,
             coupons=coupons,
             credit_grants=utils.get_pydantic_model(
-                credit_grants, Optional[List[models.DtoCreateCreditGrantRequest]]
+                credit_grants,
+                Optional[List[models.components.DtoCreateCreditGrantRequest]],
             ),
             currency=currency,
             customer_id=customer_id,
@@ -447,34 +460,37 @@ class Subscriptions(BaseSDK):
             invoice_billing=invoice_billing,
             line_item_commitments=utils.get_pydantic_model(
                 line_item_commitments,
-                Optional[Dict[str, models.DtoLineItemCommitmentConfig]],
+                Optional[Dict[str, models.components.DtoLineItemCommitmentConfig]],
             ),
             line_item_coupons=line_item_coupons,
             line_items=utils.get_pydantic_model(
-                line_items, Optional[List[models.DtoCreateSubscriptionLineItemRequest]]
+                line_items,
+                Optional[List[models.components.DtoCreateSubscriptionLineItemRequest]],
             ),
             lookup_key=lookup_key,
             metadata=metadata,
             overage_factor=overage_factor,
             override_entitlements=utils.get_pydantic_model(
                 override_entitlements,
-                Optional[List[models.DtoOverrideEntitlementRequest]],
+                Optional[List[models.components.DtoOverrideEntitlementRequest]],
             ),
             override_line_items=utils.get_pydantic_model(
-                override_line_items, Optional[List[models.DtoOverrideLineItemRequest]]
+                override_line_items,
+                Optional[List[models.components.DtoOverrideLineItemRequest]],
             ),
             parent_subscription_id=parent_subscription_id,
             payment_behavior=payment_behavior,
             payment_terms=payment_terms,
             phases=utils.get_pydantic_model(
-                phases, Optional[List[models.DtoSubscriptionPhaseCreateRequest]]
+                phases,
+                Optional[List[models.components.DtoSubscriptionPhaseCreateRequest]],
             ),
             plan_id=plan_id,
             proration_behavior=proration_behavior,
             start_date=start_date,
             subscription_status=subscription_status,
             tax_rate_overrides=utils.get_pydantic_model(
-                tax_rate_overrides, Optional[List[models.DtoTaxRateOverride]]
+                tax_rate_overrides, Optional[List[models.components.DtoTaxRateOverride]]
             ),
             trial_end=trial_end,
             trial_start=trial_start,
@@ -494,7 +510,11 @@ class Subscriptions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateSubscriptionRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoCreateSubscriptionRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -523,7 +543,9 @@ class Subscriptions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoSubscriptionResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSubscriptionResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -554,8 +576,8 @@ class Subscriptions(BaseSDK):
         subscription_id: str,
         line_item_commitments: Optional[
             Union[
-                Dict[str, models.DtoLineItemCommitmentConfig],
-                Dict[str, models.DtoLineItemCommitmentConfigTypedDict],
+                Dict[str, models.components.DtoLineItemCommitmentConfig],
+                Dict[str, models.components.DtoLineItemCommitmentConfigTypedDict],
             ]
         ] = None,
         metadata: Optional[Dict[str, Any]] = None,
@@ -564,7 +586,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoAddonAssociationResponse:
+    ) -> models.components.DtoAddonAssociationResponse:
         r"""Add addon to subscription
 
         Use when adding an optional product or add-on to an existing subscription (e.g. extra storage or support tier).
@@ -589,11 +611,11 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoAddAddonRequest(
+        request = models.components.DtoAddAddonRequest(
             addon_id=addon_id,
             line_item_commitments=utils.get_pydantic_model(
                 line_item_commitments,
-                Optional[Dict[str, models.DtoLineItemCommitmentConfig]],
+                Optional[Dict[str, models.components.DtoLineItemCommitmentConfig]],
             ),
             metadata=metadata,
             start_date=start_date,
@@ -614,7 +636,7 @@ class Subscriptions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoAddAddonRequest
+                request, False, False, "json", models.components.DtoAddAddonRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -643,7 +665,9 @@ class Subscriptions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoAddonAssociationResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoAddonAssociationResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -674,8 +698,8 @@ class Subscriptions(BaseSDK):
         subscription_id: str,
         line_item_commitments: Optional[
             Union[
-                Dict[str, models.DtoLineItemCommitmentConfig],
-                Dict[str, models.DtoLineItemCommitmentConfigTypedDict],
+                Dict[str, models.components.DtoLineItemCommitmentConfig],
+                Dict[str, models.components.DtoLineItemCommitmentConfigTypedDict],
             ]
         ] = None,
         metadata: Optional[Dict[str, Any]] = None,
@@ -684,7 +708,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoAddonAssociationResponse:
+    ) -> models.components.DtoAddonAssociationResponse:
         r"""Add addon to subscription
 
         Use when adding an optional product or add-on to an existing subscription (e.g. extra storage or support tier).
@@ -709,11 +733,11 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoAddAddonRequest(
+        request = models.components.DtoAddAddonRequest(
             addon_id=addon_id,
             line_item_commitments=utils.get_pydantic_model(
                 line_item_commitments,
-                Optional[Dict[str, models.DtoLineItemCommitmentConfig]],
+                Optional[Dict[str, models.components.DtoLineItemCommitmentConfig]],
             ),
             metadata=metadata,
             start_date=start_date,
@@ -734,7 +758,7 @@ class Subscriptions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoAddAddonRequest
+                request, False, False, "json", models.components.DtoAddAddonRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -763,7 +787,9 @@ class Subscriptions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoAddonAssociationResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoAddonAssociationResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -796,7 +822,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSuccessResponse:
+    ) -> models.components.DtoSuccessResponse:
         r"""Remove addon from subscription
 
         Use when removing an add-on from a subscription (e.g. downgrade or opt-out).
@@ -818,7 +844,7 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoRemoveAddonRequest(
+        request = models.components.DtoRemoveAddonRequest(
             addon_association_id=addon_association_id,
             reason=reason,
         )
@@ -837,7 +863,7 @@ class Subscriptions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoRemoveAddonRequest
+                request, False, False, "json", models.components.DtoRemoveAddonRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -866,7 +892,9 @@ class Subscriptions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSuccessResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSuccessResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -899,7 +927,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSuccessResponse:
+    ) -> models.components.DtoSuccessResponse:
         r"""Remove addon from subscription
 
         Use when removing an add-on from a subscription (e.g. downgrade or opt-out).
@@ -921,7 +949,7 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoRemoveAddonRequest(
+        request = models.components.DtoRemoveAddonRequest(
             addon_association_id=addon_association_id,
             reason=reason,
         )
@@ -940,7 +968,7 @@ class Subscriptions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoRemoveAddonRequest
+                request, False, False, "json", models.components.DtoRemoveAddonRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -969,7 +997,9 @@ class Subscriptions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSuccessResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSuccessResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -998,31 +1028,34 @@ class Subscriptions(BaseSDK):
         *,
         id: str,
         amount: Optional[str] = None,
-        billing_model: Optional[models.TypesBillingModel] = None,
+        billing_model: Optional[models.components.BillingModel] = None,
         commitment_amount: Optional[float] = None,
-        commitment_duration: Optional[models.TypesBillingPeriod] = None,
+        commitment_duration: Optional[models.components.BillingPeriod] = None,
         commitment_overage_factor: Optional[float] = None,
         commitment_quantity: Optional[float] = None,
         commitment_true_up_enabled: Optional[bool] = None,
-        commitment_type: Optional[models.TypesCommitmentType] = None,
+        commitment_type: Optional[models.components.CommitmentType] = None,
         commitment_windowed: Optional[bool] = None,
         effective_from: Optional[str] = None,
         metadata: Optional[Dict[str, str]] = None,
-        tier_mode: Optional[models.TypesBillingTier] = None,
+        tier_mode: Optional[models.components.BillingTier] = None,
         tiers: Optional[
             Union[
-                List[models.DtoCreatePriceTier],
-                List[models.DtoCreatePriceTierTypedDict],
+                List[models.components.DtoCreatePriceTier],
+                List[models.components.DtoCreatePriceTierTypedDict],
             ]
         ] = None,
         transform_quantity: Optional[
-            Union[models.PriceTransformQuantity, models.PriceTransformQuantityTypedDict]
+            Union[
+                models.components.PriceTransformQuantity,
+                models.components.PriceTransformQuantityTypedDict,
+            ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSubscriptionLineItemResponse:
+    ) -> models.components.DtoSubscriptionLineItemResponse:
         r"""Update subscription line item
 
         Use when changing a subscription line item (e.g. quantity or price). Implemented by ending the current line and creating a new one for clean billing.
@@ -1057,9 +1090,9 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateSubscriptionLineItemRequest(
+        request = models.operations.UpdateSubscriptionLineItemRequest(
             id=id,
-            body=models.DtoUpdateSubscriptionLineItemRequest(
+            body=models.components.DtoUpdateSubscriptionLineItemRequest(
                 amount=amount,
                 billing_model=billing_model,
                 commitment_amount=commitment_amount,
@@ -1073,10 +1106,11 @@ class Subscriptions(BaseSDK):
                 metadata=metadata,
                 tier_mode=tier_mode,
                 tiers=utils.get_pydantic_model(
-                    tiers, Optional[List[models.DtoCreatePriceTier]]
+                    tiers, Optional[List[models.components.DtoCreatePriceTier]]
                 ),
                 transform_quantity=utils.get_pydantic_model(
-                    transform_quantity, Optional[models.PriceTransformQuantity]
+                    transform_quantity,
+                    Optional[models.components.PriceTransformQuantity],
                 ),
             ),
         )
@@ -1099,7 +1133,7 @@ class Subscriptions(BaseSDK):
                 False,
                 False,
                 "json",
-                models.DtoUpdateSubscriptionLineItemRequest,
+                models.components.DtoUpdateSubscriptionLineItemRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1129,7 +1163,7 @@ class Subscriptions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoSubscriptionLineItemResponse, http_res
+                models.components.DtoSubscriptionLineItemResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -1159,31 +1193,34 @@ class Subscriptions(BaseSDK):
         *,
         id: str,
         amount: Optional[str] = None,
-        billing_model: Optional[models.TypesBillingModel] = None,
+        billing_model: Optional[models.components.BillingModel] = None,
         commitment_amount: Optional[float] = None,
-        commitment_duration: Optional[models.TypesBillingPeriod] = None,
+        commitment_duration: Optional[models.components.BillingPeriod] = None,
         commitment_overage_factor: Optional[float] = None,
         commitment_quantity: Optional[float] = None,
         commitment_true_up_enabled: Optional[bool] = None,
-        commitment_type: Optional[models.TypesCommitmentType] = None,
+        commitment_type: Optional[models.components.CommitmentType] = None,
         commitment_windowed: Optional[bool] = None,
         effective_from: Optional[str] = None,
         metadata: Optional[Dict[str, str]] = None,
-        tier_mode: Optional[models.TypesBillingTier] = None,
+        tier_mode: Optional[models.components.BillingTier] = None,
         tiers: Optional[
             Union[
-                List[models.DtoCreatePriceTier],
-                List[models.DtoCreatePriceTierTypedDict],
+                List[models.components.DtoCreatePriceTier],
+                List[models.components.DtoCreatePriceTierTypedDict],
             ]
         ] = None,
         transform_quantity: Optional[
-            Union[models.PriceTransformQuantity, models.PriceTransformQuantityTypedDict]
+            Union[
+                models.components.PriceTransformQuantity,
+                models.components.PriceTransformQuantityTypedDict,
+            ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSubscriptionLineItemResponse:
+    ) -> models.components.DtoSubscriptionLineItemResponse:
         r"""Update subscription line item
 
         Use when changing a subscription line item (e.g. quantity or price). Implemented by ending the current line and creating a new one for clean billing.
@@ -1218,9 +1255,9 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateSubscriptionLineItemRequest(
+        request = models.operations.UpdateSubscriptionLineItemRequest(
             id=id,
-            body=models.DtoUpdateSubscriptionLineItemRequest(
+            body=models.components.DtoUpdateSubscriptionLineItemRequest(
                 amount=amount,
                 billing_model=billing_model,
                 commitment_amount=commitment_amount,
@@ -1234,10 +1271,11 @@ class Subscriptions(BaseSDK):
                 metadata=metadata,
                 tier_mode=tier_mode,
                 tiers=utils.get_pydantic_model(
-                    tiers, Optional[List[models.DtoCreatePriceTier]]
+                    tiers, Optional[List[models.components.DtoCreatePriceTier]]
                 ),
                 transform_quantity=utils.get_pydantic_model(
-                    transform_quantity, Optional[models.PriceTransformQuantity]
+                    transform_quantity,
+                    Optional[models.components.PriceTransformQuantity],
                 ),
             ),
         )
@@ -1260,7 +1298,7 @@ class Subscriptions(BaseSDK):
                 False,
                 False,
                 "json",
-                models.DtoUpdateSubscriptionLineItemRequest,
+                models.components.DtoUpdateSubscriptionLineItemRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1290,7 +1328,7 @@ class Subscriptions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoSubscriptionLineItemResponse, http_res
+                models.components.DtoSubscriptionLineItemResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -1324,7 +1362,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSubscriptionLineItemResponse:
+    ) -> models.components.DtoSubscriptionLineItemResponse:
         r"""Delete subscription line item
 
         Use when removing a charge or seat from a subscription (e.g. downgrade). Line item ends; retained for history but no longer billed.
@@ -1346,9 +1384,9 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteSubscriptionLineItemRequest(
+        request = models.operations.DeleteSubscriptionLineItemRequest(
             id=id,
-            body=models.DtoDeleteSubscriptionLineItemRequest(
+            body=models.components.DtoDeleteSubscriptionLineItemRequest(
                 effective_from=effective_from,
             ),
         )
@@ -1371,7 +1409,7 @@ class Subscriptions(BaseSDK):
                 False,
                 False,
                 "json",
-                models.DtoDeleteSubscriptionLineItemRequest,
+                models.components.DtoDeleteSubscriptionLineItemRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1401,7 +1439,7 @@ class Subscriptions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoSubscriptionLineItemResponse, http_res
+                models.components.DtoSubscriptionLineItemResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -1435,7 +1473,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSubscriptionLineItemResponse:
+    ) -> models.components.DtoSubscriptionLineItemResponse:
         r"""Delete subscription line item
 
         Use when removing a charge or seat from a subscription (e.g. downgrade). Line item ends; retained for history but no longer billed.
@@ -1457,9 +1495,9 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteSubscriptionLineItemRequest(
+        request = models.operations.DeleteSubscriptionLineItemRequest(
             id=id,
-            body=models.DtoDeleteSubscriptionLineItemRequest(
+            body=models.components.DtoDeleteSubscriptionLineItemRequest(
                 effective_from=effective_from,
             ),
         )
@@ -1482,7 +1520,7 @@ class Subscriptions(BaseSDK):
                 False,
                 False,
                 "json",
-                models.DtoDeleteSubscriptionLineItemRequest,
+                models.components.DtoDeleteSubscriptionLineItemRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1512,7 +1550,7 @@ class Subscriptions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoSubscriptionLineItemResponse, http_res
+                models.components.DtoSubscriptionLineItemResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -1541,40 +1579,42 @@ class Subscriptions(BaseSDK):
         self,
         *,
         active_at: Optional[str] = None,
-        billing_cadence: Optional[List[models.TypesBillingCadence]] = None,
-        billing_period: Optional[List[models.TypesBillingPeriod]] = None,
+        billing_cadence: Optional[List[models.components.BillingCadence]] = None,
+        billing_period: Optional[List[models.components.BillingPeriod]] = None,
         customer_id: Optional[str] = None,
         end_time: Optional[str] = None,
         expand: Optional[str] = None,
         external_customer_id: Optional[str] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         invoicing_customer_ids: Optional[List[str]] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesSubscriptionFilterOrder] = None,
+        order: Optional[models.components.SubscriptionFilterOrder] = None,
         parent_subscription_ids: Optional[List[str]] = None,
         plan_id: Optional[str] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.TypesStatus] = None,
+        status: Optional[models.components.Status] = None,
         subscription_ids: Optional[List[str]] = None,
-        subscription_status: Optional[List[models.TypesSubscriptionStatus]] = None,
+        subscription_status: Optional[
+            List[models.components.SubscriptionStatus]
+        ] = None,
         with_line_items: Optional[bool] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListSubscriptionsResponse:
+    ) -> models.components.DtoListSubscriptionsResponse:
         r"""Query subscriptions
 
         Use when listing or searching subscriptions (e.g. admin view or customer subscription list). Returns a paginated list; supports filtering by customer, plan, status.
@@ -1614,7 +1654,7 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesSubscriptionFilter(
+        request = models.components.SubscriptionFilter(
             active_at=active_at,
             billing_cadence=billing_cadence,
             billing_period=billing_period,
@@ -1623,7 +1663,7 @@ class Subscriptions(BaseSDK):
             expand=expand,
             external_customer_id=external_customer_id,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             invoicing_customer_ids=invoicing_customer_ids,
             limit=limit,
@@ -1632,7 +1672,7 @@ class Subscriptions(BaseSDK):
             parent_subscription_ids=parent_subscription_ids,
             plan_id=plan_id,
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             start_time=start_time,
             status=status,
@@ -1655,7 +1695,7 @@ class Subscriptions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesSubscriptionFilter
+                request, False, False, "json", models.components.SubscriptionFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1685,7 +1725,7 @@ class Subscriptions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoListSubscriptionsResponse, http_res
+                models.components.DtoListSubscriptionsResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -1714,40 +1754,42 @@ class Subscriptions(BaseSDK):
         self,
         *,
         active_at: Optional[str] = None,
-        billing_cadence: Optional[List[models.TypesBillingCadence]] = None,
-        billing_period: Optional[List[models.TypesBillingPeriod]] = None,
+        billing_cadence: Optional[List[models.components.BillingCadence]] = None,
+        billing_period: Optional[List[models.components.BillingPeriod]] = None,
         customer_id: Optional[str] = None,
         end_time: Optional[str] = None,
         expand: Optional[str] = None,
         external_customer_id: Optional[str] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         invoicing_customer_ids: Optional[List[str]] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesSubscriptionFilterOrder] = None,
+        order: Optional[models.components.SubscriptionFilterOrder] = None,
         parent_subscription_ids: Optional[List[str]] = None,
         plan_id: Optional[str] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.TypesStatus] = None,
+        status: Optional[models.components.Status] = None,
         subscription_ids: Optional[List[str]] = None,
-        subscription_status: Optional[List[models.TypesSubscriptionStatus]] = None,
+        subscription_status: Optional[
+            List[models.components.SubscriptionStatus]
+        ] = None,
         with_line_items: Optional[bool] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListSubscriptionsResponse:
+    ) -> models.components.DtoListSubscriptionsResponse:
         r"""Query subscriptions
 
         Use when listing or searching subscriptions (e.g. admin view or customer subscription list). Returns a paginated list; supports filtering by customer, plan, status.
@@ -1787,7 +1829,7 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesSubscriptionFilter(
+        request = models.components.SubscriptionFilter(
             active_at=active_at,
             billing_cadence=billing_cadence,
             billing_period=billing_period,
@@ -1796,7 +1838,7 @@ class Subscriptions(BaseSDK):
             expand=expand,
             external_customer_id=external_customer_id,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             invoicing_customer_ids=invoicing_customer_ids,
             limit=limit,
@@ -1805,7 +1847,7 @@ class Subscriptions(BaseSDK):
             parent_subscription_ids=parent_subscription_ids,
             plan_id=plan_id,
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             start_time=start_time,
             status=status,
@@ -1828,7 +1870,7 @@ class Subscriptions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesSubscriptionFilter
+                request, False, False, "json", models.components.SubscriptionFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1858,7 +1900,7 @@ class Subscriptions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoListSubscriptionsResponse, http_res
+                models.components.DtoListSubscriptionsResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -1894,7 +1936,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoGetUsageBySubscriptionResponse:
+    ) -> models.components.DtoGetUsageBySubscriptionResponse:
         r"""Get usage by subscription
 
         Use when showing usage for a subscription (e.g. in a portal or for overage checks). Supports time range and filters.
@@ -1918,7 +1960,7 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoGetUsageBySubscriptionRequest(
+        request = models.components.DtoGetUsageBySubscriptionRequest(
             end_time=end_time,
             lifetime_usage=lifetime_usage,
             start_time=start_time,
@@ -1939,7 +1981,11 @@ class Subscriptions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoGetUsageBySubscriptionRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoGetUsageBySubscriptionRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1969,7 +2015,7 @@ class Subscriptions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoGetUsageBySubscriptionResponse, http_res
+                models.components.DtoGetUsageBySubscriptionResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -2005,7 +2051,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoGetUsageBySubscriptionResponse:
+    ) -> models.components.DtoGetUsageBySubscriptionResponse:
         r"""Get usage by subscription
 
         Use when showing usage for a subscription (e.g. in a portal or for overage checks). Supports time range and filters.
@@ -2029,7 +2075,7 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoGetUsageBySubscriptionRequest(
+        request = models.components.DtoGetUsageBySubscriptionRequest(
             end_time=end_time,
             lifetime_usage=lifetime_usage,
             start_time=start_time,
@@ -2050,7 +2096,11 @@ class Subscriptions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoGetUsageBySubscriptionRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoGetUsageBySubscriptionRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -2080,7 +2130,7 @@ class Subscriptions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoGetUsageBySubscriptionResponse, http_res
+                models.components.DtoGetUsageBySubscriptionResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -2113,7 +2163,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSubscriptionResponse:
+    ) -> models.components.DtoSubscriptionResponse:
         r"""Get subscription
 
         Use when you need to load a single subscription (e.g. for a billing portal or to check status).
@@ -2134,7 +2184,7 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetSubscriptionRequest(
+        request = models.operations.GetSubscriptionRequest(
             id=id,
         )
 
@@ -2178,7 +2228,9 @@ class Subscriptions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSubscriptionResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSubscriptionResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -2210,7 +2262,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSubscriptionResponse:
+    ) -> models.components.DtoSubscriptionResponse:
         r"""Get subscription
 
         Use when you need to load a single subscription (e.g. for a billing portal or to check status).
@@ -2231,7 +2283,7 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetSubscriptionRequest(
+        request = models.operations.GetSubscriptionRequest(
             id=id,
         )
 
@@ -2275,7 +2327,9 @@ class Subscriptions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSubscriptionResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSubscriptionResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -2306,12 +2360,12 @@ class Subscriptions(BaseSDK):
         cancel_at: Optional[str] = None,
         cancel_at_period_end: Optional[bool] = None,
         parent_subscription_id: Optional[str] = None,
-        status: Optional[models.TypesSubscriptionStatus] = None,
+        status: Optional[models.components.SubscriptionStatus] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSubscriptionResponse:
+    ) -> models.components.DtoSubscriptionResponse:
         r"""Update subscription
 
         Use when changing subscription details (e.g. quantity, billing anchor, or parent). Supports partial update; send \"\" to clear parent_subscription_id.
@@ -2336,9 +2390,9 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateSubscriptionRequest(
+        request = models.operations.UpdateSubscriptionRequest(
             id=id,
-            body=models.DtoUpdateSubscriptionRequest(
+            body=models.components.DtoUpdateSubscriptionRequest(
                 cancel_at=cancel_at,
                 cancel_at_period_end=cancel_at_period_end,
                 parent_subscription_id=parent_subscription_id,
@@ -2360,7 +2414,11 @@ class Subscriptions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdateSubscriptionRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdateSubscriptionRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -2389,7 +2447,9 @@ class Subscriptions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSubscriptionResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSubscriptionResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -2420,12 +2480,12 @@ class Subscriptions(BaseSDK):
         cancel_at: Optional[str] = None,
         cancel_at_period_end: Optional[bool] = None,
         parent_subscription_id: Optional[str] = None,
-        status: Optional[models.TypesSubscriptionStatus] = None,
+        status: Optional[models.components.SubscriptionStatus] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSubscriptionResponse:
+    ) -> models.components.DtoSubscriptionResponse:
         r"""Update subscription
 
         Use when changing subscription details (e.g. quantity, billing anchor, or parent). Supports partial update; send \"\" to clear parent_subscription_id.
@@ -2450,9 +2510,9 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateSubscriptionRequest(
+        request = models.operations.UpdateSubscriptionRequest(
             id=id,
-            body=models.DtoUpdateSubscriptionRequest(
+            body=models.components.DtoUpdateSubscriptionRequest(
                 cancel_at=cancel_at,
                 cancel_at_period_end=cancel_at_period_end,
                 parent_subscription_id=parent_subscription_id,
@@ -2474,7 +2534,11 @@ class Subscriptions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdateSubscriptionRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdateSubscriptionRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -2503,7 +2567,9 @@ class Subscriptions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSubscriptionResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSubscriptionResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -2536,7 +2602,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSubscriptionResponse:
+    ) -> models.components.DtoSubscriptionResponse:
         r"""Activate draft subscription
 
         Use when turning a draft subscription live (e.g. after collecting payment or completing setup). Once activated, billing and entitlements apply.
@@ -2558,9 +2624,9 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ActivateSubscriptionRequest(
+        request = models.operations.ActivateSubscriptionRequest(
             id=id,
-            body=models.DtoActivateDraftSubscriptionRequest(
+            body=models.components.DtoActivateDraftSubscriptionRequest(
                 start_date=start_date,
             ),
         )
@@ -2583,7 +2649,7 @@ class Subscriptions(BaseSDK):
                 False,
                 False,
                 "json",
-                models.DtoActivateDraftSubscriptionRequest,
+                models.components.DtoActivateDraftSubscriptionRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -2612,7 +2678,9 @@ class Subscriptions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSubscriptionResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSubscriptionResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -2645,7 +2713,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSubscriptionResponse:
+    ) -> models.components.DtoSubscriptionResponse:
         r"""Activate draft subscription
 
         Use when turning a draft subscription live (e.g. after collecting payment or completing setup). Once activated, billing and entitlements apply.
@@ -2667,9 +2735,9 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ActivateSubscriptionRequest(
+        request = models.operations.ActivateSubscriptionRequest(
             id=id,
-            body=models.DtoActivateDraftSubscriptionRequest(
+            body=models.components.DtoActivateDraftSubscriptionRequest(
                 start_date=start_date,
             ),
         )
@@ -2692,7 +2760,7 @@ class Subscriptions(BaseSDK):
                 False,
                 False,
                 "json",
-                models.DtoActivateDraftSubscriptionRequest,
+                models.components.DtoActivateDraftSubscriptionRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -2721,7 +2789,9 @@ class Subscriptions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSubscriptionResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSubscriptionResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -2753,7 +2823,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[models.DtoAddonAssociationResponse]:
+    ) -> List[models.components.DtoAddonAssociationResponse]:
         r"""Get active addon associations
 
         Use when listing which add-ons are currently attached to a subscription (e.g. for display or editing).
@@ -2774,7 +2844,7 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetSubscriptionAddonAssociationsRequest(
+        request = models.operations.GetSubscriptionAddonAssociationsRequest(
             id=id,
         )
 
@@ -2819,7 +2889,7 @@ class Subscriptions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                List[models.DtoAddonAssociationResponse], http_res
+                List[models.components.DtoAddonAssociationResponse], http_res
             )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
@@ -2852,7 +2922,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[models.DtoAddonAssociationResponse]:
+    ) -> List[models.components.DtoAddonAssociationResponse]:
         r"""Get active addon associations
 
         Use when listing which add-ons are currently attached to a subscription (e.g. for display or editing).
@@ -2873,7 +2943,7 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetSubscriptionAddonAssociationsRequest(
+        request = models.operations.GetSubscriptionAddonAssociationsRequest(
             id=id,
         )
 
@@ -2918,7 +2988,7 @@ class Subscriptions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                List[models.DtoAddonAssociationResponse], http_res
+                List[models.components.DtoAddonAssociationResponse], http_res
             )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
@@ -2947,17 +3017,17 @@ class Subscriptions(BaseSDK):
         self,
         *,
         id: str,
-        cancellation_type: models.TypesCancellationType,
+        cancellation_type: models.components.CancellationType,
         cancel_immediately_inovice_policy: Optional[
-            models.TypesCancelImmediatelyInvoicePolicy
+            models.components.CancelImmediatelyInvoicePolicy
         ] = None,
-        proration_behavior: Optional[models.TypesProrationBehavior] = None,
+        proration_behavior: Optional[models.components.ProrationBehavior] = None,
         reason: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCancelSubscriptionResponse:
+    ) -> models.components.DtoCancelSubscriptionResponse:
         r"""Cancel subscription
 
         Use when a customer churns or downgrades. Supports immediate or end-of-period cancellation and proration. Ideal for self-serve or support-driven cancellations.
@@ -2982,9 +3052,9 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.CancelSubscriptionRequest(
+        request = models.operations.CancelSubscriptionRequest(
             id=id,
-            body=models.DtoCancelSubscriptionRequest(
+            body=models.components.DtoCancelSubscriptionRequest(
                 cancel_immediately_inovice_policy=cancel_immediately_inovice_policy,
                 cancellation_type=cancellation_type,
                 proration_behavior=proration_behavior,
@@ -3006,7 +3076,11 @@ class Subscriptions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoCancelSubscriptionRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoCancelSubscriptionRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -3036,7 +3110,7 @@ class Subscriptions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoCancelSubscriptionResponse, http_res
+                models.components.DtoCancelSubscriptionResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -3065,17 +3139,17 @@ class Subscriptions(BaseSDK):
         self,
         *,
         id: str,
-        cancellation_type: models.TypesCancellationType,
+        cancellation_type: models.components.CancellationType,
         cancel_immediately_inovice_policy: Optional[
-            models.TypesCancelImmediatelyInvoicePolicy
+            models.components.CancelImmediatelyInvoicePolicy
         ] = None,
-        proration_behavior: Optional[models.TypesProrationBehavior] = None,
+        proration_behavior: Optional[models.components.ProrationBehavior] = None,
         reason: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCancelSubscriptionResponse:
+    ) -> models.components.DtoCancelSubscriptionResponse:
         r"""Cancel subscription
 
         Use when a customer churns or downgrades. Supports immediate or end-of-period cancellation and proration. Ideal for self-serve or support-driven cancellations.
@@ -3100,9 +3174,9 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.CancelSubscriptionRequest(
+        request = models.operations.CancelSubscriptionRequest(
             id=id,
-            body=models.DtoCancelSubscriptionRequest(
+            body=models.components.DtoCancelSubscriptionRequest(
                 cancel_immediately_inovice_policy=cancel_immediately_inovice_policy,
                 cancellation_type=cancellation_type,
                 proration_behavior=proration_behavior,
@@ -3124,7 +3198,11 @@ class Subscriptions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoCancelSubscriptionRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoCancelSubscriptionRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -3154,7 +3232,7 @@ class Subscriptions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoCancelSubscriptionResponse, http_res
+                models.components.DtoCancelSubscriptionResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -3183,19 +3261,19 @@ class Subscriptions(BaseSDK):
         self,
         *,
         id: str,
-        billing_cadence: models.TypesBillingCadence,
-        billing_cycle: models.TypesBillingCycle,
-        billing_period: models.TypesBillingPeriod,
-        proration_behavior: models.TypesProrationBehavior,
+        billing_cadence: models.components.BillingCadence,
+        billing_cycle: models.components.BillingCycle,
+        billing_period: models.components.BillingPeriod,
+        proration_behavior: models.components.ProrationBehavior,
         target_plan_id: str,
         billing_period_count: Optional[int] = None,
-        change_at: Optional[models.TypesScheduleType] = None,
+        change_at: Optional[models.components.ScheduleType] = None,
         metadata: Optional[Dict[str, str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSubscriptionChangeExecuteResponse:
+    ) -> models.components.DtoSubscriptionChangeExecuteResponse:
         r"""Execute subscription plan change
 
         Use when applying a plan change (e.g. upgrade or downgrade). Executes proration and generates invoice or credit as needed.
@@ -3224,9 +3302,9 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ExecuteSubscriptionChangeRequest(
+        request = models.operations.ExecuteSubscriptionChangeRequest(
             id=id,
-            body=models.DtoSubscriptionChangeRequest(
+            body=models.components.DtoSubscriptionChangeRequest(
                 billing_cadence=billing_cadence,
                 billing_cycle=billing_cycle,
                 billing_period=billing_period,
@@ -3252,7 +3330,11 @@ class Subscriptions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoSubscriptionChangeRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoSubscriptionChangeRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -3282,7 +3364,7 @@ class Subscriptions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoSubscriptionChangeExecuteResponse, http_res
+                models.components.DtoSubscriptionChangeExecuteResponse, http_res
             )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
@@ -3311,19 +3393,19 @@ class Subscriptions(BaseSDK):
         self,
         *,
         id: str,
-        billing_cadence: models.TypesBillingCadence,
-        billing_cycle: models.TypesBillingCycle,
-        billing_period: models.TypesBillingPeriod,
-        proration_behavior: models.TypesProrationBehavior,
+        billing_cadence: models.components.BillingCadence,
+        billing_cycle: models.components.BillingCycle,
+        billing_period: models.components.BillingPeriod,
+        proration_behavior: models.components.ProrationBehavior,
         target_plan_id: str,
         billing_period_count: Optional[int] = None,
-        change_at: Optional[models.TypesScheduleType] = None,
+        change_at: Optional[models.components.ScheduleType] = None,
         metadata: Optional[Dict[str, str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSubscriptionChangeExecuteResponse:
+    ) -> models.components.DtoSubscriptionChangeExecuteResponse:
         r"""Execute subscription plan change
 
         Use when applying a plan change (e.g. upgrade or downgrade). Executes proration and generates invoice or credit as needed.
@@ -3352,9 +3434,9 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ExecuteSubscriptionChangeRequest(
+        request = models.operations.ExecuteSubscriptionChangeRequest(
             id=id,
-            body=models.DtoSubscriptionChangeRequest(
+            body=models.components.DtoSubscriptionChangeRequest(
                 billing_cadence=billing_cadence,
                 billing_cycle=billing_cycle,
                 billing_period=billing_period,
@@ -3380,7 +3462,11 @@ class Subscriptions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoSubscriptionChangeRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoSubscriptionChangeRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -3410,7 +3496,7 @@ class Subscriptions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoSubscriptionChangeExecuteResponse, http_res
+                models.components.DtoSubscriptionChangeExecuteResponse, http_res
             )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
@@ -3439,19 +3525,19 @@ class Subscriptions(BaseSDK):
         self,
         *,
         id: str,
-        billing_cadence: models.TypesBillingCadence,
-        billing_cycle: models.TypesBillingCycle,
-        billing_period: models.TypesBillingPeriod,
-        proration_behavior: models.TypesProrationBehavior,
+        billing_cadence: models.components.BillingCadence,
+        billing_cycle: models.components.BillingCycle,
+        billing_period: models.components.BillingPeriod,
+        proration_behavior: models.components.ProrationBehavior,
         target_plan_id: str,
         billing_period_count: Optional[int] = None,
-        change_at: Optional[models.TypesScheduleType] = None,
+        change_at: Optional[models.components.ScheduleType] = None,
         metadata: Optional[Dict[str, str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSubscriptionChangePreviewResponse:
+    ) -> models.components.DtoSubscriptionChangePreviewResponse:
         r"""Preview subscription plan change
 
         Use when showing a customer the cost of a plan change before they confirm (e.g. upgrade/downgrade preview with proration).
@@ -3480,9 +3566,9 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.PreviewSubscriptionChangeRequest(
+        request = models.operations.PreviewSubscriptionChangeRequest(
             id=id,
-            body=models.DtoSubscriptionChangeRequest(
+            body=models.components.DtoSubscriptionChangeRequest(
                 billing_cadence=billing_cadence,
                 billing_cycle=billing_cycle,
                 billing_period=billing_period,
@@ -3508,7 +3594,11 @@ class Subscriptions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoSubscriptionChangeRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoSubscriptionChangeRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -3538,7 +3628,7 @@ class Subscriptions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoSubscriptionChangePreviewResponse, http_res
+                models.components.DtoSubscriptionChangePreviewResponse, http_res
             )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
@@ -3567,19 +3657,19 @@ class Subscriptions(BaseSDK):
         self,
         *,
         id: str,
-        billing_cadence: models.TypesBillingCadence,
-        billing_cycle: models.TypesBillingCycle,
-        billing_period: models.TypesBillingPeriod,
-        proration_behavior: models.TypesProrationBehavior,
+        billing_cadence: models.components.BillingCadence,
+        billing_cycle: models.components.BillingCycle,
+        billing_period: models.components.BillingPeriod,
+        proration_behavior: models.components.ProrationBehavior,
         target_plan_id: str,
         billing_period_count: Optional[int] = None,
-        change_at: Optional[models.TypesScheduleType] = None,
+        change_at: Optional[models.components.ScheduleType] = None,
         metadata: Optional[Dict[str, str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSubscriptionChangePreviewResponse:
+    ) -> models.components.DtoSubscriptionChangePreviewResponse:
         r"""Preview subscription plan change
 
         Use when showing a customer the cost of a plan change before they confirm (e.g. upgrade/downgrade preview with proration).
@@ -3608,9 +3698,9 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.PreviewSubscriptionChangeRequest(
+        request = models.operations.PreviewSubscriptionChangeRequest(
             id=id,
-            body=models.DtoSubscriptionChangeRequest(
+            body=models.components.DtoSubscriptionChangeRequest(
                 billing_cadence=billing_cadence,
                 billing_cycle=billing_cycle,
                 billing_period=billing_period,
@@ -3636,7 +3726,11 @@ class Subscriptions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoSubscriptionChangeRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoSubscriptionChangeRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -3666,7 +3760,7 @@ class Subscriptions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoSubscriptionChangePreviewResponse, http_res
+                models.components.DtoSubscriptionChangePreviewResponse, http_res
             )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
@@ -3700,7 +3794,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSubscriptionEntitlementsResponse:
+    ) -> models.components.DtoSubscriptionEntitlementsResponse:
         r"""Get subscription entitlements
 
         Use when checking what features or limits a subscription has (e.g. entitlement checks or feature gating). Optional feature_ids to filter.
@@ -3722,7 +3816,7 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetSubscriptionEntitlementsRequest(
+        request = models.operations.GetSubscriptionEntitlementsRequest(
             id=id,
             feature_ids=feature_ids,
         )
@@ -3768,7 +3862,7 @@ class Subscriptions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoSubscriptionEntitlementsResponse, http_res
+                models.components.DtoSubscriptionEntitlementsResponse, http_res
             )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
@@ -3802,7 +3896,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSubscriptionEntitlementsResponse:
+    ) -> models.components.DtoSubscriptionEntitlementsResponse:
         r"""Get subscription entitlements
 
         Use when checking what features or limits a subscription has (e.g. entitlement checks or feature gating). Optional feature_ids to filter.
@@ -3824,7 +3918,7 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetSubscriptionEntitlementsRequest(
+        request = models.operations.GetSubscriptionEntitlementsRequest(
             id=id,
             feature_ids=feature_ids,
         )
@@ -3870,7 +3964,7 @@ class Subscriptions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoSubscriptionEntitlementsResponse, http_res
+                models.components.DtoSubscriptionEntitlementsResponse, http_res
             )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
@@ -3903,7 +3997,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListCreditGrantApplicationsResponse:
+    ) -> models.components.DtoListCreditGrantApplicationsResponse:
         r"""Get upcoming credit grant applications
 
         Use when showing upcoming or pending credits for a subscription (e.g. in a portal or for forecasting).
@@ -3924,7 +4018,7 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetSubscriptionUpcomingGrantsRequest(
+        request = models.operations.GetSubscriptionUpcomingGrantsRequest(
             id=id,
         )
 
@@ -3969,7 +4063,7 @@ class Subscriptions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoListCreditGrantApplicationsResponse, http_res
+                models.components.DtoListCreditGrantApplicationsResponse, http_res
             )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
@@ -4002,7 +4096,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListCreditGrantApplicationsResponse:
+    ) -> models.components.DtoListCreditGrantApplicationsResponse:
         r"""Get upcoming credit grant applications
 
         Use when showing upcoming or pending credits for a subscription (e.g. in a portal or for forecasting).
@@ -4023,7 +4117,7 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetSubscriptionUpcomingGrantsRequest(
+        request = models.operations.GetSubscriptionUpcomingGrantsRequest(
             id=id,
         )
 
@@ -4068,7 +4162,7 @@ class Subscriptions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoListCreditGrantApplicationsResponse, http_res
+                models.components.DtoListCreditGrantApplicationsResponse, http_res
             )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
@@ -4098,19 +4192,19 @@ class Subscriptions(BaseSDK):
         *,
         id: str,
         commitment_amount: Optional[float] = None,
-        commitment_duration: Optional[models.TypesBillingPeriod] = None,
+        commitment_duration: Optional[models.components.BillingPeriod] = None,
         commitment_overage_factor: Optional[float] = None,
         commitment_quantity: Optional[float] = None,
         commitment_true_up_enabled: Optional[bool] = None,
-        commitment_type: Optional[models.TypesCommitmentType] = None,
+        commitment_type: Optional[models.components.CommitmentType] = None,
         commitment_windowed: Optional[bool] = None,
         display_name: Optional[str] = None,
         end_date: Optional[str] = None,
         metadata: Optional[Dict[str, str]] = None,
         price: Optional[
             Union[
-                models.DtoSubscriptionPriceCreateRequest,
-                models.DtoSubscriptionPriceCreateRequestTypedDict,
+                models.components.DtoSubscriptionPriceCreateRequest,
+                models.components.DtoSubscriptionPriceCreateRequestTypedDict,
             ]
         ] = None,
         price_id: Optional[str] = None,
@@ -4121,7 +4215,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSubscriptionLineItemResponse:
+    ) -> models.components.DtoSubscriptionLineItemResponse:
         r"""Create subscription line item
 
         Use when adding a new charge or seat to a subscription (e.g. extra seat or one-time add). Supports price_id or inline price.
@@ -4157,9 +4251,9 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.CreateSubscriptionLineItemRequest(
+        request = models.operations.CreateSubscriptionLineItemRequest(
             id=id,
-            body=models.DtoCreateSubscriptionLineItemRequest(
+            body=models.components.DtoCreateSubscriptionLineItemRequest(
                 commitment_amount=commitment_amount,
                 commitment_duration=commitment_duration,
                 commitment_overage_factor=commitment_overage_factor,
@@ -4171,7 +4265,7 @@ class Subscriptions(BaseSDK):
                 end_date=end_date,
                 metadata=metadata,
                 price=utils.get_pydantic_model(
-                    price, Optional[models.DtoSubscriptionPriceCreateRequest]
+                    price, Optional[models.components.DtoSubscriptionPriceCreateRequest]
                 ),
                 price_id=price_id,
                 quantity=quantity,
@@ -4198,7 +4292,7 @@ class Subscriptions(BaseSDK):
                 False,
                 False,
                 "json",
-                models.DtoCreateSubscriptionLineItemRequest,
+                models.components.DtoCreateSubscriptionLineItemRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -4228,7 +4322,7 @@ class Subscriptions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return unmarshal_json_response(
-                models.DtoSubscriptionLineItemResponse, http_res
+                models.components.DtoSubscriptionLineItemResponse, http_res
             )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
@@ -4258,19 +4352,19 @@ class Subscriptions(BaseSDK):
         *,
         id: str,
         commitment_amount: Optional[float] = None,
-        commitment_duration: Optional[models.TypesBillingPeriod] = None,
+        commitment_duration: Optional[models.components.BillingPeriod] = None,
         commitment_overage_factor: Optional[float] = None,
         commitment_quantity: Optional[float] = None,
         commitment_true_up_enabled: Optional[bool] = None,
-        commitment_type: Optional[models.TypesCommitmentType] = None,
+        commitment_type: Optional[models.components.CommitmentType] = None,
         commitment_windowed: Optional[bool] = None,
         display_name: Optional[str] = None,
         end_date: Optional[str] = None,
         metadata: Optional[Dict[str, str]] = None,
         price: Optional[
             Union[
-                models.DtoSubscriptionPriceCreateRequest,
-                models.DtoSubscriptionPriceCreateRequestTypedDict,
+                models.components.DtoSubscriptionPriceCreateRequest,
+                models.components.DtoSubscriptionPriceCreateRequestTypedDict,
             ]
         ] = None,
         price_id: Optional[str] = None,
@@ -4281,7 +4375,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSubscriptionLineItemResponse:
+    ) -> models.components.DtoSubscriptionLineItemResponse:
         r"""Create subscription line item
 
         Use when adding a new charge or seat to a subscription (e.g. extra seat or one-time add). Supports price_id or inline price.
@@ -4317,9 +4411,9 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.CreateSubscriptionLineItemRequest(
+        request = models.operations.CreateSubscriptionLineItemRequest(
             id=id,
-            body=models.DtoCreateSubscriptionLineItemRequest(
+            body=models.components.DtoCreateSubscriptionLineItemRequest(
                 commitment_amount=commitment_amount,
                 commitment_duration=commitment_duration,
                 commitment_overage_factor=commitment_overage_factor,
@@ -4331,7 +4425,7 @@ class Subscriptions(BaseSDK):
                 end_date=end_date,
                 metadata=metadata,
                 price=utils.get_pydantic_model(
-                    price, Optional[models.DtoSubscriptionPriceCreateRequest]
+                    price, Optional[models.components.DtoSubscriptionPriceCreateRequest]
                 ),
                 price_id=price_id,
                 quantity=quantity,
@@ -4358,7 +4452,7 @@ class Subscriptions(BaseSDK):
                 False,
                 False,
                 "json",
-                models.DtoCreateSubscriptionLineItemRequest,
+                models.components.DtoCreateSubscriptionLineItemRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -4388,7 +4482,7 @@ class Subscriptions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return unmarshal_json_response(
-                models.DtoSubscriptionLineItemResponse, http_res
+                models.components.DtoSubscriptionLineItemResponse, http_res
             )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
@@ -4417,7 +4511,7 @@ class Subscriptions(BaseSDK):
         self,
         *,
         id: str,
-        pause_mode: models.TypesPauseMode,
+        pause_mode: models.components.PauseMode,
         dry_run: Optional[bool] = None,
         metadata: Optional[Dict[str, str]] = None,
         pause_days: Optional[int] = None,
@@ -4428,7 +4522,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSubscriptionPauseResponse:
+    ) -> models.components.DtoSubscriptionPauseResponse:
         r"""Pause a subscription
 
         Use when temporarily stopping a subscription (e.g. customer hold or seasonal pause). Billing and access pause; resume when ready.
@@ -4468,9 +4562,9 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.PauseSubscriptionRequest(
+        request = models.operations.PauseSubscriptionRequest(
             id=id,
-            body=models.DtoPauseSubscriptionRequest(
+            body=models.components.DtoPauseSubscriptionRequest(
                 dry_run=dry_run,
                 metadata=metadata,
                 pause_days=pause_days,
@@ -4495,7 +4589,11 @@ class Subscriptions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoPauseSubscriptionRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoPauseSubscriptionRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -4525,7 +4623,7 @@ class Subscriptions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoSubscriptionPauseResponse, http_res
+                models.components.DtoSubscriptionPauseResponse, http_res
             )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
@@ -4554,7 +4652,7 @@ class Subscriptions(BaseSDK):
         self,
         *,
         id: str,
-        pause_mode: models.TypesPauseMode,
+        pause_mode: models.components.PauseMode,
         dry_run: Optional[bool] = None,
         metadata: Optional[Dict[str, str]] = None,
         pause_days: Optional[int] = None,
@@ -4565,7 +4663,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSubscriptionPauseResponse:
+    ) -> models.components.DtoSubscriptionPauseResponse:
         r"""Pause a subscription
 
         Use when temporarily stopping a subscription (e.g. customer hold or seasonal pause). Billing and access pause; resume when ready.
@@ -4605,9 +4703,9 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.PauseSubscriptionRequest(
+        request = models.operations.PauseSubscriptionRequest(
             id=id,
-            body=models.DtoPauseSubscriptionRequest(
+            body=models.components.DtoPauseSubscriptionRequest(
                 dry_run=dry_run,
                 metadata=metadata,
                 pause_days=pause_days,
@@ -4632,7 +4730,11 @@ class Subscriptions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoPauseSubscriptionRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoPauseSubscriptionRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -4662,7 +4764,7 @@ class Subscriptions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoSubscriptionPauseResponse, http_res
+                models.components.DtoSubscriptionPauseResponse, http_res
             )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
@@ -4695,7 +4797,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[models.DtoListSubscriptionPausesResponse]:
+    ) -> List[models.components.DtoListSubscriptionPausesResponse]:
         r"""List all pauses for a subscription
 
         Use when showing pause history for a subscription (e.g. support or audit). Returns all past and future pauses.
@@ -4716,7 +4818,7 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListSubscriptionPausesRequest(
+        request = models.operations.ListSubscriptionPausesRequest(
             id=id,
         )
 
@@ -4761,7 +4863,7 @@ class Subscriptions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                List[models.DtoListSubscriptionPausesResponse], http_res
+                List[models.components.DtoListSubscriptionPausesResponse], http_res
             )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
@@ -4794,7 +4896,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[models.DtoListSubscriptionPausesResponse]:
+    ) -> List[models.components.DtoListSubscriptionPausesResponse]:
         r"""List all pauses for a subscription
 
         Use when showing pause history for a subscription (e.g. support or audit). Returns all past and future pauses.
@@ -4815,7 +4917,7 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListSubscriptionPausesRequest(
+        request = models.operations.ListSubscriptionPausesRequest(
             id=id,
         )
 
@@ -4860,7 +4962,7 @@ class Subscriptions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                List[models.DtoListSubscriptionPausesResponse], http_res
+                List[models.components.DtoListSubscriptionPausesResponse], http_res
             )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
@@ -4889,14 +4991,14 @@ class Subscriptions(BaseSDK):
         self,
         *,
         id: str,
-        resume_mode: models.TypesResumeMode,
+        resume_mode: models.components.ResumeMode,
         dry_run: Optional[bool] = None,
         metadata: Optional[Dict[str, str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSubscriptionPauseResponse:
+    ) -> models.components.DtoSubscriptionPauseResponse:
         r"""Resume a paused subscription
 
         Use when reactivating a paused subscription (e.g. end of hold). Billing and access resume from the resume date.
@@ -4924,9 +5026,9 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ResumeSubscriptionRequest(
+        request = models.operations.ResumeSubscriptionRequest(
             id=id,
-            body=models.DtoResumeSubscriptionRequest(
+            body=models.components.DtoResumeSubscriptionRequest(
                 dry_run=dry_run,
                 metadata=metadata,
                 resume_mode=resume_mode,
@@ -4947,7 +5049,11 @@ class Subscriptions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoResumeSubscriptionRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoResumeSubscriptionRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -4977,7 +5083,7 @@ class Subscriptions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoSubscriptionPauseResponse, http_res
+                models.components.DtoSubscriptionPauseResponse, http_res
             )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
@@ -5006,14 +5112,14 @@ class Subscriptions(BaseSDK):
         self,
         *,
         id: str,
-        resume_mode: models.TypesResumeMode,
+        resume_mode: models.components.ResumeMode,
         dry_run: Optional[bool] = None,
         metadata: Optional[Dict[str, str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSubscriptionPauseResponse:
+    ) -> models.components.DtoSubscriptionPauseResponse:
         r"""Resume a paused subscription
 
         Use when reactivating a paused subscription (e.g. end of hold). Billing and access resume from the resume date.
@@ -5041,9 +5147,9 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ResumeSubscriptionRequest(
+        request = models.operations.ResumeSubscriptionRequest(
             id=id,
-            body=models.DtoResumeSubscriptionRequest(
+            body=models.components.DtoResumeSubscriptionRequest(
                 dry_run=dry_run,
                 metadata=metadata,
                 resume_mode=resume_mode,
@@ -5064,7 +5170,11 @@ class Subscriptions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoResumeSubscriptionRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoResumeSubscriptionRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -5094,7 +5204,7 @@ class Subscriptions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoSubscriptionPauseResponse, http_res
+                models.components.DtoSubscriptionPauseResponse, http_res
             )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
@@ -5128,7 +5238,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSubscriptionResponseV2:
+    ) -> models.components.DtoSubscriptionResponseV2:
         r"""Get subscription (V2)
 
         Use when you need a subscription with related data (line items, prices, plan). Supports expand for detailed payloads without extra round-trips.
@@ -5150,7 +5260,7 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetSubscriptionV2Request(
+        request = models.operations.GetSubscriptionV2Request(
             id=id,
             expand=expand,
         )
@@ -5195,7 +5305,9 @@ class Subscriptions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSubscriptionResponseV2, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSubscriptionResponseV2, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -5228,7 +5340,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSubscriptionResponseV2:
+    ) -> models.components.DtoSubscriptionResponseV2:
         r"""Get subscription (V2)
 
         Use when you need a subscription with related data (line items, prices, plan). Supports expand for detailed payloads without extra round-trips.
@@ -5250,7 +5362,7 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetSubscriptionV2Request(
+        request = models.operations.GetSubscriptionV2Request(
             id=id,
             expand=expand,
         )
@@ -5295,7 +5407,9 @@ class Subscriptions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSubscriptionResponseV2, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSubscriptionResponseV2, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -5330,7 +5444,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoGetPendingSchedulesResponse:
+    ) -> models.components.DtoGetPendingSchedulesResponse:
         r"""List all subscription schedules
 
         Use when listing or searching scheduled changes across subscriptions (e.g. admin view). Returns schedules with optional filtering.
@@ -5354,7 +5468,7 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListAllSubscriptionSchedulesRequest(
+        request = models.operations.ListAllSubscriptionSchedulesRequest(
             pending_only=pending_only,
             subscription_id=subscription_id,
             limit=limit,
@@ -5401,7 +5515,7 @@ class Subscriptions(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoGetPendingSchedulesResponse, http_res
+                models.components.DtoGetPendingSchedulesResponse, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -5427,7 +5541,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoGetPendingSchedulesResponse:
+    ) -> models.components.DtoGetPendingSchedulesResponse:
         r"""List all subscription schedules
 
         Use when listing or searching scheduled changes across subscriptions (e.g. admin view). Returns schedules with optional filtering.
@@ -5451,7 +5565,7 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListAllSubscriptionSchedulesRequest(
+        request = models.operations.ListAllSubscriptionSchedulesRequest(
             pending_only=pending_only,
             subscription_id=subscription_id,
             limit=limit,
@@ -5498,7 +5612,7 @@ class Subscriptions(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoGetPendingSchedulesResponse, http_res
+                models.components.DtoGetPendingSchedulesResponse, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -5521,7 +5635,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSubscriptionScheduleResponse:
+    ) -> models.components.DtoSubscriptionScheduleResponse:
         r"""Get subscription schedule
 
         Use when you need to load a single scheduled change (e.g. to show when a plan change or renewal takes effect).
@@ -5542,7 +5656,7 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetSubscriptionScheduleRequest(
+        request = models.operations.GetSubscriptionScheduleRequest(
             id=id,
         )
 
@@ -5586,7 +5700,7 @@ class Subscriptions(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoSubscriptionScheduleResponse, http_res
+                models.components.DtoSubscriptionScheduleResponse, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -5609,7 +5723,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSubscriptionScheduleResponse:
+    ) -> models.components.DtoSubscriptionScheduleResponse:
         r"""Get subscription schedule
 
         Use when you need to load a single scheduled change (e.g. to show when a plan change or renewal takes effect).
@@ -5630,7 +5744,7 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetSubscriptionScheduleRequest(
+        request = models.operations.GetSubscriptionScheduleRequest(
             id=id,
         )
 
@@ -5674,7 +5788,7 @@ class Subscriptions(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoSubscriptionScheduleResponse, http_res
+                models.components.DtoSubscriptionScheduleResponse, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -5694,13 +5808,15 @@ class Subscriptions(BaseSDK):
         *,
         schedule_id_param: str,
         schedule_id: Optional[str] = None,
-        schedule_type: Optional[models.TypesSubscriptionScheduleChangeType] = None,
+        schedule_type: Optional[
+            models.components.SubscriptionScheduleChangeType
+        ] = None,
         subscription_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCancelScheduleResponse:
+    ) -> models.components.DtoCancelScheduleResponse:
         r"""Cancel subscription schedule
 
         Use when cancelling a scheduled change (e.g. customer changed mind). Identify by schedule ID in path or by subscription ID + schedule type in body.
@@ -5724,9 +5840,9 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.CancelSubscriptionScheduleRequest(
+        request = models.operations.CancelSubscriptionScheduleRequest(
             schedule_id_param=schedule_id_param,
-            body=models.DtoCancelScheduleRequest(
+            body=models.components.DtoCancelScheduleRequest(
                 schedule_id=schedule_id,
                 schedule_type=schedule_type,
                 subscription_id=subscription_id,
@@ -5751,7 +5867,7 @@ class Subscriptions(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.DtoCancelScheduleRequest],
+                Optional[models.components.DtoCancelScheduleRequest],
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -5779,7 +5895,9 @@ class Subscriptions(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoCancelScheduleResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCancelScheduleResponse, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.FlexpriceDefaultError(
@@ -5798,13 +5916,15 @@ class Subscriptions(BaseSDK):
         *,
         schedule_id_param: str,
         schedule_id: Optional[str] = None,
-        schedule_type: Optional[models.TypesSubscriptionScheduleChangeType] = None,
+        schedule_type: Optional[
+            models.components.SubscriptionScheduleChangeType
+        ] = None,
         subscription_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCancelScheduleResponse:
+    ) -> models.components.DtoCancelScheduleResponse:
         r"""Cancel subscription schedule
 
         Use when cancelling a scheduled change (e.g. customer changed mind). Identify by schedule ID in path or by subscription ID + schedule type in body.
@@ -5828,9 +5948,9 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.CancelSubscriptionScheduleRequest(
+        request = models.operations.CancelSubscriptionScheduleRequest(
             schedule_id_param=schedule_id_param,
-            body=models.DtoCancelScheduleRequest(
+            body=models.components.DtoCancelScheduleRequest(
                 schedule_id=schedule_id,
                 schedule_type=schedule_type,
                 subscription_id=subscription_id,
@@ -5855,7 +5975,7 @@ class Subscriptions(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.DtoCancelScheduleRequest],
+                Optional[models.components.DtoCancelScheduleRequest],
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -5883,7 +6003,9 @@ class Subscriptions(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoCancelScheduleResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCancelScheduleResponse, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.FlexpriceDefaultError(
@@ -5905,7 +6027,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoGetPendingSchedulesResponse:
+    ) -> models.components.DtoGetPendingSchedulesResponse:
         r"""List subscription schedules
 
         Use when listing scheduled changes for a subscription (e.g. upcoming plan change or renewal). Returns all schedules for that subscription.
@@ -5926,7 +6048,7 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListSubscriptionSchedulesRequest(
+        request = models.operations.ListSubscriptionSchedulesRequest(
             subscription_id=subscription_id,
         )
 
@@ -5970,7 +6092,7 @@ class Subscriptions(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoGetPendingSchedulesResponse, http_res
+                models.components.DtoGetPendingSchedulesResponse, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -5993,7 +6115,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoGetPendingSchedulesResponse:
+    ) -> models.components.DtoGetPendingSchedulesResponse:
         r"""List subscription schedules
 
         Use when listing scheduled changes for a subscription (e.g. upcoming plan change or renewal). Returns all schedules for that subscription.
@@ -6014,7 +6136,7 @@ class Subscriptions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListSubscriptionSchedulesRequest(
+        request = models.operations.ListSubscriptionSchedulesRequest(
             subscription_id=subscription_id,
         )
 
@@ -6058,7 +6180,7 @@ class Subscriptions(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoGetPendingSchedulesResponse, http_res
+                models.components.DtoGetPendingSchedulesResponse, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)

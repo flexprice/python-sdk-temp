@@ -12,35 +12,35 @@ class Alerts(BaseSDK):
     def query_alert_log(
         self,
         *,
-        alert_status: Optional[models.TypesAlertState] = None,
-        alert_type: Optional[models.TypesAlertType] = None,
+        alert_status: Optional[models.components.AlertState] = None,
+        alert_type: Optional[models.components.AlertType] = None,
         customer_id: Optional[str] = None,
         end_time: Optional[str] = None,
         entity_id: Optional[str] = None,
-        entity_type: Optional[models.TypesAlertEntityType] = None,
+        entity_type: Optional[models.components.AlertEntityType] = None,
         expand: Optional[str] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesAlertLogFilterOrder] = None,
+        order: Optional[models.components.AlertLogFilterOrder] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.TypesStatus] = None,
+        status: Optional[models.components.Status] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListAlertLogsResponse:
+    ) -> models.components.DtoListAlertLogsResponse:
         r"""Query alert logs
 
         Use when viewing or searching alert history (e.g. support triage or customer-facing alert log). Returns a paginated list; supports filtering by type, customer, subscription.
@@ -74,7 +74,7 @@ class Alerts(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesAlertLogFilter(
+        request = models.components.AlertLogFilter(
             alert_status=alert_status,
             alert_type=alert_type,
             customer_id=customer_id,
@@ -83,13 +83,13 @@ class Alerts(BaseSDK):
             entity_type=entity_type,
             expand=expand,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             limit=limit,
             offset=offset,
             order=order,
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             start_time=start_time,
             status=status,
@@ -109,7 +109,7 @@ class Alerts(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesAlertLogFilter
+                request, False, False, "json", models.components.AlertLogFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -138,7 +138,9 @@ class Alerts(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListAlertLogsResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListAlertLogsResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -165,35 +167,35 @@ class Alerts(BaseSDK):
     async def query_alert_log_async(
         self,
         *,
-        alert_status: Optional[models.TypesAlertState] = None,
-        alert_type: Optional[models.TypesAlertType] = None,
+        alert_status: Optional[models.components.AlertState] = None,
+        alert_type: Optional[models.components.AlertType] = None,
         customer_id: Optional[str] = None,
         end_time: Optional[str] = None,
         entity_id: Optional[str] = None,
-        entity_type: Optional[models.TypesAlertEntityType] = None,
+        entity_type: Optional[models.components.AlertEntityType] = None,
         expand: Optional[str] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesAlertLogFilterOrder] = None,
+        order: Optional[models.components.AlertLogFilterOrder] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.TypesStatus] = None,
+        status: Optional[models.components.Status] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListAlertLogsResponse:
+    ) -> models.components.DtoListAlertLogsResponse:
         r"""Query alert logs
 
         Use when viewing or searching alert history (e.g. support triage or customer-facing alert log). Returns a paginated list; supports filtering by type, customer, subscription.
@@ -227,7 +229,7 @@ class Alerts(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesAlertLogFilter(
+        request = models.components.AlertLogFilter(
             alert_status=alert_status,
             alert_type=alert_type,
             customer_id=customer_id,
@@ -236,13 +238,13 @@ class Alerts(BaseSDK):
             entity_type=entity_type,
             expand=expand,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             limit=limit,
             offset=offset,
             order=order,
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             start_time=start_time,
             status=status,
@@ -262,7 +264,7 @@ class Alerts(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesAlertLogFilter
+                request, False, False, "json", models.components.AlertLogFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -291,7 +293,9 @@ class Alerts(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListAlertLogsResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListAlertLogsResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res

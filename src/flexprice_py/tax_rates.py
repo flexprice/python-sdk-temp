@@ -16,17 +16,17 @@ class TaxRates(BaseSDK):
         expand: Optional[str] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.GetTaxRatesOrder] = None,
-        scope: Optional[models.Scope] = None,
+        order: Optional[models.operations.GetTaxRatesOrder] = None,
+        scope: Optional[models.operations.Scope] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.GetTaxRatesStatus] = None,
+        status: Optional[models.operations.GetTaxRatesStatus] = None,
         taxrate_codes: Optional[List[str]] = None,
         taxrate_ids: Optional[List[str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[models.DtoTaxRateResponse]:
+    ) -> List[models.components.DtoTaxRateResponse]:
         r"""Get tax rates
 
         Use when listing tax rates (e.g. tax config UI). Returns tax rates with optional filters.
@@ -56,7 +56,7 @@ class TaxRates(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetTaxRatesRequest(
+        request = models.operations.GetTaxRatesRequest(
             end_time=end_time,
             expand=expand,
             limit=limit,
@@ -109,7 +109,9 @@ class TaxRates(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(List[models.DtoTaxRateResponse], http_res)
+            return unmarshal_json_response(
+                List[models.components.DtoTaxRateResponse], http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -140,17 +142,17 @@ class TaxRates(BaseSDK):
         expand: Optional[str] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.GetTaxRatesOrder] = None,
-        scope: Optional[models.Scope] = None,
+        order: Optional[models.operations.GetTaxRatesOrder] = None,
+        scope: Optional[models.operations.Scope] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.GetTaxRatesStatus] = None,
+        status: Optional[models.operations.GetTaxRatesStatus] = None,
         taxrate_codes: Optional[List[str]] = None,
         taxrate_ids: Optional[List[str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[models.DtoTaxRateResponse]:
+    ) -> List[models.components.DtoTaxRateResponse]:
         r"""Get tax rates
 
         Use when listing tax rates (e.g. tax config UI). Returns tax rates with optional filters.
@@ -180,7 +182,7 @@ class TaxRates(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetTaxRatesRequest(
+        request = models.operations.GetTaxRatesRequest(
             end_time=end_time,
             expand=expand,
             limit=limit,
@@ -233,7 +235,9 @@ class TaxRates(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(List[models.DtoTaxRateResponse], http_res)
+            return unmarshal_json_response(
+                List[models.components.DtoTaxRateResponse], http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -266,13 +270,13 @@ class TaxRates(BaseSDK):
         fixed_value: Optional[str] = None,
         metadata: Optional[Dict[str, str]] = None,
         percentage_value: Optional[str] = None,
-        scope: Optional[models.TypesTaxRateScope] = None,
-        tax_rate_type: Optional[models.TypesTaxRateType] = None,
+        scope: Optional[models.components.TaxRateScope] = None,
+        tax_rate_type: Optional[models.components.TaxRateType] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoTaxRateResponse:
+    ) -> models.components.DtoTaxRateResponse:
         r"""Create a tax rate
 
         Use when defining a new tax rate (e.g. VAT or sales tax) for use in invoices. Attach to customers or products via tax associations.
@@ -300,7 +304,7 @@ class TaxRates(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateTaxRateRequest(
+        request = models.components.DtoCreateTaxRateRequest(
             code=code,
             description=description,
             fixed_value=fixed_value,
@@ -325,7 +329,7 @@ class TaxRates(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateTaxRateRequest
+                request, False, False, "json", models.components.DtoCreateTaxRateRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -354,7 +358,9 @@ class TaxRates(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoTaxRateResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoTaxRateResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -387,13 +393,13 @@ class TaxRates(BaseSDK):
         fixed_value: Optional[str] = None,
         metadata: Optional[Dict[str, str]] = None,
         percentage_value: Optional[str] = None,
-        scope: Optional[models.TypesTaxRateScope] = None,
-        tax_rate_type: Optional[models.TypesTaxRateType] = None,
+        scope: Optional[models.components.TaxRateScope] = None,
+        tax_rate_type: Optional[models.components.TaxRateType] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoTaxRateResponse:
+    ) -> models.components.DtoTaxRateResponse:
         r"""Create a tax rate
 
         Use when defining a new tax rate (e.g. VAT or sales tax) for use in invoices. Attach to customers or products via tax associations.
@@ -421,7 +427,7 @@ class TaxRates(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateTaxRateRequest(
+        request = models.components.DtoCreateTaxRateRequest(
             code=code,
             description=description,
             fixed_value=fixed_value,
@@ -446,7 +452,7 @@ class TaxRates(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateTaxRateRequest
+                request, False, False, "json", models.components.DtoCreateTaxRateRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -475,7 +481,9 @@ class TaxRates(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoTaxRateResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoTaxRateResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -507,7 +515,7 @@ class TaxRates(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoTaxRateResponse:
+    ) -> models.components.DtoTaxRateResponse:
         r"""Get a tax rate
 
         Use when you need to load a single tax rate (e.g. for display or when creating an association).
@@ -528,7 +536,7 @@ class TaxRates(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetTaxRateRequest(
+        request = models.operations.GetTaxRateRequest(
             id=id,
         )
 
@@ -572,7 +580,9 @@ class TaxRates(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoTaxRateResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoTaxRateResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -604,7 +614,7 @@ class TaxRates(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoTaxRateResponse:
+    ) -> models.components.DtoTaxRateResponse:
         r"""Get a tax rate
 
         Use when you need to load a single tax rate (e.g. for display or when creating an association).
@@ -625,7 +635,7 @@ class TaxRates(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetTaxRateRequest(
+        request = models.operations.GetTaxRateRequest(
             id=id,
         )
 
@@ -669,7 +679,9 @@ class TaxRates(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoTaxRateResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoTaxRateResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -701,12 +713,12 @@ class TaxRates(BaseSDK):
         description: Optional[str] = None,
         metadata: Optional[Dict[str, str]] = None,
         name: Optional[str] = None,
-        tax_rate_status: Optional[models.TypesTaxRateStatus] = None,
+        tax_rate_status: Optional[models.components.TaxRateStatus] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoTaxRateResponse:
+    ) -> models.components.DtoTaxRateResponse:
         r"""Update a tax rate
 
         Use when changing a tax rate (e.g. rate value or name). Request body contains the fields to update.
@@ -732,9 +744,9 @@ class TaxRates(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateTaxRateRequest(
+        request = models.operations.UpdateTaxRateRequest(
             id=id,
-            body=models.DtoUpdateTaxRateRequest(
+            body=models.components.DtoUpdateTaxRateRequest(
                 code=code,
                 description=description,
                 metadata=metadata,
@@ -757,7 +769,11 @@ class TaxRates(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdateTaxRateRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdateTaxRateRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -786,7 +802,9 @@ class TaxRates(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoTaxRateResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoTaxRateResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -818,12 +836,12 @@ class TaxRates(BaseSDK):
         description: Optional[str] = None,
         metadata: Optional[Dict[str, str]] = None,
         name: Optional[str] = None,
-        tax_rate_status: Optional[models.TypesTaxRateStatus] = None,
+        tax_rate_status: Optional[models.components.TaxRateStatus] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoTaxRateResponse:
+    ) -> models.components.DtoTaxRateResponse:
         r"""Update a tax rate
 
         Use when changing a tax rate (e.g. rate value or name). Request body contains the fields to update.
@@ -849,9 +867,9 @@ class TaxRates(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateTaxRateRequest(
+        request = models.operations.UpdateTaxRateRequest(
             id=id,
-            body=models.DtoUpdateTaxRateRequest(
+            body=models.components.DtoUpdateTaxRateRequest(
                 code=code,
                 description=description,
                 metadata=metadata,
@@ -874,7 +892,11 @@ class TaxRates(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdateTaxRateRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdateTaxRateRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -903,7 +925,9 @@ class TaxRates(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoTaxRateResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoTaxRateResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -956,7 +980,7 @@ class TaxRates(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteTaxRateRequest(
+        request = models.operations.DeleteTaxRateRequest(
             id=id,
         )
 
@@ -1053,7 +1077,7 @@ class TaxRates(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteTaxRateRequest(
+        request = models.operations.DeleteTaxRateRequest(
             id=id,
         )
 

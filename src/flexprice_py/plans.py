@@ -21,7 +21,7 @@ class Plans(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPlanResponse:
+    ) -> models.components.DtoPlanResponse:
         r"""Create plan
 
         Use when defining a new pricing plan (e.g. Free, Pro, Enterprise). Attach prices and entitlements; customers subscribe to plans.
@@ -46,7 +46,7 @@ class Plans(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreatePlanRequest(
+        request = models.components.DtoCreatePlanRequest(
             description=description,
             display_order=display_order,
             lookup_key=lookup_key,
@@ -68,7 +68,7 @@ class Plans(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreatePlanRequest
+                request, False, False, "json", models.components.DtoCreatePlanRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -97,7 +97,7 @@ class Plans(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoPlanResponse, http_res)
+            return unmarshal_json_response(models.components.DtoPlanResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -133,7 +133,7 @@ class Plans(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPlanResponse:
+    ) -> models.components.DtoPlanResponse:
         r"""Create plan
 
         Use when defining a new pricing plan (e.g. Free, Pro, Enterprise). Attach prices and entitlements; customers subscribe to plans.
@@ -158,7 +158,7 @@ class Plans(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreatePlanRequest(
+        request = models.components.DtoCreatePlanRequest(
             description=description,
             display_order=display_order,
             lookup_key=lookup_key,
@@ -180,7 +180,7 @@ class Plans(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreatePlanRequest
+                request, False, False, "json", models.components.DtoCreatePlanRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -209,7 +209,7 @@ class Plans(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoPlanResponse, http_res)
+            return unmarshal_json_response(models.components.DtoPlanResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -240,28 +240,28 @@ class Plans(BaseSDK):
         expand: Optional[str] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         limit: Optional[int] = None,
         lookup_key: Optional[str] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesPlanFilterOrder] = None,
+        order: Optional[models.components.PlanFilterOrder] = None,
         plan_ids: Optional[List[str]] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.TypesStatus] = None,
+        status: Optional[models.components.Status] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListPlansResponse:
+    ) -> models.components.DtoListPlansResponse:
         r"""Query plans
 
         Use when listing or searching plans (e.g. plan picker or admin catalog). Returns a paginated list; supports filtering and sorting.
@@ -292,11 +292,11 @@ class Plans(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesPlanFilter(
+        request = models.components.PlanFilter(
             end_time=end_time,
             expand=expand,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             limit=limit,
             lookup_key=lookup_key,
@@ -304,7 +304,7 @@ class Plans(BaseSDK):
             order=order,
             plan_ids=plan_ids,
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             start_time=start_time,
             status=status,
@@ -324,7 +324,7 @@ class Plans(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesPlanFilter
+                request, False, False, "json", models.components.PlanFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -353,7 +353,9 @@ class Plans(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListPlansResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListPlansResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -384,28 +386,28 @@ class Plans(BaseSDK):
         expand: Optional[str] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         limit: Optional[int] = None,
         lookup_key: Optional[str] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesPlanFilterOrder] = None,
+        order: Optional[models.components.PlanFilterOrder] = None,
         plan_ids: Optional[List[str]] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.TypesStatus] = None,
+        status: Optional[models.components.Status] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListPlansResponse:
+    ) -> models.components.DtoListPlansResponse:
         r"""Query plans
 
         Use when listing or searching plans (e.g. plan picker or admin catalog). Returns a paginated list; supports filtering and sorting.
@@ -436,11 +438,11 @@ class Plans(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesPlanFilter(
+        request = models.components.PlanFilter(
             end_time=end_time,
             expand=expand,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             limit=limit,
             lookup_key=lookup_key,
@@ -448,7 +450,7 @@ class Plans(BaseSDK):
             order=order,
             plan_ids=plan_ids,
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             start_time=start_time,
             status=status,
@@ -468,7 +470,7 @@ class Plans(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesPlanFilter
+                request, False, False, "json", models.components.PlanFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -497,7 +499,9 @@ class Plans(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListPlansResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListPlansResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -529,7 +533,7 @@ class Plans(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPlanResponse:
+    ) -> models.components.DtoPlanResponse:
         r"""Get plan
 
         Use when you need to load a single plan (e.g. for display or to create a subscription).
@@ -550,7 +554,7 @@ class Plans(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetPlanRequest(
+        request = models.operations.GetPlanRequest(
             id=id,
         )
 
@@ -594,7 +598,7 @@ class Plans(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoPlanResponse, http_res)
+            return unmarshal_json_response(models.components.DtoPlanResponse, http_res)
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -626,7 +630,7 @@ class Plans(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPlanResponse:
+    ) -> models.components.DtoPlanResponse:
         r"""Get plan
 
         Use when you need to load a single plan (e.g. for display or to create a subscription).
@@ -647,7 +651,7 @@ class Plans(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetPlanRequest(
+        request = models.operations.GetPlanRequest(
             id=id,
         )
 
@@ -691,7 +695,7 @@ class Plans(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoPlanResponse, http_res)
+            return unmarshal_json_response(models.components.DtoPlanResponse, http_res)
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -728,7 +732,7 @@ class Plans(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPlanResponse:
+    ) -> models.components.DtoPlanResponse:
         r"""Update plan
 
         Use when changing plan details (e.g. name, interval, or metadata). Partial update supported.
@@ -754,9 +758,9 @@ class Plans(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdatePlanRequest(
+        request = models.operations.UpdatePlanRequest(
             id=id,
-            body=models.DtoUpdatePlanRequest(
+            body=models.components.DtoUpdatePlanRequest(
                 description=description,
                 display_order=display_order,
                 lookup_key=lookup_key,
@@ -779,7 +783,11 @@ class Plans(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdatePlanRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdatePlanRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -808,7 +816,7 @@ class Plans(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoPlanResponse, http_res)
+            return unmarshal_json_response(models.components.DtoPlanResponse, http_res)
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -845,7 +853,7 @@ class Plans(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPlanResponse:
+    ) -> models.components.DtoPlanResponse:
         r"""Update plan
 
         Use when changing plan details (e.g. name, interval, or metadata). Partial update supported.
@@ -871,9 +879,9 @@ class Plans(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdatePlanRequest(
+        request = models.operations.UpdatePlanRequest(
             id=id,
-            body=models.DtoUpdatePlanRequest(
+            body=models.components.DtoUpdatePlanRequest(
                 description=description,
                 display_order=display_order,
                 lookup_key=lookup_key,
@@ -896,7 +904,11 @@ class Plans(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdatePlanRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdatePlanRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -925,7 +937,7 @@ class Plans(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoPlanResponse, http_res)
+            return unmarshal_json_response(models.components.DtoPlanResponse, http_res)
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -957,7 +969,7 @@ class Plans(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSuccessResponse:
+    ) -> models.components.DtoSuccessResponse:
         r"""Delete plan
 
         Use when retiring a plan (e.g. end-of-life). Existing subscriptions may be affected. Returns 200 with success message.
@@ -978,7 +990,7 @@ class Plans(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeletePlanRequest(
+        request = models.operations.DeletePlanRequest(
             id=id,
         )
 
@@ -1022,7 +1034,9 @@ class Plans(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSuccessResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSuccessResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1054,7 +1068,7 @@ class Plans(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSuccessResponse:
+    ) -> models.components.DtoSuccessResponse:
         r"""Delete plan
 
         Use when retiring a plan (e.g. end-of-life). Existing subscriptions may be affected. Returns 200 with success message.
@@ -1075,7 +1089,7 @@ class Plans(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeletePlanRequest(
+        request = models.operations.DeletePlanRequest(
             id=id,
         )
 
@@ -1119,7 +1133,9 @@ class Plans(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSuccessResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSuccessResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1156,7 +1172,7 @@ class Plans(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPlanResponse:
+    ) -> models.components.DtoPlanResponse:
         r"""Clone a plan
 
         Clone an existing plan, copying its active prices, published entitlements, and published credit grants
@@ -1182,9 +1198,9 @@ class Plans(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.PostPlansIDCloneRequest(
+        request = models.operations.PostPlansIDCloneRequest(
             id=id,
-            body=models.DtoClonePlanRequest(
+            body=models.components.DtoClonePlanRequest(
                 description=description,
                 display_order=display_order,
                 lookup_key=lookup_key,
@@ -1207,7 +1223,11 @@ class Plans(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoClonePlanRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoClonePlanRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1236,7 +1256,7 @@ class Plans(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoPlanResponse, http_res)
+            return unmarshal_json_response(models.components.DtoPlanResponse, http_res)
         if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1273,7 +1293,7 @@ class Plans(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPlanResponse:
+    ) -> models.components.DtoPlanResponse:
         r"""Clone a plan
 
         Clone an existing plan, copying its active prices, published entitlements, and published credit grants
@@ -1299,9 +1319,9 @@ class Plans(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.PostPlansIDCloneRequest(
+        request = models.operations.PostPlansIDCloneRequest(
             id=id,
-            body=models.DtoClonePlanRequest(
+            body=models.components.DtoClonePlanRequest(
                 description=description,
                 display_order=display_order,
                 lookup_key=lookup_key,
@@ -1324,7 +1344,11 @@ class Plans(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoClonePlanRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoClonePlanRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1353,7 +1377,7 @@ class Plans(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoPlanResponse, http_res)
+            return unmarshal_json_response(models.components.DtoPlanResponse, http_res)
         if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1385,7 +1409,7 @@ class Plans(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ModelsTemporalWorkflowResult:
+    ) -> models.components.ModelsTemporalWorkflowResult:
         r"""Synchronize plan prices
 
         Use when you have changed plan prices and need to push them to all active subscriptions (e.g. global price update). Returns workflow ID.
@@ -1406,7 +1430,7 @@ class Plans(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.SyncPlanPricesRequest(
+        request = models.operations.SyncPlanPricesRequest(
             id=id,
         )
 
@@ -1451,7 +1475,7 @@ class Plans(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ModelsTemporalWorkflowResult, http_res
+                models.components.ModelsTemporalWorkflowResult, http_res
             )
         if utils.match_response(http_res, ["400", "404", "422"], "application/json"):
             response_data = unmarshal_json_response(
@@ -1484,7 +1508,7 @@ class Plans(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ModelsTemporalWorkflowResult:
+    ) -> models.components.ModelsTemporalWorkflowResult:
         r"""Synchronize plan prices
 
         Use when you have changed plan prices and need to push them to all active subscriptions (e.g. global price update). Returns workflow ID.
@@ -1505,7 +1529,7 @@ class Plans(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.SyncPlanPricesRequest(
+        request = models.operations.SyncPlanPricesRequest(
             id=id,
         )
 
@@ -1550,7 +1574,7 @@ class Plans(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ModelsTemporalWorkflowResult, http_res
+                models.components.ModelsTemporalWorkflowResult, http_res
             )
         if utils.match_response(http_res, ["400", "404", "422"], "application/json"):
             response_data = unmarshal_json_response(

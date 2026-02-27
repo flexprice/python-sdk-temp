@@ -14,14 +14,14 @@ class Addons(BaseSDK):
         *,
         lookup_key: str,
         name: str,
-        type_: models.TypesAddonType,
+        type_: models.components.AddonType,
         description: Optional[str] = None,
         metadata: Optional[Dict[str, Any]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCreateAddonResponse:
+    ) -> models.components.DtoCreateAddonResponse:
         r"""Create addon
 
         Use when defining an optional purchasable item (e.g. extra storage or support tier). Ideal for add-ons that customers can attach to a subscription.
@@ -46,7 +46,7 @@ class Addons(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateAddonRequest(
+        request = models.components.DtoCreateAddonRequest(
             description=description,
             lookup_key=lookup_key,
             metadata=metadata,
@@ -68,7 +68,7 @@ class Addons(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateAddonRequest
+                request, False, False, "json", models.components.DtoCreateAddonRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -97,7 +97,9 @@ class Addons(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoCreateAddonResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCreateAddonResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -126,14 +128,14 @@ class Addons(BaseSDK):
         *,
         lookup_key: str,
         name: str,
-        type_: models.TypesAddonType,
+        type_: models.components.AddonType,
         description: Optional[str] = None,
         metadata: Optional[Dict[str, Any]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCreateAddonResponse:
+    ) -> models.components.DtoCreateAddonResponse:
         r"""Create addon
 
         Use when defining an optional purchasable item (e.g. extra storage or support tier). Ideal for add-ons that customers can attach to a subscription.
@@ -158,7 +160,7 @@ class Addons(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateAddonRequest(
+        request = models.components.DtoCreateAddonRequest(
             description=description,
             lookup_key=lookup_key,
             metadata=metadata,
@@ -180,7 +182,7 @@ class Addons(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateAddonRequest
+                request, False, False, "json", models.components.DtoCreateAddonRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -209,7 +211,9 @@ class Addons(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoCreateAddonResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCreateAddonResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -241,7 +245,7 @@ class Addons(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoAddonResponse:
+    ) -> models.components.DtoAddonResponse:
         r"""Get addon by lookup key
 
         Use when resolving an addon by external id (e.g. from your product catalog). Ideal for integrations.
@@ -262,7 +266,7 @@ class Addons(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetAddonByLookupKeyRequest(
+        request = models.operations.GetAddonByLookupKeyRequest(
             lookup_key=lookup_key,
         )
 
@@ -306,7 +310,7 @@ class Addons(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoAddonResponse, http_res)
+            return unmarshal_json_response(models.components.DtoAddonResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -338,7 +342,7 @@ class Addons(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoAddonResponse:
+    ) -> models.components.DtoAddonResponse:
         r"""Get addon by lookup key
 
         Use when resolving an addon by external id (e.g. from your product catalog). Ideal for integrations.
@@ -359,7 +363,7 @@ class Addons(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetAddonByLookupKeyRequest(
+        request = models.operations.GetAddonByLookupKeyRequest(
             lookup_key=lookup_key,
         )
 
@@ -403,7 +407,7 @@ class Addons(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoAddonResponse, http_res)
+            return unmarshal_json_response(models.components.DtoAddonResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -431,32 +435,32 @@ class Addons(BaseSDK):
         self,
         *,
         addon_ids: Optional[List[str]] = None,
-        addon_type: Optional[models.TypesAddonType] = None,
+        addon_type: Optional[models.components.AddonType] = None,
         end_time: Optional[str] = None,
         expand: Optional[str] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         limit: Optional[int] = None,
         lookup_keys: Optional[List[str]] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesAddonFilterOrder] = None,
+        order: Optional[models.components.AddonFilterOrder] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.TypesStatus] = None,
+        status: Optional[models.components.Status] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListAddonsResponse:
+    ) -> models.components.DtoListAddonsResponse:
         r"""Query addons
 
         Use when listing or searching addons (e.g. catalog or subscription builder). Returns a paginated list; supports filtering and sorting.
@@ -488,20 +492,20 @@ class Addons(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesAddonFilter(
+        request = models.components.AddonFilter(
             addon_ids=addon_ids,
             addon_type=addon_type,
             end_time=end_time,
             expand=expand,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             limit=limit,
             lookup_keys=lookup_keys,
             offset=offset,
             order=order,
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             start_time=start_time,
             status=status,
@@ -521,7 +525,7 @@ class Addons(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesAddonFilter
+                request, False, False, "json", models.components.AddonFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -550,7 +554,9 @@ class Addons(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListAddonsResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListAddonsResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -578,32 +584,32 @@ class Addons(BaseSDK):
         self,
         *,
         addon_ids: Optional[List[str]] = None,
-        addon_type: Optional[models.TypesAddonType] = None,
+        addon_type: Optional[models.components.AddonType] = None,
         end_time: Optional[str] = None,
         expand: Optional[str] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         limit: Optional[int] = None,
         lookup_keys: Optional[List[str]] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesAddonFilterOrder] = None,
+        order: Optional[models.components.AddonFilterOrder] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.TypesStatus] = None,
+        status: Optional[models.components.Status] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListAddonsResponse:
+    ) -> models.components.DtoListAddonsResponse:
         r"""Query addons
 
         Use when listing or searching addons (e.g. catalog or subscription builder). Returns a paginated list; supports filtering and sorting.
@@ -635,20 +641,20 @@ class Addons(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesAddonFilter(
+        request = models.components.AddonFilter(
             addon_ids=addon_ids,
             addon_type=addon_type,
             end_time=end_time,
             expand=expand,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             limit=limit,
             lookup_keys=lookup_keys,
             offset=offset,
             order=order,
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             start_time=start_time,
             status=status,
@@ -668,7 +674,7 @@ class Addons(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesAddonFilter
+                request, False, False, "json", models.components.AddonFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -697,7 +703,9 @@ class Addons(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListAddonsResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListAddonsResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -729,7 +737,7 @@ class Addons(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoAddonResponse:
+    ) -> models.components.DtoAddonResponse:
         r"""Get addon
 
         Use when you need to load a single addon (e.g. for display or to attach to a subscription).
@@ -750,7 +758,7 @@ class Addons(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetAddonRequest(
+        request = models.operations.GetAddonRequest(
             id=id,
         )
 
@@ -794,7 +802,7 @@ class Addons(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoAddonResponse, http_res)
+            return unmarshal_json_response(models.components.DtoAddonResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -826,7 +834,7 @@ class Addons(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoAddonResponse:
+    ) -> models.components.DtoAddonResponse:
         r"""Get addon
 
         Use when you need to load a single addon (e.g. for display or to attach to a subscription).
@@ -847,7 +855,7 @@ class Addons(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetAddonRequest(
+        request = models.operations.GetAddonRequest(
             id=id,
         )
 
@@ -891,7 +899,7 @@ class Addons(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoAddonResponse, http_res)
+            return unmarshal_json_response(models.components.DtoAddonResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -926,7 +934,7 @@ class Addons(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoAddonResponse:
+    ) -> models.components.DtoAddonResponse:
         r"""Update addon
 
         Use when changing addon details (e.g. name, pricing, or metadata).
@@ -950,9 +958,9 @@ class Addons(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateAddonRequest(
+        request = models.operations.UpdateAddonRequest(
             id=id,
-            body=models.DtoUpdateAddonRequest(
+            body=models.components.DtoUpdateAddonRequest(
                 description=description,
                 metadata=metadata,
                 name=name,
@@ -973,7 +981,11 @@ class Addons(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdateAddonRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdateAddonRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1002,7 +1014,7 @@ class Addons(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoAddonResponse, http_res)
+            return unmarshal_json_response(models.components.DtoAddonResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1037,7 +1049,7 @@ class Addons(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoAddonResponse:
+    ) -> models.components.DtoAddonResponse:
         r"""Update addon
 
         Use when changing addon details (e.g. name, pricing, or metadata).
@@ -1061,9 +1073,9 @@ class Addons(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateAddonRequest(
+        request = models.operations.UpdateAddonRequest(
             id=id,
-            body=models.DtoUpdateAddonRequest(
+            body=models.components.DtoUpdateAddonRequest(
                 description=description,
                 metadata=metadata,
                 name=name,
@@ -1084,7 +1096,11 @@ class Addons(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdateAddonRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdateAddonRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1113,7 +1129,7 @@ class Addons(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoAddonResponse, http_res)
+            return unmarshal_json_response(models.components.DtoAddonResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1145,7 +1161,7 @@ class Addons(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSuccessResponse:
+    ) -> models.components.DtoSuccessResponse:
         r"""Delete addon
 
         Use when retiring an addon (e.g. end-of-life). Returns 200 with success message.
@@ -1166,7 +1182,7 @@ class Addons(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteAddonRequest(
+        request = models.operations.DeleteAddonRequest(
             id=id,
         )
 
@@ -1210,7 +1226,9 @@ class Addons(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSuccessResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSuccessResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1242,7 +1260,7 @@ class Addons(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSuccessResponse:
+    ) -> models.components.DtoSuccessResponse:
         r"""Delete addon
 
         Use when retiring an addon (e.g. end-of-life). Returns 200 with success message.
@@ -1263,7 +1281,7 @@ class Addons(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteAddonRequest(
+        request = models.operations.DeleteAddonRequest(
             id=id,
         )
 
@@ -1307,7 +1325,9 @@ class Addons(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSuccessResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSuccessResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res

@@ -17,7 +17,7 @@ class Entitlements(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListEntitlementsResponse:
+    ) -> models.components.DtoListEntitlementsResponse:
         r"""Get addon entitlements
 
         Use when checking what features or limits an addon grants (e.g. for display or entitlement logic).
@@ -38,7 +38,7 @@ class Entitlements(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetAddonEntitlementsRequest(
+        request = models.operations.GetAddonEntitlementsRequest(
             id=id,
         )
 
@@ -82,7 +82,9 @@ class Entitlements(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListEntitlementsResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListEntitlementsResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -114,7 +116,7 @@ class Entitlements(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListEntitlementsResponse:
+    ) -> models.components.DtoListEntitlementsResponse:
         r"""Get addon entitlements
 
         Use when checking what features or limits an addon grants (e.g. for display or entitlement logic).
@@ -135,7 +137,7 @@ class Entitlements(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetAddonEntitlementsRequest(
+        request = models.operations.GetAddonEntitlementsRequest(
             id=id,
         )
 
@@ -179,7 +181,9 @@ class Entitlements(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListEntitlementsResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListEntitlementsResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -207,10 +211,10 @@ class Entitlements(BaseSDK):
         self,
         *,
         feature_id: str,
-        feature_type: models.TypesFeatureType,
+        feature_type: models.components.FeatureType,
         end_date: Optional[str] = None,
         entity_id: Optional[str] = None,
-        entity_type: Optional[models.TypesEntitlementEntityType] = None,
+        entity_type: Optional[models.components.EntitlementEntityType] = None,
         is_enabled: Optional[bool] = None,
         is_soft_limit: Optional[bool] = None,
         parent_entitlement_id: Optional[str] = None,
@@ -218,12 +222,14 @@ class Entitlements(BaseSDK):
         start_date: Optional[str] = None,
         static_value: Optional[str] = None,
         usage_limit: Optional[int] = None,
-        usage_reset_period: Optional[models.TypesEntitlementUsageResetPeriod] = None,
+        usage_reset_period: Optional[
+            models.components.EntitlementUsageResetPeriod
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoEntitlementResponse:
+    ) -> models.components.DtoEntitlementResponse:
         r"""Create entitlement
 
         Use when attaching a feature (and its limit) to a plan or addon (e.g. \"10 seats\" or \"1000 API calls\"). Defines what the plan/addon includes.
@@ -256,7 +262,7 @@ class Entitlements(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateEntitlementRequest(
+        request = models.components.DtoCreateEntitlementRequest(
             end_date=end_date,
             entity_id=entity_id,
             entity_type=entity_type,
@@ -286,7 +292,11 @@ class Entitlements(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateEntitlementRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoCreateEntitlementRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -315,7 +325,9 @@ class Entitlements(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoEntitlementResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoEntitlementResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -343,10 +355,10 @@ class Entitlements(BaseSDK):
         self,
         *,
         feature_id: str,
-        feature_type: models.TypesFeatureType,
+        feature_type: models.components.FeatureType,
         end_date: Optional[str] = None,
         entity_id: Optional[str] = None,
-        entity_type: Optional[models.TypesEntitlementEntityType] = None,
+        entity_type: Optional[models.components.EntitlementEntityType] = None,
         is_enabled: Optional[bool] = None,
         is_soft_limit: Optional[bool] = None,
         parent_entitlement_id: Optional[str] = None,
@@ -354,12 +366,14 @@ class Entitlements(BaseSDK):
         start_date: Optional[str] = None,
         static_value: Optional[str] = None,
         usage_limit: Optional[int] = None,
-        usage_reset_period: Optional[models.TypesEntitlementUsageResetPeriod] = None,
+        usage_reset_period: Optional[
+            models.components.EntitlementUsageResetPeriod
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoEntitlementResponse:
+    ) -> models.components.DtoEntitlementResponse:
         r"""Create entitlement
 
         Use when attaching a feature (and its limit) to a plan or addon (e.g. \"10 seats\" or \"1000 API calls\"). Defines what the plan/addon includes.
@@ -392,7 +406,7 @@ class Entitlements(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateEntitlementRequest(
+        request = models.components.DtoCreateEntitlementRequest(
             end_date=end_date,
             entity_id=entity_id,
             entity_type=entity_type,
@@ -422,7 +436,11 @@ class Entitlements(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateEntitlementRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoCreateEntitlementRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -451,7 +469,9 @@ class Entitlements(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoEntitlementResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoEntitlementResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -479,14 +499,14 @@ class Entitlements(BaseSDK):
         self,
         *,
         items: Union[
-            List[models.DtoCreateEntitlementRequest],
-            List[models.DtoCreateEntitlementRequestTypedDict],
+            List[models.components.DtoCreateEntitlementRequest],
+            List[models.components.DtoCreateEntitlementRequestTypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCreateBulkEntitlementResponse:
+    ) -> models.components.DtoCreateBulkEntitlementResponse:
         r"""Create entitlements in bulk
 
         Use when attaching many features to a plan or addon at once (e.g. initial plan setup or import). Bulk version of create entitlement.
@@ -507,9 +527,9 @@ class Entitlements(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateBulkEntitlementRequest(
+        request = models.components.DtoCreateBulkEntitlementRequest(
             items=utils.get_pydantic_model(
-                items, List[models.DtoCreateEntitlementRequest]
+                items, List[models.components.DtoCreateEntitlementRequest]
             ),
         )
 
@@ -527,7 +547,11 @@ class Entitlements(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateBulkEntitlementRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoCreateBulkEntitlementRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -557,7 +581,7 @@ class Entitlements(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return unmarshal_json_response(
-                models.DtoCreateBulkEntitlementResponse, http_res
+                models.components.DtoCreateBulkEntitlementResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -586,14 +610,14 @@ class Entitlements(BaseSDK):
         self,
         *,
         items: Union[
-            List[models.DtoCreateEntitlementRequest],
-            List[models.DtoCreateEntitlementRequestTypedDict],
+            List[models.components.DtoCreateEntitlementRequest],
+            List[models.components.DtoCreateEntitlementRequestTypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCreateBulkEntitlementResponse:
+    ) -> models.components.DtoCreateBulkEntitlementResponse:
         r"""Create entitlements in bulk
 
         Use when attaching many features to a plan or addon at once (e.g. initial plan setup or import). Bulk version of create entitlement.
@@ -614,9 +638,9 @@ class Entitlements(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateBulkEntitlementRequest(
+        request = models.components.DtoCreateBulkEntitlementRequest(
             items=utils.get_pydantic_model(
-                items, List[models.DtoCreateEntitlementRequest]
+                items, List[models.components.DtoCreateEntitlementRequest]
             ),
         )
 
@@ -634,7 +658,11 @@ class Entitlements(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateBulkEntitlementRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoCreateBulkEntitlementRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -664,7 +692,7 @@ class Entitlements(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return unmarshal_json_response(
-                models.DtoCreateBulkEntitlementResponse, http_res
+                models.components.DtoCreateBulkEntitlementResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -694,34 +722,34 @@ class Entitlements(BaseSDK):
         *,
         end_time: Optional[str] = None,
         entity_ids: Optional[List[str]] = None,
-        entity_type: Optional[models.TypesEntitlementEntityType] = None,
+        entity_type: Optional[models.components.EntitlementEntityType] = None,
         expand: Optional[str] = None,
         feature_ids: Optional[List[str]] = None,
-        feature_type: Optional[models.TypesFeatureType] = None,
+        feature_type: Optional[models.components.FeatureType] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         is_enabled: Optional[bool] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesEntitlementFilterOrder] = None,
+        order: Optional[models.components.EntitlementFilterOrder] = None,
         plan_ids: Optional[List[str]] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.TypesStatus] = None,
+        status: Optional[models.components.Status] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListEntitlementsResponse:
+    ) -> models.components.DtoListEntitlementsResponse:
         r"""Query entitlements
 
         Use when listing or searching entitlements (e.g. plan editor or audit). Returns a paginated list; supports filtering by plan, addon, feature.
@@ -756,7 +784,7 @@ class Entitlements(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesEntitlementFilter(
+        request = models.components.EntitlementFilter(
             end_time=end_time,
             entity_ids=entity_ids,
             entity_type=entity_type,
@@ -764,7 +792,7 @@ class Entitlements(BaseSDK):
             feature_ids=feature_ids,
             feature_type=feature_type,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             is_enabled=is_enabled,
             limit=limit,
@@ -772,7 +800,7 @@ class Entitlements(BaseSDK):
             order=order,
             plan_ids=plan_ids,
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             start_time=start_time,
             status=status,
@@ -792,7 +820,7 @@ class Entitlements(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesEntitlementFilter
+                request, False, False, "json", models.components.EntitlementFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -821,7 +849,9 @@ class Entitlements(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListEntitlementsResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListEntitlementsResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -850,34 +880,34 @@ class Entitlements(BaseSDK):
         *,
         end_time: Optional[str] = None,
         entity_ids: Optional[List[str]] = None,
-        entity_type: Optional[models.TypesEntitlementEntityType] = None,
+        entity_type: Optional[models.components.EntitlementEntityType] = None,
         expand: Optional[str] = None,
         feature_ids: Optional[List[str]] = None,
-        feature_type: Optional[models.TypesFeatureType] = None,
+        feature_type: Optional[models.components.FeatureType] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         is_enabled: Optional[bool] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesEntitlementFilterOrder] = None,
+        order: Optional[models.components.EntitlementFilterOrder] = None,
         plan_ids: Optional[List[str]] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.TypesStatus] = None,
+        status: Optional[models.components.Status] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListEntitlementsResponse:
+    ) -> models.components.DtoListEntitlementsResponse:
         r"""Query entitlements
 
         Use when listing or searching entitlements (e.g. plan editor or audit). Returns a paginated list; supports filtering by plan, addon, feature.
@@ -912,7 +942,7 @@ class Entitlements(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesEntitlementFilter(
+        request = models.components.EntitlementFilter(
             end_time=end_time,
             entity_ids=entity_ids,
             entity_type=entity_type,
@@ -920,7 +950,7 @@ class Entitlements(BaseSDK):
             feature_ids=feature_ids,
             feature_type=feature_type,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             is_enabled=is_enabled,
             limit=limit,
@@ -928,7 +958,7 @@ class Entitlements(BaseSDK):
             order=order,
             plan_ids=plan_ids,
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             start_time=start_time,
             status=status,
@@ -948,7 +978,7 @@ class Entitlements(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesEntitlementFilter
+                request, False, False, "json", models.components.EntitlementFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -977,7 +1007,9 @@ class Entitlements(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListEntitlementsResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListEntitlementsResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1009,7 +1041,7 @@ class Entitlements(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoEntitlementResponse:
+    ) -> models.components.DtoEntitlementResponse:
         r"""Get entitlement
 
         Use when you need to load a single entitlement (e.g. to display or edit a feature limit).
@@ -1030,7 +1062,7 @@ class Entitlements(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetEntitlementRequest(
+        request = models.operations.GetEntitlementRequest(
             id=id,
         )
 
@@ -1074,7 +1106,9 @@ class Entitlements(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoEntitlementResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoEntitlementResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1106,7 +1140,7 @@ class Entitlements(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoEntitlementResponse:
+    ) -> models.components.DtoEntitlementResponse:
         r"""Get entitlement
 
         Use when you need to load a single entitlement (e.g. to display or edit a feature limit).
@@ -1127,7 +1161,7 @@ class Entitlements(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetEntitlementRequest(
+        request = models.operations.GetEntitlementRequest(
             id=id,
         )
 
@@ -1171,7 +1205,9 @@ class Entitlements(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoEntitlementResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoEntitlementResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1203,12 +1239,14 @@ class Entitlements(BaseSDK):
         is_soft_limit: Optional[bool] = None,
         static_value: Optional[str] = None,
         usage_limit: Optional[int] = None,
-        usage_reset_period: Optional[models.TypesEntitlementUsageResetPeriod] = None,
+        usage_reset_period: Optional[
+            models.components.EntitlementUsageResetPeriod
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoEntitlementResponse:
+    ) -> models.components.DtoEntitlementResponse:
         r"""Update entitlement
 
         Use when changing an entitlement (e.g. increasing or decreasing a limit). Request body contains the fields to update.
@@ -1234,9 +1272,9 @@ class Entitlements(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateEntitlementRequest(
+        request = models.operations.UpdateEntitlementRequest(
             id=id,
-            body=models.DtoUpdateEntitlementRequest(
+            body=models.components.DtoUpdateEntitlementRequest(
                 is_enabled=is_enabled,
                 is_soft_limit=is_soft_limit,
                 static_value=static_value,
@@ -1259,7 +1297,11 @@ class Entitlements(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdateEntitlementRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdateEntitlementRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1288,7 +1330,9 @@ class Entitlements(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoEntitlementResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoEntitlementResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1320,12 +1364,14 @@ class Entitlements(BaseSDK):
         is_soft_limit: Optional[bool] = None,
         static_value: Optional[str] = None,
         usage_limit: Optional[int] = None,
-        usage_reset_period: Optional[models.TypesEntitlementUsageResetPeriod] = None,
+        usage_reset_period: Optional[
+            models.components.EntitlementUsageResetPeriod
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoEntitlementResponse:
+    ) -> models.components.DtoEntitlementResponse:
         r"""Update entitlement
 
         Use when changing an entitlement (e.g. increasing or decreasing a limit). Request body contains the fields to update.
@@ -1351,9 +1397,9 @@ class Entitlements(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateEntitlementRequest(
+        request = models.operations.UpdateEntitlementRequest(
             id=id,
-            body=models.DtoUpdateEntitlementRequest(
+            body=models.components.DtoUpdateEntitlementRequest(
                 is_enabled=is_enabled,
                 is_soft_limit=is_soft_limit,
                 static_value=static_value,
@@ -1376,7 +1422,11 @@ class Entitlements(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdateEntitlementRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdateEntitlementRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1405,7 +1455,9 @@ class Entitlements(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoEntitlementResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoEntitlementResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1437,7 +1489,7 @@ class Entitlements(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSuccessResponse:
+    ) -> models.components.DtoSuccessResponse:
         r"""Delete entitlement
 
         Use when removing a feature from a plan or addon (e.g. deprecating a capability). Returns 200 with success message.
@@ -1458,7 +1510,7 @@ class Entitlements(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteEntitlementRequest(
+        request = models.operations.DeleteEntitlementRequest(
             id=id,
         )
 
@@ -1502,7 +1554,9 @@ class Entitlements(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSuccessResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSuccessResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1534,7 +1588,7 @@ class Entitlements(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSuccessResponse:
+    ) -> models.components.DtoSuccessResponse:
         r"""Delete entitlement
 
         Use when removing a feature from a plan or addon (e.g. deprecating a capability). Returns 200 with success message.
@@ -1555,7 +1609,7 @@ class Entitlements(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteEntitlementRequest(
+        request = models.operations.DeleteEntitlementRequest(
             id=id,
         )
 
@@ -1599,7 +1653,9 @@ class Entitlements(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSuccessResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSuccessResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1631,7 +1687,7 @@ class Entitlements(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPlanResponse:
+    ) -> models.components.DtoPlanResponse:
         r"""Get plan entitlements
 
         Use when checking what a plan includes (e.g. feature list or limits for display or gating).
@@ -1652,7 +1708,7 @@ class Entitlements(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetPlanEntitlementsRequest(
+        request = models.operations.GetPlanEntitlementsRequest(
             id=id,
         )
 
@@ -1696,7 +1752,7 @@ class Entitlements(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoPlanResponse, http_res)
+            return unmarshal_json_response(models.components.DtoPlanResponse, http_res)
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1728,7 +1784,7 @@ class Entitlements(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPlanResponse:
+    ) -> models.components.DtoPlanResponse:
         r"""Get plan entitlements
 
         Use when checking what a plan includes (e.g. feature list or limits for display or gating).
@@ -1749,7 +1805,7 @@ class Entitlements(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetPlanEntitlementsRequest(
+        request = models.operations.GetPlanEntitlementsRequest(
             id=id,
         )
 
@@ -1793,7 +1849,7 @@ class Entitlements(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoPlanResponse, http_res)
+            return unmarshal_json_response(models.components.DtoPlanResponse, http_res)
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res

@@ -1,0 +1,9 @@
+# UpdateSubscriptionRequest
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `id`                                                                                               | *str*                                                                                              | :heavy_check_mark:                                                                                 | Subscription ID                                                                                    |
+| `body`                                                                                             | [components.DtoUpdateSubscriptionRequest](../../models/components/dtoupdatesubscriptionrequest.md) | :heavy_check_mark:                                                                                 | Update Subscription Request                                                                        |

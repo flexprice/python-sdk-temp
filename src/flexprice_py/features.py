@@ -13,15 +13,21 @@ class Features(BaseSDK):
         self,
         *,
         name: str,
-        type_: models.TypesFeatureType,
+        type_: models.components.FeatureType,
         alert_settings: Optional[
-            Union[models.TypesAlertSettings, models.TypesAlertSettingsTypedDict]
+            Union[
+                models.components.AlertSettings,
+                models.components.AlertSettingsTypedDict,
+            ]
         ] = None,
         description: Optional[str] = None,
         lookup_key: Optional[str] = None,
         metadata: Optional[Dict[str, str]] = None,
         meter: Optional[
-            Union[models.DtoCreateMeterRequest, models.DtoCreateMeterRequestTypedDict]
+            Union[
+                models.components.DtoCreateMeterRequest,
+                models.components.DtoCreateMeterRequestTypedDict,
+            ]
         ] = None,
         meter_id: Optional[str] = None,
         unit_plural: Optional[str] = None,
@@ -30,7 +36,7 @@ class Features(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoFeatureResponse:
+    ) -> models.components.DtoFeatureResponse:
         r"""Create feature
 
         Use when defining a new feature or capability to gate or meter (e.g. feature flags or usage-based limits). Ideal for boolean or usage features.
@@ -60,15 +66,15 @@ class Features(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateFeatureRequest(
+        request = models.components.DtoCreateFeatureRequest(
             alert_settings=utils.get_pydantic_model(
-                alert_settings, Optional[models.TypesAlertSettings]
+                alert_settings, Optional[models.components.AlertSettings]
             ),
             description=description,
             lookup_key=lookup_key,
             metadata=metadata,
             meter=utils.get_pydantic_model(
-                meter, Optional[models.DtoCreateMeterRequest]
+                meter, Optional[models.components.DtoCreateMeterRequest]
             ),
             meter_id=meter_id,
             name=name,
@@ -91,7 +97,7 @@ class Features(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateFeatureRequest
+                request, False, False, "json", models.components.DtoCreateFeatureRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -120,7 +126,9 @@ class Features(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoFeatureResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoFeatureResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -148,15 +156,21 @@ class Features(BaseSDK):
         self,
         *,
         name: str,
-        type_: models.TypesFeatureType,
+        type_: models.components.FeatureType,
         alert_settings: Optional[
-            Union[models.TypesAlertSettings, models.TypesAlertSettingsTypedDict]
+            Union[
+                models.components.AlertSettings,
+                models.components.AlertSettingsTypedDict,
+            ]
         ] = None,
         description: Optional[str] = None,
         lookup_key: Optional[str] = None,
         metadata: Optional[Dict[str, str]] = None,
         meter: Optional[
-            Union[models.DtoCreateMeterRequest, models.DtoCreateMeterRequestTypedDict]
+            Union[
+                models.components.DtoCreateMeterRequest,
+                models.components.DtoCreateMeterRequestTypedDict,
+            ]
         ] = None,
         meter_id: Optional[str] = None,
         unit_plural: Optional[str] = None,
@@ -165,7 +179,7 @@ class Features(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoFeatureResponse:
+    ) -> models.components.DtoFeatureResponse:
         r"""Create feature
 
         Use when defining a new feature or capability to gate or meter (e.g. feature flags or usage-based limits). Ideal for boolean or usage features.
@@ -195,15 +209,15 @@ class Features(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateFeatureRequest(
+        request = models.components.DtoCreateFeatureRequest(
             alert_settings=utils.get_pydantic_model(
-                alert_settings, Optional[models.TypesAlertSettings]
+                alert_settings, Optional[models.components.AlertSettings]
             ),
             description=description,
             lookup_key=lookup_key,
             metadata=metadata,
             meter=utils.get_pydantic_model(
-                meter, Optional[models.DtoCreateMeterRequest]
+                meter, Optional[models.components.DtoCreateMeterRequest]
             ),
             meter_id=meter_id,
             name=name,
@@ -226,7 +240,7 @@ class Features(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateFeatureRequest
+                request, False, False, "json", models.components.DtoCreateFeatureRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -255,7 +269,9 @@ class Features(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoFeatureResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoFeatureResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -287,8 +303,8 @@ class Features(BaseSDK):
         feature_ids: Optional[List[str]] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         limit: Optional[int] = None,
@@ -297,20 +313,20 @@ class Features(BaseSDK):
         meter_ids: Optional[List[str]] = None,
         name_contains: Optional[str] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesFeatureFilterOrder] = None,
+        order: Optional[models.components.FeatureFilterOrder] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.TypesStatus] = None,
+        status: Optional[models.components.Status] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListFeaturesResponse:
+    ) -> models.components.DtoListFeaturesResponse:
         r"""Query features
 
         Use when listing or searching features (e.g. catalog or entitlement setup). Returns a paginated list; supports filtering and sorting.
@@ -344,12 +360,12 @@ class Features(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesFeatureFilter(
+        request = models.components.FeatureFilter(
             end_time=end_time,
             expand=expand,
             feature_ids=feature_ids,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             limit=limit,
             lookup_key=lookup_key,
@@ -359,7 +375,7 @@ class Features(BaseSDK):
             offset=offset,
             order=order,
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             start_time=start_time,
             status=status,
@@ -379,7 +395,7 @@ class Features(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesFeatureFilter
+                request, False, False, "json", models.components.FeatureFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -408,7 +424,9 @@ class Features(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListFeaturesResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListFeaturesResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -440,8 +458,8 @@ class Features(BaseSDK):
         feature_ids: Optional[List[str]] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         limit: Optional[int] = None,
@@ -450,20 +468,20 @@ class Features(BaseSDK):
         meter_ids: Optional[List[str]] = None,
         name_contains: Optional[str] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesFeatureFilterOrder] = None,
+        order: Optional[models.components.FeatureFilterOrder] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.TypesStatus] = None,
+        status: Optional[models.components.Status] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListFeaturesResponse:
+    ) -> models.components.DtoListFeaturesResponse:
         r"""Query features
 
         Use when listing or searching features (e.g. catalog or entitlement setup). Returns a paginated list; supports filtering and sorting.
@@ -497,12 +515,12 @@ class Features(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesFeatureFilter(
+        request = models.components.FeatureFilter(
             end_time=end_time,
             expand=expand,
             feature_ids=feature_ids,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             limit=limit,
             lookup_key=lookup_key,
@@ -512,7 +530,7 @@ class Features(BaseSDK):
             offset=offset,
             order=order,
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             start_time=start_time,
             status=status,
@@ -532,7 +550,7 @@ class Features(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesFeatureFilter
+                request, False, False, "json", models.components.FeatureFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -561,7 +579,9 @@ class Features(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListFeaturesResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListFeaturesResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -590,11 +610,17 @@ class Features(BaseSDK):
         *,
         id: str,
         alert_settings: Optional[
-            Union[models.TypesAlertSettings, models.TypesAlertSettingsTypedDict]
+            Union[
+                models.components.AlertSettings,
+                models.components.AlertSettingsTypedDict,
+            ]
         ] = None,
         description: Optional[str] = None,
         filters: Optional[
-            Union[List[models.MeterFilter], List[models.MeterFilterTypedDict]]
+            Union[
+                List[models.components.MeterFilter],
+                List[models.components.MeterFilterTypedDict],
+            ]
         ] = None,
         metadata: Optional[Dict[str, str]] = None,
         name: Optional[str] = None,
@@ -604,7 +630,7 @@ class Features(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoFeatureResponse:
+    ) -> models.components.DtoFeatureResponse:
         r"""Update feature
 
         Use when changing feature definition (e.g. name, type, or meter). Request body contains the fields to update.
@@ -632,15 +658,15 @@ class Features(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateFeatureRequest(
+        request = models.operations.UpdateFeatureRequest(
             id=id,
-            body=models.DtoUpdateFeatureRequest(
+            body=models.components.DtoUpdateFeatureRequest(
                 alert_settings=utils.get_pydantic_model(
-                    alert_settings, Optional[models.TypesAlertSettings]
+                    alert_settings, Optional[models.components.AlertSettings]
                 ),
                 description=description,
                 filters=utils.get_pydantic_model(
-                    filters, Optional[List[models.MeterFilter]]
+                    filters, Optional[List[models.components.MeterFilter]]
                 ),
                 metadata=metadata,
                 name=name,
@@ -663,7 +689,11 @@ class Features(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdateFeatureRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdateFeatureRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -692,7 +722,9 @@ class Features(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoFeatureResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoFeatureResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -721,11 +753,17 @@ class Features(BaseSDK):
         *,
         id: str,
         alert_settings: Optional[
-            Union[models.TypesAlertSettings, models.TypesAlertSettingsTypedDict]
+            Union[
+                models.components.AlertSettings,
+                models.components.AlertSettingsTypedDict,
+            ]
         ] = None,
         description: Optional[str] = None,
         filters: Optional[
-            Union[List[models.MeterFilter], List[models.MeterFilterTypedDict]]
+            Union[
+                List[models.components.MeterFilter],
+                List[models.components.MeterFilterTypedDict],
+            ]
         ] = None,
         metadata: Optional[Dict[str, str]] = None,
         name: Optional[str] = None,
@@ -735,7 +773,7 @@ class Features(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoFeatureResponse:
+    ) -> models.components.DtoFeatureResponse:
         r"""Update feature
 
         Use when changing feature definition (e.g. name, type, or meter). Request body contains the fields to update.
@@ -763,15 +801,15 @@ class Features(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateFeatureRequest(
+        request = models.operations.UpdateFeatureRequest(
             id=id,
-            body=models.DtoUpdateFeatureRequest(
+            body=models.components.DtoUpdateFeatureRequest(
                 alert_settings=utils.get_pydantic_model(
-                    alert_settings, Optional[models.TypesAlertSettings]
+                    alert_settings, Optional[models.components.AlertSettings]
                 ),
                 description=description,
                 filters=utils.get_pydantic_model(
-                    filters, Optional[List[models.MeterFilter]]
+                    filters, Optional[List[models.components.MeterFilter]]
                 ),
                 metadata=metadata,
                 name=name,
@@ -794,7 +832,11 @@ class Features(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdateFeatureRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdateFeatureRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -823,7 +865,9 @@ class Features(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoFeatureResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoFeatureResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -855,7 +899,7 @@ class Features(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSuccessResponse:
+    ) -> models.components.DtoSuccessResponse:
         r"""Delete feature
 
         Use when retiring a feature (e.g. deprecated capability). Returns 200 with success message.
@@ -876,7 +920,7 @@ class Features(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteFeatureRequest(
+        request = models.operations.DeleteFeatureRequest(
             id=id,
         )
 
@@ -920,7 +964,9 @@ class Features(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSuccessResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSuccessResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -952,7 +998,7 @@ class Features(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSuccessResponse:
+    ) -> models.components.DtoSuccessResponse:
         r"""Delete feature
 
         Use when retiring a feature (e.g. deprecated capability). Returns 200 with success message.
@@ -973,7 +1019,7 @@ class Features(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteFeatureRequest(
+        request = models.operations.DeleteFeatureRequest(
             id=id,
         )
 
@@ -1017,7 +1063,9 @@ class Features(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSuccessResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSuccessResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res

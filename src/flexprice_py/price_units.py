@@ -16,12 +16,12 @@ class PriceUnits(BaseSDK):
         limit: Optional[int] = 50,
         offset: Optional[int] = 0,
         sort: Optional[str] = None,
-        order: Optional[models.ListPriceUnitsOrder] = None,
+        order: Optional[models.operations.ListPriceUnitsOrder] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListPriceUnitsResponse:
+    ) -> models.components.DtoListPriceUnitsResponse:
         r"""List price units
 
         Use when listing price units (e.g. in a catalog or when creating prices). Returns a paginated list; supports status, sort, and pagination.
@@ -46,7 +46,7 @@ class PriceUnits(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListPriceUnitsRequest(
+        request = models.operations.ListPriceUnitsRequest(
             status=status,
             limit=limit,
             offset=offset,
@@ -94,7 +94,9 @@ class PriceUnits(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListPriceUnitsResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListPriceUnitsResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -125,12 +127,12 @@ class PriceUnits(BaseSDK):
         limit: Optional[int] = 50,
         offset: Optional[int] = 0,
         sort: Optional[str] = None,
-        order: Optional[models.ListPriceUnitsOrder] = None,
+        order: Optional[models.operations.ListPriceUnitsOrder] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListPriceUnitsResponse:
+    ) -> models.components.DtoListPriceUnitsResponse:
         r"""List price units
 
         Use when listing price units (e.g. in a catalog or when creating prices). Returns a paginated list; supports status, sort, and pagination.
@@ -155,7 +157,7 @@ class PriceUnits(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListPriceUnitsRequest(
+        request = models.operations.ListPriceUnitsRequest(
             status=status,
             limit=limit,
             offset=offset,
@@ -203,7 +205,9 @@ class PriceUnits(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListPriceUnitsResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListPriceUnitsResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -240,7 +244,7 @@ class PriceUnits(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCreatePriceUnitResponse:
+    ) -> models.components.DtoCreatePriceUnitResponse:
         r"""Create price unit
 
         Use when defining a new unit of measure for pricing (e.g. GB, API call, seat). Ideal for metered or usage-based prices.
@@ -276,7 +280,7 @@ class PriceUnits(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreatePriceUnitRequest(
+        request = models.components.DtoCreatePriceUnitRequest(
             base_currency=base_currency,
             code=code,
             conversion_rate=conversion_rate,
@@ -299,7 +303,11 @@ class PriceUnits(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreatePriceUnitRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoCreatePriceUnitRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -328,7 +336,9 @@ class PriceUnits(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoCreatePriceUnitResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCreatePriceUnitResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -365,7 +375,7 @@ class PriceUnits(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCreatePriceUnitResponse:
+    ) -> models.components.DtoCreatePriceUnitResponse:
         r"""Create price unit
 
         Use when defining a new unit of measure for pricing (e.g. GB, API call, seat). Ideal for metered or usage-based prices.
@@ -401,7 +411,7 @@ class PriceUnits(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreatePriceUnitRequest(
+        request = models.components.DtoCreatePriceUnitRequest(
             base_currency=base_currency,
             code=code,
             conversion_rate=conversion_rate,
@@ -424,7 +434,11 @@ class PriceUnits(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreatePriceUnitRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoCreatePriceUnitRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -453,7 +467,9 @@ class PriceUnits(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoCreatePriceUnitResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCreatePriceUnitResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -485,7 +501,7 @@ class PriceUnits(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPriceUnitResponse:
+    ) -> models.components.DtoPriceUnitResponse:
         r"""Get price unit by code
 
         Use when resolving a price unit by code (e.g. from an external catalog or config). Ideal for integrations.
@@ -506,7 +522,7 @@ class PriceUnits(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetPriceUnitByCodeRequest(
+        request = models.operations.GetPriceUnitByCodeRequest(
             code=code,
         )
 
@@ -550,7 +566,9 @@ class PriceUnits(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoPriceUnitResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoPriceUnitResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -582,7 +600,7 @@ class PriceUnits(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPriceUnitResponse:
+    ) -> models.components.DtoPriceUnitResponse:
         r"""Get price unit by code
 
         Use when resolving a price unit by code (e.g. from an external catalog or config). Ideal for integrations.
@@ -603,7 +621,7 @@ class PriceUnits(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetPriceUnitByCodeRequest(
+        request = models.operations.GetPriceUnitByCodeRequest(
             code=code,
         )
 
@@ -647,7 +665,9 @@ class PriceUnits(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoPriceUnitResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoPriceUnitResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -678,27 +698,27 @@ class PriceUnits(BaseSDK):
         expand: Optional[str] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesPriceUnitFilterOrder] = None,
+        order: Optional[models.components.PriceUnitFilterOrder] = None,
         price_unit_ids: Optional[List[str]] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.TypesStatus] = None,
+        status: Optional[models.components.Status] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListPriceUnitsResponse:
+    ) -> models.components.DtoListPriceUnitsResponse:
         r"""Query price units
 
         Use when searching or listing price units (e.g. admin catalog). Returns a paginated list; supports filtering and sorting.
@@ -728,18 +748,18 @@ class PriceUnits(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesPriceUnitFilter(
+        request = models.components.PriceUnitFilter(
             end_time=end_time,
             expand=expand,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             limit=limit,
             offset=offset,
             order=order,
             price_unit_ids=price_unit_ids,
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             start_time=start_time,
             status=status,
@@ -759,7 +779,7 @@ class PriceUnits(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesPriceUnitFilter
+                request, False, False, "json", models.components.PriceUnitFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -788,7 +808,9 @@ class PriceUnits(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListPriceUnitsResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListPriceUnitsResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -819,27 +841,27 @@ class PriceUnits(BaseSDK):
         expand: Optional[str] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesPriceUnitFilterOrder] = None,
+        order: Optional[models.components.PriceUnitFilterOrder] = None,
         price_unit_ids: Optional[List[str]] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.TypesStatus] = None,
+        status: Optional[models.components.Status] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListPriceUnitsResponse:
+    ) -> models.components.DtoListPriceUnitsResponse:
         r"""Query price units
 
         Use when searching or listing price units (e.g. admin catalog). Returns a paginated list; supports filtering and sorting.
@@ -869,18 +891,18 @@ class PriceUnits(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesPriceUnitFilter(
+        request = models.components.PriceUnitFilter(
             end_time=end_time,
             expand=expand,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             limit=limit,
             offset=offset,
             order=order,
             price_unit_ids=price_unit_ids,
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             start_time=start_time,
             status=status,
@@ -900,7 +922,7 @@ class PriceUnits(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesPriceUnitFilter
+                request, False, False, "json", models.components.PriceUnitFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -929,7 +951,9 @@ class PriceUnits(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListPriceUnitsResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListPriceUnitsResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -961,7 +985,7 @@ class PriceUnits(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPriceUnitResponse:
+    ) -> models.components.DtoPriceUnitResponse:
         r"""Get price unit
 
         Use when you need to load a single price unit (e.g. for display or when creating a price).
@@ -982,7 +1006,7 @@ class PriceUnits(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetPriceUnitRequest(
+        request = models.operations.GetPriceUnitRequest(
             id=id,
         )
 
@@ -1026,7 +1050,9 @@ class PriceUnits(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoPriceUnitResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoPriceUnitResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1053,7 +1079,7 @@ class PriceUnits(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPriceUnitResponse:
+    ) -> models.components.DtoPriceUnitResponse:
         r"""Get price unit
 
         Use when you need to load a single price unit (e.g. for display or when creating a price).
@@ -1074,7 +1100,7 @@ class PriceUnits(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetPriceUnitRequest(
+        request = models.operations.GetPriceUnitRequest(
             id=id,
         )
 
@@ -1118,7 +1144,9 @@ class PriceUnits(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoPriceUnitResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoPriceUnitResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1147,7 +1175,7 @@ class PriceUnits(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPriceUnitResponse:
+    ) -> models.components.DtoPriceUnitResponse:
         r"""Update price unit
 
         Use when renaming or updating metadata for a price unit. Code is immutable once created.
@@ -1170,9 +1198,9 @@ class PriceUnits(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdatePriceUnitRequest(
+        request = models.operations.UpdatePriceUnitRequest(
             id=id,
-            body=models.DtoUpdatePriceUnitRequest(
+            body=models.components.DtoUpdatePriceUnitRequest(
                 metadata=metadata,
                 name=name,
             ),
@@ -1192,7 +1220,11 @@ class PriceUnits(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdatePriceUnitRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdatePriceUnitRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1221,7 +1253,9 @@ class PriceUnits(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoPriceUnitResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoPriceUnitResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1250,7 +1284,7 @@ class PriceUnits(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPriceUnitResponse:
+    ) -> models.components.DtoPriceUnitResponse:
         r"""Update price unit
 
         Use when renaming or updating metadata for a price unit. Code is immutable once created.
@@ -1273,9 +1307,9 @@ class PriceUnits(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdatePriceUnitRequest(
+        request = models.operations.UpdatePriceUnitRequest(
             id=id,
-            body=models.DtoUpdatePriceUnitRequest(
+            body=models.components.DtoUpdatePriceUnitRequest(
                 metadata=metadata,
                 name=name,
             ),
@@ -1295,7 +1329,11 @@ class PriceUnits(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdatePriceUnitRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdatePriceUnitRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1324,7 +1362,9 @@ class PriceUnits(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoPriceUnitResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoPriceUnitResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1351,7 +1391,7 @@ class PriceUnits(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSuccessResponse:
+    ) -> models.components.DtoSuccessResponse:
         r"""Delete price unit
 
         Use when removing a price unit that is no longer needed. Fails if any price references this unit.
@@ -1372,7 +1412,7 @@ class PriceUnits(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeletePriceUnitRequest(
+        request = models.operations.DeletePriceUnitRequest(
             id=id,
         )
 
@@ -1416,7 +1456,9 @@ class PriceUnits(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSuccessResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSuccessResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1443,7 +1485,7 @@ class PriceUnits(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSuccessResponse:
+    ) -> models.components.DtoSuccessResponse:
         r"""Delete price unit
 
         Use when removing a price unit that is no longer needed. Fails if any price references this unit.
@@ -1464,7 +1506,7 @@ class PriceUnits(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeletePriceUnitRequest(
+        request = models.operations.DeletePriceUnitRequest(
             id=id,
         )
 
@@ -1508,7 +1550,9 @@ class PriceUnits(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSuccessResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSuccessResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res

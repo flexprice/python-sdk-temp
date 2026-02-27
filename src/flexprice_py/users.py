@@ -13,12 +13,12 @@ class Users(BaseSDK):
         self,
         *,
         roles: List[str],
-        type_: models.TypesUserType,
+        type_: models.components.UserType,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoUserResponse:
+    ) -> models.components.DtoUserResponse:
         r"""Create service account
 
         Use when provisioning API access for automation, CI/CD pipelines, or headless integrations that need scoped API keys.
@@ -40,7 +40,7 @@ class Users(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateUserRequest(
+        request = models.components.DtoCreateUserRequest(
             roles=roles,
             type=type_,
         )
@@ -59,7 +59,7 @@ class Users(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateUserRequest
+                request, False, False, "json", models.components.DtoCreateUserRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -88,7 +88,7 @@ class Users(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoUserResponse, http_res)
+            return unmarshal_json_response(models.components.DtoUserResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -116,12 +116,12 @@ class Users(BaseSDK):
         self,
         *,
         roles: List[str],
-        type_: models.TypesUserType,
+        type_: models.components.UserType,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoUserResponse:
+    ) -> models.components.DtoUserResponse:
         r"""Create service account
 
         Use when provisioning API access for automation, CI/CD pipelines, or headless integrations that need scoped API keys.
@@ -143,7 +143,7 @@ class Users(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateUserRequest(
+        request = models.components.DtoCreateUserRequest(
             roles=roles,
             type=type_,
         )
@@ -162,7 +162,7 @@ class Users(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateUserRequest
+                request, False, False, "json", models.components.DtoCreateUserRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -191,7 +191,7 @@ class Users(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoUserResponse, http_res)
+            return unmarshal_json_response(models.components.DtoUserResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -222,7 +222,7 @@ class Users(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoUserResponse:
+    ) -> models.components.DtoUserResponse:
         r"""Get current user
 
         Use to show the logged-in user's profile in the UI or to check permissions and roles for the current session.
@@ -281,7 +281,7 @@ class Users(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoUserResponse, http_res)
+            return unmarshal_json_response(models.components.DtoUserResponse, http_res)
         if utils.match_response(http_res, "401", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -312,7 +312,7 @@ class Users(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoUserResponse:
+    ) -> models.components.DtoUserResponse:
         r"""Get current user
 
         Use to show the logged-in user's profile in the UI or to check permissions and roles for the current session.
@@ -371,7 +371,7 @@ class Users(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoUserResponse, http_res)
+            return unmarshal_json_response(models.components.DtoUserResponse, http_res)
         if utils.match_response(http_res, "401", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -402,29 +402,29 @@ class Users(BaseSDK):
         expand: Optional[str] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesUserFilterOrder] = None,
+        order: Optional[models.components.UserFilterOrder] = None,
         roles: Optional[List[str]] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.TypesStatus] = None,
-        type_: Optional[models.TypesUserType] = None,
+        status: Optional[models.components.Status] = None,
+        type_: Optional[models.components.UserType] = None,
         user_ids: Optional[List[str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListUsersResponse:
+    ) -> models.components.DtoListUsersResponse:
         r"""Query users
 
         Use when listing or searching service accounts in an admin UI, or when auditing who has API access and which roles they have.
@@ -456,18 +456,18 @@ class Users(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesUserFilter(
+        request = models.components.UserFilter(
             end_time=end_time,
             expand=expand,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             limit=limit,
             offset=offset,
             order=order,
             roles=roles,
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             start_time=start_time,
             status=status,
@@ -489,7 +489,7 @@ class Users(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesUserFilter
+                request, False, False, "json", models.components.UserFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -518,7 +518,9 @@ class Users(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListUsersResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListUsersResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -549,29 +551,29 @@ class Users(BaseSDK):
         expand: Optional[str] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesUserFilterOrder] = None,
+        order: Optional[models.components.UserFilterOrder] = None,
         roles: Optional[List[str]] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.TypesStatus] = None,
-        type_: Optional[models.TypesUserType] = None,
+        status: Optional[models.components.Status] = None,
+        type_: Optional[models.components.UserType] = None,
         user_ids: Optional[List[str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListUsersResponse:
+    ) -> models.components.DtoListUsersResponse:
         r"""Query users
 
         Use when listing or searching service accounts in an admin UI, or when auditing who has API access and which roles they have.
@@ -603,18 +605,18 @@ class Users(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesUserFilter(
+        request = models.components.UserFilter(
             end_time=end_time,
             expand=expand,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             limit=limit,
             offset=offset,
             order=order,
             roles=roles,
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             start_time=start_time,
             status=status,
@@ -636,7 +638,7 @@ class Users(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesUserFilter
+                request, False, False, "json", models.components.UserFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -665,7 +667,9 @@ class Users(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListUsersResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListUsersResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res

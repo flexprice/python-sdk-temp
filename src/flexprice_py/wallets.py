@@ -22,7 +22,7 @@ class Wallets(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[models.DtoWalletResponse]:
+    ) -> List[models.components.DtoWalletResponse]:
         r"""Get Customer Wallets
 
         Use when resolving wallets by external customer id or lookup key (e.g. from your app's user id). Supports optional real-time balance and expand.
@@ -48,7 +48,7 @@ class Wallets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetCustomerWalletsRequest(
+        request = models.operations.GetCustomerWalletsRequest(
             minus=minus,
             expand=expand,
             from_cache=from_cache,
@@ -97,7 +97,9 @@ class Wallets(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(List[models.DtoWalletResponse], http_res)
+            return unmarshal_json_response(
+                List[models.components.DtoWalletResponse], http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -134,7 +136,7 @@ class Wallets(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[models.DtoWalletResponse]:
+    ) -> List[models.components.DtoWalletResponse]:
         r"""Get Customer Wallets
 
         Use when resolving wallets by external customer id or lookup key (e.g. from your app's user id). Supports optional real-time balance and expand.
@@ -160,7 +162,7 @@ class Wallets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetCustomerWalletsRequest(
+        request = models.operations.GetCustomerWalletsRequest(
             minus=minus,
             expand=expand,
             from_cache=from_cache,
@@ -209,7 +211,9 @@ class Wallets(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(List[models.DtoWalletResponse], http_res)
+            return unmarshal_json_response(
+                List[models.components.DtoWalletResponse], http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -241,7 +245,7 @@ class Wallets(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[models.DtoWalletResponse]:
+    ) -> List[models.components.DtoWalletResponse]:
         r"""Get wallets by customer ID
 
         Use when showing a customer's wallets (e.g. balance overview by currency or in a billing portal). Supports optional expand for balance breakdown.
@@ -262,7 +266,7 @@ class Wallets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetWalletsByCustomerIDRequest(
+        request = models.operations.GetWalletsByCustomerIDRequest(
             id=id,
         )
 
@@ -306,7 +310,9 @@ class Wallets(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(List[models.DtoWalletResponse], http_res)
+            return unmarshal_json_response(
+                List[models.components.DtoWalletResponse], http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -338,7 +344,7 @@ class Wallets(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[models.DtoWalletResponse]:
+    ) -> List[models.components.DtoWalletResponse]:
         r"""Get wallets by customer ID
 
         Use when showing a customer's wallets (e.g. balance overview by currency or in a billing portal). Supports optional expand for balance breakdown.
@@ -359,7 +365,7 @@ class Wallets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetWalletsByCustomerIDRequest(
+        request = models.operations.GetWalletsByCustomerIDRequest(
             id=id,
         )
 
@@ -403,7 +409,9 @@ class Wallets(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(List[models.DtoWalletResponse], http_res)
+            return unmarshal_json_response(
+                List[models.components.DtoWalletResponse], http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -432,10 +440,13 @@ class Wallets(BaseSDK):
         *,
         currency: str,
         alert_settings: Optional[
-            Union[models.TypesAlertSettings, models.TypesAlertSettingsTypedDict]
+            Union[
+                models.components.AlertSettings,
+                models.components.AlertSettingsTypedDict,
+            ]
         ] = None,
         auto_topup: Optional[
-            Union[models.TypesAutoTopup, models.TypesAutoTopupTypedDict]
+            Union[models.components.AutoTopup, models.components.AutoTopupTypedDict]
         ] = None,
         conversion_rate: Optional[str] = "1",
         customer_id: Optional[str] = None,
@@ -447,12 +458,12 @@ class Wallets(BaseSDK):
         metadata: Optional[Dict[str, str]] = None,
         price_unit: Optional[str] = None,
         topup_conversion_rate: Optional[str] = None,
-        wallet_type: Optional[models.TypesWalletType] = None,
+        wallet_type: Optional[models.components.WalletType] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoWalletResponse:
+    ) -> models.components.DtoWalletResponse:
         r"""Create a new wallet
 
         Use when giving a customer a prepaid or credit balance (e.g. prepaid plans or promotional credits).
@@ -500,12 +511,12 @@ class Wallets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateWalletRequest(
+        request = models.components.DtoCreateWalletRequest(
             alert_settings=utils.get_pydantic_model(
-                alert_settings, Optional[models.TypesAlertSettings]
+                alert_settings, Optional[models.components.AlertSettings]
             ),
             auto_topup=utils.get_pydantic_model(
-                auto_topup, Optional[models.TypesAutoTopup]
+                auto_topup, Optional[models.components.AutoTopup]
             ),
             conversion_rate=conversion_rate,
             currency=currency,
@@ -535,7 +546,7 @@ class Wallets(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateWalletRequest
+                request, False, False, "json", models.components.DtoCreateWalletRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -564,7 +575,9 @@ class Wallets(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoWalletResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoWalletResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -593,10 +606,13 @@ class Wallets(BaseSDK):
         *,
         currency: str,
         alert_settings: Optional[
-            Union[models.TypesAlertSettings, models.TypesAlertSettingsTypedDict]
+            Union[
+                models.components.AlertSettings,
+                models.components.AlertSettingsTypedDict,
+            ]
         ] = None,
         auto_topup: Optional[
-            Union[models.TypesAutoTopup, models.TypesAutoTopupTypedDict]
+            Union[models.components.AutoTopup, models.components.AutoTopupTypedDict]
         ] = None,
         conversion_rate: Optional[str] = "1",
         customer_id: Optional[str] = None,
@@ -608,12 +624,12 @@ class Wallets(BaseSDK):
         metadata: Optional[Dict[str, str]] = None,
         price_unit: Optional[str] = None,
         topup_conversion_rate: Optional[str] = None,
-        wallet_type: Optional[models.TypesWalletType] = None,
+        wallet_type: Optional[models.components.WalletType] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoWalletResponse:
+    ) -> models.components.DtoWalletResponse:
         r"""Create a new wallet
 
         Use when giving a customer a prepaid or credit balance (e.g. prepaid plans or promotional credits).
@@ -661,12 +677,12 @@ class Wallets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateWalletRequest(
+        request = models.components.DtoCreateWalletRequest(
             alert_settings=utils.get_pydantic_model(
-                alert_settings, Optional[models.TypesAlertSettings]
+                alert_settings, Optional[models.components.AlertSettings]
             ),
             auto_topup=utils.get_pydantic_model(
-                auto_topup, Optional[models.TypesAutoTopup]
+                auto_topup, Optional[models.components.AutoTopup]
             ),
             conversion_rate=conversion_rate,
             currency=currency,
@@ -696,7 +712,7 @@ class Wallets(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateWalletRequest
+                request, False, False, "json", models.components.DtoCreateWalletRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -725,7 +741,9 @@ class Wallets(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoWalletResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoWalletResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -756,15 +774,15 @@ class Wallets(BaseSDK):
         expand: Optional[str] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesWalletFilterOrder] = None,
+        order: Optional[models.components.WalletFilterOrder] = None,
         sort: Optional[str] = None,
-        status: Optional[models.TypesWalletStatus] = None,
+        status: Optional[models.components.WalletStatus] = None,
         wallet_ids: Optional[List[str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.TypesListResponseDtoWalletResponse:
+    ) -> models.components.ListResponseDtoWalletResponse:
         r"""Query wallets
 
         Use when listing or searching wallets (e.g. admin view or reporting). Returns a paginated list; supports filtering by customer and status.
@@ -792,7 +810,7 @@ class Wallets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesWalletFilter(
+        request = models.components.WalletFilter(
             alert_enabled=alert_enabled,
             expand=expand,
             limit=limit,
@@ -817,7 +835,7 @@ class Wallets(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesWalletFilter
+                request, False, False, "json", models.components.WalletFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -847,7 +865,7 @@ class Wallets(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.TypesListResponseDtoWalletResponse, http_res
+                models.components.ListResponseDtoWalletResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -879,15 +897,15 @@ class Wallets(BaseSDK):
         expand: Optional[str] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesWalletFilterOrder] = None,
+        order: Optional[models.components.WalletFilterOrder] = None,
         sort: Optional[str] = None,
-        status: Optional[models.TypesWalletStatus] = None,
+        status: Optional[models.components.WalletStatus] = None,
         wallet_ids: Optional[List[str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.TypesListResponseDtoWalletResponse:
+    ) -> models.components.ListResponseDtoWalletResponse:
         r"""Query wallets
 
         Use when listing or searching wallets (e.g. admin view or reporting). Returns a paginated list; supports filtering by customer and status.
@@ -915,7 +933,7 @@ class Wallets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesWalletFilter(
+        request = models.components.WalletFilter(
             alert_enabled=alert_enabled,
             expand=expand,
             limit=limit,
@@ -940,7 +958,7 @@ class Wallets(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesWalletFilter
+                request, False, False, "json", models.components.WalletFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -970,7 +988,7 @@ class Wallets(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.TypesListResponseDtoWalletResponse, http_res
+                models.components.ListResponseDtoWalletResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -1006,33 +1024,33 @@ class Wallets(BaseSDK):
         expiry_date_before: Optional[str] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         id: Optional[str] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesWalletTransactionFilterOrder] = None,
+        order: Optional[models.components.WalletTransactionFilterOrder] = None,
         priority: Optional[int] = None,
         reference_id: Optional[str] = None,
         reference_type: Optional[str] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.TypesStatus] = None,
-        transaction_reason: Optional[models.TypesTransactionReason] = None,
-        transaction_status: Optional[models.TypesTransactionStatus] = None,
-        type_: Optional[models.TypesTransactionType] = None,
+        status: Optional[models.components.Status] = None,
+        transaction_reason: Optional[models.components.TransactionReason] = None,
+        transaction_status: Optional[models.components.TransactionStatus] = None,
+        type_: Optional[models.components.TransactionType] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListWalletTransactionsResponse:
+    ) -> models.components.DtoListWalletTransactionsResponse:
         r"""Query wallet transactions
 
         Use when searching or reporting on wallet transactions (e.g. cross-wallet history or reconciliation). Returns a paginated list; supports filtering by wallet, customer, type, date range.
@@ -1072,7 +1090,7 @@ class Wallets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesWalletTransactionFilter(
+        request = models.components.WalletTransactionFilter(
             created_by=created_by,
             credits_available_gt=credits_available_gt,
             end_time=end_time,
@@ -1080,7 +1098,7 @@ class Wallets(BaseSDK):
             expiry_date_after=expiry_date_after,
             expiry_date_before=expiry_date_before,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             id=id,
             limit=limit,
@@ -1090,7 +1108,7 @@ class Wallets(BaseSDK):
             reference_id=reference_id,
             reference_type=reference_type,
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             start_time=start_time,
             status=status,
@@ -1113,7 +1131,7 @@ class Wallets(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesWalletTransactionFilter
+                request, False, False, "json", models.components.WalletTransactionFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1143,7 +1161,7 @@ class Wallets(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoListWalletTransactionsResponse, http_res
+                models.components.DtoListWalletTransactionsResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -1179,33 +1197,33 @@ class Wallets(BaseSDK):
         expiry_date_before: Optional[str] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         id: Optional[str] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesWalletTransactionFilterOrder] = None,
+        order: Optional[models.components.WalletTransactionFilterOrder] = None,
         priority: Optional[int] = None,
         reference_id: Optional[str] = None,
         reference_type: Optional[str] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.TypesStatus] = None,
-        transaction_reason: Optional[models.TypesTransactionReason] = None,
-        transaction_status: Optional[models.TypesTransactionStatus] = None,
-        type_: Optional[models.TypesTransactionType] = None,
+        status: Optional[models.components.Status] = None,
+        transaction_reason: Optional[models.components.TransactionReason] = None,
+        transaction_status: Optional[models.components.TransactionStatus] = None,
+        type_: Optional[models.components.TransactionType] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListWalletTransactionsResponse:
+    ) -> models.components.DtoListWalletTransactionsResponse:
         r"""Query wallet transactions
 
         Use when searching or reporting on wallet transactions (e.g. cross-wallet history or reconciliation). Returns a paginated list; supports filtering by wallet, customer, type, date range.
@@ -1245,7 +1263,7 @@ class Wallets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesWalletTransactionFilter(
+        request = models.components.WalletTransactionFilter(
             created_by=created_by,
             credits_available_gt=credits_available_gt,
             end_time=end_time,
@@ -1253,7 +1271,7 @@ class Wallets(BaseSDK):
             expiry_date_after=expiry_date_after,
             expiry_date_before=expiry_date_before,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             id=id,
             limit=limit,
@@ -1263,7 +1281,7 @@ class Wallets(BaseSDK):
             reference_id=reference_id,
             reference_type=reference_type,
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             start_time=start_time,
             status=status,
@@ -1286,7 +1304,7 @@ class Wallets(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesWalletTransactionFilter
+                request, False, False, "json", models.components.WalletTransactionFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1316,7 +1334,7 @@ class Wallets(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoListWalletTransactionsResponse, http_res
+                models.components.DtoListWalletTransactionsResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -1349,7 +1367,7 @@ class Wallets(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoWalletResponse:
+    ) -> models.components.DtoWalletResponse:
         r"""Get wallet
 
         Use when you need to load a single wallet (e.g. for a balance or settings view).
@@ -1370,7 +1388,7 @@ class Wallets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetWalletRequest(
+        request = models.operations.GetWalletRequest(
             id=id,
         )
 
@@ -1414,7 +1432,9 @@ class Wallets(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoWalletResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoWalletResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1446,7 +1466,7 @@ class Wallets(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoWalletResponse:
+    ) -> models.components.DtoWalletResponse:
         r"""Get wallet
 
         Use when you need to load a single wallet (e.g. for a balance or settings view).
@@ -1467,7 +1487,7 @@ class Wallets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetWalletRequest(
+        request = models.operations.GetWalletRequest(
             id=id,
         )
 
@@ -1511,7 +1531,9 @@ class Wallets(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoWalletResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoWalletResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1540,13 +1562,18 @@ class Wallets(BaseSDK):
         *,
         id: str,
         alert_settings: Optional[
-            Union[models.TypesAlertSettings, models.TypesAlertSettingsTypedDict]
+            Union[
+                models.components.AlertSettings,
+                models.components.AlertSettingsTypedDict,
+            ]
         ] = None,
         auto_topup: Optional[
-            Union[models.TypesAutoTopup, models.TypesAutoTopupTypedDict]
+            Union[models.components.AutoTopup, models.components.AutoTopupTypedDict]
         ] = None,
         config: Optional[
-            Union[models.TypesWalletConfig, models.TypesWalletConfigTypedDict]
+            Union[
+                models.components.WalletConfig, models.components.WalletConfigTypedDict
+            ]
         ] = None,
         description: Optional[str] = None,
         metadata: Optional[Dict[str, str]] = None,
@@ -1555,7 +1582,7 @@ class Wallets(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoWalletResponse:
+    ) -> models.components.DtoWalletResponse:
         r"""Update a wallet
 
         Use when changing wallet settings (e.g. enabling or updating auto top-up thresholds).
@@ -1582,17 +1609,17 @@ class Wallets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateWalletRequest(
+        request = models.operations.UpdateWalletRequest(
             id=id,
-            body=models.DtoUpdateWalletRequest(
+            body=models.components.DtoUpdateWalletRequest(
                 alert_settings=utils.get_pydantic_model(
-                    alert_settings, Optional[models.TypesAlertSettings]
+                    alert_settings, Optional[models.components.AlertSettings]
                 ),
                 auto_topup=utils.get_pydantic_model(
-                    auto_topup, Optional[models.TypesAutoTopup]
+                    auto_topup, Optional[models.components.AutoTopup]
                 ),
                 config=utils.get_pydantic_model(
-                    config, Optional[models.TypesWalletConfig]
+                    config, Optional[models.components.WalletConfig]
                 ),
                 description=description,
                 metadata=metadata,
@@ -1614,7 +1641,11 @@ class Wallets(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdateWalletRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdateWalletRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1643,7 +1674,9 @@ class Wallets(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoWalletResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoWalletResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1672,13 +1705,18 @@ class Wallets(BaseSDK):
         *,
         id: str,
         alert_settings: Optional[
-            Union[models.TypesAlertSettings, models.TypesAlertSettingsTypedDict]
+            Union[
+                models.components.AlertSettings,
+                models.components.AlertSettingsTypedDict,
+            ]
         ] = None,
         auto_topup: Optional[
-            Union[models.TypesAutoTopup, models.TypesAutoTopupTypedDict]
+            Union[models.components.AutoTopup, models.components.AutoTopupTypedDict]
         ] = None,
         config: Optional[
-            Union[models.TypesWalletConfig, models.TypesWalletConfigTypedDict]
+            Union[
+                models.components.WalletConfig, models.components.WalletConfigTypedDict
+            ]
         ] = None,
         description: Optional[str] = None,
         metadata: Optional[Dict[str, str]] = None,
@@ -1687,7 +1725,7 @@ class Wallets(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoWalletResponse:
+    ) -> models.components.DtoWalletResponse:
         r"""Update a wallet
 
         Use when changing wallet settings (e.g. enabling or updating auto top-up thresholds).
@@ -1714,17 +1752,17 @@ class Wallets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateWalletRequest(
+        request = models.operations.UpdateWalletRequest(
             id=id,
-            body=models.DtoUpdateWalletRequest(
+            body=models.components.DtoUpdateWalletRequest(
                 alert_settings=utils.get_pydantic_model(
-                    alert_settings, Optional[models.TypesAlertSettings]
+                    alert_settings, Optional[models.components.AlertSettings]
                 ),
                 auto_topup=utils.get_pydantic_model(
-                    auto_topup, Optional[models.TypesAutoTopup]
+                    auto_topup, Optional[models.components.AutoTopup]
                 ),
                 config=utils.get_pydantic_model(
-                    config, Optional[models.TypesWalletConfig]
+                    config, Optional[models.components.WalletConfig]
                 ),
                 description=description,
                 metadata=metadata,
@@ -1746,7 +1784,11 @@ class Wallets(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdateWalletRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdateWalletRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1775,7 +1817,9 @@ class Wallets(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoWalletResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoWalletResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1808,7 +1852,7 @@ class Wallets(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoWalletBalanceResponse:
+    ) -> models.components.DtoWalletBalanceResponse:
         r"""Get wallet balance
 
         Use when displaying or checking current wallet balance (e.g. before charging or in a portal). Supports optional expand for credits breakdown and from_cache.
@@ -1830,7 +1874,7 @@ class Wallets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetWalletBalanceRequest(
+        request = models.operations.GetWalletBalanceRequest(
             id=id,
             expand=expand,
         )
@@ -1875,7 +1919,9 @@ class Wallets(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoWalletBalanceResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoWalletBalanceResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1908,7 +1954,7 @@ class Wallets(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoWalletBalanceResponse:
+    ) -> models.components.DtoWalletBalanceResponse:
         r"""Get wallet balance
 
         Use when displaying or checking current wallet balance (e.g. before charging or in a portal). Supports optional expand for credits breakdown and from_cache.
@@ -1930,7 +1976,7 @@ class Wallets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetWalletBalanceRequest(
+        request = models.operations.GetWalletBalanceRequest(
             id=id,
             expand=expand,
         )
@@ -1975,7 +2021,9 @@ class Wallets(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoWalletBalanceResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoWalletBalanceResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -2007,7 +2055,7 @@ class Wallets(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoWalletResponse:
+    ) -> models.components.DtoWalletResponse:
         r"""Terminate a wallet
 
         Use when closing a customer wallet (e.g. churn or migration). Closes the wallet and applies remaining balance per policy (refund or forfeit).
@@ -2028,7 +2076,7 @@ class Wallets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TerminateWalletRequest(
+        request = models.operations.TerminateWalletRequest(
             id=id,
         )
 
@@ -2072,7 +2120,9 @@ class Wallets(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoWalletResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoWalletResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -2104,7 +2154,7 @@ class Wallets(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoWalletResponse:
+    ) -> models.components.DtoWalletResponse:
         r"""Terminate a wallet
 
         Use when closing a customer wallet (e.g. churn or migration). Closes the wallet and applies remaining balance per policy (refund or forfeit).
@@ -2125,7 +2175,7 @@ class Wallets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TerminateWalletRequest(
+        request = models.operations.TerminateWalletRequest(
             id=id,
         )
 
@@ -2169,7 +2219,9 @@ class Wallets(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoWalletResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoWalletResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -2197,7 +2249,7 @@ class Wallets(BaseSDK):
         self,
         *,
         id: str,
-        transaction_reason: models.TypesTransactionReason,
+        transaction_reason: models.components.TransactionReason,
         amount: Optional[str] = None,
         credits_to_add: Optional[str] = None,
         description: Optional[str] = None,
@@ -2209,7 +2261,7 @@ class Wallets(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoTopUpWalletResponse:
+    ) -> models.components.DtoTopUpWalletResponse:
         r"""Top up wallet
 
         Use when adding funds to a wallet (e.g. top-up, refund, or manual credit). Supports optional idempotency via reference.
@@ -2246,9 +2298,9 @@ class Wallets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TopUpWalletRequest(
+        request = models.operations.TopUpWalletRequest(
             id=id,
-            body=models.DtoTopUpWalletRequest(
+            body=models.components.DtoTopUpWalletRequest(
                 amount=amount,
                 credits_to_add=credits_to_add,
                 description=description,
@@ -2274,7 +2326,11 @@ class Wallets(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoTopUpWalletRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoTopUpWalletRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -2303,7 +2359,9 @@ class Wallets(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoTopUpWalletResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoTopUpWalletResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -2331,7 +2389,7 @@ class Wallets(BaseSDK):
         self,
         *,
         id: str,
-        transaction_reason: models.TypesTransactionReason,
+        transaction_reason: models.components.TransactionReason,
         amount: Optional[str] = None,
         credits_to_add: Optional[str] = None,
         description: Optional[str] = None,
@@ -2343,7 +2401,7 @@ class Wallets(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoTopUpWalletResponse:
+    ) -> models.components.DtoTopUpWalletResponse:
         r"""Top up wallet
 
         Use when adding funds to a wallet (e.g. top-up, refund, or manual credit). Supports optional idempotency via reference.
@@ -2380,9 +2438,9 @@ class Wallets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TopUpWalletRequest(
+        request = models.operations.TopUpWalletRequest(
             id=id,
-            body=models.DtoTopUpWalletRequest(
+            body=models.components.DtoTopUpWalletRequest(
                 amount=amount,
                 credits_to_add=credits_to_add,
                 description=description,
@@ -2408,7 +2466,11 @@ class Wallets(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoTopUpWalletRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoTopUpWalletRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -2437,7 +2499,9 @@ class Wallets(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoTopUpWalletResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoTopUpWalletResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -2474,20 +2538,20 @@ class Wallets(BaseSDK):
         id_query_parameter: Optional[str] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.GetWalletTransactionsOrder] = None,
+        order: Optional[models.operations.GetWalletTransactionsOrder] = None,
         priority: Optional[int] = None,
         reference_id: Optional[str] = None,
         reference_type: Optional[str] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.GetWalletTransactionsStatus] = None,
-        transaction_reason: Optional[models.TransactionReason] = None,
-        transaction_status: Optional[models.TransactionStatus] = None,
-        type_: Optional[models.Type] = None,
+        status: Optional[models.operations.GetWalletTransactionsStatus] = None,
+        transaction_reason: Optional[models.operations.TransactionReason] = None,
+        transaction_status: Optional[models.operations.TransactionStatus] = None,
+        type_: Optional[models.operations.Type] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListWalletTransactionsResponse:
+    ) -> models.components.DtoListWalletTransactionsResponse:
         r"""Get wallet transactions
 
         Use when showing transaction history for a wallet (e.g. credit/debit log or audit). Returns a paginated list; supports limit, offset, and filters.
@@ -2526,7 +2590,7 @@ class Wallets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetWalletTransactionsRequest(
+        request = models.operations.GetWalletTransactionsRequest(
             id_path_parameter=id_path_parameter,
             created_by=created_by,
             credits_available_gt=credits_available_gt,
@@ -2589,7 +2653,7 @@ class Wallets(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoListWalletTransactionsResponse, http_res
+                models.components.DtoListWalletTransactionsResponse, http_res
             )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
@@ -2627,20 +2691,20 @@ class Wallets(BaseSDK):
         id_query_parameter: Optional[str] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.GetWalletTransactionsOrder] = None,
+        order: Optional[models.operations.GetWalletTransactionsOrder] = None,
         priority: Optional[int] = None,
         reference_id: Optional[str] = None,
         reference_type: Optional[str] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.GetWalletTransactionsStatus] = None,
-        transaction_reason: Optional[models.TransactionReason] = None,
-        transaction_status: Optional[models.TransactionStatus] = None,
-        type_: Optional[models.Type] = None,
+        status: Optional[models.operations.GetWalletTransactionsStatus] = None,
+        transaction_reason: Optional[models.operations.TransactionReason] = None,
+        transaction_status: Optional[models.operations.TransactionStatus] = None,
+        type_: Optional[models.operations.Type] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListWalletTransactionsResponse:
+    ) -> models.components.DtoListWalletTransactionsResponse:
         r"""Get wallet transactions
 
         Use when showing transaction history for a wallet (e.g. credit/debit log or audit). Returns a paginated list; supports limit, offset, and filters.
@@ -2679,7 +2743,7 @@ class Wallets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetWalletTransactionsRequest(
+        request = models.operations.GetWalletTransactionsRequest(
             id_path_parameter=id_path_parameter,
             created_by=created_by,
             credits_available_gt=credits_available_gt,
@@ -2742,7 +2806,7 @@ class Wallets(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoListWalletTransactionsResponse, http_res
+                models.components.DtoListWalletTransactionsResponse, http_res
             )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(

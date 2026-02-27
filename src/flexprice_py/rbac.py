@@ -196,7 +196,7 @@ class Rbac(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetRbacRoleRequest(
+        request = models.operations.GetRbacRoleRequest(
             id=id,
         )
 
@@ -282,7 +282,7 @@ class Rbac(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetRbacRoleRequest(
+        request = models.operations.GetRbacRoleRequest(
             id=id,
         )
 

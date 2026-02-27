@@ -20,7 +20,7 @@ class Costs(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCreateCostsheetResponse:
+    ) -> models.components.DtoCreateCostsheetResponse:
         r"""Create costsheet
 
         Use when setting up a new pricing configuration (e.g. a new product or region). Costsheets group prices and define the default for the environment.
@@ -44,7 +44,7 @@ class Costs(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateCostsheetRequest(
+        request = models.components.DtoCreateCostsheetRequest(
             description=description,
             lookup_key=lookup_key,
             metadata=metadata,
@@ -65,7 +65,11 @@ class Costs(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateCostsheetRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoCreateCostsheetRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -94,7 +98,9 @@ class Costs(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoCreateCostsheetResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCreateCostsheetResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -129,7 +135,7 @@ class Costs(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCreateCostsheetResponse:
+    ) -> models.components.DtoCreateCostsheetResponse:
         r"""Create costsheet
 
         Use when setting up a new pricing configuration (e.g. a new product or region). Costsheets group prices and define the default for the environment.
@@ -153,7 +159,7 @@ class Costs(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateCostsheetRequest(
+        request = models.components.DtoCreateCostsheetRequest(
             description=description,
             lookup_key=lookup_key,
             metadata=metadata,
@@ -174,7 +180,11 @@ class Costs(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateCostsheetRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoCreateCostsheetRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -203,7 +213,9 @@ class Costs(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoCreateCostsheetResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCreateCostsheetResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -234,7 +246,7 @@ class Costs(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCostsheetResponse:
+    ) -> models.components.DtoCostsheetResponse:
         r"""Get active costsheet
 
         Use when you need the tenant's default pricing configuration (e.g. for checkout or plan display). Returns the active costsheet for the environment.
@@ -293,7 +305,9 @@ class Costs(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoCostsheetResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCostsheetResponse, http_res
+            )
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -324,7 +338,7 @@ class Costs(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCostsheetResponse:
+    ) -> models.components.DtoCostsheetResponse:
         r"""Get active costsheet
 
         Use when you need the tenant's default pricing configuration (e.g. for checkout or plan display). Returns the active costsheet for the environment.
@@ -383,7 +397,9 @@ class Costs(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoCostsheetResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCostsheetResponse, http_res
+            )
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -421,7 +437,7 @@ class Costs(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoGetDetailedCostAnalyticsResponse:
+    ) -> models.components.DtoGetDetailedCostAnalyticsResponse:
         r"""Get combined revenue and cost analytics
 
         Use when building dashboards or reports that need revenue vs cost, ROI, and margin over a time period (e.g. finance views or executive summaries).
@@ -448,7 +464,7 @@ class Costs(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoGetCostAnalyticsRequest(
+        request = models.components.DtoGetCostAnalyticsRequest(
             end_time=end_time,
             expand=expand,
             external_customer_id=external_customer_id,
@@ -472,7 +488,11 @@ class Costs(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoGetCostAnalyticsRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoGetCostAnalyticsRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -502,7 +522,7 @@ class Costs(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoGetDetailedCostAnalyticsResponse, http_res
+                models.components.DtoGetDetailedCostAnalyticsResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -541,7 +561,7 @@ class Costs(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoGetDetailedCostAnalyticsResponse:
+    ) -> models.components.DtoGetDetailedCostAnalyticsResponse:
         r"""Get combined revenue and cost analytics
 
         Use when building dashboards or reports that need revenue vs cost, ROI, and margin over a time period (e.g. finance views or executive summaries).
@@ -568,7 +588,7 @@ class Costs(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoGetCostAnalyticsRequest(
+        request = models.components.DtoGetCostAnalyticsRequest(
             end_time=end_time,
             expand=expand,
             external_customer_id=external_customer_id,
@@ -592,7 +612,11 @@ class Costs(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoGetCostAnalyticsRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoGetCostAnalyticsRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -622,7 +646,7 @@ class Costs(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoGetDetailedCostAnalyticsResponse, http_res
+                models.components.DtoGetDetailedCostAnalyticsResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -661,7 +685,7 @@ class Costs(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoGetDetailedCostAnalyticsResponse:
+    ) -> models.components.DtoGetDetailedCostAnalyticsResponse:
         r"""Get combined revenue and cost analytics (V2)
 
         Use when you need the same revenue/cost/ROI analytics but computed from the costsheet usage-tracking pipeline (e.g. for consistency with usage-based cost data).
@@ -688,7 +712,7 @@ class Costs(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoGetCostAnalyticsRequest(
+        request = models.components.DtoGetCostAnalyticsRequest(
             end_time=end_time,
             expand=expand,
             external_customer_id=external_customer_id,
@@ -712,7 +736,11 @@ class Costs(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoGetCostAnalyticsRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoGetCostAnalyticsRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -742,7 +770,7 @@ class Costs(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoGetDetailedCostAnalyticsResponse, http_res
+                models.components.DtoGetDetailedCostAnalyticsResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -781,7 +809,7 @@ class Costs(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoGetDetailedCostAnalyticsResponse:
+    ) -> models.components.DtoGetDetailedCostAnalyticsResponse:
         r"""Get combined revenue and cost analytics (V2)
 
         Use when you need the same revenue/cost/ROI analytics but computed from the costsheet usage-tracking pipeline (e.g. for consistency with usage-based cost data).
@@ -808,7 +836,7 @@ class Costs(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoGetCostAnalyticsRequest(
+        request = models.components.DtoGetCostAnalyticsRequest(
             end_time=end_time,
             expand=expand,
             external_customer_id=external_customer_id,
@@ -832,7 +860,11 @@ class Costs(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoGetCostAnalyticsRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoGetCostAnalyticsRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -862,7 +894,7 @@ class Costs(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoGetDetailedCostAnalyticsResponse, http_res
+                models.components.DtoGetDetailedCostAnalyticsResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -894,31 +926,34 @@ class Costs(BaseSDK):
         environment_id: Optional[str] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         lookup_key: Optional[str] = None,
         name: Optional[str] = None,
         query_filter: Optional[
-            Union[models.TypesQueryFilter, models.TypesQueryFilterTypedDict]
+            Union[models.components.QueryFilter, models.components.QueryFilterTypedDict]
         ] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
-        status: Optional[models.TypesStatus] = None,
+        status: Optional[models.components.Status] = None,
         tenant_id: Optional[str] = None,
         time_range_filter: Optional[
-            Union[models.TypesTimeRangeFilter, models.TypesTimeRangeFilterTypedDict]
+            Union[
+                models.components.TimeRangeFilter,
+                models.components.TimeRangeFilterTypedDict,
+            ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListCostsheetResponse:
+    ) -> models.components.DtoListCostsheetResponse:
         r"""Query costsheets
 
         Use when listing or searching costsheets (e.g. admin catalog). Returns a paginated list; supports filtering and sorting.
@@ -948,24 +983,24 @@ class Costs(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.CostsheetFilter(
+        request = models.components.CostsheetFilter(
             costsheet_i_ds=costsheet_i_ds,
             environment_id=environment_id,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             lookup_key=lookup_key,
             name=name,
             query_filter=utils.get_pydantic_model(
-                query_filter, Optional[models.TypesQueryFilter]
+                query_filter, Optional[models.components.QueryFilter]
             ),
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             status=status,
             tenant_id=tenant_id,
             time_range_filter=utils.get_pydantic_model(
-                time_range_filter, Optional[models.TypesTimeRangeFilter]
+                time_range_filter, Optional[models.components.TimeRangeFilter]
             ),
         )
 
@@ -983,7 +1018,7 @@ class Costs(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.CostsheetFilter
+                request, False, False, "json", models.components.CostsheetFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1012,7 +1047,9 @@ class Costs(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListCostsheetResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListCostsheetResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1043,31 +1080,34 @@ class Costs(BaseSDK):
         environment_id: Optional[str] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         lookup_key: Optional[str] = None,
         name: Optional[str] = None,
         query_filter: Optional[
-            Union[models.TypesQueryFilter, models.TypesQueryFilterTypedDict]
+            Union[models.components.QueryFilter, models.components.QueryFilterTypedDict]
         ] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
-        status: Optional[models.TypesStatus] = None,
+        status: Optional[models.components.Status] = None,
         tenant_id: Optional[str] = None,
         time_range_filter: Optional[
-            Union[models.TypesTimeRangeFilter, models.TypesTimeRangeFilterTypedDict]
+            Union[
+                models.components.TimeRangeFilter,
+                models.components.TimeRangeFilterTypedDict,
+            ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListCostsheetResponse:
+    ) -> models.components.DtoListCostsheetResponse:
         r"""Query costsheets
 
         Use when listing or searching costsheets (e.g. admin catalog). Returns a paginated list; supports filtering and sorting.
@@ -1097,24 +1137,24 @@ class Costs(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.CostsheetFilter(
+        request = models.components.CostsheetFilter(
             costsheet_i_ds=costsheet_i_ds,
             environment_id=environment_id,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             lookup_key=lookup_key,
             name=name,
             query_filter=utils.get_pydantic_model(
-                query_filter, Optional[models.TypesQueryFilter]
+                query_filter, Optional[models.components.QueryFilter]
             ),
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             status=status,
             tenant_id=tenant_id,
             time_range_filter=utils.get_pydantic_model(
-                time_range_filter, Optional[models.TypesTimeRangeFilter]
+                time_range_filter, Optional[models.components.TimeRangeFilter]
             ),
         )
 
@@ -1132,7 +1172,7 @@ class Costs(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.CostsheetFilter
+                request, False, False, "json", models.components.CostsheetFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1161,7 +1201,9 @@ class Costs(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListCostsheetResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListCostsheetResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1194,7 +1236,7 @@ class Costs(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoGetCostsheetResponse:
+    ) -> models.components.DtoGetCostsheetResponse:
         r"""Get costsheet
 
         Use when you need to load a single costsheet (e.g. for editing or display). Supports optional expand for related prices.
@@ -1216,7 +1258,7 @@ class Costs(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetCostsheetRequest(
+        request = models.operations.GetCostsheetRequest(
             id=id,
             expand=expand,
         )
@@ -1261,7 +1303,9 @@ class Costs(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoGetCostsheetResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoGetCostsheetResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1294,7 +1338,7 @@ class Costs(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoGetCostsheetResponse:
+    ) -> models.components.DtoGetCostsheetResponse:
         r"""Get costsheet
 
         Use when you need to load a single costsheet (e.g. for editing or display). Supports optional expand for related prices.
@@ -1316,7 +1360,7 @@ class Costs(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetCostsheetRequest(
+        request = models.operations.GetCostsheetRequest(
             id=id,
             expand=expand,
         )
@@ -1361,7 +1405,9 @@ class Costs(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoGetCostsheetResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoGetCostsheetResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1397,7 +1443,7 @@ class Costs(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoUpdateCostsheetResponse:
+    ) -> models.components.DtoUpdateCostsheetResponse:
         r"""Update costsheet
 
         Use when changing costsheet name or metadata.
@@ -1422,9 +1468,9 @@ class Costs(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateCostsheetRequest(
+        request = models.operations.UpdateCostsheetRequest(
             id=id,
-            body=models.DtoUpdateCostsheetRequest(
+            body=models.components.DtoUpdateCostsheetRequest(
                 description=description,
                 lookup_key=lookup_key,
                 metadata=metadata,
@@ -1446,7 +1492,11 @@ class Costs(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdateCostsheetRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdateCostsheetRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1475,7 +1525,9 @@ class Costs(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoUpdateCostsheetResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoUpdateCostsheetResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1511,7 +1563,7 @@ class Costs(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoUpdateCostsheetResponse:
+    ) -> models.components.DtoUpdateCostsheetResponse:
         r"""Update costsheet
 
         Use when changing costsheet name or metadata.
@@ -1536,9 +1588,9 @@ class Costs(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateCostsheetRequest(
+        request = models.operations.UpdateCostsheetRequest(
             id=id,
-            body=models.DtoUpdateCostsheetRequest(
+            body=models.components.DtoUpdateCostsheetRequest(
                 description=description,
                 lookup_key=lookup_key,
                 metadata=metadata,
@@ -1560,7 +1612,11 @@ class Costs(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdateCostsheetRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdateCostsheetRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1589,7 +1645,9 @@ class Costs(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoUpdateCostsheetResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoUpdateCostsheetResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1621,7 +1679,7 @@ class Costs(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoDeleteCostsheetResponse:
+    ) -> models.components.DtoDeleteCostsheetResponse:
         r"""Delete costsheet
 
         Use when retiring a costsheet (e.g. end-of-life product). Soft-deletes; status set to deleted.
@@ -1642,7 +1700,7 @@ class Costs(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteCostsheetRequest(
+        request = models.operations.DeleteCostsheetRequest(
             id=id,
         )
 
@@ -1686,7 +1744,9 @@ class Costs(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoDeleteCostsheetResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoDeleteCostsheetResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1718,7 +1778,7 @@ class Costs(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoDeleteCostsheetResponse:
+    ) -> models.components.DtoDeleteCostsheetResponse:
         r"""Delete costsheet
 
         Use when retiring a costsheet (e.g. end-of-life product). Soft-deletes; status set to deleted.
@@ -1739,7 +1799,7 @@ class Costs(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteCostsheetRequest(
+        request = models.operations.DeleteCostsheetRequest(
             id=id,
         )
 
@@ -1783,7 +1843,9 @@ class Costs(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoDeleteCostsheetResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoDeleteCostsheetResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res

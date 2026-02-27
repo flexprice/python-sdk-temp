@@ -19,7 +19,7 @@ class Secrets(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListSecretsResponse:
+    ) -> models.components.DtoListSecretsResponse:
         r"""List API keys
 
         Use when listing API keys (e.g. admin view or rotating keys). Returns a paginated list.
@@ -42,7 +42,7 @@ class Secrets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListAPIKeysRequest(
+        request = models.operations.ListAPIKeysRequest(
             limit=limit,
             offset=offset,
             status=status,
@@ -88,7 +88,9 @@ class Secrets(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListSecretsResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListSecretsResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -122,7 +124,7 @@ class Secrets(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListSecretsResponse:
+    ) -> models.components.DtoListSecretsResponse:
         r"""List API keys
 
         Use when listing API keys (e.g. admin view or rotating keys). Returns a paginated list.
@@ -145,7 +147,7 @@ class Secrets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListAPIKeysRequest(
+        request = models.operations.ListAPIKeysRequest(
             limit=limit,
             offset=offset,
             status=status,
@@ -191,7 +193,9 @@ class Secrets(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListSecretsResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListSecretsResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -219,14 +223,14 @@ class Secrets(BaseSDK):
         self,
         *,
         name: str,
-        type_: models.TypesSecretType,
+        type_: models.components.SecretType,
         expires_at: Optional[str] = None,
         service_account_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCreateAPIKeyResponse:
+    ) -> models.components.DtoCreateAPIKeyResponse:
         r"""Create a new API key
 
         Use when issuing a new API key (e.g. for a service account or for the current user). Provide service_account_id to create for a service account.
@@ -250,7 +254,7 @@ class Secrets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateAPIKeyRequest(
+        request = models.components.DtoCreateAPIKeyRequest(
             expires_at=expires_at,
             name=name,
             service_account_id=service_account_id,
@@ -271,7 +275,7 @@ class Secrets(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateAPIKeyRequest
+                request, False, False, "json", models.components.DtoCreateAPIKeyRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -300,7 +304,9 @@ class Secrets(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoCreateAPIKeyResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCreateAPIKeyResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -328,14 +334,14 @@ class Secrets(BaseSDK):
         self,
         *,
         name: str,
-        type_: models.TypesSecretType,
+        type_: models.components.SecretType,
         expires_at: Optional[str] = None,
         service_account_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCreateAPIKeyResponse:
+    ) -> models.components.DtoCreateAPIKeyResponse:
         r"""Create a new API key
 
         Use when issuing a new API key (e.g. for a service account or for the current user). Provide service_account_id to create for a service account.
@@ -359,7 +365,7 @@ class Secrets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateAPIKeyRequest(
+        request = models.components.DtoCreateAPIKeyRequest(
             expires_at=expires_at,
             name=name,
             service_account_id=service_account_id,
@@ -380,7 +386,7 @@ class Secrets(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateAPIKeyRequest
+                request, False, False, "json", models.components.DtoCreateAPIKeyRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -409,7 +415,9 @@ class Secrets(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoCreateAPIKeyResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCreateAPIKeyResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -462,7 +470,7 @@ class Secrets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteAPIKeyRequest(
+        request = models.operations.DeleteAPIKeyRequest(
             id=id,
         )
 
@@ -559,7 +567,7 @@ class Secrets(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteAPIKeyRequest(
+        request = models.operations.DeleteAPIKeyRequest(
             id=id,
         )
 

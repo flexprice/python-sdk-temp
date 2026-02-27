@@ -3,14 +3,16 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 from flexprice_py.errors import FlexpriceError
-from flexprice_py.models import errors_errordetail as models_errors_errordetail
+from flexprice_py.models.components import (
+    errors_errordetail as components_errors_errordetail,
+)
 from flexprice_py.types import BaseModel
 import httpx
 from typing import Optional
 
 
 class ErrorsErrorResponseData(BaseModel):
-    error: Optional[models_errors_errordetail.ErrorsErrorDetail] = None
+    error: Optional[components_errors_errordetail.ErrorsErrorDetail] = None
     success: Optional[bool] = None
 
 

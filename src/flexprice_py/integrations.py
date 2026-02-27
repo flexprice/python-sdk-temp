@@ -17,7 +17,7 @@ class Integrations(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSecretResponse:
+    ) -> models.components.DtoSecretResponse:
         r"""Get integration details
 
         Use when you need to check or display integration config (e.g. which provider is linked). Sensitive values may be redacted.
@@ -38,7 +38,7 @@ class Integrations(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetIntegrationRequest(
+        request = models.operations.GetIntegrationRequest(
             provider=provider,
         )
 
@@ -82,7 +82,9 @@ class Integrations(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSecretResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSecretResponse, http_res
+            )
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -114,7 +116,7 @@ class Integrations(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSecretResponse:
+    ) -> models.components.DtoSecretResponse:
         r"""Get integration details
 
         Use when you need to check or display integration config (e.g. which provider is linked). Sensitive values may be redacted.
@@ -135,7 +137,7 @@ class Integrations(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetIntegrationRequest(
+        request = models.operations.GetIntegrationRequest(
             provider=provider,
         )
 
@@ -179,7 +181,9 @@ class Integrations(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSecretResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSecretResponse, http_res
+            )
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -209,12 +213,12 @@ class Integrations(BaseSDK):
         provider_param: str,
         credentials: Dict[str, str],
         name: str,
-        provider: models.TypesSecretProvider,
+        provider: models.components.SecretProvider,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSecretResponse:
+    ) -> models.components.DtoSecretResponse:
         r"""Create or update an integration
 
         Use when storing or updating credentials for an external integration (e.g. Stripe, HubSpot). Secrets are encrypted at rest.
@@ -238,9 +242,9 @@ class Integrations(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.CreateOrUpdateIntegrationRequest(
+        request = models.operations.CreateOrUpdateIntegrationRequest(
             provider_param=provider_param,
-            body=models.DtoCreateIntegrationRequest(
+            body=models.components.DtoCreateIntegrationRequest(
                 credentials=credentials,
                 name=name,
                 provider=provider,
@@ -261,7 +265,11 @@ class Integrations(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoCreateIntegrationRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoCreateIntegrationRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -290,7 +298,9 @@ class Integrations(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoSecretResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSecretResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -320,12 +330,12 @@ class Integrations(BaseSDK):
         provider_param: str,
         credentials: Dict[str, str],
         name: str,
-        provider: models.TypesSecretProvider,
+        provider: models.components.SecretProvider,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSecretResponse:
+    ) -> models.components.DtoSecretResponse:
         r"""Create or update an integration
 
         Use when storing or updating credentials for an external integration (e.g. Stripe, HubSpot). Secrets are encrypted at rest.
@@ -349,9 +359,9 @@ class Integrations(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.CreateOrUpdateIntegrationRequest(
+        request = models.operations.CreateOrUpdateIntegrationRequest(
             provider_param=provider_param,
-            body=models.DtoCreateIntegrationRequest(
+            body=models.components.DtoCreateIntegrationRequest(
                 credentials=credentials,
                 name=name,
                 provider=provider,
@@ -372,7 +382,11 @@ class Integrations(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoCreateIntegrationRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoCreateIntegrationRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -401,7 +415,9 @@ class Integrations(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoSecretResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSecretResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -432,7 +448,7 @@ class Integrations(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoLinkedIntegrationsResponse:
+    ) -> models.components.DtoLinkedIntegrationsResponse:
         r"""List linked integrations
 
         Use when showing which integrations are connected (e.g. settings page). Returns providers that have valid linked credentials.
@@ -492,7 +508,7 @@ class Integrations(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoLinkedIntegrationsResponse, http_res
+                models.components.DtoLinkedIntegrationsResponse, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
@@ -519,7 +535,7 @@ class Integrations(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoLinkedIntegrationsResponse:
+    ) -> models.components.DtoLinkedIntegrationsResponse:
         r"""List linked integrations
 
         Use when showing which integrations are connected (e.g. settings page). Returns providers that have valid linked credentials.
@@ -579,7 +595,7 @@ class Integrations(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoLinkedIntegrationsResponse, http_res
+                models.components.DtoLinkedIntegrationsResponse, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
@@ -628,7 +644,7 @@ class Integrations(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteIntegrationRequest(
+        request = models.operations.DeleteIntegrationRequest(
             id=id,
         )
 
@@ -725,7 +741,7 @@ class Integrations(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteIntegrationRequest(
+        request = models.operations.DeleteIntegrationRequest(
             id=id,
         )
 

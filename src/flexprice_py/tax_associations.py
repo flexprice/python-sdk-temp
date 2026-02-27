@@ -20,7 +20,7 @@ class TaxAssociations(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListTaxAssociationsResponse:
+    ) -> models.components.DtoListTaxAssociationsResponse:
         r"""List tax associations
 
         Use when listing tax associations (e.g. tax config or audit). Returns list with optional filtering.
@@ -44,7 +44,7 @@ class TaxAssociations(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListTaxAssociationsRequest(
+        request = models.operations.ListTaxAssociationsRequest(
             entity_type=entity_type,
             entity_id=entity_id,
             external_customer_id=external_customer_id,
@@ -92,7 +92,7 @@ class TaxAssociations(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoListTaxAssociationsResponse, http_res
+                models.components.DtoListTaxAssociationsResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -128,7 +128,7 @@ class TaxAssociations(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListTaxAssociationsResponse:
+    ) -> models.components.DtoListTaxAssociationsResponse:
         r"""List tax associations
 
         Use when listing tax associations (e.g. tax config or audit). Returns list with optional filtering.
@@ -152,7 +152,7 @@ class TaxAssociations(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListTaxAssociationsRequest(
+        request = models.operations.ListTaxAssociationsRequest(
             entity_type=entity_type,
             entity_id=entity_id,
             external_customer_id=external_customer_id,
@@ -200,7 +200,7 @@ class TaxAssociations(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoListTaxAssociationsResponse, http_res
+                models.components.DtoListTaxAssociationsResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -232,7 +232,7 @@ class TaxAssociations(BaseSDK):
         auto_apply: Optional[bool] = None,
         currency: Optional[str] = None,
         entity_id: Optional[str] = None,
-        entity_type: Optional[models.TypesTaxRateEntityType] = None,
+        entity_type: Optional[models.components.TaxRateEntityType] = None,
         external_customer_id: Optional[str] = None,
         metadata: Optional[Dict[str, str]] = None,
         priority: Optional[int] = None,
@@ -240,7 +240,7 @@ class TaxAssociations(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoTaxAssociationResponse:
+    ) -> models.components.DtoTaxAssociationResponse:
         r"""Create Tax Association
 
         Use when linking a tax rate to an entity (e.g. customer, product, or region) so that rate applies on invoices.
@@ -268,7 +268,7 @@ class TaxAssociations(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateTaxAssociationRequest(
+        request = models.components.DtoCreateTaxAssociationRequest(
             auto_apply=auto_apply,
             currency=currency,
             entity_id=entity_id,
@@ -293,7 +293,11 @@ class TaxAssociations(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateTaxAssociationRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoCreateTaxAssociationRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -322,7 +326,9 @@ class TaxAssociations(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoTaxAssociationResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoTaxAssociationResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -353,7 +359,7 @@ class TaxAssociations(BaseSDK):
         auto_apply: Optional[bool] = None,
         currency: Optional[str] = None,
         entity_id: Optional[str] = None,
-        entity_type: Optional[models.TypesTaxRateEntityType] = None,
+        entity_type: Optional[models.components.TaxRateEntityType] = None,
         external_customer_id: Optional[str] = None,
         metadata: Optional[Dict[str, str]] = None,
         priority: Optional[int] = None,
@@ -361,7 +367,7 @@ class TaxAssociations(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoTaxAssociationResponse:
+    ) -> models.components.DtoTaxAssociationResponse:
         r"""Create Tax Association
 
         Use when linking a tax rate to an entity (e.g. customer, product, or region) so that rate applies on invoices.
@@ -389,7 +395,7 @@ class TaxAssociations(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateTaxAssociationRequest(
+        request = models.components.DtoCreateTaxAssociationRequest(
             auto_apply=auto_apply,
             currency=currency,
             entity_id=entity_id,
@@ -414,7 +420,11 @@ class TaxAssociations(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateTaxAssociationRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoCreateTaxAssociationRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -443,7 +453,9 @@ class TaxAssociations(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoTaxAssociationResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoTaxAssociationResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -475,7 +487,7 @@ class TaxAssociations(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoTaxAssociationResponse:
+    ) -> models.components.DtoTaxAssociationResponse:
         r"""Get Tax Association
 
         Use when you need to load a single tax association (e.g. for display or editing).
@@ -496,7 +508,7 @@ class TaxAssociations(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetTaxAssociationRequest(
+        request = models.operations.GetTaxAssociationRequest(
             id=id,
         )
 
@@ -540,7 +552,9 @@ class TaxAssociations(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoTaxAssociationResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoTaxAssociationResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -572,7 +586,7 @@ class TaxAssociations(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoTaxAssociationResponse:
+    ) -> models.components.DtoTaxAssociationResponse:
         r"""Get Tax Association
 
         Use when you need to load a single tax association (e.g. for display or editing).
@@ -593,7 +607,7 @@ class TaxAssociations(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetTaxAssociationRequest(
+        request = models.operations.GetTaxAssociationRequest(
             id=id,
         )
 
@@ -637,7 +651,9 @@ class TaxAssociations(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoTaxAssociationResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoTaxAssociationResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -672,7 +688,7 @@ class TaxAssociations(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoTaxAssociationResponse:
+    ) -> models.components.DtoTaxAssociationResponse:
         r"""Update tax association
 
         Use when changing a tax association (e.g. switch rate or entity). Request body contains the fields to update.
@@ -696,9 +712,9 @@ class TaxAssociations(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateTaxAssociationRequest(
+        request = models.operations.UpdateTaxAssociationRequest(
             id=id,
-            body=models.DtoTaxAssociationUpdateRequest(
+            body=models.components.DtoTaxAssociationUpdateRequest(
                 auto_apply=auto_apply,
                 metadata=metadata,
                 priority=priority,
@@ -723,7 +739,7 @@ class TaxAssociations(BaseSDK):
                 False,
                 False,
                 "json",
-                models.DtoTaxAssociationUpdateRequest,
+                models.components.DtoTaxAssociationUpdateRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -752,7 +768,9 @@ class TaxAssociations(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoTaxAssociationResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoTaxAssociationResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -787,7 +805,7 @@ class TaxAssociations(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoTaxAssociationResponse:
+    ) -> models.components.DtoTaxAssociationResponse:
         r"""Update tax association
 
         Use when changing a tax association (e.g. switch rate or entity). Request body contains the fields to update.
@@ -811,9 +829,9 @@ class TaxAssociations(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateTaxAssociationRequest(
+        request = models.operations.UpdateTaxAssociationRequest(
             id=id,
-            body=models.DtoTaxAssociationUpdateRequest(
+            body=models.components.DtoTaxAssociationUpdateRequest(
                 auto_apply=auto_apply,
                 metadata=metadata,
                 priority=priority,
@@ -838,7 +856,7 @@ class TaxAssociations(BaseSDK):
                 False,
                 False,
                 "json",
-                models.DtoTaxAssociationUpdateRequest,
+                models.components.DtoTaxAssociationUpdateRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -867,7 +885,9 @@ class TaxAssociations(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoTaxAssociationResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoTaxAssociationResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -899,7 +919,7 @@ class TaxAssociations(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoTaxAssociationResponse:
+    ) -> models.components.DtoTaxAssociationResponse:
         r"""Delete tax association
 
         Use when removing a tax association (e.g. entity no longer subject to that rate).
@@ -920,7 +940,7 @@ class TaxAssociations(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteTaxAssociationRequest(
+        request = models.operations.DeleteTaxAssociationRequest(
             id=id,
         )
 
@@ -964,7 +984,9 @@ class TaxAssociations(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoTaxAssociationResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoTaxAssociationResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -996,7 +1018,7 @@ class TaxAssociations(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoTaxAssociationResponse:
+    ) -> models.components.DtoTaxAssociationResponse:
         r"""Delete tax association
 
         Use when removing a tax association (e.g. entity no longer subject to that rate).
@@ -1017,7 +1039,7 @@ class TaxAssociations(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteTaxAssociationRequest(
+        request = models.operations.DeleteTaxAssociationRequest(
             id=id,
         )
 
@@ -1061,7 +1083,9 @@ class TaxAssociations(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoTaxAssociationResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoTaxAssociationResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res

@@ -21,19 +21,19 @@ class Payments(BaseSDK):
         gateway_tracking_id: Optional[str] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.ListPaymentsOrder] = None,
+        order: Optional[models.operations.ListPaymentsOrder] = None,
         payment_gateway: Optional[str] = None,
         payment_ids: Optional[List[str]] = None,
         payment_method_type: Optional[str] = None,
         payment_status: Optional[str] = None,
         sort: Optional[str] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.ListPaymentsStatus] = None,
+        status: Optional[models.operations.ListPaymentsStatus] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListPaymentsResponse:
+    ) -> models.components.DtoListPaymentsResponse:
         r"""List payments
 
         Use when listing or searching payments (e.g. reconciliation UI or customer payment history). Returns a paginated list; supports filtering by customer, invoice, status.
@@ -70,7 +70,7 @@ class Payments(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListPaymentsRequest(
+        request = models.operations.ListPaymentsRequest(
             currency=currency,
             destination_id=destination_id,
             destination_type=destination_type,
@@ -130,7 +130,9 @@ class Payments(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListPaymentsResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListPaymentsResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -166,19 +168,19 @@ class Payments(BaseSDK):
         gateway_tracking_id: Optional[str] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.ListPaymentsOrder] = None,
+        order: Optional[models.operations.ListPaymentsOrder] = None,
         payment_gateway: Optional[str] = None,
         payment_ids: Optional[List[str]] = None,
         payment_method_type: Optional[str] = None,
         payment_status: Optional[str] = None,
         sort: Optional[str] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.ListPaymentsStatus] = None,
+        status: Optional[models.operations.ListPaymentsStatus] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListPaymentsResponse:
+    ) -> models.components.DtoListPaymentsResponse:
         r"""List payments
 
         Use when listing or searching payments (e.g. reconciliation UI or customer payment history). Returns a paginated list; supports filtering by customer, invoice, status.
@@ -215,7 +217,7 @@ class Payments(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListPaymentsRequest(
+        request = models.operations.ListPaymentsRequest(
             currency=currency,
             destination_id=destination_id,
             destination_type=destination_type,
@@ -275,7 +277,9 @@ class Payments(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListPaymentsResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListPaymentsResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -305,12 +309,12 @@ class Payments(BaseSDK):
         amount: str,
         currency: str,
         destination_id: str,
-        destination_type: models.TypesPaymentDestinationType,
-        payment_method_type: models.TypesPaymentMethodType,
+        destination_type: models.components.PaymentDestinationType,
+        payment_method_type: models.components.PaymentMethodType,
         cancel_url: Optional[str] = None,
         idempotency_key: Optional[str] = None,
         metadata: Optional[Dict[str, str]] = None,
-        payment_gateway: Optional[models.TypesPaymentGatewayType] = None,
+        payment_gateway: Optional[models.components.PaymentGatewayType] = None,
         payment_method_id: Optional[str] = None,
         process_payment: Optional[bool] = True,
         save_card_and_make_default: Optional[bool] = False,
@@ -319,7 +323,7 @@ class Payments(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPaymentResponse:
+    ) -> models.components.DtoPaymentResponse:
         r"""Create payment
 
         Use when recording a payment against an invoice (e.g. after receiving funds via a gateway or manual entry).
@@ -352,7 +356,7 @@ class Payments(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreatePaymentRequest(
+        request = models.components.DtoCreatePaymentRequest(
             amount=amount,
             cancel_url=cancel_url,
             currency=currency,
@@ -382,7 +386,7 @@ class Payments(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreatePaymentRequest
+                request, False, False, "json", models.components.DtoCreatePaymentRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -411,7 +415,9 @@ class Payments(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoPaymentResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoPaymentResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -441,12 +447,12 @@ class Payments(BaseSDK):
         amount: str,
         currency: str,
         destination_id: str,
-        destination_type: models.TypesPaymentDestinationType,
-        payment_method_type: models.TypesPaymentMethodType,
+        destination_type: models.components.PaymentDestinationType,
+        payment_method_type: models.components.PaymentMethodType,
         cancel_url: Optional[str] = None,
         idempotency_key: Optional[str] = None,
         metadata: Optional[Dict[str, str]] = None,
-        payment_gateway: Optional[models.TypesPaymentGatewayType] = None,
+        payment_gateway: Optional[models.components.PaymentGatewayType] = None,
         payment_method_id: Optional[str] = None,
         process_payment: Optional[bool] = True,
         save_card_and_make_default: Optional[bool] = False,
@@ -455,7 +461,7 @@ class Payments(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPaymentResponse:
+    ) -> models.components.DtoPaymentResponse:
         r"""Create payment
 
         Use when recording a payment against an invoice (e.g. after receiving funds via a gateway or manual entry).
@@ -488,7 +494,7 @@ class Payments(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreatePaymentRequest(
+        request = models.components.DtoCreatePaymentRequest(
             amount=amount,
             cancel_url=cancel_url,
             currency=currency,
@@ -518,7 +524,7 @@ class Payments(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreatePaymentRequest
+                request, False, False, "json", models.components.DtoCreatePaymentRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -547,7 +553,9 @@ class Payments(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoPaymentResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoPaymentResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -579,7 +587,7 @@ class Payments(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPaymentResponse:
+    ) -> models.components.DtoPaymentResponse:
         r"""Get payment
 
         Use when you need to load a single payment (e.g. for a receipt view or reconciliation).
@@ -600,7 +608,7 @@ class Payments(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetPaymentRequest(
+        request = models.operations.GetPaymentRequest(
             id=id,
         )
 
@@ -644,7 +652,9 @@ class Payments(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoPaymentResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoPaymentResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -676,7 +686,7 @@ class Payments(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPaymentResponse:
+    ) -> models.components.DtoPaymentResponse:
         r"""Get payment
 
         Use when you need to load a single payment (e.g. for a receipt view or reconciliation).
@@ -697,7 +707,7 @@ class Payments(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetPaymentRequest(
+        request = models.operations.GetPaymentRequest(
             id=id,
         )
 
@@ -741,7 +751,9 @@ class Payments(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoPaymentResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoPaymentResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -781,7 +793,7 @@ class Payments(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPaymentResponse:
+    ) -> models.components.DtoPaymentResponse:
         r"""Update payment
 
         Use when updating payment status or metadata (e.g. after reconciliation or adding a reference).
@@ -810,9 +822,9 @@ class Payments(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdatePaymentRequest(
+        request = models.operations.UpdatePaymentRequest(
             id=id,
-            body=models.DtoUpdatePaymentRequest(
+            body=models.components.DtoUpdatePaymentRequest(
                 error_message=error_message,
                 failed_at=failed_at,
                 gateway_payment_id=gateway_payment_id,
@@ -838,7 +850,11 @@ class Payments(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdatePaymentRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdatePaymentRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -867,7 +883,9 @@ class Payments(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoPaymentResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoPaymentResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -907,7 +925,7 @@ class Payments(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPaymentResponse:
+    ) -> models.components.DtoPaymentResponse:
         r"""Update payment
 
         Use when updating payment status or metadata (e.g. after reconciliation or adding a reference).
@@ -936,9 +954,9 @@ class Payments(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdatePaymentRequest(
+        request = models.operations.UpdatePaymentRequest(
             id=id,
-            body=models.DtoUpdatePaymentRequest(
+            body=models.components.DtoUpdatePaymentRequest(
                 error_message=error_message,
                 failed_at=failed_at,
                 gateway_payment_id=gateway_payment_id,
@@ -964,7 +982,11 @@ class Payments(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdatePaymentRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdatePaymentRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -993,7 +1015,9 @@ class Payments(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoPaymentResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoPaymentResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1025,7 +1049,7 @@ class Payments(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSuccessResponse:
+    ) -> models.components.DtoSuccessResponse:
         r"""Delete payment
 
         Use when removing or voiding a payment record (e.g. correcting erroneous entries). Returns 200 with success message.
@@ -1046,7 +1070,7 @@ class Payments(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeletePaymentRequest(
+        request = models.operations.DeletePaymentRequest(
             id=id,
         )
 
@@ -1090,7 +1114,9 @@ class Payments(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSuccessResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSuccessResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1122,7 +1148,7 @@ class Payments(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSuccessResponse:
+    ) -> models.components.DtoSuccessResponse:
         r"""Delete payment
 
         Use when removing or voiding a payment record (e.g. correcting erroneous entries). Returns 200 with success message.
@@ -1143,7 +1169,7 @@ class Payments(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeletePaymentRequest(
+        request = models.operations.DeletePaymentRequest(
             id=id,
         )
 
@@ -1187,7 +1213,9 @@ class Payments(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSuccessResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSuccessResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1219,7 +1247,7 @@ class Payments(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPaymentResponse:
+    ) -> models.components.DtoPaymentResponse:
         r"""Process payment
 
         Use when you need to charge or process a payment (e.g. trigger the payment provider to capture funds). Returns updated payment with status.
@@ -1240,7 +1268,7 @@ class Payments(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ProcessPaymentRequest(
+        request = models.operations.ProcessPaymentRequest(
             id=id,
         )
 
@@ -1284,7 +1312,9 @@ class Payments(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoPaymentResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoPaymentResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1316,7 +1346,7 @@ class Payments(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoPaymentResponse:
+    ) -> models.components.DtoPaymentResponse:
         r"""Process payment
 
         Use when you need to charge or process a payment (e.g. trigger the payment provider to capture funds). Returns updated payment with status.
@@ -1337,7 +1367,7 @@ class Payments(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ProcessPaymentRequest(
+        request = models.operations.ProcessPaymentRequest(
             id=id,
         )
 
@@ -1381,7 +1411,9 @@ class Payments(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoPaymentResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoPaymentResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res

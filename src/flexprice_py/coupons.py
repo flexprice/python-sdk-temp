@@ -12,9 +12,9 @@ class Coupons(BaseSDK):
     def create_coupon(
         self,
         *,
-        cadence: models.TypesCouponCadence,
+        cadence: models.components.CouponCadence,
         name: str,
-        type_: models.TypesCouponType,
+        type_: models.components.CouponType,
         amount_off: Optional[str] = None,
         currency: Optional[str] = None,
         duration_in_periods: Optional[int] = None,
@@ -28,7 +28,7 @@ class Coupons(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCouponResponse:
+    ) -> models.components.DtoCouponResponse:
         r"""Create coupon
 
         Use when creating a discount (e.g. promo code or referral). Ideal for percent or fixed value, with optional validity and usage limits.
@@ -60,7 +60,7 @@ class Coupons(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateCouponRequest(
+        request = models.components.DtoCreateCouponRequest(
             amount_off=amount_off,
             cadence=cadence,
             currency=currency,
@@ -89,7 +89,7 @@ class Coupons(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateCouponRequest
+                request, False, False, "json", models.components.DtoCreateCouponRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -118,7 +118,9 @@ class Coupons(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoCouponResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCouponResponse, http_res
+            )
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
@@ -147,9 +149,9 @@ class Coupons(BaseSDK):
     async def create_coupon_async(
         self,
         *,
-        cadence: models.TypesCouponCadence,
+        cadence: models.components.CouponCadence,
         name: str,
-        type_: models.TypesCouponType,
+        type_: models.components.CouponType,
         amount_off: Optional[str] = None,
         currency: Optional[str] = None,
         duration_in_periods: Optional[int] = None,
@@ -163,7 +165,7 @@ class Coupons(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCouponResponse:
+    ) -> models.components.DtoCouponResponse:
         r"""Create coupon
 
         Use when creating a discount (e.g. promo code or referral). Ideal for percent or fixed value, with optional validity and usage limits.
@@ -195,7 +197,7 @@ class Coupons(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateCouponRequest(
+        request = models.components.DtoCreateCouponRequest(
             amount_off=amount_off,
             cadence=cadence,
             currency=currency,
@@ -224,7 +226,7 @@ class Coupons(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateCouponRequest
+                request, False, False, "json", models.components.DtoCreateCouponRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -253,7 +255,9 @@ class Coupons(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoCouponResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCouponResponse, http_res
+            )
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
@@ -286,25 +290,25 @@ class Coupons(BaseSDK):
         expand: Optional[str] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesCouponFilterOrder] = None,
+        order: Optional[models.components.CouponFilterOrder] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
-        status: Optional[models.TypesStatus] = None,
+        status: Optional[models.components.Status] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListCouponsResponse:
+    ) -> models.components.DtoListCouponsResponse:
         r"""Query coupons
 
         Use when listing or searching coupons (e.g. promo management). Returns a paginated list; supports filtering and sorting.
@@ -332,17 +336,17 @@ class Coupons(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesCouponFilter(
+        request = models.components.CouponFilter(
             coupon_ids=coupon_ids,
             expand=expand,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             limit=limit,
             offset=offset,
             order=order,
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             status=status,
         )
@@ -361,7 +365,7 @@ class Coupons(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesCouponFilter
+                request, False, False, "json", models.components.CouponFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -390,7 +394,9 @@ class Coupons(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListCouponsResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListCouponsResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -421,25 +427,25 @@ class Coupons(BaseSDK):
         expand: Optional[str] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesCouponFilterOrder] = None,
+        order: Optional[models.components.CouponFilterOrder] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
-        status: Optional[models.TypesStatus] = None,
+        status: Optional[models.components.Status] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListCouponsResponse:
+    ) -> models.components.DtoListCouponsResponse:
         r"""Query coupons
 
         Use when listing or searching coupons (e.g. promo management). Returns a paginated list; supports filtering and sorting.
@@ -467,17 +473,17 @@ class Coupons(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesCouponFilter(
+        request = models.components.CouponFilter(
             coupon_ids=coupon_ids,
             expand=expand,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             limit=limit,
             offset=offset,
             order=order,
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             status=status,
         )
@@ -496,7 +502,7 @@ class Coupons(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesCouponFilter
+                request, False, False, "json", models.components.CouponFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -525,7 +531,9 @@ class Coupons(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListCouponsResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListCouponsResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -557,7 +565,7 @@ class Coupons(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCouponResponse:
+    ) -> models.components.DtoCouponResponse:
         r"""Get coupon
 
         Use when you need to load a single coupon (e.g. for display or to validate a code).
@@ -578,7 +586,7 @@ class Coupons(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetCouponRequest(
+        request = models.operations.GetCouponRequest(
             id=id,
         )
 
@@ -622,7 +630,9 @@ class Coupons(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoCouponResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCouponResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -654,7 +664,7 @@ class Coupons(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCouponResponse:
+    ) -> models.components.DtoCouponResponse:
         r"""Get coupon
 
         Use when you need to load a single coupon (e.g. for display or to validate a code).
@@ -675,7 +685,7 @@ class Coupons(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetCouponRequest(
+        request = models.operations.GetCouponRequest(
             id=id,
         )
 
@@ -719,7 +729,9 @@ class Coupons(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoCouponResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCouponResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -753,7 +765,7 @@ class Coupons(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCouponResponse:
+    ) -> models.components.DtoCouponResponse:
         r"""Update coupon
 
         Use when changing coupon config (e.g. value, validity, or usage limits).
@@ -776,9 +788,9 @@ class Coupons(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateCouponRequest(
+        request = models.operations.UpdateCouponRequest(
             id=id,
-            body=models.DtoUpdateCouponRequest(
+            body=models.components.DtoUpdateCouponRequest(
                 metadata=metadata,
                 name=name,
             ),
@@ -798,7 +810,11 @@ class Coupons(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdateCouponRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdateCouponRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -827,7 +843,9 @@ class Coupons(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoCouponResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCouponResponse, http_res
+            )
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
@@ -863,7 +881,7 @@ class Coupons(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCouponResponse:
+    ) -> models.components.DtoCouponResponse:
         r"""Update coupon
 
         Use when changing coupon config (e.g. value, validity, or usage limits).
@@ -886,9 +904,9 @@ class Coupons(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateCouponRequest(
+        request = models.operations.UpdateCouponRequest(
             id=id,
-            body=models.DtoUpdateCouponRequest(
+            body=models.components.DtoUpdateCouponRequest(
                 metadata=metadata,
                 name=name,
             ),
@@ -908,7 +926,11 @@ class Coupons(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdateCouponRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdateCouponRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -937,7 +959,9 @@ class Coupons(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoCouponResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCouponResponse, http_res
+            )
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
@@ -992,7 +1016,7 @@ class Coupons(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteCouponRequest(
+        request = models.operations.DeleteCouponRequest(
             id=id,
         )
 
@@ -1091,7 +1115,7 @@ class Coupons(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteCouponRequest(
+        request = models.operations.DeleteCouponRequest(
             id=id,
         )
 

@@ -164,9 +164,9 @@ class Flexprice(BaseSDK):
         security: Any = None
         if callable(api_key_auth):
             # pylint: disable=unnecessary-lambda-assignment
-            security = lambda: models.Security(api_key_auth=api_key_auth())
+            security = lambda: models.components.Security(api_key_auth=api_key_auth())
         else:
-            security = models.Security(api_key_auth=api_key_auth)
+            security = models.components.Security(api_key_auth=api_key_auth)
 
         BaseSDK.__init__(
             self,

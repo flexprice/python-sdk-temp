@@ -19,7 +19,7 @@ class Groups(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoGroupResponse:
+    ) -> models.components.DtoGroupResponse:
         r"""Create group
 
         Use when organizing entities into a group (e.g. for filtering prices or plans by product line or region).
@@ -42,7 +42,7 @@ class Groups(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateGroupRequest(
+        request = models.components.DtoCreateGroupRequest(
             entity_type=entity_type,
             lookup_key=lookup_key,
             name=name,
@@ -62,7 +62,7 @@ class Groups(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateGroupRequest
+                request, False, False, "json", models.components.DtoCreateGroupRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -91,7 +91,7 @@ class Groups(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoGroupResponse, http_res)
+            return unmarshal_json_response(models.components.DtoGroupResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -125,7 +125,7 @@ class Groups(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoGroupResponse:
+    ) -> models.components.DtoGroupResponse:
         r"""Create group
 
         Use when organizing entities into a group (e.g. for filtering prices or plans by product line or region).
@@ -148,7 +148,7 @@ class Groups(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateGroupRequest(
+        request = models.components.DtoCreateGroupRequest(
             entity_type=entity_type,
             lookup_key=lookup_key,
             name=name,
@@ -168,7 +168,7 @@ class Groups(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateGroupRequest
+                request, False, False, "json", models.components.DtoCreateGroupRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -197,7 +197,7 @@ class Groups(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoGroupResponse, http_res)
+            return unmarshal_json_response(models.components.DtoGroupResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -229,8 +229,8 @@ class Groups(BaseSDK):
         expand: Optional[str] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         group_ids: Optional[List[str]] = None,
@@ -238,20 +238,20 @@ class Groups(BaseSDK):
         lookup_key: Optional[str] = None,
         name: Optional[str] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesGroupFilterOrder] = None,
+        order: Optional[models.components.GroupFilterOrder] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.TypesStatus] = None,
+        status: Optional[models.components.Status] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListGroupsResponse:
+    ) -> models.components.DtoListGroupsResponse:
         r"""Query groups
 
         Use when listing or searching groups (e.g. admin catalog). Returns a paginated list; supports filtering and sorting.
@@ -284,12 +284,12 @@ class Groups(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesGroupFilter(
+        request = models.components.GroupFilter(
             end_time=end_time,
             entity_type=entity_type,
             expand=expand,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             group_ids=group_ids,
             limit=limit,
@@ -298,7 +298,7 @@ class Groups(BaseSDK):
             offset=offset,
             order=order,
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             start_time=start_time,
             status=status,
@@ -318,7 +318,7 @@ class Groups(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesGroupFilter
+                request, False, False, "json", models.components.GroupFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -347,7 +347,9 @@ class Groups(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListGroupsResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListGroupsResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -379,8 +381,8 @@ class Groups(BaseSDK):
         expand: Optional[str] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         group_ids: Optional[List[str]] = None,
@@ -388,20 +390,20 @@ class Groups(BaseSDK):
         lookup_key: Optional[str] = None,
         name: Optional[str] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesGroupFilterOrder] = None,
+        order: Optional[models.components.GroupFilterOrder] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.TypesStatus] = None,
+        status: Optional[models.components.Status] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListGroupsResponse:
+    ) -> models.components.DtoListGroupsResponse:
         r"""Query groups
 
         Use when listing or searching groups (e.g. admin catalog). Returns a paginated list; supports filtering and sorting.
@@ -434,12 +436,12 @@ class Groups(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesGroupFilter(
+        request = models.components.GroupFilter(
             end_time=end_time,
             entity_type=entity_type,
             expand=expand,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             group_ids=group_ids,
             limit=limit,
@@ -448,7 +450,7 @@ class Groups(BaseSDK):
             offset=offset,
             order=order,
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             start_time=start_time,
             status=status,
@@ -468,7 +470,7 @@ class Groups(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesGroupFilter
+                request, False, False, "json", models.components.GroupFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -497,7 +499,9 @@ class Groups(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListGroupsResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListGroupsResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -529,7 +533,7 @@ class Groups(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoGroupResponse:
+    ) -> models.components.DtoGroupResponse:
         r"""Get group
 
         Use when you need to load a single group (e.g. for display or to assign entities).
@@ -550,7 +554,7 @@ class Groups(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetGroupRequest(
+        request = models.operations.GetGroupRequest(
             id=id,
         )
 
@@ -594,7 +598,7 @@ class Groups(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoGroupResponse, http_res)
+            return unmarshal_json_response(models.components.DtoGroupResponse, http_res)
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -626,7 +630,7 @@ class Groups(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoGroupResponse:
+    ) -> models.components.DtoGroupResponse:
         r"""Get group
 
         Use when you need to load a single group (e.g. for display or to assign entities).
@@ -647,7 +651,7 @@ class Groups(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetGroupRequest(
+        request = models.operations.GetGroupRequest(
             id=id,
         )
 
@@ -691,7 +695,7 @@ class Groups(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoGroupResponse, http_res)
+            return unmarshal_json_response(models.components.DtoGroupResponse, http_res)
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -744,7 +748,7 @@ class Groups(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteGroupRequest(
+        request = models.operations.DeleteGroupRequest(
             id=id,
         )
 
@@ -841,7 +845,7 @@ class Groups(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteGroupRequest(
+        request = models.operations.DeleteGroupRequest(
             id=id,
         )
 

@@ -24,8 +24,8 @@ class Customers(BaseSDK):
         external_id: Optional[str] = None,
         integration_entity_mapping: Optional[
             Union[
-                List[models.DtoIntegrationEntityMapping],
-                List[models.DtoIntegrationEntityMappingTypedDict],
+                List[models.components.DtoIntegrationEntityMapping],
+                List[models.components.DtoIntegrationEntityMappingTypedDict],
             ]
         ] = None,
         metadata: Optional[Dict[str, str]] = None,
@@ -36,7 +36,7 @@ class Customers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCustomerResponse:
+    ) -> models.components.DtoCustomerResponse:
         r"""Update customer
 
         Use when updating customer details (e.g. name, email, or metadata). Identify by id or external_customer_id.
@@ -73,10 +73,10 @@ class Customers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateCustomerRequest(
+        request = models.operations.UpdateCustomerRequest(
             id=id,
             external_customer_id=external_customer_id,
-            body=models.DtoUpdateCustomerRequest(
+            body=models.components.DtoUpdateCustomerRequest(
                 address_city=address_city,
                 address_country=address_country,
                 address_line1=address_line1,
@@ -87,7 +87,7 @@ class Customers(BaseSDK):
                 external_id=external_id,
                 integration_entity_mapping=utils.get_pydantic_model(
                     integration_entity_mapping,
-                    Optional[List[models.DtoIntegrationEntityMapping]],
+                    Optional[List[models.components.DtoIntegrationEntityMapping]],
                 ),
                 metadata=metadata,
                 name=name,
@@ -110,7 +110,11 @@ class Customers(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdateCustomerRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdateCustomerRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -139,7 +143,9 @@ class Customers(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoCustomerResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCustomerResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -178,8 +184,8 @@ class Customers(BaseSDK):
         external_id: Optional[str] = None,
         integration_entity_mapping: Optional[
             Union[
-                List[models.DtoIntegrationEntityMapping],
-                List[models.DtoIntegrationEntityMappingTypedDict],
+                List[models.components.DtoIntegrationEntityMapping],
+                List[models.components.DtoIntegrationEntityMappingTypedDict],
             ]
         ] = None,
         metadata: Optional[Dict[str, str]] = None,
@@ -190,7 +196,7 @@ class Customers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCustomerResponse:
+    ) -> models.components.DtoCustomerResponse:
         r"""Update customer
 
         Use when updating customer details (e.g. name, email, or metadata). Identify by id or external_customer_id.
@@ -227,10 +233,10 @@ class Customers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateCustomerRequest(
+        request = models.operations.UpdateCustomerRequest(
             id=id,
             external_customer_id=external_customer_id,
-            body=models.DtoUpdateCustomerRequest(
+            body=models.components.DtoUpdateCustomerRequest(
                 address_city=address_city,
                 address_country=address_country,
                 address_line1=address_line1,
@@ -241,7 +247,7 @@ class Customers(BaseSDK):
                 external_id=external_id,
                 integration_entity_mapping=utils.get_pydantic_model(
                     integration_entity_mapping,
-                    Optional[List[models.DtoIntegrationEntityMapping]],
+                    Optional[List[models.components.DtoIntegrationEntityMapping]],
                 ),
                 metadata=metadata,
                 name=name,
@@ -264,7 +270,11 @@ class Customers(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdateCustomerRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdateCustomerRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -293,7 +303,9 @@ class Customers(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoCustomerResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCustomerResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -330,8 +342,8 @@ class Customers(BaseSDK):
         email: Optional[str] = None,
         integration_entity_mapping: Optional[
             Union[
-                List[models.DtoIntegrationEntityMapping],
-                List[models.DtoIntegrationEntityMappingTypedDict],
+                List[models.components.DtoIntegrationEntityMapping],
+                List[models.components.DtoIntegrationEntityMappingTypedDict],
             ]
         ] = None,
         metadata: Optional[Dict[str, str]] = None,
@@ -341,15 +353,15 @@ class Customers(BaseSDK):
         skip_onboarding_workflow: Optional[bool] = None,
         tax_rate_overrides: Optional[
             Union[
-                List[models.DtoTaxRateOverride],
-                List[models.DtoTaxRateOverrideTypedDict],
+                List[models.components.DtoTaxRateOverride],
+                List[models.components.DtoTaxRateOverrideTypedDict],
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCustomerResponse:
+    ) -> models.components.DtoCustomerResponse:
         r"""Create customer
 
         Use when onboarding a new billing customer (e.g. sign-up or CRM sync). Ideal for linking via external_customer_id to your app's user id.
@@ -387,7 +399,7 @@ class Customers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateCustomerRequest(
+        request = models.components.DtoCreateCustomerRequest(
             address_city=address_city,
             address_country=address_country,
             address_line1=address_line1,
@@ -398,7 +410,7 @@ class Customers(BaseSDK):
             external_id=external_id,
             integration_entity_mapping=utils.get_pydantic_model(
                 integration_entity_mapping,
-                Optional[List[models.DtoIntegrationEntityMapping]],
+                Optional[List[models.components.DtoIntegrationEntityMapping]],
             ),
             metadata=metadata,
             name=name,
@@ -406,7 +418,7 @@ class Customers(BaseSDK):
             parent_customer_id=parent_customer_id,
             skip_onboarding_workflow=skip_onboarding_workflow,
             tax_rate_overrides=utils.get_pydantic_model(
-                tax_rate_overrides, Optional[List[models.DtoTaxRateOverride]]
+                tax_rate_overrides, Optional[List[models.components.DtoTaxRateOverride]]
             ),
         )
 
@@ -424,7 +436,11 @@ class Customers(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateCustomerRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoCreateCustomerRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -453,7 +469,9 @@ class Customers(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoCustomerResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCustomerResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -490,8 +508,8 @@ class Customers(BaseSDK):
         email: Optional[str] = None,
         integration_entity_mapping: Optional[
             Union[
-                List[models.DtoIntegrationEntityMapping],
-                List[models.DtoIntegrationEntityMappingTypedDict],
+                List[models.components.DtoIntegrationEntityMapping],
+                List[models.components.DtoIntegrationEntityMappingTypedDict],
             ]
         ] = None,
         metadata: Optional[Dict[str, str]] = None,
@@ -501,15 +519,15 @@ class Customers(BaseSDK):
         skip_onboarding_workflow: Optional[bool] = None,
         tax_rate_overrides: Optional[
             Union[
-                List[models.DtoTaxRateOverride],
-                List[models.DtoTaxRateOverrideTypedDict],
+                List[models.components.DtoTaxRateOverride],
+                List[models.components.DtoTaxRateOverrideTypedDict],
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCustomerResponse:
+    ) -> models.components.DtoCustomerResponse:
         r"""Create customer
 
         Use when onboarding a new billing customer (e.g. sign-up or CRM sync). Ideal for linking via external_customer_id to your app's user id.
@@ -547,7 +565,7 @@ class Customers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateCustomerRequest(
+        request = models.components.DtoCreateCustomerRequest(
             address_city=address_city,
             address_country=address_country,
             address_line1=address_line1,
@@ -558,7 +576,7 @@ class Customers(BaseSDK):
             external_id=external_id,
             integration_entity_mapping=utils.get_pydantic_model(
                 integration_entity_mapping,
-                Optional[List[models.DtoIntegrationEntityMapping]],
+                Optional[List[models.components.DtoIntegrationEntityMapping]],
             ),
             metadata=metadata,
             name=name,
@@ -566,7 +584,7 @@ class Customers(BaseSDK):
             parent_customer_id=parent_customer_id,
             skip_onboarding_workflow=skip_onboarding_workflow,
             tax_rate_overrides=utils.get_pydantic_model(
-                tax_rate_overrides, Optional[List[models.DtoTaxRateOverride]]
+                tax_rate_overrides, Optional[List[models.components.DtoTaxRateOverride]]
             ),
         )
 
@@ -584,7 +602,11 @@ class Customers(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateCustomerRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoCreateCustomerRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -613,7 +635,9 @@ class Customers(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoCustomerResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCustomerResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -645,7 +669,7 @@ class Customers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCustomerResponse:
+    ) -> models.components.DtoCustomerResponse:
         r"""Get customer by external ID
 
         Use when resolving a customer by your app's id (e.g. from your user table). Ideal for integrations that key by external id.
@@ -666,7 +690,7 @@ class Customers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetCustomerByExternalIDRequest(
+        request = models.operations.GetCustomerByExternalIDRequest(
             external_id=external_id,
         )
 
@@ -710,7 +734,9 @@ class Customers(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoCustomerResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCustomerResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -742,7 +768,7 @@ class Customers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCustomerResponse:
+    ) -> models.components.DtoCustomerResponse:
         r"""Get customer by external ID
 
         Use when resolving a customer by your app's id (e.g. from your user table). Ideal for integrations that key by external id.
@@ -763,7 +789,7 @@ class Customers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetCustomerByExternalIDRequest(
+        request = models.operations.GetCustomerByExternalIDRequest(
             external_id=external_id,
         )
 
@@ -807,7 +833,9 @@ class Customers(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoCustomerResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCustomerResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -842,27 +870,27 @@ class Customers(BaseSDK):
         external_ids: Optional[List[str]] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesCustomerFilterOrder] = None,
+        order: Optional[models.components.CustomerFilterOrder] = None,
         parent_customer_ids: Optional[List[str]] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.TypesStatus] = None,
+        status: Optional[models.components.Status] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListCustomersResponse:
+    ) -> models.components.DtoListCustomersResponse:
         r"""Query customers
 
         Use when listing or searching customers (e.g. admin CRM or reporting). Returns a paginated list; supports filtering and sorting.
@@ -896,7 +924,7 @@ class Customers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesCustomerFilter(
+        request = models.components.CustomerFilter(
             customer_ids=customer_ids,
             email=email,
             end_time=end_time,
@@ -904,14 +932,14 @@ class Customers(BaseSDK):
             external_id=external_id,
             external_ids=external_ids,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             limit=limit,
             offset=offset,
             order=order,
             parent_customer_ids=parent_customer_ids,
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             start_time=start_time,
             status=status,
@@ -931,7 +959,7 @@ class Customers(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesCustomerFilter
+                request, False, False, "json", models.components.CustomerFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -960,7 +988,9 @@ class Customers(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListCustomersResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListCustomersResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -995,27 +1025,27 @@ class Customers(BaseSDK):
         external_ids: Optional[List[str]] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesCustomerFilterOrder] = None,
+        order: Optional[models.components.CustomerFilterOrder] = None,
         parent_customer_ids: Optional[List[str]] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.TypesStatus] = None,
+        status: Optional[models.components.Status] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListCustomersResponse:
+    ) -> models.components.DtoListCustomersResponse:
         r"""Query customers
 
         Use when listing or searching customers (e.g. admin CRM or reporting). Returns a paginated list; supports filtering and sorting.
@@ -1049,7 +1079,7 @@ class Customers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesCustomerFilter(
+        request = models.components.CustomerFilter(
             customer_ids=customer_ids,
             email=email,
             end_time=end_time,
@@ -1057,14 +1087,14 @@ class Customers(BaseSDK):
             external_id=external_id,
             external_ids=external_ids,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             limit=limit,
             offset=offset,
             order=order,
             parent_customer_ids=parent_customer_ids,
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             start_time=start_time,
             status=status,
@@ -1084,7 +1114,7 @@ class Customers(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesCustomerFilter
+                request, False, False, "json", models.components.CustomerFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1113,7 +1143,9 @@ class Customers(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListCustomersResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListCustomersResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1149,7 +1181,7 @@ class Customers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCustomerUsageSummaryResponse:
+    ) -> models.components.DtoCustomerUsageSummaryResponse:
         r"""Get customer usage summary
 
         Use when showing a customer's usage (e.g. portal or overage alerts). Identify by customer_id or customer_lookup_key; supports filters.
@@ -1174,7 +1206,7 @@ class Customers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetCustomerUsageSummaryRequest(
+        request = models.operations.GetCustomerUsageSummaryRequest(
             customer_id=customer_id,
             customer_lookup_key=customer_lookup_key,
             feature_ids=feature_ids,
@@ -1223,7 +1255,7 @@ class Customers(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoCustomerUsageSummaryResponse, http_res
+                models.components.DtoCustomerUsageSummaryResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -1260,7 +1292,7 @@ class Customers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCustomerUsageSummaryResponse:
+    ) -> models.components.DtoCustomerUsageSummaryResponse:
         r"""Get customer usage summary
 
         Use when showing a customer's usage (e.g. portal or overage alerts). Identify by customer_id or customer_lookup_key; supports filters.
@@ -1285,7 +1317,7 @@ class Customers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetCustomerUsageSummaryRequest(
+        request = models.operations.GetCustomerUsageSummaryRequest(
             customer_id=customer_id,
             customer_lookup_key=customer_lookup_key,
             feature_ids=feature_ids,
@@ -1334,7 +1366,7 @@ class Customers(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoCustomerUsageSummaryResponse, http_res
+                models.components.DtoCustomerUsageSummaryResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -1367,7 +1399,7 @@ class Customers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCustomerResponse:
+    ) -> models.components.DtoCustomerResponse:
         r"""Get customer
 
         Use when you need to load a single customer (e.g. for a billing portal or to attach a subscription).
@@ -1388,7 +1420,7 @@ class Customers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetCustomerRequest(
+        request = models.operations.GetCustomerRequest(
             id=id,
         )
 
@@ -1432,7 +1464,9 @@ class Customers(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoCustomerResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCustomerResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1464,7 +1498,7 @@ class Customers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCustomerResponse:
+    ) -> models.components.DtoCustomerResponse:
         r"""Get customer
 
         Use when you need to load a single customer (e.g. for a billing portal or to attach a subscription).
@@ -1485,7 +1519,7 @@ class Customers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetCustomerRequest(
+        request = models.operations.GetCustomerRequest(
             id=id,
         )
 
@@ -1529,7 +1563,9 @@ class Customers(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoCustomerResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCustomerResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1582,7 +1618,7 @@ class Customers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteCustomerRequest(
+        request = models.operations.DeleteCustomerRequest(
             id=id,
         )
 
@@ -1679,7 +1715,7 @@ class Customers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteCustomerRequest(
+        request = models.operations.DeleteCustomerRequest(
             id=id,
         )
 
@@ -1755,7 +1791,7 @@ class Customers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCustomerEntitlementsResponse:
+    ) -> models.components.DtoCustomerEntitlementsResponse:
         r"""Get customer entitlements
 
         Use when checking what a customer can access (e.g. feature gating or usage limits). Supports optional filters (feature_ids, subscription_ids).
@@ -1776,7 +1812,7 @@ class Customers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetCustomerEntitlementsRequest(
+        request = models.operations.GetCustomerEntitlementsRequest(
             id=id,
         )
 
@@ -1821,7 +1857,7 @@ class Customers(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoCustomerEntitlementsResponse, http_res
+                models.components.DtoCustomerEntitlementsResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -1854,7 +1890,7 @@ class Customers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCustomerEntitlementsResponse:
+    ) -> models.components.DtoCustomerEntitlementsResponse:
         r"""Get customer entitlements
 
         Use when checking what a customer can access (e.g. feature gating or usage limits). Supports optional filters (feature_ids, subscription_ids).
@@ -1875,7 +1911,7 @@ class Customers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetCustomerEntitlementsRequest(
+        request = models.operations.GetCustomerEntitlementsRequest(
             id=id,
         )
 
@@ -1920,7 +1956,7 @@ class Customers(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoCustomerEntitlementsResponse, http_res
+                models.components.DtoCustomerEntitlementsResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -1953,7 +1989,7 @@ class Customers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListCreditGrantApplicationsResponse:
+    ) -> models.components.DtoListCreditGrantApplicationsResponse:
         r"""Get upcoming credit grant applications
 
         Use when showing upcoming or pending credits for a customer (e.g. in a portal or for forecasting).
@@ -1974,7 +2010,7 @@ class Customers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetCustomerUpcomingGrantsRequest(
+        request = models.operations.GetCustomerUpcomingGrantsRequest(
             id=id,
         )
 
@@ -2019,7 +2055,7 @@ class Customers(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoListCreditGrantApplicationsResponse, http_res
+                models.components.DtoListCreditGrantApplicationsResponse, http_res
             )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
@@ -2052,7 +2088,7 @@ class Customers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListCreditGrantApplicationsResponse:
+    ) -> models.components.DtoListCreditGrantApplicationsResponse:
         r"""Get upcoming credit grant applications
 
         Use when showing upcoming or pending credits for a customer (e.g. in a portal or for forecasting).
@@ -2073,7 +2109,7 @@ class Customers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetCustomerUpcomingGrantsRequest(
+        request = models.operations.GetCustomerUpcomingGrantsRequest(
             id=id,
         )
 
@@ -2118,7 +2154,7 @@ class Customers(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoListCreditGrantApplicationsResponse, http_res
+                models.components.DtoListCreditGrantApplicationsResponse, http_res
             )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(

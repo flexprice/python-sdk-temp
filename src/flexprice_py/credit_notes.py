@@ -13,13 +13,13 @@ class CreditNotes(BaseSDK):
         self,
         *,
         invoice_id: str,
-        reason: models.TypesCreditNoteReason,
+        reason: models.components.CreditNoteReason,
         credit_note_number: Optional[str] = None,
         idempotency_key: Optional[str] = None,
         line_items: Optional[
             Union[
-                List[models.DtoCreateCreditNoteLineItemRequest],
-                List[models.DtoCreateCreditNoteLineItemRequestTypedDict],
+                List[models.components.DtoCreateCreditNoteLineItemRequest],
+                List[models.components.DtoCreateCreditNoteLineItemRequestTypedDict],
             ]
         ] = None,
         memo: Optional[str] = None,
@@ -29,7 +29,7 @@ class CreditNotes(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCreditNoteResponse:
+    ) -> models.components.DtoCreditNoteResponse:
         r"""Create credit note
 
         Use when issuing a refund or adjustment (e.g. customer dispute or proration). Links to an invoice; create as draft then finalize.
@@ -57,12 +57,13 @@ class CreditNotes(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateCreditNoteRequest(
+        request = models.components.DtoCreateCreditNoteRequest(
             credit_note_number=credit_note_number,
             idempotency_key=idempotency_key,
             invoice_id=invoice_id,
             line_items=utils.get_pydantic_model(
-                line_items, Optional[List[models.DtoCreateCreditNoteLineItemRequest]]
+                line_items,
+                Optional[List[models.components.DtoCreateCreditNoteLineItemRequest]],
             ),
             memo=memo,
             metadata=metadata,
@@ -84,7 +85,11 @@ class CreditNotes(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateCreditNoteRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoCreateCreditNoteRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -113,7 +118,9 @@ class CreditNotes(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoCreditNoteResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCreditNoteResponse, http_res
+            )
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
@@ -143,13 +150,13 @@ class CreditNotes(BaseSDK):
         self,
         *,
         invoice_id: str,
-        reason: models.TypesCreditNoteReason,
+        reason: models.components.CreditNoteReason,
         credit_note_number: Optional[str] = None,
         idempotency_key: Optional[str] = None,
         line_items: Optional[
             Union[
-                List[models.DtoCreateCreditNoteLineItemRequest],
-                List[models.DtoCreateCreditNoteLineItemRequestTypedDict],
+                List[models.components.DtoCreateCreditNoteLineItemRequest],
+                List[models.components.DtoCreateCreditNoteLineItemRequestTypedDict],
             ]
         ] = None,
         memo: Optional[str] = None,
@@ -159,7 +166,7 @@ class CreditNotes(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCreditNoteResponse:
+    ) -> models.components.DtoCreditNoteResponse:
         r"""Create credit note
 
         Use when issuing a refund or adjustment (e.g. customer dispute or proration). Links to an invoice; create as draft then finalize.
@@ -187,12 +194,13 @@ class CreditNotes(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateCreditNoteRequest(
+        request = models.components.DtoCreateCreditNoteRequest(
             credit_note_number=credit_note_number,
             idempotency_key=idempotency_key,
             invoice_id=invoice_id,
             line_items=utils.get_pydantic_model(
-                line_items, Optional[List[models.DtoCreateCreditNoteLineItemRequest]]
+                line_items,
+                Optional[List[models.components.DtoCreateCreditNoteLineItemRequest]],
             ),
             memo=memo,
             metadata=metadata,
@@ -214,7 +222,11 @@ class CreditNotes(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateCreditNoteRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoCreateCreditNoteRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -243,7 +255,9 @@ class CreditNotes(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoCreditNoteResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCreditNoteResponse, http_res
+            )
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
@@ -277,7 +291,7 @@ class CreditNotes(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCreditNoteResponse:
+    ) -> models.components.DtoCreditNoteResponse:
         r"""Get credit note
 
         Use when you need to load a single credit note (e.g. for display or reconciliation).
@@ -298,7 +312,7 @@ class CreditNotes(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetCreditNoteRequest(
+        request = models.operations.GetCreditNoteRequest(
             id=id,
         )
 
@@ -342,7 +356,9 @@ class CreditNotes(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoCreditNoteResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCreditNoteResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -374,7 +390,7 @@ class CreditNotes(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCreditNoteResponse:
+    ) -> models.components.DtoCreditNoteResponse:
         r"""Get credit note
 
         Use when you need to load a single credit note (e.g. for display or reconciliation).
@@ -395,7 +411,7 @@ class CreditNotes(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetCreditNoteRequest(
+        request = models.operations.GetCreditNoteRequest(
             id=id,
         )
 
@@ -439,7 +455,9 @@ class CreditNotes(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoCreditNoteResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCreditNoteResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -471,7 +489,7 @@ class CreditNotes(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCreditNoteResponse:
+    ) -> models.components.DtoCreditNoteResponse:
         r"""Finalize credit note
 
         Use when locking a draft credit note and applying the credit (e.g. after approval). Once finalized, applied per billing provider.
@@ -492,7 +510,7 @@ class CreditNotes(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ProcessCreditNoteRequest(
+        request = models.operations.ProcessCreditNoteRequest(
             id=id,
         )
 
@@ -536,7 +554,9 @@ class CreditNotes(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoCreditNoteResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCreditNoteResponse, http_res
+            )
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
@@ -570,7 +590,7 @@ class CreditNotes(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCreditNoteResponse:
+    ) -> models.components.DtoCreditNoteResponse:
         r"""Finalize credit note
 
         Use when locking a draft credit note and applying the credit (e.g. after approval). Once finalized, applied per billing provider.
@@ -591,7 +611,7 @@ class CreditNotes(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ProcessCreditNoteRequest(
+        request = models.operations.ProcessCreditNoteRequest(
             id=id,
         )
 
@@ -635,7 +655,9 @@ class CreditNotes(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoCreditNoteResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCreditNoteResponse, http_res
+            )
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
@@ -669,7 +691,7 @@ class CreditNotes(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCreditNoteResponse:
+    ) -> models.components.DtoCreditNoteResponse:
         r"""Void credit note
 
         Use when cancelling a draft credit note (e.g. created by mistake). Only draft credit notes can be voided.
@@ -690,7 +712,7 @@ class CreditNotes(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.VoidCreditNoteRequest(
+        request = models.operations.VoidCreditNoteRequest(
             id=id,
         )
 
@@ -734,7 +756,9 @@ class CreditNotes(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoCreditNoteResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCreditNoteResponse, http_res
+            )
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
@@ -768,7 +792,7 @@ class CreditNotes(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCreditNoteResponse:
+    ) -> models.components.DtoCreditNoteResponse:
         r"""Void credit note
 
         Use when cancelling a draft credit note (e.g. created by mistake). Only draft credit notes can be voided.
@@ -789,7 +813,7 @@ class CreditNotes(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.VoidCreditNoteRequest(
+        request = models.operations.VoidCreditNoteRequest(
             id=id,
         )
 
@@ -833,7 +857,9 @@ class CreditNotes(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoCreditNoteResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCreditNoteResponse, http_res
+            )
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):

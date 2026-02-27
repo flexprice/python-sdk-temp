@@ -5,7 +5,7 @@ from flexprice_py import Flexprice
 
 
 with Flexprice(
-    server_url="https://api.example.com",
+    "https://api.example.com",
     api_key_auth="<YOUR_API_KEY_HERE>",
 ) as flexprice:
 
@@ -27,7 +27,7 @@ from flexprice_py import Flexprice
 async def main():
 
     async with Flexprice(
-        server_url="https://api.example.com",
+        "https://api.example.com",
         api_key_auth="<YOUR_API_KEY_HERE>",
     ) as flexprice:
 

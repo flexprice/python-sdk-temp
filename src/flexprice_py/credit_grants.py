@@ -12,19 +12,19 @@ class CreditGrants(BaseSDK):
     def create_credit_grant(
         self,
         *,
-        cadence: models.TypesCreditGrantCadence,
+        cadence: models.components.CreditGrantCadence,
         credits: str,
         name: str,
-        scope: models.TypesCreditGrantScope,
+        scope: models.components.CreditGrantScope,
         conversion_rate: Optional[str] = None,
         end_date: Optional[str] = None,
         expiration_duration: Optional[int] = None,
         expiration_duration_unit: Optional[
-            models.TypesCreditGrantExpiryDurationUnit
+            models.components.CreditGrantExpiryDurationUnit
         ] = None,
-        expiration_type: Optional[models.TypesCreditGrantExpiryType] = None,
+        expiration_type: Optional[models.components.CreditGrantExpiryType] = None,
         metadata: Optional[Dict[str, str]] = None,
-        period: Optional[models.TypesCreditGrantPeriod] = None,
+        period: Optional[models.components.CreditGrantPeriod] = None,
         period_count: Optional[int] = None,
         plan_id: Optional[str] = None,
         priority: Optional[int] = None,
@@ -35,7 +35,7 @@ class CreditGrants(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCreditGrantResponse:
+    ) -> models.components.DtoCreditGrantResponse:
         r"""Create credit grant
 
         Use when giving a customer or plan credits (e.g. prepaid balance or promotional credits). Scope can be plan or subscription; supports start/end dates.
@@ -78,7 +78,7 @@ class CreditGrants(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateCreditGrantRequest(
+        request = models.components.DtoCreateCreditGrantRequest(
             cadence=cadence,
             conversion_rate=conversion_rate,
             credits=credits,
@@ -112,7 +112,11 @@ class CreditGrants(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateCreditGrantRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoCreateCreditGrantRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -141,7 +145,9 @@ class CreditGrants(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoCreditGrantResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCreditGrantResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -168,19 +174,19 @@ class CreditGrants(BaseSDK):
     async def create_credit_grant_async(
         self,
         *,
-        cadence: models.TypesCreditGrantCadence,
+        cadence: models.components.CreditGrantCadence,
         credits: str,
         name: str,
-        scope: models.TypesCreditGrantScope,
+        scope: models.components.CreditGrantScope,
         conversion_rate: Optional[str] = None,
         end_date: Optional[str] = None,
         expiration_duration: Optional[int] = None,
         expiration_duration_unit: Optional[
-            models.TypesCreditGrantExpiryDurationUnit
+            models.components.CreditGrantExpiryDurationUnit
         ] = None,
-        expiration_type: Optional[models.TypesCreditGrantExpiryType] = None,
+        expiration_type: Optional[models.components.CreditGrantExpiryType] = None,
         metadata: Optional[Dict[str, str]] = None,
-        period: Optional[models.TypesCreditGrantPeriod] = None,
+        period: Optional[models.components.CreditGrantPeriod] = None,
         period_count: Optional[int] = None,
         plan_id: Optional[str] = None,
         priority: Optional[int] = None,
@@ -191,7 +197,7 @@ class CreditGrants(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCreditGrantResponse:
+    ) -> models.components.DtoCreditGrantResponse:
         r"""Create credit grant
 
         Use when giving a customer or plan credits (e.g. prepaid balance or promotional credits). Scope can be plan or subscription; supports start/end dates.
@@ -234,7 +240,7 @@ class CreditGrants(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateCreditGrantRequest(
+        request = models.components.DtoCreateCreditGrantRequest(
             cadence=cadence,
             conversion_rate=conversion_rate,
             credits=credits,
@@ -268,7 +274,11 @@ class CreditGrants(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateCreditGrantRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoCreateCreditGrantRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -297,7 +307,9 @@ class CreditGrants(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoCreditGrantResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCreditGrantResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -329,7 +341,7 @@ class CreditGrants(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCreditGrantResponse:
+    ) -> models.components.DtoCreditGrantResponse:
         r"""Get credit grant
 
         Use when you need to load a single credit grant (e.g. for display or to check balance).
@@ -350,7 +362,7 @@ class CreditGrants(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetCreditGrantRequest(
+        request = models.operations.GetCreditGrantRequest(
             id=id,
         )
 
@@ -394,7 +406,9 @@ class CreditGrants(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoCreditGrantResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCreditGrantResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -426,7 +440,7 @@ class CreditGrants(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCreditGrantResponse:
+    ) -> models.components.DtoCreditGrantResponse:
         r"""Get credit grant
 
         Use when you need to load a single credit grant (e.g. for display or to check balance).
@@ -447,7 +461,7 @@ class CreditGrants(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetCreditGrantRequest(
+        request = models.operations.GetCreditGrantRequest(
             id=id,
         )
 
@@ -491,7 +505,9 @@ class CreditGrants(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoCreditGrantResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCreditGrantResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -525,7 +541,7 @@ class CreditGrants(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCreditGrantResponse:
+    ) -> models.components.DtoCreditGrantResponse:
         r"""Update credit grant
 
         Use when changing a credit grant (e.g. amount or end date). Request body contains the fields to update.
@@ -548,9 +564,9 @@ class CreditGrants(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateCreditGrantRequest(
+        request = models.operations.UpdateCreditGrantRequest(
             id=id,
-            body=models.DtoUpdateCreditGrantRequest(
+            body=models.components.DtoUpdateCreditGrantRequest(
                 metadata=metadata,
                 name=name,
             ),
@@ -570,7 +586,11 @@ class CreditGrants(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdateCreditGrantRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdateCreditGrantRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -599,7 +619,9 @@ class CreditGrants(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoCreditGrantResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCreditGrantResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -633,7 +655,7 @@ class CreditGrants(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoCreditGrantResponse:
+    ) -> models.components.DtoCreditGrantResponse:
         r"""Update credit grant
 
         Use when changing a credit grant (e.g. amount or end date). Request body contains the fields to update.
@@ -656,9 +678,9 @@ class CreditGrants(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateCreditGrantRequest(
+        request = models.operations.UpdateCreditGrantRequest(
             id=id,
-            body=models.DtoUpdateCreditGrantRequest(
+            body=models.components.DtoUpdateCreditGrantRequest(
                 metadata=metadata,
                 name=name,
             ),
@@ -678,7 +700,11 @@ class CreditGrants(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdateCreditGrantRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdateCreditGrantRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -707,7 +733,9 @@ class CreditGrants(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoCreditGrantResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoCreditGrantResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -740,7 +768,7 @@ class CreditGrants(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSuccessResponse:
+    ) -> models.components.DtoSuccessResponse:
         r"""Delete credit grant
 
         Use when removing or ending a credit grant (e.g. revoke promo or close prepaid). Plan-scoped grants are archived; subscription-scoped supports optional effective_date in body.
@@ -762,9 +790,9 @@ class CreditGrants(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteCreditGrantRequest(
+        request = models.operations.DeleteCreditGrantRequest(
             id=id,
-            body=models.DtoDeleteCreditGrantRequest(
+            body=models.components.DtoDeleteCreditGrantRequest(
                 effective_date=effective_date,
             ),
         )
@@ -787,7 +815,7 @@ class CreditGrants(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.DtoDeleteCreditGrantRequest],
+                Optional[models.components.DtoDeleteCreditGrantRequest],
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -816,7 +844,9 @@ class CreditGrants(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSuccessResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSuccessResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -849,7 +879,7 @@ class CreditGrants(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoSuccessResponse:
+    ) -> models.components.DtoSuccessResponse:
         r"""Delete credit grant
 
         Use when removing or ending a credit grant (e.g. revoke promo or close prepaid). Plan-scoped grants are archived; subscription-scoped supports optional effective_date in body.
@@ -871,9 +901,9 @@ class CreditGrants(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteCreditGrantRequest(
+        request = models.operations.DeleteCreditGrantRequest(
             id=id,
-            body=models.DtoDeleteCreditGrantRequest(
+            body=models.components.DtoDeleteCreditGrantRequest(
                 effective_date=effective_date,
             ),
         )
@@ -896,7 +926,7 @@ class CreditGrants(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.DtoDeleteCreditGrantRequest],
+                Optional[models.components.DtoDeleteCreditGrantRequest],
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -925,7 +955,9 @@ class CreditGrants(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoSuccessResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoSuccessResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -957,7 +989,7 @@ class CreditGrants(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListCreditGrantsResponse:
+    ) -> models.components.DtoListCreditGrantsResponse:
         r"""Get plan credit grants
 
         Use when listing credits attached to a plan (e.g. included prepaid or promo credits).
@@ -978,7 +1010,7 @@ class CreditGrants(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetPlanCreditGrantsRequest(
+        request = models.operations.GetPlanCreditGrantsRequest(
             id=id,
         )
 
@@ -1022,7 +1054,9 @@ class CreditGrants(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListCreditGrantsResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListCreditGrantsResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1054,7 +1088,7 @@ class CreditGrants(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListCreditGrantsResponse:
+    ) -> models.components.DtoListCreditGrantsResponse:
         r"""Get plan credit grants
 
         Use when listing credits attached to a plan (e.g. included prepaid or promo credits).
@@ -1075,7 +1109,7 @@ class CreditGrants(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetPlanCreditGrantsRequest(
+        request = models.operations.GetPlanCreditGrantsRequest(
             id=id,
         )
 
@@ -1119,7 +1153,9 @@ class CreditGrants(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListCreditGrantsResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListCreditGrantsResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res

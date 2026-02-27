@@ -13,7 +13,7 @@ class EntityIntegrationMappings(BaseSDK):
         self,
         *,
         entity_id: str,
-        entity_type: models.TypesIntegrationEntityType,
+        entity_type: models.components.IntegrationEntityType,
         provider_entity_id: str,
         provider_type: str,
         metadata: Optional[Dict[str, Any]] = None,
@@ -21,7 +21,7 @@ class EntityIntegrationMappings(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoEntityIntegrationMappingResponse:
+    ) -> models.components.DtoEntityIntegrationMappingResponse:
         r"""Create entity integration mapping
 
         Use when linking a FlexPrice entity to an external system (e.g. CRM or payment provider) so you can sync or reconcile by external ID.
@@ -46,7 +46,7 @@ class EntityIntegrationMappings(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateEntityIntegrationMappingRequest(
+        request = models.components.DtoCreateEntityIntegrationMappingRequest(
             entity_id=entity_id,
             entity_type=entity_type,
             metadata=metadata,
@@ -72,7 +72,7 @@ class EntityIntegrationMappings(BaseSDK):
                 False,
                 False,
                 "json",
-                models.DtoCreateEntityIntegrationMappingRequest,
+                models.components.DtoCreateEntityIntegrationMappingRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -102,7 +102,7 @@ class EntityIntegrationMappings(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return unmarshal_json_response(
-                models.DtoEntityIntegrationMappingResponse, http_res
+                models.components.DtoEntityIntegrationMappingResponse, http_res
             )
         if utils.match_response(http_res, ["400", "401", "409"], "application/json"):
             response_data = unmarshal_json_response(
@@ -131,7 +131,7 @@ class EntityIntegrationMappings(BaseSDK):
         self,
         *,
         entity_id: str,
-        entity_type: models.TypesIntegrationEntityType,
+        entity_type: models.components.IntegrationEntityType,
         provider_entity_id: str,
         provider_type: str,
         metadata: Optional[Dict[str, Any]] = None,
@@ -139,7 +139,7 @@ class EntityIntegrationMappings(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoEntityIntegrationMappingResponse:
+    ) -> models.components.DtoEntityIntegrationMappingResponse:
         r"""Create entity integration mapping
 
         Use when linking a FlexPrice entity to an external system (e.g. CRM or payment provider) so you can sync or reconcile by external ID.
@@ -164,7 +164,7 @@ class EntityIntegrationMappings(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateEntityIntegrationMappingRequest(
+        request = models.components.DtoCreateEntityIntegrationMappingRequest(
             entity_id=entity_id,
             entity_type=entity_type,
             metadata=metadata,
@@ -190,7 +190,7 @@ class EntityIntegrationMappings(BaseSDK):
                 False,
                 False,
                 "json",
-                models.DtoCreateEntityIntegrationMappingRequest,
+                models.components.DtoCreateEntityIntegrationMappingRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -220,7 +220,7 @@ class EntityIntegrationMappings(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return unmarshal_json_response(
-                models.DtoEntityIntegrationMappingResponse, http_res
+                models.components.DtoEntityIntegrationMappingResponse, http_res
             )
         if utils.match_response(http_res, ["400", "401", "409"], "application/json"):
             response_data = unmarshal_json_response(
@@ -274,7 +274,7 @@ class EntityIntegrationMappings(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteEntityIntegrationMappingRequest(
+        request = models.operations.DeleteEntityIntegrationMappingRequest(
             id=id,
         )
 
@@ -371,7 +371,7 @@ class EntityIntegrationMappings(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteEntityIntegrationMappingRequest(
+        request = models.operations.DeleteEntityIntegrationMappingRequest(
             id=id,
         )
 

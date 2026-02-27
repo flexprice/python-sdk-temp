@@ -22,8 +22,10 @@ class SDKConfiguration:
     async_client: Union[AsyncHttpClient, None]
     async_client_supplied: bool
     debug_logger: Logger
-    server_url: str
-    security: Optional[Union[models.Security, Callable[[], models.Security]]] = None
+    security: Optional[
+        Union[models.components.Security, Callable[[], models.components.Security]]
+    ] = None
+    server_url: str = ""
     language: str = "python"
     openapi_doc_version: str = __openapi_doc_version__
     sdk_version: str = __version__

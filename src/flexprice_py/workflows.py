@@ -18,21 +18,21 @@ class Workflows(BaseSDK):
         expand: Optional[str] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesWorkflowExecutionFilterOrder] = None,
+        order: Optional[models.components.WorkflowExecutionFilterOrder] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.TypesStatus] = None,
+        status: Optional[models.components.Status] = None,
         task_queue: Optional[str] = None,
         workflow_id: Optional[str] = None,
         workflow_status: Optional[str] = None,
@@ -41,7 +41,7 @@ class Workflows(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListWorkflowsResponse:
+    ) -> models.components.DtoListWorkflowsResponse:
         r"""Query workflows
 
         Use when listing or auditing workflow runs (e.g. ops dashboard or debugging). Returns a paginated list; supports filtering by workflow type and status.
@@ -76,19 +76,19 @@ class Workflows(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesWorkflowExecutionFilter(
+        request = models.components.WorkflowExecutionFilter(
             end_time=end_time,
             entity=entity,
             entity_id=entity_id,
             expand=expand,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             limit=limit,
             offset=offset,
             order=order,
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             start_time=start_time,
             status=status,
@@ -112,7 +112,7 @@ class Workflows(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesWorkflowExecutionFilter
+                request, False, False, "json", models.components.WorkflowExecutionFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -141,7 +141,9 @@ class Workflows(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListWorkflowsResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListWorkflowsResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -174,21 +176,21 @@ class Workflows(BaseSDK):
         expand: Optional[str] = None,
         filters: Optional[
             Union[
-                List[models.TypesFilterCondition],
-                List[models.TypesFilterConditionTypedDict],
+                List[models.components.FilterCondition],
+                List[models.components.FilterConditionTypedDict],
             ]
         ] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
-        order: Optional[models.TypesWorkflowExecutionFilterOrder] = None,
+        order: Optional[models.components.WorkflowExecutionFilterOrder] = None,
         sort: Optional[
             Union[
-                List[models.TypesSortCondition],
-                List[models.TypesSortConditionTypedDict],
+                List[models.components.SortCondition],
+                List[models.components.SortConditionTypedDict],
             ]
         ] = None,
         start_time: Optional[str] = None,
-        status: Optional[models.TypesStatus] = None,
+        status: Optional[models.components.Status] = None,
         task_queue: Optional[str] = None,
         workflow_id: Optional[str] = None,
         workflow_status: Optional[str] = None,
@@ -197,7 +199,7 @@ class Workflows(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListWorkflowsResponse:
+    ) -> models.components.DtoListWorkflowsResponse:
         r"""Query workflows
 
         Use when listing or auditing workflow runs (e.g. ops dashboard or debugging). Returns a paginated list; supports filtering by workflow type and status.
@@ -232,19 +234,19 @@ class Workflows(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TypesWorkflowExecutionFilter(
+        request = models.components.WorkflowExecutionFilter(
             end_time=end_time,
             entity=entity,
             entity_id=entity_id,
             expand=expand,
             filters=utils.get_pydantic_model(
-                filters, Optional[List[models.TypesFilterCondition]]
+                filters, Optional[List[models.components.FilterCondition]]
             ),
             limit=limit,
             offset=offset,
             order=order,
             sort=utils.get_pydantic_model(
-                sort, Optional[List[models.TypesSortCondition]]
+                sort, Optional[List[models.components.SortCondition]]
             ),
             start_time=start_time,
             status=status,
@@ -268,7 +270,7 @@ class Workflows(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TypesWorkflowExecutionFilter
+                request, False, False, "json", models.components.WorkflowExecutionFilter
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -297,7 +299,9 @@ class Workflows(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoListWorkflowsResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoListWorkflowsResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res

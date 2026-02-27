@@ -22,7 +22,7 @@ class ScheduledTasks(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListScheduledTasksResponse:
+    ) -> models.components.DtoListScheduledTasksResponse:
         r"""List scheduled tasks
 
         Use when listing or managing scheduled tasks in an admin UI. Returns a list; supports filtering by status, type, and pagination.
@@ -48,7 +48,7 @@ class ScheduledTasks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListScheduledTasksRequest(
+        request = models.operations.ListScheduledTasksRequest(
             limit=limit,
             offset=offset,
             connection_id=connection_id,
@@ -98,7 +98,7 @@ class ScheduledTasks(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoListScheduledTasksResponse, http_res
+                models.components.DtoListScheduledTasksResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -136,7 +136,7 @@ class ScheduledTasks(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoListScheduledTasksResponse:
+    ) -> models.components.DtoListScheduledTasksResponse:
         r"""List scheduled tasks
 
         Use when listing or managing scheduled tasks in an admin UI. Returns a list; supports filtering by status, type, and pagination.
@@ -162,7 +162,7 @@ class ScheduledTasks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListScheduledTasksRequest(
+        request = models.operations.ListScheduledTasksRequest(
             limit=limit,
             offset=offset,
             connection_id=connection_id,
@@ -212,7 +212,7 @@ class ScheduledTasks(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DtoListScheduledTasksResponse, http_res
+                models.components.DtoListScheduledTasksResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -241,15 +241,17 @@ class ScheduledTasks(BaseSDK):
         self,
         *,
         connection_id: str,
-        entity_type: models.TypesScheduledTaskEntityType,
-        interval: models.TypesScheduledTaskInterval,
-        job_config: Union[models.TypesS3JobConfig, models.TypesS3JobConfigTypedDict],
+        entity_type: models.components.ScheduledTaskEntityType,
+        interval: models.components.ScheduledTaskInterval,
+        job_config: Union[
+            models.components.S3JobConfig, models.components.S3JobConfigTypedDict
+        ],
         enabled: Optional[bool] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoScheduledTaskResponse:
+    ) -> models.components.DtoScheduledTaskResponse:
         r"""Create scheduled task
 
         Use when setting up recurring data exports or other scheduled jobs. Ideal for report generation or syncing data on a schedule.
@@ -274,12 +276,14 @@ class ScheduledTasks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateScheduledTaskRequest(
+        request = models.components.DtoCreateScheduledTaskRequest(
             connection_id=connection_id,
             enabled=enabled,
             entity_type=entity_type,
             interval=interval,
-            job_config=utils.get_pydantic_model(job_config, models.TypesS3JobConfig),
+            job_config=utils.get_pydantic_model(
+                job_config, models.components.S3JobConfig
+            ),
         )
 
         req = self._build_request(
@@ -296,7 +300,11 @@ class ScheduledTasks(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateScheduledTaskRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoCreateScheduledTaskRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -325,7 +333,9 @@ class ScheduledTasks(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoScheduledTaskResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoScheduledTaskResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -353,15 +363,17 @@ class ScheduledTasks(BaseSDK):
         self,
         *,
         connection_id: str,
-        entity_type: models.TypesScheduledTaskEntityType,
-        interval: models.TypesScheduledTaskInterval,
-        job_config: Union[models.TypesS3JobConfig, models.TypesS3JobConfigTypedDict],
+        entity_type: models.components.ScheduledTaskEntityType,
+        interval: models.components.ScheduledTaskInterval,
+        job_config: Union[
+            models.components.S3JobConfig, models.components.S3JobConfigTypedDict
+        ],
         enabled: Optional[bool] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoScheduledTaskResponse:
+    ) -> models.components.DtoScheduledTaskResponse:
         r"""Create scheduled task
 
         Use when setting up recurring data exports or other scheduled jobs. Ideal for report generation or syncing data on a schedule.
@@ -386,12 +398,14 @@ class ScheduledTasks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DtoCreateScheduledTaskRequest(
+        request = models.components.DtoCreateScheduledTaskRequest(
             connection_id=connection_id,
             enabled=enabled,
             entity_type=entity_type,
             interval=interval,
-            job_config=utils.get_pydantic_model(job_config, models.TypesS3JobConfig),
+            job_config=utils.get_pydantic_model(
+                job_config, models.components.S3JobConfig
+            ),
         )
 
         req = self._build_request_async(
@@ -408,7 +422,11 @@ class ScheduledTasks(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DtoCreateScheduledTaskRequest
+                request,
+                False,
+                False,
+                "json",
+                models.components.DtoCreateScheduledTaskRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -437,7 +455,9 @@ class ScheduledTasks(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.DtoScheduledTaskResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoScheduledTaskResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -465,14 +485,14 @@ class ScheduledTasks(BaseSDK):
         self,
         *,
         request: Union[
-            models.ScheduleUpdateBillingPeriodRequest,
-            models.ScheduleUpdateBillingPeriodRequestTypedDict,
+            models.operations.ScheduleUpdateBillingPeriodRequest,
+            models.operations.ScheduleUpdateBillingPeriodRequestTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ScheduleUpdateBillingPeriodResponse:
+    ) -> models.operations.ScheduleUpdateBillingPeriodResponse:
         r"""Schedule update billing period
 
         Use when you need to trigger a billing-period update workflow (e.g. to recalculate or sync billing windows).
@@ -495,9 +515,9 @@ class ScheduledTasks(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, models.ScheduleUpdateBillingPeriodRequest
+                request, models.operations.ScheduleUpdateBillingPeriodRequest
             )
-        request = cast(models.ScheduleUpdateBillingPeriodRequest, request)
+        request = cast(models.operations.ScheduleUpdateBillingPeriodRequest, request)
 
         req = self._build_request(
             method="POST",
@@ -513,7 +533,11 @@ class ScheduledTasks(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.ScheduleUpdateBillingPeriodRequest
+                request,
+                False,
+                False,
+                "json",
+                models.operations.ScheduleUpdateBillingPeriodRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -543,7 +567,7 @@ class ScheduledTasks(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ScheduleUpdateBillingPeriodResponse, http_res
+                models.operations.ScheduleUpdateBillingPeriodResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -572,14 +596,14 @@ class ScheduledTasks(BaseSDK):
         self,
         *,
         request: Union[
-            models.ScheduleUpdateBillingPeriodRequest,
-            models.ScheduleUpdateBillingPeriodRequestTypedDict,
+            models.operations.ScheduleUpdateBillingPeriodRequest,
+            models.operations.ScheduleUpdateBillingPeriodRequestTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ScheduleUpdateBillingPeriodResponse:
+    ) -> models.operations.ScheduleUpdateBillingPeriodResponse:
         r"""Schedule update billing period
 
         Use when you need to trigger a billing-period update workflow (e.g. to recalculate or sync billing windows).
@@ -602,9 +626,9 @@ class ScheduledTasks(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, models.ScheduleUpdateBillingPeriodRequest
+                request, models.operations.ScheduleUpdateBillingPeriodRequest
             )
-        request = cast(models.ScheduleUpdateBillingPeriodRequest, request)
+        request = cast(models.operations.ScheduleUpdateBillingPeriodRequest, request)
 
         req = self._build_request_async(
             method="POST",
@@ -620,7 +644,11 @@ class ScheduledTasks(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.ScheduleUpdateBillingPeriodRequest
+                request,
+                False,
+                False,
+                "json",
+                models.operations.ScheduleUpdateBillingPeriodRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -650,7 +678,7 @@ class ScheduledTasks(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ScheduleUpdateBillingPeriodResponse, http_res
+                models.operations.ScheduleUpdateBillingPeriodResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -683,7 +711,7 @@ class ScheduledTasks(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoScheduledTaskResponse:
+    ) -> models.components.DtoScheduledTaskResponse:
         r"""Get scheduled task
 
         Use when you need to load a single scheduled task (e.g. to show details in a UI or check its configuration).
@@ -704,7 +732,7 @@ class ScheduledTasks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetScheduledTaskRequest(
+        request = models.operations.GetScheduledTaskRequest(
             id=id,
         )
 
@@ -748,7 +776,9 @@ class ScheduledTasks(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoScheduledTaskResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoScheduledTaskResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -780,7 +810,7 @@ class ScheduledTasks(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoScheduledTaskResponse:
+    ) -> models.components.DtoScheduledTaskResponse:
         r"""Get scheduled task
 
         Use when you need to load a single scheduled task (e.g. to show details in a UI or check its configuration).
@@ -801,7 +831,7 @@ class ScheduledTasks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetScheduledTaskRequest(
+        request = models.operations.GetScheduledTaskRequest(
             id=id,
         )
 
@@ -845,7 +875,9 @@ class ScheduledTasks(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoScheduledTaskResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoScheduledTaskResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -878,7 +910,7 @@ class ScheduledTasks(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoScheduledTaskResponse:
+    ) -> models.components.DtoScheduledTaskResponse:
         r"""Update a scheduled task
 
         Use when pausing or resuming a scheduled task. Only the enabled field can be changed.
@@ -900,9 +932,9 @@ class ScheduledTasks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateScheduledTaskRequest(
+        request = models.operations.UpdateScheduledTaskRequest(
             id=id,
-            body=models.DtoUpdateScheduledTaskRequest(
+            body=models.components.DtoUpdateScheduledTaskRequest(
                 enabled=enabled,
             ),
         )
@@ -921,7 +953,11 @@ class ScheduledTasks(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdateScheduledTaskRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdateScheduledTaskRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -950,7 +986,9 @@ class ScheduledTasks(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoScheduledTaskResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoScheduledTaskResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -983,7 +1021,7 @@ class ScheduledTasks(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoScheduledTaskResponse:
+    ) -> models.components.DtoScheduledTaskResponse:
         r"""Update a scheduled task
 
         Use when pausing or resuming a scheduled task. Only the enabled field can be changed.
@@ -1005,9 +1043,9 @@ class ScheduledTasks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateScheduledTaskRequest(
+        request = models.operations.UpdateScheduledTaskRequest(
             id=id,
-            body=models.DtoUpdateScheduledTaskRequest(
+            body=models.components.DtoUpdateScheduledTaskRequest(
                 enabled=enabled,
             ),
         )
@@ -1026,7 +1064,11 @@ class ScheduledTasks(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.body, False, False, "json", models.DtoUpdateScheduledTaskRequest
+                request.body,
+                False,
+                False,
+                "json",
+                models.components.DtoUpdateScheduledTaskRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1055,7 +1097,9 @@ class ScheduledTasks(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoScheduledTaskResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoScheduledTaskResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1108,7 +1152,7 @@ class ScheduledTasks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteScheduledTaskRequest(
+        request = models.operations.DeleteScheduledTaskRequest(
             id=id,
         )
 
@@ -1205,7 +1249,7 @@ class ScheduledTasks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteScheduledTaskRequest(
+        request = models.operations.DeleteScheduledTaskRequest(
             id=id,
         )
 
@@ -1283,7 +1327,7 @@ class ScheduledTasks(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoTriggerForceRunResponse:
+    ) -> models.components.DtoTriggerForceRunResponse:
         r"""Trigger force run
 
         Use when you need to run a scheduled export immediately (e.g. on-demand report or catch-up). Supports optional custom time range.
@@ -1306,9 +1350,9 @@ class ScheduledTasks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TriggerScheduledTaskRunRequest(
+        request = models.operations.TriggerScheduledTaskRunRequest(
             id=id,
-            body=models.DtoTriggerForceRunRequest(
+            body=models.components.DtoTriggerForceRunRequest(
                 end_time=end_time,
                 start_time=start_time,
             ),
@@ -1332,7 +1376,7 @@ class ScheduledTasks(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.DtoTriggerForceRunRequest],
+                Optional[models.components.DtoTriggerForceRunRequest],
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1361,7 +1405,9 @@ class ScheduledTasks(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoTriggerForceRunResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoTriggerForceRunResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
@@ -1395,7 +1441,7 @@ class ScheduledTasks(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DtoTriggerForceRunResponse:
+    ) -> models.components.DtoTriggerForceRunResponse:
         r"""Trigger force run
 
         Use when you need to run a scheduled export immediately (e.g. on-demand report or catch-up). Supports optional custom time range.
@@ -1418,9 +1464,9 @@ class ScheduledTasks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.TriggerScheduledTaskRunRequest(
+        request = models.operations.TriggerScheduledTaskRunRequest(
             id=id,
-            body=models.DtoTriggerForceRunRequest(
+            body=models.components.DtoTriggerForceRunRequest(
                 end_time=end_time,
                 start_time=start_time,
             ),
@@ -1444,7 +1490,7 @@ class ScheduledTasks(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.DtoTriggerForceRunRequest],
+                Optional[models.components.DtoTriggerForceRunRequest],
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1473,7 +1519,9 @@ class ScheduledTasks(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DtoTriggerForceRunResponse, http_res)
+            return unmarshal_json_response(
+                models.components.DtoTriggerForceRunResponse, http_res
+            )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.ErrorsErrorResponseData, http_res
