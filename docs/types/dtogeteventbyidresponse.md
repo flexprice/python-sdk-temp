@@ -1,0 +1,11 @@
+# DtoGetEventByIDResponse
+
+
+## Fields
+
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `debug_tracker`                                                                    | [Optional[types.DtoDebugTracker]](../types/dtodebugtracker.md)                     | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| `event`                                                                            | [Optional[types.DtoEvent]](../types/dtoevent.md)                                   | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| `processed_events`                                                                 | List[[types.DtoFeatureUsageInfo](../types/dtofeatureusageinfo.md)]                 | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| `status`                                                                           | [Optional[types.EventProcessingStatusType]](../types/eventprocessingstatustype.md) | :heavy_minus_sign:                                                                 | N/A                                                                                |

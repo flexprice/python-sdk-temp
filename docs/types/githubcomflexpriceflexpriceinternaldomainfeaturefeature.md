@@ -1,0 +1,24 @@
+# GithubComFlexpriceFlexpriceInternalDomainFeatureFeature
+
+
+## Fields
+
+| Field                                                      | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `alert_settings`                                           | [Optional[types.AlertSettings]](../types/alertsettings.md) | :heavy_minus_sign:                                         | N/A                                                        |
+| `created_at`                                               | *Optional[str]*                                            | :heavy_minus_sign:                                         | N/A                                                        |
+| `created_by`                                               | *Optional[str]*                                            | :heavy_minus_sign:                                         | N/A                                                        |
+| `description`                                              | *Optional[str]*                                            | :heavy_minus_sign:                                         | N/A                                                        |
+| `environment_id`                                           | *Optional[str]*                                            | :heavy_minus_sign:                                         | N/A                                                        |
+| `id`                                                       | *Optional[str]*                                            | :heavy_minus_sign:                                         | N/A                                                        |
+| `lookup_key`                                               | *Optional[str]*                                            | :heavy_minus_sign:                                         | N/A                                                        |
+| `metadata`                                                 | Dict[str, *str*]                                           | :heavy_minus_sign:                                         | N/A                                                        |
+| `meter_id`                                                 | *Optional[str]*                                            | :heavy_minus_sign:                                         | N/A                                                        |
+| `name`                                                     | *Optional[str]*                                            | :heavy_minus_sign:                                         | N/A                                                        |
+| `status`                                                   | [Optional[types.Status]](../types/status.md)               | :heavy_minus_sign:                                         | N/A                                                        |
+| `tenant_id`                                                | *Optional[str]*                                            | :heavy_minus_sign:                                         | N/A                                                        |
+| `type`                                                     | [Optional[types.FeatureType]](../types/featuretype.md)     | :heavy_minus_sign:                                         | N/A                                                        |
+| `unit_plural`                                              | *Optional[str]*                                            | :heavy_minus_sign:                                         | N/A                                                        |
+| `unit_singular`                                            | *Optional[str]*                                            | :heavy_minus_sign:                                         | N/A                                                        |
+| `updated_at`                                               | *Optional[str]*                                            | :heavy_minus_sign:                                         | N/A                                                        |
+| `updated_by`                                               | *Optional[str]*                                            | :heavy_minus_sign:                                         | N/A                                                        |

@@ -9,7 +9,7 @@ from ._version import (
 from .httpclient import AsyncHttpClient, HttpClient
 from .utils import Logger, RetryConfig, remove_suffix
 from dataclasses import dataclass
-from flexprice_py import models
+from flexprice_py import types
 from flexprice_py.types import OptionalNullable, UNSET
 from pydantic import Field
 from typing import Callable, Dict, Optional, Tuple, Union
@@ -22,9 +22,7 @@ class SDKConfiguration:
     async_client: Union[AsyncHttpClient, None]
     async_client_supplied: bool
     debug_logger: Logger
-    security: Optional[
-        Union[models.components.Security, Callable[[], models.components.Security]]
-    ] = None
+    security: Optional[Union[types.Security, Callable[[], types.Security]]] = None
     server_url: str = ""
     language: str = "python"
     openapi_doc_version: str = __openapi_doc_version__
@@ -35,4 +33,4 @@ class SDKConfiguration:
     timeout_ms: Optional[int] = None
 
     def get_server_details(self) -> Tuple[str, Dict[str, str]]:
-        return remove_suffix(self.server_url, "/"), {}
+        return remove_suffix(self.server_url or "", "/"), {}

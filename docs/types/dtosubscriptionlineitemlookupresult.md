@@ -1,0 +1,10 @@
+# DtoSubscriptionLineItemLookupResult
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `error`                                                                                  | [Optional[types.ErrorsErrorResponse]](../types/errorserrorresponse.md)                   | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `matched_line_items`                                                                     | List[[types.DtoMatchedSubscriptionLineItem](../types/dtomatchedsubscriptionlineitem.md)] | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `status`                                                                                 | [Optional[types.DebugTrackerStatus]](../types/debugtrackerstatus.md)                     | :heavy_minus_sign:                                                                       | N/A                                                                                      |

@@ -1,0 +1,14 @@
+# S3JobConfig
+
+
+## Fields
+
+| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `bucket`                                                                       | *Optional[str]*                                                                | :heavy_minus_sign:                                                             | S3 bucket name                                                                 |
+| `compression`                                                                  | [Optional[types.S3CompressionType]](../types/s3compressiontype.md)             | :heavy_minus_sign:                                                             | N/A                                                                            |
+| `encryption`                                                                   | [Optional[types.S3EncryptionType]](../types/s3encryptiontype.md)               | :heavy_minus_sign:                                                             | N/A                                                                            |
+| `endpoint_url`                                                                 | *Optional[str]*                                                                | :heavy_minus_sign:                                                             | Custom S3 endpoint URL (e.g., "http://minio:9000" for MinIO)                   |
+| `key_prefix`                                                                   | *Optional[str]*                                                                | :heavy_minus_sign:                                                             | Optional prefix for S3 keys (e.g., "flexprice-exports/")                       |
+| `region`                                                                       | *Optional[str]*                                                                | :heavy_minus_sign:                                                             | AWS region (e.g., "us-west-2")                                                 |
+| `use_path_style`                                                               | *Optional[bool]*                                                               | :heavy_minus_sign:                                                             | Use path-style addressing instead of virtual-hosted-style (required for MinIO) |

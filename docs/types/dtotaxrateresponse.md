@@ -1,0 +1,24 @@
+# DtoTaxRateResponse
+
+
+## Fields
+
+| Field                                                      | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `code`                                                     | *Optional[str]*                                            | :heavy_minus_sign:                                         | N/A                                                        |
+| `created_at`                                               | *Optional[str]*                                            | :heavy_minus_sign:                                         | N/A                                                        |
+| `created_by`                                               | *Optional[str]*                                            | :heavy_minus_sign:                                         | N/A                                                        |
+| `description`                                              | *Optional[str]*                                            | :heavy_minus_sign:                                         | N/A                                                        |
+| `environment_id`                                           | *Optional[str]*                                            | :heavy_minus_sign:                                         | N/A                                                        |
+| `fixed_value`                                              | *Optional[str]*                                            | :heavy_minus_sign:                                         | N/A                                                        |
+| `id`                                                       | *Optional[str]*                                            | :heavy_minus_sign:                                         | N/A                                                        |
+| `metadata`                                                 | Dict[str, *str*]                                           | :heavy_minus_sign:                                         | N/A                                                        |
+| `name`                                                     | *Optional[str]*                                            | :heavy_minus_sign:                                         | N/A                                                        |
+| `percentage_value`                                         | *Optional[str]*                                            | :heavy_minus_sign:                                         | N/A                                                        |
+| `scope`                                                    | [Optional[types.TaxRateScope]](../types/taxratescope.md)   | :heavy_minus_sign:                                         | N/A                                                        |
+| `status`                                                   | [Optional[types.Status]](../types/status.md)               | :heavy_minus_sign:                                         | N/A                                                        |
+| `tax_rate_status`                                          | [Optional[types.TaxRateStatus]](../types/taxratestatus.md) | :heavy_minus_sign:                                         | N/A                                                        |
+| `tax_rate_type`                                            | [Optional[types.TaxRateType]](../types/taxratetype.md)     | :heavy_minus_sign:                                         | N/A                                                        |
+| `tenant_id`                                                | *Optional[str]*                                            | :heavy_minus_sign:                                         | N/A                                                        |
+| `updated_at`                                               | *Optional[str]*                                            | :heavy_minus_sign:                                         | N/A                                                        |
+| `updated_by`                                               | *Optional[str]*                                            | :heavy_minus_sign:                                         | N/A                                                        |

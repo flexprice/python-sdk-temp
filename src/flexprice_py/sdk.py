@@ -5,7 +5,7 @@ from .httpclient import AsyncHttpClient, ClientOwner, HttpClient, close_clients
 from .sdkconfiguration import SDKConfiguration
 from .utils.logger import Logger, get_default_logger
 from .utils.retries import RetryConfig
-from flexprice_py import models
+from flexprice_py import types
 from flexprice_py._hooks import SDKHooks
 from flexprice_py.types import OptionalNullable, UNSET
 import httpx
@@ -164,9 +164,9 @@ class Flexprice(BaseSDK):
         security: Any = None
         if callable(api_key_auth):
             # pylint: disable=unnecessary-lambda-assignment
-            security = lambda: models.components.Security(api_key_auth=api_key_auth())
+            security = lambda: types.Security(api_key_auth=api_key_auth())
         else:
-            security = models.components.Security(api_key_auth=api_key_auth)
+            security = types.Security(api_key_auth=api_key_auth)
 
         BaseSDK.__init__(
             self,

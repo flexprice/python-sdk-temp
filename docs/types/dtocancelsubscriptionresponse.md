@@ -1,0 +1,17 @@
+# DtoCancelSubscriptionResponse
+
+
+## Fields
+
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `cancellation_type`                                                  | [Optional[types.CancellationType]](../types/cancellationtype.md)     | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `effective_date`                                                     | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `message`                                                            | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | Response metadata                                                    |
+| `processed_at`                                                       | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `proration_details`                                                  | List[[types.DtoProrationDetail](../types/dtoprorationdetail.md)]     | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `proration_invoice`                                                  | [Optional[types.DtoInvoiceResponse]](../types/dtoinvoiceresponse.md) | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `reason`                                                             | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `status`                                                             | [Optional[types.SubscriptionStatus]](../types/subscriptionstatus.md) | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `subscription_id`                                                    | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | Basic cancellation info                                              |
+| `total_credit_amount`                                                | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | N/A                                                                  |

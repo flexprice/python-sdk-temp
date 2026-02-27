@@ -1,9 +1,0 @@
-# ExecuteSubscriptionChangeRequest
-
-
-## Fields
-
-| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
-| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `id`                                                                                               | *str*                                                                                              | :heavy_check_mark:                                                                                 | Subscription ID                                                                                    |
-| `body`                                                                                             | [components.DtoSubscriptionChangeRequest](../../models/components/dtosubscriptionchangerequest.md) | :heavy_check_mark:                                                                                 | Subscription change request                                                                        |

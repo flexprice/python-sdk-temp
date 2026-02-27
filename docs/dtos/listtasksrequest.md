@@ -1,0 +1,20 @@
+# ListTasksRequest
+
+
+## Fields
+
+| Field                                                        | Type                                                         | Required                                                     | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `created_by`                                                 | *Optional[str]*                                              | :heavy_minus_sign:                                           | N/A                                                          |
+| `end_time`                                                   | *Optional[str]*                                              | :heavy_minus_sign:                                           | N/A                                                          |
+| `entity_type`                                                | [Optional[dtos.EntityType]](../dtos/entitytype.md)           | :heavy_minus_sign:                                           | N/A                                                          |
+| `expand`                                                     | *Optional[str]*                                              | :heavy_minus_sign:                                           | N/A                                                          |
+| `limit`                                                      | *Optional[int]*                                              | :heavy_minus_sign:                                           | N/A                                                          |
+| `offset`                                                     | *Optional[int]*                                              | :heavy_minus_sign:                                           | N/A                                                          |
+| `order`                                                      | [Optional[dtos.ListTasksOrder]](../dtos/listtasksorder.md)   | :heavy_minus_sign:                                           | N/A                                                          |
+| `scheduled_task_id`                                          | *Optional[str]*                                              | :heavy_minus_sign:                                           | N/A                                                          |
+| `sort`                                                       | *Optional[str]*                                              | :heavy_minus_sign:                                           | N/A                                                          |
+| `start_time`                                                 | *Optional[str]*                                              | :heavy_minus_sign:                                           | N/A                                                          |
+| `status`                                                     | [Optional[dtos.ListTasksStatus]](../dtos/listtasksstatus.md) | :heavy_minus_sign:                                           | N/A                                                          |
+| `task_status`                                                | [Optional[dtos.TaskStatus]](../dtos/taskstatus.md)           | :heavy_minus_sign:                                           | N/A                                                          |
+| `task_type`                                                  | [Optional[dtos.TaskType]](../dtos/tasktype.md)               | :heavy_minus_sign:                                           | N/A                                                          |

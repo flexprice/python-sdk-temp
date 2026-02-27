@@ -1,0 +1,9 @@
+# UpdateSubscriptionLineItemRequest
+
+
+## Fields
+
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `id`                                                                                           | *str*                                                                                          | :heavy_check_mark:                                                                             | Line Item ID                                                                                   |
+| `body`                                                                                         | [types.DtoUpdateSubscriptionLineItemRequest](../types/dtoupdatesubscriptionlineitemrequest.md) | :heavy_check_mark:                                                                             | Update Line Item Request                                                                       |

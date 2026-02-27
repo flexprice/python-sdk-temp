@@ -1,0 +1,20 @@
+# GroupFilter
+
+
+## Fields
+
+| Field                                                            | Type                                                             | Required                                                         | Description                                                      |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `end_time`                                                       | *Optional[str]*                                                  | :heavy_minus_sign:                                               | N/A                                                              |
+| `entity_type`                                                    | *Optional[str]*                                                  | :heavy_minus_sign:                                               | N/A                                                              |
+| `expand`                                                         | *Optional[str]*                                                  | :heavy_minus_sign:                                               | N/A                                                              |
+| `filters`                                                        | List[[types.FilterCondition](../types/filtercondition.md)]       | :heavy_minus_sign:                                               | filters allows complex filtering based on multiple fields        |
+| `group_ids`                                                      | List[*str*]                                                      | :heavy_minus_sign:                                               | Group specific filters                                           |
+| `limit`                                                          | *Optional[int]*                                                  | :heavy_minus_sign:                                               | N/A                                                              |
+| `lookup_key`                                                     | *Optional[str]*                                                  | :heavy_minus_sign:                                               | N/A                                                              |
+| `name`                                                           | *Optional[str]*                                                  | :heavy_minus_sign:                                               | N/A                                                              |
+| `offset`                                                         | *Optional[int]*                                                  | :heavy_minus_sign:                                               | N/A                                                              |
+| `order`                                                          | [Optional[types.GroupFilterOrder]](../types/groupfilterorder.md) | :heavy_minus_sign:                                               | N/A                                                              |
+| `sort`                                                           | List[[types.SortCondition](../types/sortcondition.md)]           | :heavy_minus_sign:                                               | N/A                                                              |
+| `start_time`                                                     | *Optional[str]*                                                  | :heavy_minus_sign:                                               | N/A                                                              |
+| `status`                                                         | [Optional[types.Status]](../types/status.md)                     | :heavy_minus_sign:                                               | N/A                                                              |

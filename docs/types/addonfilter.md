@@ -1,0 +1,19 @@
+# AddonFilter
+
+
+## Fields
+
+| Field                                                            | Type                                                             | Required                                                         | Description                                                      |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `addon_ids`                                                      | List[*str*]                                                      | :heavy_minus_sign:                                               | N/A                                                              |
+| `addon_type`                                                     | [Optional[types.AddonType]](../types/addontype.md)               | :heavy_minus_sign:                                               | N/A                                                              |
+| `end_time`                                                       | *Optional[str]*                                                  | :heavy_minus_sign:                                               | N/A                                                              |
+| `expand`                                                         | *Optional[str]*                                                  | :heavy_minus_sign:                                               | N/A                                                              |
+| `filters`                                                        | List[[types.FilterCondition](../types/filtercondition.md)]       | :heavy_minus_sign:                                               | filters allows complex filtering based on multiple fields        |
+| `limit`                                                          | *Optional[int]*                                                  | :heavy_minus_sign:                                               | N/A                                                              |
+| `lookup_keys`                                                    | List[*str*]                                                      | :heavy_minus_sign:                                               | N/A                                                              |
+| `offset`                                                         | *Optional[int]*                                                  | :heavy_minus_sign:                                               | N/A                                                              |
+| `order`                                                          | [Optional[types.AddonFilterOrder]](../types/addonfilterorder.md) | :heavy_minus_sign:                                               | N/A                                                              |
+| `sort`                                                           | List[[types.SortCondition](../types/sortcondition.md)]           | :heavy_minus_sign:                                               | N/A                                                              |
+| `start_time`                                                     | *Optional[str]*                                                  | :heavy_minus_sign:                                               | N/A                                                              |
+| `status`                                                         | [Optional[types.Status]](../types/status.md)                     | :heavy_minus_sign:                                               | N/A                                                              |

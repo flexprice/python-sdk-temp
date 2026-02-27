@@ -1,0 +1,19 @@
+# DtoSubscriptionChangePreviewResponse
+
+Response showing the financial impact of a subscription plan change
+
+
+## Fields
+
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `change_type`                                                                | [Optional[types.SubscriptionChangeType]](../types/subscriptionchangetype.md) | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `current_plan`                                                               | [Optional[types.DtoPlanSummary]](../types/dtoplansummary.md)                 | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `effective_date`                                                             | *Optional[str]*                                                              | :heavy_minus_sign:                                                           | effective_date is when the change would take effect                          |
+| `metadata`                                                                   | Dict[str, *str*]                                                             | :heavy_minus_sign:                                                           | metadata from the request                                                    |
+| `new_billing_cycle`                                                          | [Optional[types.DtoBillingCycleInfo]](../types/dtobillingcycleinfo.md)       | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `next_invoice_preview`                                                       | [Optional[types.DtoInvoicePreview]](../types/dtoinvoicepreview.md)           | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `proration_details`                                                          | [Optional[types.DtoProrationDetails]](../types/dtoprorationdetails.md)       | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `subscription_id`                                                            | *Optional[str]*                                                              | :heavy_minus_sign:                                                           | subscription_id is the ID of the subscription being changed                  |
+| `target_plan`                                                                | [Optional[types.DtoPlanSummary]](../types/dtoplansummary.md)                 | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `warnings`                                                                   | List[*str*]                                                                  | :heavy_minus_sign:                                                           | warnings contains any warnings about the change                              |

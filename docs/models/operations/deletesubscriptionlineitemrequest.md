@@ -1,9 +1,0 @@
-# DeleteSubscriptionLineItemRequest
-
-
-## Fields
-
-| Field                                                                                                              | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| `id`                                                                                                               | *str*                                                                                                              | :heavy_check_mark:                                                                                                 | Line Item ID                                                                                                       |
-| `body`                                                                                                             | [components.DtoDeleteSubscriptionLineItemRequest](../../models/components/dtodeletesubscriptionlineitemrequest.md) | :heavy_check_mark:                                                                                                 | Delete Line Item Request                                                                                           |

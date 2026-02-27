@@ -1,0 +1,11 @@
+# DtoCancelSubscriptionRequest
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `cancel_immediately_inovice_policy`                                                          | [Optional[types.CancelImmediatelyInvoicePolicy]](../types/cancelimmediatelyinvoicepolicy.md) | :heavy_minus_sign:                                                                           | N/A                                                                                          |
+| `cancellation_type`                                                                          | [types.CancellationType](../types/cancellationtype.md)                                       | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `proration_behavior`                                                                         | [Optional[types.ProrationBehavior]](../types/prorationbehavior.md)                           | :heavy_minus_sign:                                                                           | N/A                                                                                          |
+| `reason`                                                                                     | *Optional[str]*                                                                              | :heavy_minus_sign:                                                                           | Reason for cancellation (for audit and business intelligence)                                |
